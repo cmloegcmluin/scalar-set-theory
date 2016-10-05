@@ -6,69 +6,38 @@ function factorial(n) {
 }
 
 function elementCount(set) {
-  var total = 0;
-  set.forEach(function(element) {
-    total += element;
-  });
-  return total;
+  return _.reduce(set, function(memo, num) { return memo + num; }, 0);
 }
 
 function permutationsCount(set) {
   return factorial(elementCount(set));
 }
 
-function permutationRepetitionFactor(set) {
-  var total = 1;
-  set.forEach(function(element) {
-    total *= factorial(element);
-  })
-  return total;
+function indistinguishableElementRepetitionFactor(set) {
+  return _.reduce(set, function(memo, num) { return memo * factorial(num); }, 1);
 }
 
-function permutationsWithoutRepetitionsCount(set) {
-  return permutationsCount(set) / permutationRepetitionFactor(set);
+function permutationsWithRepetitionOfIndistinguishableElementsCount(set) {
+  return permutationsCount(set) / indistinguishableElementRepetitionFactor(set);
 }
 
 function equalDivisorsOfSet(set) {
-  var max = Math.max.apply(Math, set);
-  var equalDivisors = [];
-  var isEqualDivisor;
-
-  for (var i = 2; i <= max; i++) {
-    isEqualDivisor = true;
-    set.forEach(function(element) {
-      if (element % i !== 0) isEqualDivisor = false;
-    });
-    if (isEqualDivisor) equalDivisors.push(i);
-  }
-
-  return equalDivisors;
+  var range = _.range(2, Math.max.apply(Math, set) + 1);
+  return _.filter(range, function(num) {
+    return _.every(set, function(el) { return el % num === 0; });
+  });
 }
 
 function setReductions(set) {
-  var equalDivisors = equalDivisorsOfSet(set);
-  var setReductions = [];
-  var reducedSet;
-
-  equalDivisors.forEach(function(divisor) {
-    reducedSet = [];
-    set.forEach(function(element) {
-      reducedSet.push(element / divisor);
-    })
-    setReductions.push(reducedSet)
-  })
-
-  return setReductions;
+  return _.map(equalDivisorsOfSet(set), function(divisor) {
+    return _.map(set, function(el) { return el / divisor; });
+  });
 }
 
 function sumAcrossReducedSets(fn, set) {
-  var sum = 0;
-
-  setReductions(set).forEach(function(reducedSet) {
-    sum += fn(reducedSet);
-  });
-
-  return sum;
+  return _.reduce(setReductions(set), function(memo, reducedSet) {
+    return memo += fn(reducedSet);
+  }, 0);
 }
 
 function redundanciesToEliminate(set) {
@@ -76,7 +45,7 @@ function redundanciesToEliminate(set) {
 }
 
 function permutationCountWithRedundanciesEliminated(set) {
-  return permutationsWithoutRepetitionsCount(set) - redundanciesToEliminate(set);
+  return permutationsWithRepetitionOfIndistinguishableElementsCount(set) - redundanciesToEliminate(set);
 }
 
 function permutationCountWithRedundanciesEliminatedPerElement(set) {
@@ -84,9 +53,7 @@ function permutationCountWithRedundanciesEliminatedPerElement(set) {
 }
 
 function normalOrderCount(set) {
-  var count = permutationCountWithRedundanciesEliminatedPerElement(set);
-  count += sumAcrossReducedSets(permutationCountWithRedundanciesEliminatedPerElement, set);
-  return count;
+  return permutationCountWithRedundanciesEliminatedPerElement(set) + sumAcrossReducedSets(permutationCountWithRedundanciesEliminatedPerElement, set);
 }
 
 console.log(normalOrderCount(scalarSet));

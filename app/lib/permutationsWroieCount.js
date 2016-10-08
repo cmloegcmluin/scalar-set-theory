@@ -13,8 +13,9 @@ function indistinguishableElementRepetitionFactor(set) {
   return set.reduce((memo, num) => memo * factorial(num), 1);
 }
 
-function permutationsWithRepetitionOfIndistinguishableElementsCount(set) {
+//permutations with repetition of indistinguishable elements count
+function permutationsWroieCount(set) {
   return permutationsCount(set) / indistinguishableElementRepetitionFactor(set);
 }
 
-export default permutationsWithRepetitionOfIndistinguishableElementsCount;
+export default permutationsWroieCount;

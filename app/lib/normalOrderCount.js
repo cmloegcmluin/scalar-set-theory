@@ -1,13 +1,14 @@
 import elementCount from './elementCount';
-import sumAcrossReducedSets from './setReductions';
-import permutationCountWithRedundanciesEliminated from './recursiveRedundancyElimination';
+import sumAcrossReducedSets from './sumAcrossReducedSets';
+import permutationCountWre from './permutationCountWre';
 
-function permutationCountWithRedundanciesEliminatedPerElement(set) {
-  return permutationCountWithRedundanciesEliminated(set) / elementCount(set);
+//permutation count with redundancies eliminated per element
+function permutationCountWrepe(set) {
+  return permutationCountWre(set) / elementCount(set);
 }
 
 function normalOrderCount(set) {
-  return permutationCountWithRedundanciesEliminatedPerElement(set) + sumAcrossReducedSets(permutationCountWithRedundanciesEliminatedPerElement, set);
+  return permutationCountWrepe(set) + sumAcrossReducedSets(permutationCountWrepe, set);
 }
 
 export default normalOrderCount;

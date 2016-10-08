@@ -2,10 +2,11 @@ import React from 'react';
 
 export default class ScalarCountInput extends React.Component {
   handleChange(component, event) {
-    component.props.store.dispatch({ type: 'DECREMENT' });
+    console.log(event)
+    component.props.store.dispatch({ type: 'SET_COUNT', data: event.target.value });
   }
 
   render() {
-    return <input onChange={() => this.handleChange(this)}/>;
+    return <input onChange={(event) => this.handleChange(this, event)}/>;
   }
 }

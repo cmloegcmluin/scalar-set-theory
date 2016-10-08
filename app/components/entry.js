@@ -9,7 +9,7 @@ export default class Entry extends React.Component {
     return (
       <div>
         How many scalars? <ScalarCountInput store={this.props.store}/>
-        <ScalarInputs store={this.props.store} scalarInputCount={this.props.store.getState()}/>
+        <ScalarInputs store={this.props.store} scalarInputCount={this.props.store.getState().scalarInputCount}/>
         <NormalOrderCounter scalarSet={[20, 20]}/>
       </div>
     );

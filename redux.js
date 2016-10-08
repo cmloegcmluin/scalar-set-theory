@@ -15,14 +15,25 @@ import Entry from './app/components/entry.js'
  * follows a different convention (such as function maps) if it makes sense for your
  * project.
  */
-function counter(state = 0, action) {
+
+let initialState = {
+  scalarInputCount: 3,
+  scalarSet: [1, 2, 1]
+};
+function counter(state = initialState, action) {
   switch (action.type) {
   case 'INCREMENT':
-    return state + 1
+    state.scalarInputCount++;
+    return state;
   case 'DECREMENT':
-    return state - 1
+    state.scalarInputCount--;
+    return state;
+  case 'SET_COUNT':
+    console.log(action.data)
+    state.scalarInputCount = action.data;
+    return state;
   default:
-    return state
+    return state;
   }
 }
 

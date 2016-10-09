@@ -1,1 +1,1 @@
-export default set => set.reduce((memo, num) => memo + num, 0)
+export default set => set.reduce((m, n) => m + n, 0)

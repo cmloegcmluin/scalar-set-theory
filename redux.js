@@ -29,7 +29,7 @@ function counter(state = initialState, action) {
     state.scalarInputCount--;
     return state;
   case 'SET_COUNT':
-    state.scalarInputCount = action.data;
+    state.scalarInputCount = parseInt(action.data);
     return state;
   default:
     return state;

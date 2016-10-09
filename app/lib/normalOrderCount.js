@@ -1,14 +1,8 @@
 import elementCount from './elementCount'
-import sumAcrossReducedSets from './sumAcrossReducedSets'
-import permutationCountWre from './permutationCountWre'
+import sumAcrSetReds from './sumAcrSetReds'
+import permCountWre from './permCountWre'
 
-//permutation count with redundancies eliminated per element
-function permutationCountWrepe(set) {
-  return permutationCountWre(set) / elementCount(set)
-}
+//perm count with redundancies eliminated per element
+const permCountWrepe = set => permCountWre(set) / elementCount(set)
 
-function normalOrderCount(set) {
-  return permutationCountWrepe(set) + sumAcrossReducedSets(permutationCountWrepe, set)
-}
-
-export default normalOrderCount
+export default set => permCountWrepe(set) + sumAcrSetReds(permCountWrepe, set)

@@ -1,0 +1,1 @@
+export default (max, min = 0) => Array.from(Array(max), (_, i) => min + i)

@@ -29,7 +29,6 @@ function counter(state = initialState, action) {
     state.scalarInputCount--;
     return state;
   case 'SET_COUNT':
-    console.log(action.data)
     state.scalarInputCount = action.data;
     return state;
   default:

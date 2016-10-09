@@ -8,7 +8,7 @@ export default ({state}) => (
 		How many scalars? <ScalarCountInput state={state}/>
 		<ScalarInputs 
 			state={state} 
-			scalarInputCount={state.getState().scalarInputCount}
+			scalarCount={state.getState().scalarCount}
 		/>
 		<NormalOrderCounter scalarSet={state.getState().scalarSet}/>
 	</div>

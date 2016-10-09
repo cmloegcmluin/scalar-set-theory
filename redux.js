@@ -8,7 +8,7 @@ function counter(state = initialState, action) {
   switch (action.type) {
   case 'SET_SCALAR_INPUT_COUNT':
     const count = parseInt(action.data)
-    state.scalarInputCount = count
+    state.scalarCount = count
     if (count < state.scalarSet.length) {
       state.scalarSet = state.scalarSet.splice(0, count)
     }
@@ -16,11 +16,9 @@ function counter(state = initialState, action) {
       state.scalarSet.push(0)
     }
   case 'UPDATE_SCALAR':
-    if (action.data.index === undefined) break
-    if (action.data.index > state.scalarSet.length) {
-
-    }
-    state.scalarSet[action.data.index] = parseInt(action.data.val)
+    const {index, val} = action.data
+    if (index === undefined) break
+    state.scalarSet[index] = parseInt(val)
   default:
   }
   console.log(state.scalarSet)

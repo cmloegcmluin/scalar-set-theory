@@ -1,10 +1,10 @@
 import React from 'react'
 import ScalarInput from './scalarInput'
-import range from '../lib/range'
+import range from '../helpers/range'
 
-export default ({scalarInputCount, state}) => (
+export default ({scalarCount, state}) => (
 	<div>
-		{range(scalarInputCount).map(
+		{range(scalarCount).map(
 			input => <ScalarInput state={state} index={input} key={input}/>
 		)}
 	</div>

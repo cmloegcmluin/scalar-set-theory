@@ -1,4 +1,4 @@
-import range from './range'
+import range from '../helpers/range'
 
 const maxOfSet = set => Math.max.apply(Math, set)
 

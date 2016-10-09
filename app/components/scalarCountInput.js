@@ -1,5 +1,10 @@
 import React from 'react'
 
-export default ({store}) => (
-	<input onChange={event => store.dispatch({type: 'SET_COUNT', data: event.target.value})}/>
+export default ({state}) => (
+	<input 
+		value={state.getState().scalarInputCount} 
+		onChange={event => state.dispatch(
+			{type: 'SET_SCALAR_INPUT_COUNT', data: event.target.value}
+		)}
+	/>
 )

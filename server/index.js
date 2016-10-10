@@ -1,4 +1,4 @@
-import run from './redux.js'
+import run from '../app/dispatch/redux.js'
 
 const root = document.createElement('div')
 document.body.appendChild(root)

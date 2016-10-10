@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 
 import initialState from './initialState'
 
-import Entry from './app/components/entry'
+import Entry from '../components/entry'
 
 function rootReducer(state = initialState, action) {
   let newState = {

@@ -8,7 +8,7 @@ export default class {
 				reject('Server did not start')
 			});
 			this.process.stdout.on('data', data => {
-				if (data.includes('webpack: bundle is now VALID.')) {
+				if (data.includes('Server running')) {
 					setTimeout(resolve, 1000)
 				}
 			})

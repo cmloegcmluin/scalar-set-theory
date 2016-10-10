@@ -5,7 +5,7 @@ import ScalarInput from './scalarInput'
 
 import range from '../helpers/range'
 
-const mapStateToProps = state => ({scalarCount: state.scalarCount})
+const mapStateToProps = state => (state)
 
 export default connect(mapStateToProps)(
 	({scalarCount}) => (

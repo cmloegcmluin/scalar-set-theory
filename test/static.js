@@ -7,11 +7,11 @@ const browser = new PhantomJS()
 
 test.before(async () => {
   await server.start()
-  await browser.open('http://127.0.0.1:8080')
+  await browser.open('http://127.0.0.1:3000')
 });
 
 test(async (t) => {
-  const scalarCountInput = await browser.find('#scalarCountInput')
+  const scalarCountInput = await browser.find('#scalar-count-input')
   t.not(scalarCountInput, null)
   t.is(scalarCountInput.value, "3")
 });

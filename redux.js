@@ -1,32 +1,41 @@
-import {createStore} from 'redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Entry from './app/components/entry'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
 import initialState from './initialState'
 
-function counter(state = initialState, action) {
+import Entry from './app/components/entry'
+
+function rootReducer(state = initialState, action) {
+  let newState = {
+    scalarCount: state.scalarCount,
+    scalarSet: state.scalarSet.slice()
+  } 
+
   switch (action.type) {
   case 'SET_SCALAR_INPUT_COUNT':
     const count = parseInt(action.data)
-    state.scalarCount = count
-    if (count < state.scalarSet.length) {
-      state.scalarSet = state.scalarSet.splice(0, count)
+    newState.scalarCount = count
+    if (count < newState.scalarSet.length) {
+      newState.scalarSet = newState.scalarSet.splice(0, count)
     }
-    while (count > state.scalarSet.length) {
-      state.scalarSet.push(0)
+    while (count > newState.scalarSet.length) {
+      newState.scalarSet.push(0)
     }
   case 'UPDATE_SCALAR':
     const {index, val} = action.data
     if (index === undefined) break
-    state.scalarSet[index] = parseInt(val)
+    newState.scalarSet[index] = parseInt(val)
   default:
   }
-  console.log(state.scalarSet)
-  return state;
+  return newState;
 }
 
 export default root => {
-  let state = createStore(counter)
-  state.subscribe(() => ReactDOM.render(<Entry state={state}/>, root))
-  state.dispatch({ type: 'WAKEUP' })
+  let state = createStore(rootReducer)
+  state.subscribe(() => {
+    ReactDOM.render(<Provider store={state}><Entry/></Provider>, root)
+  })
+  state.dispatch({type: 'WAKE_UP'})
 }

@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
   devtool: 'source-map',
   entry: './app/entry',
@@ -21,4 +23,5 @@ module.exports = {
       }
     ]
   },
+  plugins: [new HtmlWebpackPlugin({title: 'Scalar Set Theory'})]
 }

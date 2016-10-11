@@ -1,2 +1,5 @@
 import run from './dispatch/redux.js'
-run(document.getElementById('root'))
+
+const root = document.createElement('div')
+document.body.appendChild(root)
+run(root)

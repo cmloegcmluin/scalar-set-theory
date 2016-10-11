@@ -1,8 +1,9 @@
 import crossPlatformSpawn from './crossPlatformSpawn'
+import process from 'process'
 
 export default class {
 	async start() {
-		this.process = crossPlatformSpawn('npm', ['start'])
+		this.process = crossPlatformSpawn('npm', ['start', '--', '--port=8081'], {detached: true})
 		await new Promise((resolve, reject) => {
 			this.process.once('close', () => {
 				reject('Server did not start')
@@ -16,20 +17,21 @@ export default class {
 	}
 
 	async stop() {
-    this.process.kill()
+		process.kill(-this.process.pid, 'SIGKILL')
 		await new Promise(resolve => {
 			if (!this.process.connected) resolve()
 			this.process.on('close', resolve)
 		})
-
-    this.killProcess = crossPlatformSpawn('npm', ['run-script', 'kill-test-server'])
-    await new Promise(resolve => {
-      this.killProcess.stdout.on('data', data => {
-        if (data.includes('SUCCESS')) {
-          console.log('Server process successfully killed. Windows sucks')
-          setTimeout(resolve, 1000)
-        }
-      })
-    })
+		if(process.platform === 'win32') {
+			this.killProcess = crossPlatformSpawn('npm', ['run-script', 'kill-test-server'])
+		    await new Promise(resolve => {
+		    	this.killProcess.stdout.on('data', data => {
+		        if (data.includes('SUCCESS')) {
+		        	console.log('Server process successfully killed. Windows sucks')
+		        	setTimeout(resolve, 1000)
+		        }
+		      })
+		    })
+		}
 	}
 }

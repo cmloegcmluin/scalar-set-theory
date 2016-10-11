@@ -1,29 +1,25 @@
 {
   "name": "scalar-set-theory",
   "scripts": {
-    "start": "node server/server",
+    "start": "webpack-dev-server --hot --inline --content-base dist/",
+    "deploy": "sh ./deploy.sh",
     "test": "ava",
-    "install": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "kill-test-server": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \"8080\" ^| find \"LISTENING\"') do taskkill /f /pid %a"
   },
-  "dependencies": {
+  "devDependencies": {
+    "ava": "^0.16.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
-    "express": "^4.14.0",
+    "babel-register": "^6.16.3",
+    "immutable": "^3.8.1",
+    "phantomjs-adapter": "0.0.4",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
-    "webpack": "^1.13.2"
-  },
-  "devDependencies": {
-    "ava": "^0.16.0",
-    "babel-core": "^6.17.0",
-    "babel-register": "^6.16.3",
-    "babel-runtime": "^6.11.6",
-    "phantomjs-adapter": "0.0.4",
+    "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
   "ava": {

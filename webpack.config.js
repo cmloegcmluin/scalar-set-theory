@@ -1,27 +1,19 @@
-var Webpack = require('webpack');
-var path = require('path');
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var buildPath = path.resolve(__dirname, 'public', 'build');
-var mainPath = path.resolve(__dirname, 'server', 'index.js');
-
 module.exports = {
-  devtool: 'eval',
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    mainPath
-  ],
+  devtool: 'source-map',
+  entry: './app/entry',
   output: {
-    path: buildPath,
-    filename: 'bundle.js',
-    publicPath: '/build/'
+    path: 'dist',
+    filename: 'dist.js',
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: [nodeModulesPath]
+        query: {
+          cacheDirectory: true,
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -29,5 +21,4 @@ module.exports = {
       }
     ]
   },
-  plugins: [new Webpack.HotModuleReplacementPlugin()]
 }

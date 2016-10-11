@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 
 import initialState from './initialState'
 
-import Entry from '../components/entry'
+import App from '../components/app'
 
 function rootReducer(state = initialState, action) {
   let newState = {
@@ -35,7 +35,7 @@ function rootReducer(state = initialState, action) {
 export default root => {
   let state = createStore(rootReducer)
   state.subscribe(() => {
-    ReactDOM.render(<Provider store={state}><Entry/></Provider>, root)
+    ReactDOM.render(<Provider store={state}><App/></Provider>, root)
   })
   state.dispatch({type: 'WAKE_UP'})
 }

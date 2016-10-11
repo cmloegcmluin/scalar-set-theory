@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		value: state.scalarSet[ownProps.index] || 0,
+		value: state.get('scalarSet').toArray()[ownProps.index] || 0,
 		index: ownProps.index
 	}
 }

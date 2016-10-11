@@ -8,28 +8,19 @@ import initialState from './initialState'
 import App from '../components/app'
 
 function rootReducer(state = initialState, action) {
-  let newState = {
-    scalarCount: state.scalarCount,
-    scalarSet: state.scalarSet.slice()
-  } 
-
   switch (action.type) {
   case 'SET_SCALAR_INPUT_COUNT':
     const count = parseInt(action.data)
-    newState.scalarCount = count
-    if (count < newState.scalarSet.length) {
-      newState.scalarSet = newState.scalarSet.splice(0, count)
-    }
-    while (count > newState.scalarSet.length) {
-      newState.scalarSet.push(0)
-    }
+    return state
+      .set('scalarCount', parseInt(count))
+      .set('scalarSet', state.get('scalarSet').setSize(count))
   case 'UPDATE_SCALAR':
     const {index, val} = action.data
-    if (index === undefined) break
-    newState.scalarSet[index] = parseInt(val)
+    return state
+      .set('scalarSet', state.get('scalarSet').set(index, parseInt(val)))
   default:
+    return state
   }
-  return newState;
 }
 
 export default root => {

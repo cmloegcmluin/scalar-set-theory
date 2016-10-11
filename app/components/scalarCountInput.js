@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const mapStateToProps = state => (state)
+const mapStateToProps = state => ({scalarCount: state.get('scalarCount')})
 
 const mapDispatchToProps = dispatch => {
 	return {

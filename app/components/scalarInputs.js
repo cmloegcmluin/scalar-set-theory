@@ -11,7 +11,7 @@ export default connect(mapStateToProps)(
 	({scalarCount}) => (
 		<div>
 			{range(scalarCount).map(
-				index => <ScalarInput index={index} key={index}/>
+				index => <ScalarInput {...{index, key: index}}/>
 			)}
 		</div>
 	)

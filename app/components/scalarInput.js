@@ -10,17 +10,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleChange: (event, index) => dispatch(
+		onChange: (event, index) => dispatch(
 			{type: 'UPDATE_SCALAR', data: {index: index, val: event.target.value}}
 		)
 	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-	({value, index, handleChange}) => (
+	({value, index, onChange}) => (
 		<input 
-			value={value}
-			onChange={event => {handleChange(event, index)}}
+			{...{value, onChange: event => {onChange(event, index)}}}
 		/>
 	)
 )

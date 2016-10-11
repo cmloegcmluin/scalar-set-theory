@@ -13,6 +13,7 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.16.3",
     "html-webpack-plugin": "^2.22.0",
     "immutable": "^3.8.1",
@@ -33,7 +34,8 @@
   "babel": {
     "presets": [
       "latest",
-      "react"
+      "react",
+      "stage-0"
     ],
     "plugins": [
       "transform-runtime"

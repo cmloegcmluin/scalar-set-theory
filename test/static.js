@@ -7,7 +7,7 @@ const browser = new PhantomJS()
 
 test.before(async () => {
   await server.start()
-  await browser.open('http://127.0.0.1:3000')
+  await browser.open('http://127.0.0.1:8080')
 });
 
 test(async (t) => {

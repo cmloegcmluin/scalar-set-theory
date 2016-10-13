@@ -1,28 +1,25 @@
 import test from 'ava'
+const webdriverio = require('webdriverio')
 import Server from './helpers/server'
 
 const server = new Server()
-const webdriverio = require('webdriverio')
-let client;
+let client, scalarInputs, inputValue, normalOrderCount
 
-test(async t => {
-	let scalarInputs, inputValue, normalOrderCount
-
-	// start up
-
+test.beforeEach(async t => {
 	await server.start()
-
 	const options = {
 		desiredCapabilities: {browserName: 'chrome'}
 	}
 	client = webdriverio.remote(options).init().url('localhost:8081')
+})
 
-	// page loads
+test.afterEach.always(async t => {
+	await server.stop()
+	await client.end()
+})
 
+test('initial values', async t => {
 	t.is(await client.getTitle(), 'Scalar Set Theory')
-
-	// initial values
-
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 3)
 	inputValue = await client.getValue('.scalar-input-0')
@@ -33,9 +30,9 @@ test(async t => {
 	t.is(inputValue, '1')
 	normalOrderCount = await client.getText('#normal-order-count')
 	t.true(/.* 3.*/.test(normalOrderCount))
+})
 
-	// can reduce scalar count and add new values
-
+test('reducing scalar count and adding new values', async t => {
 	await client.setValue('#scalar-count-input', '2')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 2)
@@ -43,72 +40,70 @@ test(async t => {
 	await client.setValue('.scalar-input-1', '20')
 	normalOrderCount = await client.getText('#normal-order-count')
 	t.true(/.* 3446167860.*/.test(normalOrderCount))
+})
 
-	// can add new scalars
-
-	await client.setValue('#scalar-count-input', '4')
+test('adding new scalars', async t => {
+	await client.setValue('#scalar-count-input', '5')
 	scalarInputs = await client.elements('.scalar-input')
-	t.is(scalarInputs.value.length, 4)
+	t.is(scalarInputs.value.length, 5)
 
 	inputValue = await client.getValue('.scalar-input-0')
-	t.is(inputValue, '20')
+	t.is(inputValue, '1')
 	inputValue = await client.getValue('.scalar-input-1')
-	t.is(inputValue, '20')
+	t.is(inputValue, '2')
 	inputValue = await client.getValue('.scalar-input-2')
-	t.is(inputValue, '')
+	t.is(inputValue, '1')
 	inputValue = await client.getValue('.scalar-input-3')
 	t.is(inputValue, '')
+	inputValue = await client.getValue('.scalar-input-4')
+	t.is(inputValue, '')
+})
 
-	//can skip an input in the middle and it will be treated as zero
+test('skipped scalar are treated as zeroes', async t => {
+	await client.setValue('#scalar-count-input', '5')
+	scalarInputs = await client.elements('.scalar-input')
+	t.is(scalarInputs.value.length, 5)
 
-	await client.setValue('.scalar-input-3', '3')
+	await client.setValue('.scalar-input-4', '3')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 39561953771340.*/.test(normalOrderCount))
+	t.true(/.* 60.*/.test(normalOrderCount))
+})
 
-	
-	// can clear the count without losing scalars
-
+test('scalars preserved when clearing the count', async t=> {
 	await client.setValue('#scalar-count-input', '')
 	scalarInputs = await client.elements('.scalar-input')
-	t.is(scalarInputs.value.length, 4)
+	t.is(scalarInputs.value.length, 3)
 	inputValue = await client.getValue('.scalar-input-0')
-	t.is(inputValue, '20')
+	t.is(inputValue, '1')
 	inputValue = await client.getValue('.scalar-input-1')
-	t.is(inputValue, '20')
+	t.is(inputValue, '2')
 	inputValue = await client.getValue('.scalar-input-2')
-	t.is(inputValue, '')
-	inputValue = await client.getValue('.scalar-input-3')
-	t.is(inputValue, '3')
+	t.is(inputValue, '1')
 
 	await client.setValue('#scalar-count-input', '4')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 4)
 	inputValue = await client.getValue('.scalar-input-0')
-	t.is(inputValue, '20')
+	t.is(inputValue, '1')
 	inputValue = await client.getValue('.scalar-input-1')
-	t.is(inputValue, '20')
+	t.is(inputValue, '2')
 	inputValue = await client.getValue('.scalar-input-2')
-	t.is(inputValue, '')
-	inputValue = await client.getValue('.scalar-input-3')
-	t.is(inputValue, '3')
+	t.is(inputValue, '1')
+})
 
-	// can clear another input in the middle and it will be treated as zero
-
+test('cleared scalars are treated as zeroes', async t => {
 	await client.setValue('.scalar-input-1', '0')
 	inputValue = await client.getValue('.scalar-input-1')
 	t.is(inputValue, '')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 77.*/.test(normalOrderCount))
-
-	// if all scalars are zeroed out, returns zero
-	
-	await client.setValue('.scalar-input-0', '0')
-	await client.setValue('.scalar-input-3', '0')
-	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 0.*/.test(normalOrderCount))
+	t.true(/.* 1.*/.test(normalOrderCount))
 })
 
-test.after.always(async t => {
-	await server.stop()
-	client.end()
+
+test('if all scalars are zeroed out, normal order count is zero', async t => {
+	await client.setValue('.scalar-input-0', '0')
+	await client.setValue('.scalar-input-1', '0')
+	await client.setValue('.scalar-input-2', '0')
+	normalOrderCount = await client.getText('#normal-order-count')
+	t.true(/.* 0.*/.test(normalOrderCount))	
 })

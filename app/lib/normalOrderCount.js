@@ -1,4 +1,4 @@
-import elementCount from './elementCount'
+import elementCount from '../helpers/elementCount'
 import sumAcrSetReds from './sumAcrSetReds'
 import permCountWre from './permCountWre'
 

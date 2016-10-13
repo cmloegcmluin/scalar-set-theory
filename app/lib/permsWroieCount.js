@@ -1,4 +1,4 @@
-import elementCount from './elementCount'
+import elementCount from '../helpers/elementCount'
 
 const fact = n => n <= 1 ? 1 : n * fact(n - 1)
 

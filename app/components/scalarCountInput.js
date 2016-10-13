@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const mapStateToProps = state => ({scalarCount: state.get('scalarCount')})
+const mapStateToProps = state => ({
+	scalarCountDisplay: state.get('scalarCountDisplay')
+})
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -12,12 +14,15 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-	({scalarCount, onChange}) => (
+	({scalarCountDisplay, onChange}) => (
 		<div>
 			How many scalars?
-			<input
-			{...{id: 'scalar-count-input', value: scalarCount, onChange}}
-			/>
+			<input {...{
+					id: 'scalar-count-input', 
+					type: 'number', 
+					value: scalarCountDisplay, 
+					onChange
+			}}/>
 		</div>
 	)
 )

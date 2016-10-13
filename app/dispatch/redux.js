@@ -31,7 +31,7 @@ function rootReducer(state = initialState, action) {
 export default root => {
   let state = createStore(rootReducer)
   state.subscribe(() => {
-    ReactDOM.render(<Provider store={state}><App/></Provider>, root)
+    ReactDOM.render(<Provider {...{store: state, children: <App/>}}/>, root)
   })
   state.dispatch({type: 'WAKE_UP'})
 }

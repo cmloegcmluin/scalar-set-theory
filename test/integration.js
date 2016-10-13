@@ -18,7 +18,7 @@ test.afterEach.always(async t => {
 	await client.end()
 })
 
-test('initial values', async t => {
+test('integration - initial values', async t => {
 	t.is(await client.getTitle(), 'Scalar Set Theory')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 3)
@@ -32,7 +32,7 @@ test('initial values', async t => {
 	t.true(/.* 3.*/.test(normalOrderCount))
 })
 
-test('reducing scalar count and adding new values', async t => {
+test('integration - reducing scalar count and adding new values', async t => {
 	await client.setValue('#scalar-count-input', '2')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 2)
@@ -42,7 +42,7 @@ test('reducing scalar count and adding new values', async t => {
 	t.true(/.* 3446167860.*/.test(normalOrderCount))
 })
 
-test('adding new scalars', async t => {
+test('integration - adding new scalars', async t => {
 	await client.setValue('#scalar-count-input', '5')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 5)
@@ -59,7 +59,7 @@ test('adding new scalars', async t => {
 	t.is(inputValue, '')
 })
 
-test('skipped scalar are treated as zeroes', async t => {
+test('integration - skipped scalars are treated as zeroes', async t => {
 	await client.setValue('#scalar-count-input', '5')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 5)
@@ -69,7 +69,7 @@ test('skipped scalar are treated as zeroes', async t => {
 	t.true(/.* 60.*/.test(normalOrderCount))
 })
 
-test('scalars preserved when clearing the count', async t=> {
+test('integration - scalars preserved when clearing the count', async t=> {
 	await client.setValue('#scalar-count-input', '')
 	scalarInputs = await client.elements('.scalar-input')
 	t.is(scalarInputs.value.length, 3)
@@ -91,7 +91,7 @@ test('scalars preserved when clearing the count', async t=> {
 	t.is(inputValue, '1')
 })
 
-test('cleared scalars are treated as zeroes', async t => {
+test('integration - cleared scalars are treated as zeroes', async t => {
 	await client.setValue('.scalar-input-1', '0')
 	inputValue = await client.getValue('.scalar-input-1')
 	t.is(inputValue, '')
@@ -100,7 +100,7 @@ test('cleared scalars are treated as zeroes', async t => {
 })
 
 
-test('if all scalars are zeroed out, normal order count is zero', async t => {
+test('integration - if all scalars zero, normal order count zero', async t => {
 	await client.setValue('.scalar-input-0', '0')
 	await client.setValue('.scalar-input-1', '0')
 	await client.setValue('.scalar-input-2', '0')

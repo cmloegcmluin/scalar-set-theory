@@ -8,11 +8,13 @@ import configureMockStore from 'redux-mock-store'
 import NormalOrderCounter from '../../../app/components/normalOrderCounter'
 import NormalOrderCounterContainer from '../../../app/containers/normalOrderCounterContainer'
 
-test('renders a normal order container', t => {
+test('renders a normal order counter', t => {
 	const initialState = Map({scalarSet: List.of(0,1,0)})
 	const store = configureMockStore()(initialState)
 
-	const wrapper = mount(<Provider {...{store, children: <NormalOrderCounterContainer/>}}/>)
+	const wrapper = mount(<Provider 
+		{...{store, children: <NormalOrderCounterContainer/>}}
+	/>)
 	const container = wrapper.find(NormalOrderCounterContainer)
 	const component = container.find(NormalOrderCounter)
 	t.is(component.length, 1)

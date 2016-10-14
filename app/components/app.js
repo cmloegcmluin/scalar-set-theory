@@ -1,12 +1,12 @@
 import React from 'react'
 
-import ScalarCountInput from './scalarCountInput'
+import ScalarCountInputContainer from '../containers/scalarCountInputContainer'
 import ScalarInputs from './scalarInputs'
 import NormalOrderCounterContainer from '../containers/normalOrderCounterContainer'
 
 export default () => (
 	<div>
-		<ScalarCountInput/>
+		<ScalarCountInputContainer/>
 		<ScalarInputs/>
 		<NormalOrderCounterContainer/>
 	</div>

@@ -29,7 +29,7 @@ test('integration - initial values', async t => {
 	inputValue = await client.getValue('.scalar-input-2')
 	t.is(inputValue, '1')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 3.*/.test(normalOrderCount))
+	t.true(/.*\n3.*/.test(normalOrderCount))
 })
 
 test('integration - reducing scalar count and adding new values', async t => {
@@ -39,7 +39,7 @@ test('integration - reducing scalar count and adding new values', async t => {
 	await client.setValue('.scalar-input-0', '20')
 	await client.setValue('.scalar-input-1', '20')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 3446167860.*/.test(normalOrderCount))
+	t.true(/.*\n3446167860.*/.test(normalOrderCount))
 })
 
 test('integration - adding new scalars', async t => {
@@ -66,7 +66,7 @@ test('integration - skipped scalars are treated as zeroes', async t => {
 
 	await client.setValue('.scalar-input-4', '3')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 60.*/.test(normalOrderCount))
+	t.true(/.*\n60.*/.test(normalOrderCount))
 })
 
 test('integration - scalars preserved when clearing the count', async t=> {
@@ -96,7 +96,7 @@ test('integration - cleared scalars are treated as zeroes', async t => {
 	inputValue = await client.getValue('.scalar-input-1')
 	t.is(inputValue, '')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 1.*/.test(normalOrderCount))
+	t.true(/.*\n1.*/.test(normalOrderCount))
 })
 
 
@@ -105,5 +105,5 @@ test('integration - if all scalars zero, normal order count zero', async t => {
 	await client.setValue('.scalar-input-1', '0')
 	await client.setValue('.scalar-input-2', '0')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.* 0.*/.test(normalOrderCount))	
+	t.true(/.*\n0.*/.test(normalOrderCount))	
 })

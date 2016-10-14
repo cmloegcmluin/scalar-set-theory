@@ -5,7 +5,7 @@
     "deploy": "sh ./deploy.sh",
     "test": "npm run unit && npm run integration",
     "unit": "ava --match='!integration*'",
-    "integration": "(selenium-standalone start &); ava --match='integration*' --serial",
+    "integration": "selenium-standalone start & ava --match='integration*' --serial",
     "unit:watch": "ava --match='!integration*' --watch",
     "kill-test-server": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \"8081\" ^| find  \"LISTENING\"') do taskkill /f /pid %a"
   },

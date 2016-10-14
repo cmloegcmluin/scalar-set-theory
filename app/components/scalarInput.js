@@ -9,15 +9,12 @@ const mapStateToProps = (state, ownProps) => {
 	return {...{value, index, className}}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onChange: (event, index) => dispatch(
-			{type: 'UPDATE_SCALAR', data: {
-				index: index, val: event.target.value
-			}}
-		)
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	onChange: (event, index) => dispatch({
+		type: 'UPDATE_SCALAR', 
+		data: {...{index, val: event.target.value}}
+	})
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(
 	({value, index, onChange, className}) => (

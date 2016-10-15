@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default ({value, index, onChange, className}) => (
-	<input
-		{...{value, className, onChange: e => onChange(e.target.value, index)}}
-	/>
+export default ({value, index, name, onChange, className}) => (
+	<div>
+		<span>{name}</span>
+		<input
+			{...{value, className, onChange: e => onChange(e.target.value, index)}}
+		/>
+	</div>
 )

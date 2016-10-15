@@ -2,7 +2,13 @@ import test from 'ava'
 import rootReducer from '../../../app/reducers/rootReducer'
 import {List, Map} from 'immutable'
 
-test(t => {
+test('returns existing state if no action match', t => {
+	const state = Map({thing: 'anything'})
+	const nextState = rootReducer(state, {type: 'WAKE_UP'})
+	t.true(nextState.equals(state))
+})
+
+test('updating a scalar', t => {
 	const state = Map({scalarSet: List.of(1, 2, 1)})
 
 	const data = {index: 2, val: '9'}
@@ -12,7 +18,7 @@ test(t => {
 	t.true(nextState.equals(expectedNextState))
 })
 
-test(t => {
+test('deleting a scalar', t => {
 	const state = Map({scalarSet: List.of(1, 2, 1)})
 
 	const data = {index: 2, val: undefined}

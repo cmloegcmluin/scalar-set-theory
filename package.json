@@ -4,8 +4,9 @@
     "start": "webpack-dev-server --hot --inline --content-base dist/",
     "deploy": "sh ./deploy.sh",
     "postinstall": "selenium-standalone install",
+    "lint": "eslint .",
     "test": "npm run unit && npm run integration",
-    "unit": "ava --match='!integration*'",
+    "unit": "nyc ava --match='!integration*'",
     "integration": "selenium-standalone start & ava --match='integration*' --serial",
     "unit:watch": "ava --match='!integration*' --watch",
     "kill-test-server": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \"8081\" ^| find  \"LISTENING\"') do taskkill /f /pid %a"
@@ -28,6 +29,7 @@
     "eslint-plugin-react": "^6.4.1",
     "html-webpack-plugin": "^2.22.0",
     "immutable": "^3.8.1",
+    "nyc": "^8.3.1",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",

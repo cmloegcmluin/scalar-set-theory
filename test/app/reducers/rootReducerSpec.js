@@ -81,3 +81,16 @@ test('deleting scalar count', t => {
 	const nextState = rootReducer(state, {type: 'SET_SCALAR_INPUT_COUNT', data})
 	t.true(nextState.equals(expectedNextState))
 })
+
+test('negative scalar count', t => {
+	const state = Map({
+		scalarCount: 0,
+		scalarCountDisplay: '',
+		scalarSet: List.of(1)
+	})
+
+	const data = '-1'
+
+	const nextState = rootReducer(state, {type: 'SET_SCALAR_INPUT_COUNT', data})
+	t.true(nextState.equals(state))
+})

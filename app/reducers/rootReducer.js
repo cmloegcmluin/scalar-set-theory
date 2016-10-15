@@ -4,7 +4,7 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 	case 'SET_SCALAR_INPUT_COUNT': {
 		const count = parseInt(action.data)
-		if (count) {
+		if (count && count > 0) {
 			return state
 				.set('scalarCount', count)
 				.set('scalarCountDisplay', count)

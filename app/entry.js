@@ -6,6 +6,8 @@ import {Provider} from 'react-redux'
 import App from './components/app'
 import rootReducer from './reducers/rootReducer'
 
+import './stylesheets/styles.css'
+
 const root = document.createElement('div')
 document.body.appendChild(root)
 

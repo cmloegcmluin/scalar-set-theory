@@ -8,17 +8,26 @@ import configureMockStore from 'redux-mock-store'
 import NormalOrderCounter from '../../../app/components/normalOrderCounter'
 import NormalOrderCounterContainer from '../../../app/containers/normalOrderCounterContainer'
 
-test('renders a normal order counter', t => {
-	const initialState = Map({scalarSet: List.of(0,1,0)})
-	const store = configureMockStore()(initialState)
+let component
+const scalarSet = [1, undefined, 2, 0, undefined]
+const filteredScalarSet = [1, 2, 0]
 
+test.beforeEach(t => {
+	const initialState = Map({scalarSet: List(scalarSet)})
+	const store = configureMockStore()(initialState)
 	const wrapper = mount(<Provider 
 		{...{store, children: <NormalOrderCounterContainer/>}}
 	/>)
 	const container = wrapper.find(NormalOrderCounterContainer)
-	const component = container.find(NormalOrderCounter)
-	t.is(component.length, 1)
+	component = container.find(NormalOrderCounter)
+})
 
-	const expected = [0,1,0]
-	t.true(component.props().scalarSet.every((el, i) => el === expected[i]))
+test('renders one normal order counter', t => {
+	t.is(component.length, 1)
+})
+
+test('passes it the scalarSet with undefined elements filtered', t => {
+	t.true(component.props().scalarSet.every(
+		(el, i) => el === filteredScalarSet[i])
+	)
 })

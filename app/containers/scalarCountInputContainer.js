@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	onChange: event => dispatch({
-		type: 'SET_SCALAR_INPUT_COUNT', data: event.target.value
+	onChange: e => dispatch({
+		type: 'SET_SCALAR_INPUT_COUNT', data: e.target.value
 	})
 })
 

@@ -1,18 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
-import ScalarInput from './scalarInput'
-
+import ScalarInputContainer from '../containers/scalarInputContainer'
 import range from '../helpers/range'
 
-const mapStateToProps = state => ({scalarCount: state.get('scalarCount')})
-
-export default connect(mapStateToProps)(
-	({scalarCount}) => (
-		<div>
-			{range(scalarCount).map(
-				index => <ScalarInput {...{index, key: index}}/>
-			)}
-		</div>
-	)
+export default ({scalarCount}) => (
+	<div>
+		{range(scalarCount).map(
+			index => <ScalarInputContainer {...{index, key: index}}/>
+		)}
+	</div>
 )

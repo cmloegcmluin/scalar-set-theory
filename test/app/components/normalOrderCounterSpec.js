@@ -4,7 +4,6 @@ import {shallow} from 'enzyme'
 
 import NormalOrderCounter from '../../../app/components/normalOrderCounter'
 
-
 test('calculates a simple normal order count', t => {
 	const wrapper = shallow(<NormalOrderCounter {...{scalarSet: [1, 2, 1]}}/>)
 	t.is(wrapper.text(), "Normal order count:3")

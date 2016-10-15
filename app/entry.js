@@ -4,12 +4,12 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
 import App from './components/app'
-import reducer from './reducers/reducer'
+import rootReducer from './reducers/rootReducer'
 
 const root = document.createElement('div')
 document.body.appendChild(root)
 
-let state = createStore(reducer)
+let state = createStore(rootReducer)
 state.subscribe(() => {
 	render(<Provider {...{store: state, children: <App/>}}/>, root)
 })

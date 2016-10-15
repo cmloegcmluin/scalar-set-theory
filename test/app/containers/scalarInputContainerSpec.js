@@ -12,7 +12,7 @@ import ScalarInputContainer from '../../../app/containers/scalarInputContainer'
 let component, dispatchSpy
 const index = 1
 
-test.beforeEach(t => {
+test.beforeEach(() => {
 	const initialState = Map({scalarSet: List.of(97, 98, 99)})
 	const store = configureMockStore()(initialState)
 	dispatchSpy = sinon.spy(store, 'dispatch')
@@ -34,7 +34,7 @@ test('gives it the correct index from the scalar set as its value', t => {
 test('connects it to dispatch, using its index', t => {
 	component.find('input').simulate('change', {target: {value: 96}})
 	t.true(dispatchSpy.calledWith({
-		type: 'UPDATE_SCALAR', 
+		type: 'UPDATE_SCALAR',
 		data: {...{index, val: 96}}
 	}))
 })

@@ -1,4 +1,4 @@
-import {spawn} from 'child_process';
+import {spawn} from 'child_process'
 
 export default function(cmd, args, options) {
 	if(process.platform === 'win32') {

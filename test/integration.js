@@ -5,7 +5,7 @@ import Server from './helpers/server'
 const server = new Server()
 let client, scalarInputs, inputValue, normalOrderCount
 
-test.beforeEach(async t => {
+test.beforeEach(async () => {
 	await server.start()
 	const options = {
 		desiredCapabilities: {browserName: 'chrome'}
@@ -13,7 +13,7 @@ test.beforeEach(async t => {
 	client = webdriverio.remote(options).init().url('localhost:8081')
 })
 
-test.afterEach.always(async t => {
+test.afterEach.always(async () => {
 	await server.stop()
 	await client.end()
 })
@@ -105,5 +105,5 @@ test('integration - if all scalars zero, normal order count zero', async t => {
 	await client.setValue('.scalar-input-1', '0')
 	await client.setValue('.scalar-input-2', '0')
 	normalOrderCount = await client.getText('#normal-order-count')
-	t.true(/.*\n0.*/.test(normalOrderCount))	
+	t.true(/.*\n0.*/.test(normalOrderCount))
 })

@@ -12,10 +12,10 @@ let component
 const scalarSet = [1, undefined, 2, 0, undefined]
 const filteredScalarSet = [1, 2, 0]
 
-test.beforeEach(t => {
+test.beforeEach(() => {
 	const initialState = Map({scalarSet: List(scalarSet)})
 	const store = configureMockStore()(initialState)
-	const wrapper = mount(<Provider 
+	const wrapper = mount(<Provider
 		{...{store, children: <NormalOrderCounterContainer/>}}
 	/>)
 	const container = wrapper.find(NormalOrderCounterContainer)

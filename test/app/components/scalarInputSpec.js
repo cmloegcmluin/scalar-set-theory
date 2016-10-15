@@ -10,7 +10,7 @@ const value = 5
 const index = 3
 const onChange = sinon.spy()
 
-test.beforeEach(t => {
+test.beforeEach(() => {
 	wrapper = shallow(<ScalarInput {...{value, index, onChange}}/>)
 })
 

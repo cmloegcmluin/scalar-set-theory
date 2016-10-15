@@ -11,7 +11,7 @@ import ScalarCountInputContainer from '../../../app/containers/scalarCountInputC
 
 let component, dispatchSpy
 
-test.beforeEach(t => {
+test.beforeEach(() => {
 	const initialState = Map({scalarCountDisplay: 4})
 	const store = configureMockStore()(initialState)
 	dispatchSpy = sinon.spy(store, 'dispatch')

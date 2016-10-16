@@ -6,9 +6,9 @@
     "postinstall": "selenium-standalone install",
     "lint": "eslint .",
     "test": "npm run unit && npm run integration",
-    "unit": "nyc ava --match='!integration*'",
-    "integration": "selenium-standalone start & ava --match='integration*' --serial",
-    "unit:watch": "ava --match='!integration*' --watch",
+    "unit": "nyc ava --match=\"!integration*\"",
+    "integration": "selenium-standalone start & ava --match=\"integration*\" --serial",
+    "unit:watch": "ava --match=\"!integration*\" --watch",
     "kill-test-server": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \"8081\" ^| find  \"LISTENING\"') do taskkill /f /pid %a"
   },
   "devDependencies": {

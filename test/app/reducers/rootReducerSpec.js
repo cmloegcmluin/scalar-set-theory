@@ -28,6 +28,16 @@ test('deleting a scalar', t => {
 	t.true(nextState.equals(expectedNextState))
 })
 
+test('setting scalar to something invalid like a letter', t => {
+	const state = Map({scalarSet: List.of(1, 2, 1)})
+
+	const data = {index: 2, val: 'r'}
+	const expectedNextState = Map({scalarSet: List.of(1, 2, 0)})
+
+	const nextState = rootReducer(state, {type: 'UPDATE_SCALAR', data})
+	t.true(nextState.equals(expectedNextState))
+})
+
 test('reducing scalar count', t => {
 	const state = Map({
 		scalarCount: 4,

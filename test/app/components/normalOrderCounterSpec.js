@@ -18,3 +18,8 @@ test('calculates a big normal order count', t => {
 	const wrapper = shallow(<NormalOrderCounter {...{scalarSet: [20, 20]}}/>)
 	t.is(wrapper.text(), 'Normal order count:3446167860')
 })
+
+test('gives a nice message if the normal order count is too big', t => {
+	const wrapper = shallow(<NormalOrderCounter {...{scalarSet: [99, 99]}}/>)
+	t.is(wrapper.text(), "Normal order count:Sorry, this one's beyond me.")
+})

@@ -6,6 +6,10 @@ import elementCount from '../helpers/elementCount'
 export default ({scalarSet}) => (
 	<div id="normal-order-count">
 		<div>Normal order count:</div>
-		<div>{elementCount(scalarSet) ? normalOrderCount(scalarSet) : 0}</div>
+		<div>{
+			elementCount(scalarSet) ?
+			(normalOrderCount(scalarSet) || "Sorry, this one's beyond me.")
+			: 0
+		}</div>
 	</div>
 )

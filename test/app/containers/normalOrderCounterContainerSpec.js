@@ -5,6 +5,7 @@ import {Provider} from 'react-redux'
 import {Map, List} from 'immutable'
 import configureMockStore from 'redux-mock-store'
 
+import arraysEqual from '../../helpers/arraysEqual'
 import NormalOrderCounter from '../../../app/components/normalOrderCounter'
 import NormalOrderCounterContainer from '../../../app/containers/normalOrderCounterContainer'
 
@@ -27,7 +28,5 @@ test('renders one normal order counter', t => {
 })
 
 test('passes it the scalarSet with undefined elements filtered', t => {
-	t.true(component.props().scalarSet.every(
-		(el, i) => el === filteredScalarSet[i])
-	)
+	t.true(arraysEqual(component.props().scalarSet, filteredScalarSet))
 })

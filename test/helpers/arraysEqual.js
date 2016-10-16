@@ -1,0 +1,1 @@
+export default (arr1, arr2) => arr1.every((el, i) => el === arr2[i])

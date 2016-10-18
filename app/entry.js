@@ -11,6 +11,8 @@ import './stylesheets/styles.css'
 const root = document.createElement('div')
 document.body.appendChild(root)
 
+console.log(process.env.NODE_ENV === 'production' ? 'wassup' : 'wasabi')
+
 let state = createStore(rootReducer)
 state.subscribe(() => {
 	render(<Provider {...{store: state, children: <App/>}}/>, root)

@@ -27,7 +27,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({title: 'Scalar Set Theory'}),
 		new webpack.DefinePlugin({
-			'process.env': {NODE_ENV: JSON.stringify('production')}
+			'process.env': {NODE_ENV: JSON.stringify(process.env.NODE_ENV === 'production' ? 'production' : 'development')}
 		})
 	]
 }

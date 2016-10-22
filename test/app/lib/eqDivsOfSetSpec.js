@@ -26,27 +26,3 @@ test.only('composite set', t => {
 test('no equal divisors', t => {
 	t.true(arraysEqual(eqDivsOfSet([2, 3], [])))
 })
-
-
-
-/*
-List [ 0, 0, 1, 2, 2, 2 ]
-List [ 0, 0, 2, 1, 2, 2 ]
-List [ 0, 0, 2, 2, 1, 2 ]
-List [ 0, 0, 2, 2, 2, 1 ]
-List [ 1, 0, 2, 0, 2, 2 ]
-List [ 1, 0, 2, 2, 0, 2 ]
-List [ 1, 0, 2, 2, 2, 0 ]
-List [ 2, 0, 0, 1, 2, 2 ]
-List [ 2, 0, 0, 2, 1, 2 ]
-List [ 2, 0, 0, 2, 2, 1 ]
-List [ 2, 0, 1, 0, 2, 2 ]
-List [ 2, 0, 1, 2, 0, 2 ]
-List [ 2, 0, 1, 2, 2, 0 ]
-List [ 2, 0, 2, 0, 1, 2 ]
-List [ 2, 0, 2, 0, 2, 1 ]
-List [ 2, 0, 2, 1, 0, 2 ]
-List [ 2, 0, 2, 1, 2, 0 ]
-List [ 2, 0, 2, 2, 0, 1 ]
-List [ 2, 0, 2, 2, 1, 0 ]
-*/

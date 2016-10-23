@@ -4,7 +4,7 @@ import range from '../helpers/range'
 
 const scalarNames = [
 	[],
-	['e'],
+	['L'],
 	['L', 's'],
 	['L', 'M', 's'],
 	['L', 'M', 'm', 's']

@@ -3,8 +3,8 @@ import test from 'ava'
 import scalarNames from '../../../app/lib/scalarNames'
 import arraysEqual from '../../helpers/arraysEqual'
 
-test('with 1 scalar, uses e', t => {
-	t.true(arraysEqual(scalarNames(1), ['e']))
+test('with 1 scalar, uses only L', t => {
+	t.true(arraysEqual(scalarNames(1), ['L']))
 })
 
 test('with 2 scalars, uses L s', t => {

@@ -6,3 +6,8 @@ span {
 	display: inline-block;
 	width: 50px;
 }
+
+.normal-orders {
+	font-family: 'Courier New';
+	width: 600px;
+}

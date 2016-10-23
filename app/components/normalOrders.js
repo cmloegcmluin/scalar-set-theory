@@ -1,10 +1,9 @@
 import React from 'react'
-import normalOrders from '../lib/normalOrders'
+
+import normalOrdersList from '../lib/normalOrdersList'
 
 export default ({scalarSet}) => (
-	<div>
-		{normalOrders(scalarSet).map(
-			normalOrder => <div>{normalOrder}</div>
-		)}
+	<div {...{className: 'normal-orders'}}>
+		{normalOrdersList(scalarSet)}
 	</div>
 )

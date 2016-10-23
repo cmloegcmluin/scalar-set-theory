@@ -18,5 +18,5 @@ test('it renders a list of normal orders', t => {
 	/>)
 	const component = wrapper.find(NormalOrders)
 	t.is(component.length, 1)
-	t.true(arraysEqual(component.props().scalarSet, [3, 2, 1]))
+	t.true(arraysEqual(component.props().scalarSet, [1, 2, 3]))
 })

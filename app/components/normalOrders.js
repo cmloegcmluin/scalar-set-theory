@@ -1,11 +1,10 @@
 import React from 'react'
-import {List} from 'immutable'
 
 import normalOrdersList from '../lib/normalOrdersList'
 import getScalarNames from '../lib/scalarNames'
 
 const calcRenderNormalOrders = scalarSet => {
-	const scalarNames = List(getScalarNames(scalarSet.length)).reverse().toArray()
+	const scalarNames = getScalarNames(scalarSet.length)
 	let output = ''
 	normalOrdersList(scalarSet)
 		.forEach(normalOrder => {

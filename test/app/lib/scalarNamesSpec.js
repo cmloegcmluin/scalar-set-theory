@@ -8,17 +8,17 @@ test('with 1 scalar, uses only L', t => {
 })
 
 test('with 2 scalars, uses L s', t => {
-	t.true(arraysEqual(scalarNames(2), ['L', 's']))
+	t.true(arraysEqual(scalarNames(2), ['s', 'L']))
 })
 
 test('with 3 scalars, uses L M s', t => {
-	t.true(arraysEqual(scalarNames(3), ['L', 'M', 's']))
+	t.true(arraysEqual(scalarNames(3), ['s', 'M', 'L']))
 })
 
 test('with 4 scalars, uses L M m s', t => {
-	t.true(arraysEqual(scalarNames(4), ['L', 'M', 'm', 's']))
+	t.true(arraysEqual(scalarNames(4), ['s', 'm', 'M', 'L']))
 })
 
 test('with greater than 4 scalars, uses L M m m(1) m(2) m(...) m(n) s', t => {
-	t.true(arraysEqual(scalarNames(7), ['L', 'M', 'm', 'm1', 'm2', 'm3', 's']))
+	t.true(arraysEqual(scalarNames(7), ['s', '3', '2', '1', 'm', 'M', 'L']))
 })

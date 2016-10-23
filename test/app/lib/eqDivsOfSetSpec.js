@@ -18,7 +18,7 @@ test.only('composite set', t => {
 	// 		])
 	// 	)
 	// )
-	sawada()
+	sawada([2, 1, 3])
 
 	t.true(arraysEqual(eqDivsOfSet([20, 20]), [2, 4, 5, 10, 20]))
 })

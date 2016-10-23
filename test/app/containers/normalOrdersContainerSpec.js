@@ -12,7 +12,7 @@ import NormalOrdersContainer from '../../../app/containers/normalOrdersContainer
 test('it renders a list of normal orders', t => {
 	const initialState = Map({scalarSet: List([1, 2, 3])})
 	const store = configureMockStore()(initialState)
-	NormalOrders.__Rewire__('normalOrdersList', () => {})
+	NormalOrders.__Rewire__('calcRenderNormalOrders', () => {})
 	const wrapper = mount(<Provider
 		{...{store, children: <NormalOrdersContainer/>}}
 	/>)

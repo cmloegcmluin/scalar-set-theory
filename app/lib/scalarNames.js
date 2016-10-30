@@ -1,5 +1,3 @@
-import {List} from 'immutable'
-
 import range from '../helpers/range'
 
 const scalarNames = [

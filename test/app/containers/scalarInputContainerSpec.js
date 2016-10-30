@@ -10,12 +10,14 @@ import ScalarInput from '../../../app/components/scalarInput'
 import ScalarInputContainer from '../../../app/containers/scalarInputContainer'
 
 let component, dispatchSpy
+const updateNormalOrdersStub = sinon.stub()
 const index = 1
 
 test.beforeEach(() => {
-	const initialState = Map({scalarSet: List.of(97, 98, 99)})
+	const initialState = Map({scalarSet: List([97, 98, 99])})
 	const store = configureMockStore()(initialState)
 	dispatchSpy = sinon.spy(store, 'dispatch')
+	ScalarInputContainer.__Rewire__('updateNormalOrders', updateNormalOrdersStub)
 	const wrapper = mount(<Provider
 		{...{store, children: <ScalarInputContainer {...{index}}/>}}
 	/>)
@@ -35,16 +37,8 @@ test('gives it the correct class name from its index', t => {
 	t.is(component.props().className, 'scalar-input-' + index + ' scalar-input')
 })
 
-test('connects it to dispatch, using its index', t => {
-	component.find('input').simulate('change', {target: {value: 96}})
-	t.true(dispatchSpy.calledWith({
-		type: 'UPDATE_SCALAR',
-		data: {...{index, val: 96}}
-	}))
-})
-
 test('if its index is beyond the scalar set length, value is empty', t => {
-	const reInitialState = Map({scalarSet: List.of(97, 98, 99)})
+	const reInitialState = Map({scalarSet: List([97, 98, 99])})
 	const reStore = configureMockStore()(reInitialState)
 	const reWrapper = mount(<Provider
 		{...{store: reStore, children: <ScalarInputContainer {...{index: 4}}/>}}
@@ -52,4 +46,31 @@ test('if its index is beyond the scalar set length, value is empty', t => {
 	const reContainer = reWrapper.find(ScalarInputContainer)
 	component = reContainer.find(ScalarInput)
 	t.is(component.props().value, '')
+})
+
+test('updates the scalar set and normal orders', t => {
+	component.find('input').simulate('change', {target: {value: 96}})
+	t.true(dispatchSpy.calledWith({
+		type: 'UPDATE_SCALAR',
+		data: List([97, 96, 99])
+	}))
+	t.true(updateNormalOrdersStub.calledWith(dispatchSpy, [97, 96, 99]))
+})
+
+test('deleting a scalar', t => {
+	component.find('input').simulate('change', {target: {value: undefined}})
+	t.true(dispatchSpy.calledWith({
+		type: 'UPDATE_SCALAR',
+		data: List([97, 0, 99])
+	}))
+	t.true(updateNormalOrdersStub.calledWith(dispatchSpy, [97, 0, 99]))
+})
+
+test('setting scalar to something invalid like a letter', t => {
+	component.find('input').simulate('change', {target: {value: 'r'}})
+	t.true(dispatchSpy.calledWith({
+		type: 'UPDATE_SCALAR',
+		data: List([97, 0, 99])
+	}))
+	t.true(updateNormalOrdersStub.calledWith(dispatchSpy, [97, 0, 99]))
 })

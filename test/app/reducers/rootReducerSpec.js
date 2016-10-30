@@ -1,6 +1,8 @@
 import test from 'ava'
-import rootReducer from '../../../app/reducers/rootReducer'
 import {List, Map} from 'immutable'
+import equal from 'deep-equal'
+
+import rootReducer from '../../../app/reducers/rootReducer'
 
 test('returns existing state if no action match', t => {
 	const state = Map({thing: 'anything'})
@@ -8,48 +10,62 @@ test('returns existing state if no action match', t => {
 	t.true(nextState.equals(state))
 })
 
-test('updating a scalar', t => {
-	const state = Map({scalarSet: List.of(1, 2, 1)})
+test('updating a scalar also sets calculating to true', t => {
+	const state = Map({
+		scalarSet: List([1, 2, 1]),
+		calculating: false,
+		normalOrders: [
+			[0, 1, 1, 2],
+			[0, 1, 2, 1],
+			[0, 2, 1, 1]
+		]
+	})
 
-	const data = {index: 2, val: '9'}
-	const expectedNextState = Map({scalarSet: List.of(1, 2, 9)})
+	const data = List([1, 1, 1])
+	const expectedNextState = Map({
+		scalarSet: List([1, 1, 1]),
+		calculating: true,
+		normalOrders: [
+			[0, 1, 1, 2],
+			[0, 1, 2, 1],
+			[0, 2, 1, 1]
+		]
+	})
 
 	const nextState = rootReducer(state, {type: 'UPDATE_SCALAR', data})
-	t.true(nextState.equals(expectedNextState))
+	t.true(equal(nextState.toObject(), expectedNextState.toObject()))
 })
 
-test('deleting a scalar', t => {
-	const state = Map({scalarSet: List.of(1, 2, 1)})
+test('updating normal orders also sets calculating to false', t => {
+	const state = Map({
+		scalarSet: List([1, 1, 1]),
+		calculating: true,
+		normalOrders: [[0, 1, 1, 2], [0, 1, 2, 1], [0, 2, 1, 1]]
+	})
 
-	const data = {index: 2, val: undefined}
-	const expectedNextState = Map({scalarSet: List.of(1, 2, 0)})
+	const data = [[0, 1, 2], [0, 2, 1]]
+	const expectedNextState = Map({
+		scalarSet: List([1, 1, 1]),
+		calculating: false,
+		normalOrders: [[0, 1, 2], [0, 2, 1]]
+	})
 
-	const nextState = rootReducer(state, {type: 'UPDATE_SCALAR', data})
-	t.true(nextState.equals(expectedNextState))
-})
-
-test('setting scalar to something invalid like a letter', t => {
-	const state = Map({scalarSet: List.of(1, 2, 1)})
-
-	const data = {index: 2, val: 'r'}
-	const expectedNextState = Map({scalarSet: List.of(1, 2, 0)})
-
-	const nextState = rootReducer(state, {type: 'UPDATE_SCALAR', data})
-	t.true(nextState.equals(expectedNextState))
+	const nextState = rootReducer(state, {type: 'UPDATE_NORMAL_ORDERS', data})
+	t.true(equal(nextState.toObject(), expectedNextState.toObject()))
 })
 
 test('reducing scalar count', t => {
 	const state = Map({
 		scalarCount: 4,
 		scalarCountDisplay: 4,
-		scalarSet: List.of(1, 2, 3, 4)
+		scalarSet: List([1, 2, 3, 4])
 	})
 
 	const data = '2'
 	const expectedNextState = Map({
 		scalarCount: 2,
 		scalarCountDisplay: 2,
-		scalarSet: List.of(1, 2)
+		scalarSet: List([1, 2])
 	})
 
 	const nextState = rootReducer(state, {type: 'SET_SCALAR_INPUT_COUNT', data})
@@ -60,14 +76,14 @@ test('increasing scalar count', t => {
 	const state = Map({
 		scalarCount: 4,
 		scalarCountDisplay: 4,
-		scalarSet: List.of(1, 2, 3, 4)
+		scalarSet: List([1, 2, 3, 4])
 	})
 
 	const data = '6'
 	const expectedNextState = Map({
 		scalarCount: 6,
 		scalarCountDisplay: 6,
-		scalarSet: List.of(1, 2, 3, 4, undefined, undefined)
+		scalarSet: List([1, 2, 3, 4, undefined, undefined])
 	})
 
 	const nextState = rootReducer(state, {type: 'SET_SCALAR_INPUT_COUNT', data})
@@ -78,14 +94,14 @@ test('deleting scalar count', t => {
 	const state = Map({
 		scalarCount: 4,
 		scalarCountDisplay: 4,
-		scalarSet: List.of(1, 2, 3, 4)
+		scalarSet: List([1, 2, 3, 4])
 	})
 
 	const data = ''
 	const expectedNextState = Map({
 		scalarCount: 4,
 		scalarCountDisplay: '',
-		scalarSet: List.of(1, 2, 3, 4)
+		scalarSet: List([1, 2, 3, 4])
 	})
 
 	const nextState = rootReducer(state, {type: 'SET_SCALAR_INPUT_COUNT', data})
@@ -96,7 +112,7 @@ test('negative scalar count', t => {
 	const state = Map({
 		scalarCount: 0,
 		scalarCountDisplay: '',
-		scalarSet: List.of(1)
+		scalarSet: List([1])
 	})
 
 	const data = '-1'

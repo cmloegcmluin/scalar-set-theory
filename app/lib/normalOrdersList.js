@@ -1,11 +1,10 @@
 import elementCount from '../helpers/elementCount'
-import {List} from 'immutable'
 
-export default scalarSet => {
+const getList = scalarSet => {
+	const results = []
 	const answerLength = elementCount(scalarSet)
 	let answer = Array.apply(null, Array(answerLength)).map(() => 0)
 	const scalarCount = scalarSet.length
-	const results = []
 
 	const simpleFixedContent = (t = 1, p = 1) => {
 		if (t > answerLength) {
@@ -27,3 +26,5 @@ export default scalarSet => {
 
 	return results
 }
+
+export default {getList}

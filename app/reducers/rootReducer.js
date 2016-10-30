@@ -14,10 +14,14 @@ export default (state = initialState, action) => {
 			.set('scalarCountDisplay', '')
 	}
 	case 'UPDATE_SCALAR': {
-		const val = parseInt(action.data.val) || 0
-		const {index} = action.data
 		return state
-			.set('scalarSet', state.get('scalarSet').set(index, val))
+			.set('scalarSet', action.data)
+			.set('calculating', true)
+	}
+	case 'UPDATE_NORMAL_ORDERS': {
+		return state
+			.set('normalOrders', action.data)
+			.set('calculating', false)
 	}
 	default:
 		return state

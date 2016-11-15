@@ -4,7 +4,7 @@ import sinon from 'sinon'
 import fetch from '../../../app/lib/normalOrdersList'
 import updateNormalOrders from '../../../app/actions/updateNormalOrders'
 
-test.only('calls dispatch with the results from the algorithm', async t => {
+test('calls dispatch with the results from the algorithm', async t => {
 	const results = [[0, 1, 2]]
 	const dispatchStub = sinon.stub()
 	const jsonStub = sinon.stub().returns(results)

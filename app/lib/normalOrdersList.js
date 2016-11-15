@@ -1,6 +1,7 @@
 import elementCount from '../helpers/elementCount'
 
-const getList = scalarSet => {
+const getList = actualScalarSet => {
+	const scalarSet = actualScalarSet.reverse()
 	const results = []
 	const answerLength = elementCount(scalarSet)
 	let answer = Array.apply(null, Array(answerLength)).map(() => 0)
@@ -8,7 +9,9 @@ const getList = scalarSet => {
 
 	const simpleFixedContent = (t = 1, p = 1) => {
 		if (t > answerLength) {
-			if (answerLength % p === 0) results.push(answer.slice(1))
+			if (answerLength % p === 0) {
+				results.push(answer.slice(1).reverse().map(el => (scalarCount - 1) - el))
+			}
 		} else {
 			const atp = answer[t - p]
 			for (let j = atp; j < scalarCount; j++) {

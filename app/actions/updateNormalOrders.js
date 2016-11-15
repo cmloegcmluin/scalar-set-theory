@@ -1,7 +1,7 @@
-import normalOrdersList from '../lib/normalOrdersList'
 import fetch from 'isomorphic-fetch'
 import queryString from 'query-string'
 
+/* istanbul ignore next */
 const apiUrl = process.env.NODE_ENV === 'production' ? 'https://scalar-set-theory-backend.cfapps.io' : 'http://localhost:3000';
 
 export default async (dispatch, scalarSet) => {

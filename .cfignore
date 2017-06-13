@@ -1,5 +1,5 @@
-/coverage
-/.nyc_output
-/app
+/elm-stuff
+/integration-tests
+/src
 /node_modules
-/test
+/tests

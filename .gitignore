@@ -1,6 +1,7 @@
 /node_modules
 npm-debug.log
 /dist
-/test/npm-debug.log.*
-/.nyc_output
-/coverage
+/.idea
+/elm-stuff
+/integration-tests/node_modules
+/tests/elm-stuff

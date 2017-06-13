@@ -1,69 +1,9 @@
 {
   "name": "scalar-set-theory",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --content-base dist/",
-    "deploy": "sh ./deploy.sh",
-    "postinstall": "selenium-standalone install",
-    "lint": "eslint .",
-    "test": "npm run unit && npm run integration",
-    "unit": "nyc ava --match=\"!integration*\"",
-    "integration": "selenium-standalone start & ava --match=\"integration*\" --serial",
-    "unit:watch": "ava --match=\"!integration*\" --watch",
-    "kill-test-server": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \"8081\" ^| find  \"LISTENING\"') do taskkill /f /pid %a"
-  },
-  "devDependencies": {
-    "ava": "^0.16.0",
-    "babel-eslint": "^7.0.0",
-    "babel-loader": "^6.2.5",
-    "babel-plugin-rewire": "^1.0.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-latest": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-register": "^6.16.3",
-    "browser-env": "^2.0.11",
-    "classnames": "^2.2.5",
-    "css-loader": "^0.25.0",
-    "deep-equal": "^1.0.1",
-    "enzyme": "^2.4.1",
-    "eslint": "^3.8.0",
-    "eslint-plugin-react": "^6.4.1",
-    "html-webpack-plugin": "^2.22.0",
-    "immutable": "^3.8.1",
-    "isomorphic-fetch": "^2.2.1",
-    "nyc": "^8.3.1",
-    "query-string": "^4.2.3",
-    "react": "^15.3.2",
-    "react-addons-test-utils": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-redux": "^4.4.5",
-    "redux": "^3.6.0",
-    "redux-mock-store": "^1.2.1",
-    "selenium-standalone": "^5.7.2",
-    "sinon": "^1.17.6",
-    "style-loader": "^0.13.1",
-    "webdriverio": "^4.2.16",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "ava": {
-    "babel": "inherit",
-    "require": [
-      "babel-register",
-      "./test/helpers/setupBrowserEnv.js"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "latest",
-      "react",
-      "stage-0"
-    ],
-    "plugins": [
-      "transform-runtime",
-      "transform-decorators-legacy",
-      "rewire"
-    ]
+    "start": "elm-reactor",
+    "build": "elm-make src/ScalarSetTheory/Main.elm --output dist/index.html",
+    "deploy": "cf push scalar-set-theory -b https://github.com/cloudfoundry/staticfile-buildpack.git -m 64m",
+    "test": "elm-test && elm-reactor -p 8001 & cd integration-tests && npm test"
   }
 }

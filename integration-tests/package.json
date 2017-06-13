@@ -1,0 +1,17 @@
+{
+  "name": "standup-emcee-integration-test",
+  "version": "0.0.1",
+  "description": "Integration tests for Scalar Set Theory",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio wdio.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "wdio-mocha-framework": "^0.5.9",
+    "wdio-spec-reporter": "0.0.5",
+    "webdriverio": "^4.6.2"
+  }
+}

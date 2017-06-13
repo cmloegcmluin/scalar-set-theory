@@ -4,4 +4,5 @@ npm-debug.log
 /.idea
 /elm-stuff
 /integration-tests/node_modules
+/integration-tests/errorShots
 /tests/elm-stuff

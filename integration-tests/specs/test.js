@@ -13,10 +13,29 @@ describe('landing page', function () {
 });
 
 describe('range of equal divisions', function () {
-	it('updates the rows and count of rows when min filter is changed', function () {
+	it('updates the rows and count of rows when min or max filter is changed', function () {
 		let minSelect = '//table/tr[2]/td[2]/select'
 		let maxSelect = '//table/tr[3]/td[2]/select'
 		browser.url('/src/ScalarSetTheory/Main.elm');
+
+		assert.equal(browser.getValue(minSelect), '2');
+		assert.equal(browser.getValue(maxSelect), '2');
+		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (1)');
+		assert.equal(browser.getText('//table/tr[4]/td[2]'), '2');
+
+		selectOption(maxSelect, '7')
+
+		assert.equal(browser.getValue(minSelect), '2');
+		assert.equal(browser.getValue(maxSelect), '7');
+		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (6)');
+		assert.equal(browser.getText('//table/tr[4]/td[2]'), '2');
+		assert.equal(browser.getText('//table/tr[5]/td[1]'), '3');
+		assert.equal(browser.getText('//table/tr[6]/td[1]'), '4');
+		assert.equal(browser.getText('//table/tr[7]/td[1]'), '5');
+		assert.equal(browser.getText('//table/tr[8]/td[1]'), '6');
+		assert.equal(browser.getText('//table/tr[9]/td[1]'), '7');
+
+		selectOption(minSelect, '5')
 
 		assert.equal(browser.getValue(minSelect), '5');
 		assert.equal(browser.getValue(maxSelect), '7');
@@ -24,13 +43,6 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getText('//table/tr[4]/td[2]'), '5');
 		assert.equal(browser.getText('//table/tr[5]/td[1]'), '6');
 		assert.equal(browser.getText('//table/tr[6]/td[1]'), '7');
-
-		selectOption(minSelect, '7')
-
-		assert.equal(browser.getValue(minSelect), '7');
-		assert.equal(browser.getValue(maxSelect), '7');
-		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (1)');
-		assert.equal(browser.getText('//table/tr[4]/td[2]'), '7');
 	})
 })
 

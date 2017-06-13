@@ -25,14 +25,15 @@ main =
 model : Model
 model =
     { ed =
-        { min = "5"
-        , max = "7"
+        { min = "2"
+        , max = "2"
         }
     }
 
 
 type Msg
     = UpdateEdMin String
+    | UpdateEdMax String
 
 
 update : Msg -> Model -> Model
@@ -45,6 +46,16 @@ update msg model =
 
                 newEd =
                     { oldEd | min = newMin }
+            in
+            { model | ed = newEd }
+
+        UpdateEdMax newMax ->
+            let
+                oldEd =
+                    model.ed
+
+                newEd =
+                    { oldEd | max = newMax }
             in
             { model | ed = newEd }
 
@@ -64,19 +75,12 @@ view model =
              , tr
                 []
                 [ td [] [ text "min" ]
-                , td []
-                    [ select
-                        [ onInput edMinOnInputHandler ]
-                        [ option [ value "5" ] [ text "5" ]
-                        , option [ value "6" ] [ text "6" ]
-                        , option [ value "7" ] [ text "7" ]
-                        ]
-                    ]
+                , td [] [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
                 ]
              , tr
                 []
                 [ td [] [ text "max" ]
-                , td [] [ select [] [ option [ value "7" ] [ text "7" ] ] ]
+                , td [] [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
                 ]
              ]
                 ++ edRangeToTableRows model.ed.min model.ed.max
@@ -84,9 +88,24 @@ view model =
         ]
 
 
+edRangeFilterOptions : List (Html Msg)
+edRangeFilterOptions =
+    List.map edRangeFilterOption (List.range 2 100)
+
+
+edRangeFilterOption : Int -> Html Msg
+edRangeFilterOption ed =
+    option [ value (toString ed) ] [ text (toString ed) ]
+
+
 edMinOnInputHandler : String -> Msg
 edMinOnInputHandler newMin =
     UpdateEdMin newMin
+
+
+edMaxOnInputHandler : String -> Msg
+edMaxOnInputHandler newMax =
+    UpdateEdMax newMax
 
 
 headEdRow : String -> Int -> Html Msg

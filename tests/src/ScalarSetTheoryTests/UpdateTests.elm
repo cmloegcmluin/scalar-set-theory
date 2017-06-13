@@ -18,4 +18,14 @@ updateTests =
                         update (UpdateEdMin "5") { ed = { min = "7", max = "7" } }
                 in
                 Expect.equal expected actual
+        , test "UpdateEdMax" <|
+            \() ->
+                let
+                    expected =
+                        { ed = { min = "5", max = "11" } }
+
+                    actual =
+                        update (UpdateEdMax "11") { ed = { min = "5", max = "7" } }
+                in
+                Expect.equal expected actual
         ]

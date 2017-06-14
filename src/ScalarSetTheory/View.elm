@@ -29,36 +29,40 @@ view model =
         [ h1 [] [ text "Scalar Set Theory" ]
         , table
             [ tableBorderCollapse ]
-            ([ tr
-                []
-                [ th
-                    [ tableBorder ]
-                    [ text "section" ]
-                , th
-                    [ tableBorder ]
-                    [ text "ed" ]
-                ]
-             , tr
-                []
-                [ td
-                    [ tableBorder ]
-                    [ text "min" ]
-                , td
-                    [ tableBorder ]
-                    [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
-                ]
-             , tr
-                []
-                [ td
-                    [ tableBorder ]
-                    [ text "max" ]
-                , td
-                    [ tableBorder ]
-                    [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
-                ]
-             ]
+            ([ tableHeader ]
+                ++ [ tr
+                        []
+                        [ td
+                            [ tableBorder ]
+                            [ text "min" ]
+                        , td
+                            [ tableBorder ]
+                            [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
+                        ]
+                   , tr
+                        []
+                        [ td
+                            [ tableBorder ]
+                            [ text "max" ]
+                        , td
+                            [ tableBorder ]
+                            [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
+                        ]
+                   ]
                 ++ edRangeToTableRows model.ed.min model.ed.max
             )
+        ]
+
+
+tableHeader : Html Msg
+tableHeader =
+    tr []
+        [ th
+            [ tableBorder ]
+            [ text "section" ]
+        , th
+            [ tableBorder ]
+            [ text "ed" ]
         ]
 
 

@@ -22,43 +22,40 @@ viewTests =
                             [ h1 [] [ text "Scalar Set Theory" ]
                             , table
                                 [ styles [ borderCollapse collapse ] ]
-                                [ tr
-                                    []
-                                    [ th [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "section" ]
-                                    , th [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "ed" ]
-                                    ]
-                                , tr
-                                    []
-                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
-                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                        [ select
-                                            [ onInput edMinOnInputHandler ]
-                                            expectedRangeOptions
-                                        ]
-                                    ]
-                                , tr
-                                    []
-                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
-                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                        [ select
-                                            [ onInput edMaxOnInputHandler ]
-                                            expectedRangeOptions
-                                        ]
-                                    ]
-                                , tr
-                                    []
-                                    [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
-                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
-                                    ]
-                                , tr
-                                    []
-                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "5" ]
-                                    ]
-                                , tr
-                                    []
-                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "6" ]
-                                    ]
-                                ]
+                                ([ tableHeader ]
+                                    ++ [ tr
+                                            []
+                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
+                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                                [ select
+                                                    [ onInput edMinOnInputHandler ]
+                                                    expectedRangeOptions
+                                                ]
+                                            ]
+                                       , tr
+                                            []
+                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
+                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                                [ select
+                                                    [ onInput edMaxOnInputHandler ]
+                                                    expectedRangeOptions
+                                                ]
+                                            ]
+                                       , tr
+                                            []
+                                            [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
+                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
+                                            ]
+                                       , tr
+                                            []
+                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "5" ]
+                                            ]
+                                       , tr
+                                            []
+                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "6" ]
+                                            ]
+                                       ]
+                                )
                             ]
 
                     actual =
@@ -96,6 +93,23 @@ viewTests =
 
                     actual =
                         edRangeFilterOptions
+                in
+                equal expected actual
+        , test "tableHeader returns a tr with a list of the section titles as th's" <|
+            \() ->
+                let
+                    expected =
+                        tr []
+                            [ th
+                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                [ text "section" ]
+                            , th
+                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                [ text "ed" ]
+                            ]
+
+                    actual =
+                        tableHeader
                 in
                 equal expected actual
         ]

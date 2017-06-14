@@ -3,6 +3,7 @@ module ScalarSetTheory.Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (rowspan, value)
 import Html.Events exposing (onInput)
+import ScalarSetTheory.Utilities exposing (parseInt)
 import String exposing (concat)
 
 
@@ -137,8 +138,3 @@ edRangeToTableRows min max =
     in
     [ headEdRow min rowCount ]
         ++ List.map tailEdRow rangeIgnoringFirst
-
-
-parseInt : String -> Int
-parseInt string =
-    String.toInt string |> Result.toMaybe |> Maybe.withDefault 0

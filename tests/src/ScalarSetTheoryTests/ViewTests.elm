@@ -1,11 +1,11 @@
 module ScalarSetTheoryTests.ViewTests exposing (viewTests)
 
-import Expect
+import Expect exposing (equal)
 import Html exposing (..)
 import Html.Attributes exposing (rowspan, value)
 import Html.Events exposing (onInput)
 import ScalarSetTheory.Main exposing (..)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 
 
 viewTests : Test
@@ -62,7 +62,7 @@ viewTests =
                     actual =
                         view { ed = { min = "4", max = "6" } }
                 in
-                Expect.equal expected actual
+                equal expected actual
         , test "edRangeToTableRows returns a list of table rows with a count spanning them vertically" <|
             \() ->
                 let
@@ -85,7 +85,7 @@ viewTests =
                     actual =
                         edRangeToTableRows "2" "4"
                 in
-                Expect.equal expected actual
+                equal expected actual
         , test "edRangeFilterOptions returns a list of options with values and text between 2 and 100" <|
             \() ->
                 let
@@ -95,7 +95,7 @@ viewTests =
                     actual =
                         edRangeFilterOptions
                 in
-                Expect.equal expected actual
+                equal expected actual
         ]
 
 

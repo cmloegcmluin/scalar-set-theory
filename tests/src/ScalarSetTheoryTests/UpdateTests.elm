@@ -1,8 +1,8 @@
 module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
-import Expect exposing (..)
+import Expect exposing (equal)
 import ScalarSetTheory.Main exposing (..)
-import Test exposing (..)
+import Test exposing (Test, describe, test)
 
 
 updateTests : Test
@@ -17,7 +17,7 @@ updateTests =
                     actual =
                         update (UpdateEdMin "5") { ed = { min = "7", max = "7" } }
                 in
-                Expect.equal expected actual
+                equal expected actual
         , test "UpdateEdMax" <|
             \() ->
                 let
@@ -27,5 +27,5 @@ updateTests =
                     actual =
                         update (UpdateEdMax "11") { ed = { min = "5", max = "7" } }
                 in
-                Expect.equal expected actual
+                equal expected actual
         ]

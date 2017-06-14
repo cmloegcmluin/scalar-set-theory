@@ -1,7 +1,7 @@
 module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Main exposing (..)
+import ScalarSetTheory.Update exposing (..)
 import Test exposing (Test, describe, test)
 
 

@@ -4,7 +4,8 @@ import Expect exposing (equal)
 import Html exposing (..)
 import Html.Attributes exposing (rowspan, value)
 import Html.Events exposing (onInput)
-import ScalarSetTheory.Main exposing (..)
+import ScalarSetTheory.Update exposing (Msg)
+import ScalarSetTheory.View exposing (..)
 import Test exposing (Test, describe, test)
 
 

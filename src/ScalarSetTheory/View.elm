@@ -29,7 +29,7 @@ view model =
         [ h1 [] [ text "Scalar Set Theory" ]
         , table
             [ tableBorderCollapse ]
-            ([ tableHeaderRow [ "ed" ] ]
+            ([ tableHeaderRow model.sections ]
                 ++ [ tr
                         []
                         [ td

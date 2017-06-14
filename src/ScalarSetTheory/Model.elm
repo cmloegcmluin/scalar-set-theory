@@ -6,6 +6,7 @@ type alias Model =
         { min : String
         , max : String
         }
+    , sections : List String
     }
 
 
@@ -15,4 +16,5 @@ model =
         { min = "2"
         , max = "2"
         }
+    , sections = [ "ed", "n-chord" ]
     }

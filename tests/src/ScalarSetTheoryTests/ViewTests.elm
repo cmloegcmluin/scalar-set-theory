@@ -14,7 +14,7 @@ viewTests : Test
 viewTests =
     describe "view module"
         [ describe "view"
-            [ test "includes a table row for each equal division in the chosen range" <|
+            [ test "includes a title and a table with a header for every section, and for the ed section only for now, rows for a header, min, max, and each equal division in the range" <|
                 \() ->
                     let
                         expected =
@@ -23,7 +23,7 @@ viewTests =
                                 [ h1 [] [ text "Scalar Set Theory" ]
                                 , table
                                     [ styles [ borderCollapse collapse ] ]
-                                    ([ tableHeaderRow [ "ed" ] ]
+                                    ([ tableHeaderRow [ "ed", "n-chord" ] ]
                                         ++ [ tr
                                                 []
                                                 [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
@@ -60,7 +60,7 @@ viewTests =
                                 ]
 
                         actual =
-                            view { ed = { min = "4", max = "6" } }
+                            view { ed = { min = "4", max = "6" }, sections = [ "ed", "n-chord" ] }
                     in
                     equal expected actual
             ]

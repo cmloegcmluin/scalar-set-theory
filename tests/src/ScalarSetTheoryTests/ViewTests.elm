@@ -116,7 +116,7 @@ viewTests =
                     equal expected actual
             ]
         , describe "tableMinRow"
-            [ test "returns a table row with a list of min dropdowns in table data, which for now is only ed, plus one additional table datum at the beginning that says 'min'" <|
+            [ test "returns a table row with a list of min dropdowns in table data (though each dropdown controls ed still), plus one additional table datum at the beginning that says 'min'" <|
                 \() ->
                     let
                         expected =
@@ -126,10 +126,10 @@ viewTests =
                                     [ text "min" ]
                                 , td
                                     [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                    [ select
-                                        edMinAttributes
-                                        expectedRangeOptions
-                                    ]
+                                    (minDropdown "ed")
+                                , td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    (minDropdown "n-chord")
                                 ]
 
                         actual =

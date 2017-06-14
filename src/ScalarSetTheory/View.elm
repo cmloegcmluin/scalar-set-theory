@@ -49,16 +49,27 @@ view model =
 tableMinRow : List String -> Html Msg
 tableMinRow sectionNames =
     tr []
-        [ td
+        ([ td
             [ tableBorder ]
             [ text "min" ]
-        , td
-            [ tableBorder ]
-            [ select
-                edMinAttributes
-                edRangeFilterOptions
-            ]
-        ]
+         ]
+            ++ List.map sectionNameToMinDropdown sectionNames
+        )
+
+
+sectionNameToMinDropdown : String -> Html Msg
+sectionNameToMinDropdown sectionName =
+    td
+        [ tableBorder ]
+        (minDropdown sectionName)
+
+
+minDropdown : String -> List (Html Msg)
+minDropdown sectionName =
+    [ select
+        edMinAttributes
+        edRangeFilterOptions
+    ]
 
 
 edMinAttributes : List (Attribute Msg)

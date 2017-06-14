@@ -12,109 +12,117 @@ import Test exposing (Test, describe, test)
 
 viewTests : Test
 viewTests =
-    describe "view"
-        [ test "includes a table row for each equal division in the chosen range" <|
-            \() ->
-                let
-                    expected =
-                        div
-                            []
-                            [ h1 [] [ text "Scalar Set Theory" ]
-                            , table
-                                [ styles [ borderCollapse collapse ] ]
-                                ([ tableHeaderRow [ "ed" ] ]
-                                    ++ [ tr
-                                            []
-                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
-                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                                [ select
-                                                    [ onInput edMinOnInputHandler ]
-                                                    expectedRangeOptions
+    describe "view module"
+        [ describe "view"
+            [ test "includes a table row for each equal division in the chosen range" <|
+                \() ->
+                    let
+                        expected =
+                            div
+                                []
+                                [ h1 [] [ text "Scalar Set Theory" ]
+                                , table
+                                    [ styles [ borderCollapse collapse ] ]
+                                    ([ tableHeaderRow [ "ed" ] ]
+                                        ++ [ tr
+                                                []
+                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
+                                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                                    [ select
+                                                        [ onInput edMinOnInputHandler ]
+                                                        expectedRangeOptions
+                                                    ]
                                                 ]
-                                            ]
-                                       , tr
-                                            []
-                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
-                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                                [ select
-                                                    [ onInput edMaxOnInputHandler ]
-                                                    expectedRangeOptions
+                                           , tr
+                                                []
+                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
+                                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                                    [ select
+                                                        [ onInput edMaxOnInputHandler ]
+                                                        expectedRangeOptions
+                                                    ]
                                                 ]
-                                            ]
-                                       , tr
-                                            []
-                                            [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
-                                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
-                                            ]
-                                       , tr
-                                            []
-                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "5" ]
-                                            ]
-                                       , tr
-                                            []
-                                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "6" ]
-                                            ]
-                                       ]
-                                )
+                                           , tr
+                                                []
+                                                [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
+                                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
+                                                ]
+                                           , tr
+                                                []
+                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "5" ]
+                                                ]
+                                           , tr
+                                                []
+                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "6" ]
+                                                ]
+                                           ]
+                                    )
+                                ]
+
+                        actual =
+                            view { ed = { min = "4", max = "6" } }
+                    in
+                    equal expected actual
+            ]
+        , describe "edRangeToTableRows"
+            [ test "returns a list of table rows with a count spanning them vertically" <|
+                \() ->
+                    let
+                        expected =
+                            [ tr
+                                []
+                                [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
+                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "2" ]
+                                ]
+                            , tr
+                                []
+                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "3" ]
+                                ]
+                            , tr
+                                []
+                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
+                                ]
                             ]
 
-                    actual =
-                        view { ed = { min = "4", max = "6" } }
-                in
-                equal expected actual
-        , test "edRangeToTableRows returns a list of table rows with a count spanning them vertically" <|
-            \() ->
-                let
-                    expected =
-                        [ tr
-                            []
-                            [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
-                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "2" ]
-                            ]
-                        , tr
-                            []
-                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "3" ]
-                            ]
-                        , tr
-                            []
-                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
-                            ]
-                        ]
+                        actual =
+                            edRangeToTableRows "2" "4"
+                    in
+                    equal expected actual
+            ]
+        , describe "edRangeFilterOptions"
+            [ test "returns a list of options with values and text between 2 and 100" <|
+                \() ->
+                    let
+                        expected =
+                            expectedRangeOptions
 
-                    actual =
-                        edRangeToTableRows "2" "4"
-                in
-                equal expected actual
-        , test "edRangeFilterOptions returns a list of options with values and text between 2 and 100" <|
-            \() ->
-                let
-                    expected =
-                        expectedRangeOptions
+                        actual =
+                            edRangeFilterOptions
+                    in
+                    equal expected actual
+            ]
+        , describe "tableHeaderRow"
+            [ test "returns a tr with a list of the section titles as th's" <|
+                \() ->
+                    let
+                        expected =
+                            tr []
+                                [ th
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ text "section" ]
+                                , th
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ text "ed" ]
+                                , th
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ text "n-chord" ]
+                                ]
 
-                    actual =
-                        edRangeFilterOptions
-                in
-                equal expected actual
-        , test "tableHeaderRow returns a tr with a list of the section titles as th's" <|
-            \() ->
-                let
-                    expected =
-                        tr []
-                            [ th
-                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                [ text "section" ]
-                            , th
-                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                [ text "ed" ]
-                            , th
-                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                [ text "n-chord" ]
-                            ]
-
-                    actual =
-                        tableHeaderRow [ "ed", "n-chord" ]
-                in
-                equal expected actual
+                        actual =
+                            tableHeaderRow [ "ed", "n-chord" ]
+                    in
+                    equal expected actual
+            ]
         ]
 
 

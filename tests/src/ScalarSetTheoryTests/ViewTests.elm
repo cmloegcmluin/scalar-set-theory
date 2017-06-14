@@ -22,7 +22,7 @@ viewTests =
                             [ h1 [] [ text "Scalar Set Theory" ]
                             , table
                                 [ styles [ borderCollapse collapse ] ]
-                                ([ tableHeader ]
+                                ([ tableHeaderRow [ "ed" ] ]
                                     ++ [ tr
                                             []
                                             [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
@@ -95,7 +95,7 @@ viewTests =
                         edRangeFilterOptions
                 in
                 equal expected actual
-        , test "tableHeader returns a tr with a list of the section titles as th's" <|
+        , test "tableHeaderRow returns a tr with a list of the section titles as th's" <|
             \() ->
                 let
                     expected =
@@ -106,10 +106,13 @@ viewTests =
                             , th
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                 [ text "ed" ]
+                            , th
+                                [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                [ text "n-chord" ]
                             ]
 
                     actual =
-                        tableHeader
+                        tableHeaderRow [ "ed", "n-chord" ]
                 in
                 equal expected actual
         ]

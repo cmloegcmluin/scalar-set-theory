@@ -29,7 +29,7 @@ view model =
         [ h1 [] [ text "Scalar Set Theory" ]
         , table
             [ tableBorderCollapse ]
-            ([ tableHeader ]
+            ([ tableHeaderRow [ "ed" ] ]
                 ++ [ tr
                         []
                         [ td
@@ -54,16 +54,22 @@ view model =
         ]
 
 
-tableHeader : Html Msg
-tableHeader =
+tableHeaderRow : List String -> Html Msg
+tableHeaderRow sectionNames =
     tr []
-        [ th
+        ([ th
             [ tableBorder ]
             [ text "section" ]
-        , th
-            [ tableBorder ]
-            [ text "ed" ]
-        ]
+         ]
+            ++ List.map sectionNameToTableHeader sectionNames
+        )
+
+
+sectionNameToTableHeader : String -> Html Msg
+sectionNameToTableHeader sectionName =
+    th
+        [ tableBorder ]
+        [ text sectionName ]
 
 
 edRangeFilterOptions : List (Html Msg)

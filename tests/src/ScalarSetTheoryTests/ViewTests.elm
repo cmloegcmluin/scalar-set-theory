@@ -24,16 +24,8 @@ viewTests =
                                 , table
                                     [ styles [ borderCollapse collapse ] ]
                                     ([ tableHeaderRow [ "ed", "n-chord" ] ]
+                                        ++ [ tableMinRow [ "ed", "n-chord" ] ]
                                         ++ [ tr
-                                                []
-                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
-                                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                                    [ select
-                                                        [ onInput edMinOnInputHandler ]
-                                                        expectedRangeOptions
-                                                    ]
-                                                ]
-                                           , tr
                                                 []
                                                 [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
                                                 , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
@@ -102,7 +94,7 @@ viewTests =
                     equal expected actual
             ]
         , describe "tableHeaderRow"
-            [ test "returns a tr with a list of the section titles as th's" <|
+            [ test "returns a table row with a list of the section titles in table headers, plus one additional table header at the beginning that says 'section'" <|
                 \() ->
                     let
                         expected =
@@ -120,6 +112,28 @@ viewTests =
 
                         actual =
                             tableHeaderRow [ "ed", "n-chord" ]
+                    in
+                    equal expected actual
+            ]
+        , describe "tableMinRow"
+            [ test "returns a table row with a list of min dropdowns in table data, which for now is only ed, plus one additional table datum at the beginning that says 'min'" <|
+                \() ->
+                    let
+                        expected =
+                            tr []
+                                [ td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ text "min" ]
+                                , td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ select
+                                        edMinAttributes
+                                        expectedRangeOptions
+                                    ]
+                                ]
+
+                        actual =
+                            tableMinRow [ "ed", "n-chord" ]
                     in
                     equal expected actual
             ]

@@ -30,16 +30,8 @@ view model =
         , table
             [ tableBorderCollapse ]
             ([ tableHeaderRow model.sections ]
+                ++ [ tableMinRow model.sections ]
                 ++ [ tr
-                        []
-                        [ td
-                            [ tableBorder ]
-                            [ text "min" ]
-                        , td
-                            [ tableBorder ]
-                            [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
-                        ]
-                   , tr
                         []
                         [ td
                             [ tableBorder ]
@@ -52,6 +44,26 @@ view model =
                 ++ edRangeToTableRows model.ed.min model.ed.max
             )
         ]
+
+
+tableMinRow : List String -> Html Msg
+tableMinRow sectionNames =
+    tr []
+        [ td
+            [ tableBorder ]
+            [ text "min" ]
+        , td
+            [ tableBorder ]
+            [ select
+                edMinAttributes
+                edRangeFilterOptions
+            ]
+        ]
+
+
+edMinAttributes : List (Attribute Msg)
+edMinAttributes =
+    [ onInput edMinOnInputHandler ]
 
 
 tableHeaderRow : List String -> Html Msg

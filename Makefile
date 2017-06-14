@@ -17,4 +17,4 @@ integration:
 	elm-reactor -p 8001 & cd integration-tests && npm test
 
 setup:
-	elm-package install && cd integration-tests && npm i
+	elm-package install -y && cd integration-tests && npm i

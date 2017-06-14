@@ -1,5 +1,6 @@
 module ScalarSetTheoryTests.ViewTests exposing (viewTests)
 
+import Css exposing (border3, borderCollapse, collapse, px, rgb, solid)
 import Expect exposing (equal)
 import Html exposing (..)
 import Html.Attributes exposing (rowspan, value)
@@ -20,16 +21,16 @@ viewTests =
                             []
                             [ h1 [] [ text "Scalar Set Theory" ]
                             , table
-                                []
+                                [ styles [ borderCollapse collapse ] ]
                                 [ tr
                                     []
-                                    [ th [] [ text "section" ]
-                                    , th [] [ text "ed" ]
+                                    [ th [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "section" ]
+                                    , th [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "ed" ]
                                     ]
                                 , tr
                                     []
-                                    [ td [] [ text "min" ]
-                                    , td []
+                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "min" ]
+                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                         [ select
                                             [ onInput edMinOnInputHandler ]
                                             expectedRangeOptions
@@ -37,8 +38,8 @@ viewTests =
                                     ]
                                 , tr
                                     []
-                                    [ td [] [ text "max" ]
-                                    , td []
+                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
+                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                         [ select
                                             [ onInput edMaxOnInputHandler ]
                                             expectedRangeOptions
@@ -46,16 +47,16 @@ viewTests =
                                     ]
                                 , tr
                                     []
-                                    [ td [ rowspan 3 ] [ text "count (3)" ]
-                                    , td [] [ text "4" ]
+                                    [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
+                                    , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
                                     ]
                                 , tr
                                     []
-                                    [ td [] [ text "5" ]
+                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "5" ]
                                     ]
                                 , tr
                                     []
-                                    [ td [] [ text "6" ]
+                                    [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "6" ]
                                     ]
                                 ]
                             ]
@@ -70,16 +71,16 @@ viewTests =
                     expected =
                         [ tr
                             []
-                            [ td [ rowspan 3 ] [ text "count (3)" ]
-                            , td [] [ text "2" ]
+                            [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
+                            , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "2" ]
                             ]
                         , tr
                             []
-                            [ td [] [ text "3" ]
+                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "3" ]
                             ]
                         , tr
                             []
-                            [ td [] [ text "4" ]
+                            [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
                             ]
                         ]
 

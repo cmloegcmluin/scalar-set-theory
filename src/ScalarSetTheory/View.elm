@@ -1,5 +1,6 @@
 module ScalarSetTheory.View exposing (..)
 
+import Css exposing (asPairs, border3, borderCollapse, collapse, px, rgb, solid)
 import Html exposing (..)
 import Html.Attributes exposing (rowspan, value)
 import Html.Events exposing (onInput)
@@ -9,27 +10,51 @@ import ScalarSetTheory.Utilities exposing (parseInt)
 import String exposing (concat)
 
 
+styles =
+    Css.asPairs >> Html.Attributes.style
+
+
+tableBorder =
+    styles [ border3 (px 1) solid (rgb 128 128 128) ]
+
+
+tableBorderCollapse =
+    styles [ borderCollapse collapse ]
+
+
 view : Model -> Html Msg
 view model =
     div
         []
         [ h1 [] [ text "Scalar Set Theory" ]
         , table
-            []
+            [ tableBorderCollapse ]
             ([ tr
                 []
-                [ th [] [ text "section" ]
-                , th [] [ text "ed" ]
+                [ th
+                    [ tableBorder ]
+                    [ text "section" ]
+                , th
+                    [ tableBorder ]
+                    [ text "ed" ]
                 ]
              , tr
                 []
-                [ td [] [ text "min" ]
-                , td [] [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
+                [ td
+                    [ tableBorder ]
+                    [ text "min" ]
+                , td
+                    [ tableBorder ]
+                    [ select [ onInput edMinOnInputHandler ] edRangeFilterOptions ]
                 ]
              , tr
                 []
-                [ td [] [ text "max" ]
-                , td [] [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
+                [ td
+                    [ tableBorder ]
+                    [ text "max" ]
+                , td
+                    [ tableBorder ]
+                    [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
                 ]
              ]
                 ++ edRangeToTableRows model.ed.min model.ed.max
@@ -62,9 +87,9 @@ headEdRow ed edCount =
     tr
         []
         [ td
-            [ rowspan edCount ]
+            [ rowspan edCount, tableBorder ]
             [ text (concat [ "count (", toString edCount, ")" ]) ]
-        , td [] [ text ed ]
+        , td [ tableBorder ] [ text ed ]
         ]
 
 
@@ -72,7 +97,7 @@ tailEdRow : Int -> Html Msg
 tailEdRow ed =
     tr
         []
-        [ td [] [ text (toString ed) ] ]
+        [ td [ tableBorder ] [ text (toString ed) ] ]
 
 
 edRangeToTableRows : String -> String -> List (Html Msg)

@@ -1,25 +1,17 @@
 module ScalarSetTheory.View exposing (..)
 
-import Css exposing (asPairs, border3, borderCollapse, collapse, px, rgb, solid)
-import Html exposing (..)
+import Html exposing (Html, div, h1, table, td, text, tr)
 import Html.Attributes exposing (rowspan, value)
 import Html.Events exposing (onInput)
+import List exposing (concatMap, foldr, map, range)
+import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
+import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
+import ScalarSetTheory.Components.TableMinRow exposing (tableMinRow)
 import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Styles.TableStyles exposing (tableBorder, tableBorderCollapse)
 import ScalarSetTheory.Update exposing (..)
-import ScalarSetTheory.Utilities exposing (parseInt)
+import ScalarSetTheory.Utilities exposing (inclusiveCount, parseInt)
 import String exposing (concat)
-
-
-styles =
-    Css.asPairs >> Html.Attributes.style
-
-
-tableBorder =
-    styles [ border3 (px 1) solid (rgb 128 128 128) ]
-
-
-tableBorderCollapse =
-    styles [ borderCollapse collapse ]
 
 
 view : Model -> Html Msg
@@ -37,132 +29,60 @@ view model =
         ]
 
 
-tableMinRow : List String -> Html Msg
-tableMinRow sectionNames =
-    tr []
+edRangeToTableRows : String -> String -> List (Html Msg)
+edRangeToTableRows edMin edMax =
+    edHeadRows (parseInt edMin) (parseInt edMax)
+        ++ concatMap edTailRows (range (parseInt edMin + 1) (parseInt edMax))
+
+
+edHeadRows : Int -> Int -> List (Html Msg)
+edHeadRows edMin edMax =
+    [ tr
+        []
         ([ td
-            [ tableBorder ]
-            [ text "min" ]
+            [ rowspan (edHeadRowSpan edMin edMax), tableBorder ]
+            [ text (concat [ "count (", toString (inclusiveCount edMin edMax), ")" ]) ]
          ]
-            ++ List.map sectionNameToMinDropdown sectionNames
+            ++ nChordHeadRowCells edMin
         )
-
-
-sectionNameToMinDropdown : String -> Html Msg
-sectionNameToMinDropdown sectionName =
-    td
-        [ tableBorder ]
-        (minDropdown sectionName)
-
-
-minDropdown : String -> List (Html Msg)
-minDropdown sectionName =
-    [ select
-        edMinAttributes
-        edRangeFilterOptions
     ]
+        ++ map nChordTailRow (range 2 edMin)
 
 
-edMinAttributes : List (Attribute Msg)
-edMinAttributes =
-    [ onInput edMinOnInputHandler ]
+edTailRows : Int -> List (Html Msg)
+edTailRows ed =
+    [ nChordHeadRow ed ]
+        ++ map nChordTailRow (range 2 ed)
 
 
-tableMaxRow : List String -> Html Msg
-tableMaxRow sectionNames =
-    tr []
-        ([ td
-            [ tableBorder ]
-            [ text "max" ]
-         ]
-            ++ List.map sectionNameToMaxDropdown sectionNames
-        )
+nChordHeadRow : Int -> Html Msg
+nChordHeadRow ed =
+    tr
+        []
+        (nChordHeadRowCells ed)
 
 
-sectionNameToMaxDropdown : String -> Html Msg
-sectionNameToMaxDropdown sectionName =
-    td
-        [ tableBorder ]
-        (maxDropdown sectionName)
-
-
-maxDropdown : String -> List (Html Msg)
-maxDropdown sectionName =
-    [ select
-        edMaxAttributes
-        edRangeFilterOptions
-    ]
-
-
-edMaxAttributes : List (Attribute Msg)
-edMaxAttributes =
-    [ onInput edMaxOnInputHandler ]
-
-
-tableHeaderRow : List String -> Html Msg
-tableHeaderRow sectionNames =
-    tr []
-        ([ th
-            [ tableBorder ]
-            [ text "section" ]
-         ]
-            ++ List.map sectionNameToTableHeader sectionNames
-        )
-
-
-sectionNameToTableHeader : String -> Html Msg
-sectionNameToTableHeader sectionName =
-    th
-        [ tableBorder ]
-        [ text sectionName ]
-
-
-edRangeFilterOptions : List (Html Msg)
-edRangeFilterOptions =
-    List.map edRangeFilterOption (List.range 2 100)
-
-
-edRangeFilterOption : Int -> Html Msg
-edRangeFilterOption ed =
-    option [ value (toString ed) ] [ text (toString ed) ]
-
-
-edMinOnInputHandler : String -> Msg
-edMinOnInputHandler newMin =
-    UpdateEdMin newMin
-
-
-edMaxOnInputHandler : String -> Msg
-edMaxOnInputHandler newMax =
-    UpdateEdMax newMax
-
-
-headEdRow : String -> Int -> Html Msg
-headEdRow ed edCount =
+nChordTailRow : Int -> Html Msg
+nChordTailRow nChord =
     tr
         []
         [ td
-            [ rowspan edCount, tableBorder ]
-            [ text (concat [ "count (", toString edCount, ")" ]) ]
-        , td [ tableBorder ] [ text ed ]
+            [ tableBorder ]
+            [ text (toString nChord) ]
         ]
 
 
-tailEdRow : Int -> Html Msg
-tailEdRow ed =
-    tr
-        []
-        [ td [ tableBorder ] [ text (toString ed) ] ]
+edHeadRowSpan : Int -> Int -> Int
+edHeadRowSpan min max =
+    foldr (+) 0 (range min max)
 
 
-edRangeToTableRows : String -> String -> List (Html Msg)
-edRangeToTableRows min max =
-    let
-        rowCount =
-            (parseInt max - parseInt min) + 1
-
-        rangeIgnoringFirst =
-            List.range (parseInt min + 1) (parseInt max)
-    in
-    [ headEdRow min rowCount ]
-        ++ List.map tailEdRow rangeIgnoringFirst
+nChordHeadRowCells : Int -> List (Html Msg)
+nChordHeadRowCells ed =
+    [ td
+        [ rowspan ed, tableBorder ]
+        [ text (toString ed) ]
+    , td
+        [ tableBorder ]
+        [ text "1" ]
+    ]

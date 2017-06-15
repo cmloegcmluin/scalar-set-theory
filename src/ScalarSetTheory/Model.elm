@@ -21,8 +21,8 @@ model =
         , max = "2"
         }
     , nChord =
-        { min = "2"
-        , max = "2"
+        { min = "1"
+        , max = "100"
         }
     , sections = [ "ed", "n-chord" ]
     }

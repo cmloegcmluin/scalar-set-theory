@@ -1,7 +1,7 @@
 module ScalarSetTheoryTests.UtilitiesTests exposing (utilitiesTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Utilities exposing (parseInt)
+import ScalarSetTheory.Utilities exposing (inclusiveCount, parseInt)
 import Test exposing (Test, describe, test)
 
 
@@ -17,6 +17,18 @@ utilitiesTests =
 
                         actual =
                             parseInt "four"
+                    in
+                    equal expected actual
+            ]
+        , describe "inclusiveCount"
+            [ test "is inclusive" <|
+                \() ->
+                    let
+                        expected =
+                            4
+
+                        actual =
+                            inclusiveCount 3 6
                     in
                     equal expected actual
             ]

@@ -31,11 +31,11 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getValue(maxSelect), '7');
 		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (6)');
 		assert.equal(browser.getText('//table/tr[4]/td[2]'), '2');
-		assert.equal(browser.getText('//table/tr[5]/td[1]'), '3');
-		assert.equal(browser.getText('//table/tr[6]/td[1]'), '4');
-		assert.equal(browser.getText('//table/tr[7]/td[1]'), '5');
-		assert.equal(browser.getText('//table/tr[8]/td[1]'), '6');
-		assert.equal(browser.getText('//table/tr[9]/td[1]'), '7');
+		assert.equal(browser.getText('//table/tr[6]/td[1]'), '3');
+		assert.equal(browser.getText('//table/tr[9]/td[1]'), '4');
+		assert.equal(browser.getText('//table/tr[13]/td[1]'), '5');
+		assert.equal(browser.getText('//table/tr[18]/td[1]'), '6');
+		assert.equal(browser.getText('//table/tr[24]/td[1]'), '7');
 
 		selectOption(minSelect, '5')
 
@@ -43,8 +43,8 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getValue(maxSelect), '7');
 		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (3)');
 		assert.equal(browser.getText('//table/tr[4]/td[2]'), '5');
-		assert.equal(browser.getText('//table/tr[5]/td[1]'), '6');
-		assert.equal(browser.getText('//table/tr[6]/td[1]'), '7');
+		assert.equal(browser.getText('//table/tr[9]/td[1]'), '6');
+		assert.equal(browser.getText('//table/tr[15]/td[1]'), '7');
 	})
 })
 

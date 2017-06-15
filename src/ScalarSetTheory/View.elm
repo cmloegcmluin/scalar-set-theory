@@ -31,16 +31,7 @@ view model =
             [ tableBorderCollapse ]
             ([ tableHeaderRow model.sections ]
                 ++ [ tableMinRow model.sections ]
-                ++ [ tr
-                        []
-                        [ td
-                            [ tableBorder ]
-                            [ text "max" ]
-                        , td
-                            [ tableBorder ]
-                            [ select [ onInput edMaxOnInputHandler ] edRangeFilterOptions ]
-                        ]
-                   ]
+                ++ [ tableMaxRow model.sections ]
                 ++ edRangeToTableRows model.ed.min model.ed.max
             )
         ]
@@ -75,6 +66,37 @@ minDropdown sectionName =
 edMinAttributes : List (Attribute Msg)
 edMinAttributes =
     [ onInput edMinOnInputHandler ]
+
+
+tableMaxRow : List String -> Html Msg
+tableMaxRow sectionNames =
+    tr []
+        ([ td
+            [ tableBorder ]
+            [ text "max" ]
+         ]
+            ++ List.map sectionNameToMaxDropdown sectionNames
+        )
+
+
+sectionNameToMaxDropdown : String -> Html Msg
+sectionNameToMaxDropdown sectionName =
+    td
+        [ tableBorder ]
+        (maxDropdown sectionName)
+
+
+maxDropdown : String -> List (Html Msg)
+maxDropdown sectionName =
+    [ select
+        edMaxAttributes
+        edRangeFilterOptions
+    ]
+
+
+edMaxAttributes : List (Attribute Msg)
+edMaxAttributes =
+    [ onInput edMaxOnInputHandler ]
 
 
 tableHeaderRow : List String -> Html Msg

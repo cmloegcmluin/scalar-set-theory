@@ -25,16 +25,8 @@ viewTests =
                                     [ styles [ borderCollapse collapse ] ]
                                     ([ tableHeaderRow [ "ed", "n-chord" ] ]
                                         ++ [ tableMinRow [ "ed", "n-chord" ] ]
+                                        ++ [ tableMaxRow [ "ed", "n-chord" ] ]
                                         ++ [ tr
-                                                []
-                                                [ td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "max" ]
-                                                , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                                    [ select
-                                                        [ onInput edMaxOnInputHandler ]
-                                                        expectedRangeOptions
-                                                    ]
-                                                ]
-                                           , tr
                                                 []
                                                 [ td [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "count (3)" ]
                                                 , td [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ] [ text "4" ]
@@ -52,7 +44,11 @@ viewTests =
                                 ]
 
                         actual =
-                            view { ed = { min = "4", max = "6" }, sections = [ "ed", "n-chord" ] }
+                            view
+                                { ed = { min = "4", max = "6" }
+                                , nChord = { min = "4", max = "6" }
+                                , sections = [ "ed", "n-chord" ]
+                                }
                     in
                     equal expected actual
             ]
@@ -134,6 +130,28 @@ viewTests =
 
                         actual =
                             tableMinRow [ "ed", "n-chord" ]
+                    in
+                    equal expected actual
+            ]
+        , describe "tableMaxRow"
+            [ test "returns a table row with a list of max dropdowns in table data (though each dropdown controls ed still), plus one additional table datum at the beginning that says 'max'" <|
+                \() ->
+                    let
+                        expected =
+                            tr []
+                                [ td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ text "max" ]
+                                , td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    (maxDropdown "ed")
+                                , td
+                                    [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    (maxDropdown "n-chord")
+                                ]
+
+                        actual =
+                            tableMaxRow [ "ed", "n-chord" ]
                     in
                     equal expected actual
             ]

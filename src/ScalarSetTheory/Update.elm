@@ -4,51 +4,59 @@ import ScalarSetTheory.Model exposing (Model)
 
 
 type Msg
-    = UpdateEdMin String
-    | UpdateEdMax String
-    | UpdateNChordMin String
-    | UpdateNChordMax String
+    = UpdateSectionMin String String
+    | UpdateSectionMax String String
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateEdMin newMin ->
-            let
-                oldEd =
-                    model.ed
+        UpdateSectionMin newMin section ->
+            case section of
+                "ed" ->
+                    let
+                        oldEd =
+                            model.ed
 
-                newEd =
-                    { oldEd | min = newMin }
-            in
-            { model | ed = newEd }
+                        newEd =
+                            { oldEd | min = newMin }
+                    in
+                    { model | ed = newEd }
 
-        UpdateEdMax newMax ->
-            let
-                oldEd =
-                    model.ed
+                "nChord" ->
+                    let
+                        oldNChord =
+                            model.nChord
 
-                newEd =
-                    { oldEd | max = newMax }
-            in
-            { model | ed = newEd }
+                        newNChord =
+                            { oldNChord | min = newMin }
+                    in
+                    { model | nChord = newNChord }
 
-        UpdateNChordMin newMin ->
-            let
-                oldNChord =
-                    model.nChord
+                _ ->
+                    model
 
-                newNChord =
-                    { oldNChord | min = newMin }
-            in
-            { model | nChord = newNChord }
+        UpdateSectionMax newMax section ->
+            case section of
+                "ed" ->
+                    let
+                        oldEd =
+                            model.ed
 
-        UpdateNChordMax newMax ->
-            let
-                oldNChord =
-                    model.nChord
+                        newEd =
+                            { oldEd | max = newMax }
+                    in
+                    { model | ed = newEd }
 
-                newNChord =
-                    { oldNChord | max = newMax }
-            in
-            { model | nChord = newNChord }
+                "nChord" ->
+                    let
+                        oldNChord =
+                            model.nChord
+
+                        newNChord =
+                            { oldNChord | max = newMax }
+                    in
+                    { model | nChord = newNChord }
+
+                _ ->
+                    model

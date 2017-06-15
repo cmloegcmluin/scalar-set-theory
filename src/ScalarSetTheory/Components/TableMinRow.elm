@@ -41,4 +41,4 @@ edMinAttributes =
 
 edMinOnInputHandler : String -> Msg
 edMinOnInputHandler newMin =
-    UpdateEdMin newMin
+    UpdateSectionMin newMin "ed"

@@ -41,4 +41,4 @@ edMaxAttributes =
 
 edMaxOnInputHandler : String -> Msg
 edMaxOnInputHandler newMax =
-    UpdateEdMax newMax
+    UpdateSectionMax newMax "ed"

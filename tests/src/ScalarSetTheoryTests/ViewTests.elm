@@ -10,7 +10,7 @@ import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
 import ScalarSetTheory.Components.TableMinRow exposing (tableMinRow)
 import ScalarSetTheory.Styles.Styles exposing (styles)
 import ScalarSetTheory.Update exposing (Msg)
-import ScalarSetTheory.View exposing (..)
+import ScalarSetTheory.View exposing (edHeadRowSpan, edHeadRows, edRangeToTableRows, edTailRows, nChordHeadRow, nChordTailRow, view)
 import Test exposing (Test, describe, test)
 
 

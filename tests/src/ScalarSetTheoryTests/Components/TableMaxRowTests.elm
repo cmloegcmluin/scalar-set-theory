@@ -21,14 +21,14 @@ tableMaxRowTests =
                                 [ text "max" ]
                             , td
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                (maxDropdown "ed")
+                                (maxDropdown "ed" "8")
                             , td
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                (maxDropdown "n-chord")
+                                (maxDropdown "n-chord" "40")
                             ]
 
                     actual =
-                        tableMaxRow [ "ed", "n-chord" ]
+                        tableMaxRow [ ( "ed", "8" ), ( "n-chord", "40" ) ]
                 in
                 equal expected actual
         ]

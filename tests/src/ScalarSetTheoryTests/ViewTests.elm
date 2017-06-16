@@ -28,8 +28,8 @@ viewTests =
                                 , table
                                     [ styles [ borderCollapse collapse ] ]
                                     ([ tableHeaderRow [ "ed", "n-chord" ] ]
-                                        ++ [ tableMinRow [ "ed", "n-chord" ] ]
-                                        ++ [ tableMaxRow [ "ed", "n-chord" ] ]
+                                        ++ [ tableMinRow [ ( "ed", "2" ), ( "n-chord", "1" ) ] ]
+                                        ++ [ tableMaxRow [ ( "ed", "3" ), ( "n-chord", "100" ) ] ]
                                         ++ edRangeToTableRows "2" "3"
                                     )
                                 ]
@@ -38,7 +38,7 @@ viewTests =
                             view
                                 { ed = { min = "2", max = "3" }
                                 , nChord = { min = "1", max = "100" }
-                                , sections = [ "ed", "n-chord" ]
+                                , activeSections = [ "ed", "n-chord" ]
                                 }
                     in
                     equal expected actual

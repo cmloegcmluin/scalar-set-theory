@@ -17,34 +17,43 @@ describe('landing page', function () {
 
 describe('range of equal divisions', function () {
 	it('updates the rows and count of rows when min or max filter is changed', function () {
-		let minSelect = '//table/tr[2]/td[2]/select'
-		let maxSelect = '//table/tr[3]/td[2]/select'
+		let edMinSelect = '//table/tr[2]/td[2]/select'
+		let edMaxSelect = '//table/tr[3]/td[2]/select'
 
-		assert.equal(browser.getValue(minSelect), '2');
-		assert.equal(browser.getValue(maxSelect), '2');
+		assert.equal(browser.getValue(edMinSelect), '3');
+		assert.equal(browser.getValue(edMaxSelect), '3');
 		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (1)');
-		assert.equal(browser.getText('//table/tr[4]/td[2]'), '2');
+		assert.equal(browser.getText('//table/tr[4]/td[2]'), '3');
 
-		selectOption(maxSelect, '7')
+		selectOption(edMaxSelect, '7')
 
-		assert.equal(browser.getValue(minSelect), '2');
-		assert.equal(browser.getValue(maxSelect), '7');
-		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (6)');
-		assert.equal(browser.getText('//table/tr[4]/td[2]'), '2');
-		assert.equal(browser.getText('//table/tr[6]/td[1]'), '3');
-		assert.equal(browser.getText('//table/tr[9]/td[1]'), '4');
-		assert.equal(browser.getText('//table/tr[13]/td[1]'), '5');
-		assert.equal(browser.getText('//table/tr[18]/td[1]'), '6');
-		assert.equal(browser.getText('//table/tr[24]/td[1]'), '7');
+		assert.equal(browser.getValue(edMinSelect), '3');
+		assert.equal(browser.getValue(edMaxSelect), '7');
+		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (5)');
+		assert.equal(browser.getText('//table/tr[4]/td[2]'), '3');
+		assert.equal(browser.getText('//table/tr[7]/td[1]'), '4');
+		assert.equal(browser.getText('//table/tr[11]/td[1]'), '5');
+		assert.equal(browser.getText('//table/tr[16]/td[1]'), '6');
+		assert.equal(browser.getText('//table/tr[22]/td[1]'), '7');
 
-		selectOption(minSelect, '5')
+		selectOption(edMinSelect, '5')
 
-		assert.equal(browser.getValue(minSelect), '5');
-		assert.equal(browser.getValue(maxSelect), '7');
+		assert.equal(browser.getValue(edMinSelect), '5');
+		assert.equal(browser.getValue(edMaxSelect), '7');
 		assert.equal(browser.getText('//table/tr[4]/td[1]'), 'count (3)');
 		assert.equal(browser.getText('//table/tr[4]/td[2]'), '5');
 		assert.equal(browser.getText('//table/tr[9]/td[1]'), '6');
 		assert.equal(browser.getText('//table/tr[15]/td[1]'), '7');
+	})
+})
+
+describe('range of n-chords', function () {
+	it('updates the ranges of n-chords for each equal division', function () {
+		let nChordMinSelect = '//table/tr[2]/td[3]/select'
+		let nChordMaxSelect = '//table/tr[3]/td[3]/select'
+
+		assert.equal(browser.getValue(nChordMinSelect), '2');
+		assert.equal(browser.getValue(nChordMaxSelect), '100');
 	})
 })
 

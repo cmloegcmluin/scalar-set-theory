@@ -3,34 +3,35 @@ module ScalarSetTheory.Components.TableMinRow exposing (minDropdown, tableMinRow
 import Html exposing (Attribute, Html, select, td, text, tr)
 import Html.Events exposing (onInput)
 import List exposing (map)
-import ScalarSetTheory.Sections.EqualDivision exposing (edRangeFilterOptions)
+import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Styles.TableStyles exposing (tableBorder)
 import ScalarSetTheory.Update exposing (..)
+import Tuple exposing (first, second)
 
 
-tableMinRow : List String -> Html Msg
-tableMinRow sectionNames =
+tableMinRow : List ( String, String ) -> Html Msg
+tableMinRow nameAndMinPerSection =
     tr []
         ([ td
             [ tableBorder ]
             [ text "min" ]
          ]
-            ++ map sectionNameToMinDropdown sectionNames
+            ++ map sectionNameToMinDropdown nameAndMinPerSection
         )
 
 
-sectionNameToMinDropdown : String -> Html Msg
-sectionNameToMinDropdown sectionName =
+sectionNameToMinDropdown : ( String, String ) -> Html Msg
+sectionNameToMinDropdown nameAndMin =
     td
         [ tableBorder ]
-        (minDropdown sectionName)
+        (minDropdown (first nameAndMin) (second nameAndMin))
 
 
-minDropdown : String -> List (Html Msg)
-minDropdown sectionName =
+minDropdown : String -> String -> List (Html Msg)
+minDropdown sectionName selectedOption =
     [ select
         edMinAttributes
-        edRangeFilterOptions
+        (dropdownOptions sectionName selectedOption)
     ]
 
 

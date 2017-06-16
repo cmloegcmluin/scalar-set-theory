@@ -14,7 +14,7 @@ updateTests =
                     expected =
                         { ed = { min = "5", max = "7" }
                         , nChord = { min = "4", max = "6" }
-                        , sections = [ "ed" ]
+                        , activeSections = [ "ed" ]
                         }
 
                     actual =
@@ -22,7 +22,7 @@ updateTests =
                             (UpdateSectionMin "5" "ed")
                             { ed = { min = "7", max = "7" }
                             , nChord = { min = "4", max = "6" }
-                            , sections = [ "ed" ]
+                            , activeSections = [ "ed" ]
                             }
                 in
                 equal expected actual
@@ -32,7 +32,7 @@ updateTests =
                     expected =
                         { ed = { min = "5", max = "7" }
                         , nChord = { min = "4", max = "8" }
-                        , sections = [ "ed" ]
+                        , activeSections = [ "ed" ]
                         }
 
                     actual =
@@ -40,7 +40,7 @@ updateTests =
                             (UpdateSectionMax "8" "nChord")
                             { ed = { min = "5", max = "7" }
                             , nChord = { min = "4", max = "6" }
-                            , sections = [ "ed" ]
+                            , activeSections = [ "ed" ]
                             }
                 in
                 equal expected actual

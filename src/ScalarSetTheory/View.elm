@@ -21,12 +21,48 @@ view model =
         [ h1 [] [ text "Scalar Set Theory" ]
         , table
             [ tableBorderCollapse ]
-            ([ tableHeaderRow model.sections ]
-                ++ [ tableMinRow model.sections ]
-                ++ [ tableMaxRow model.sections ]
+            ([ tableHeaderRow model.activeSections ]
+                ++ [ tableMinRow (nameAndMinPerSection model) ]
+                ++ [ tableMaxRow (nameAndMaxPerSection model) ]
                 ++ edRangeToTableRows model.ed.min model.ed.max
             )
         ]
+
+
+nameAndMinPerSection : Model -> List ( String, String )
+nameAndMinPerSection model =
+    map (\name -> nameAndMin name model) model.activeSections
+
+
+nameAndMin : String -> Model -> ( String, String )
+nameAndMin name model =
+    case name of
+        "ed" ->
+            ( name, model.ed.min )
+
+        "nChord" ->
+            ( name, model.nChord.min )
+
+        _ ->
+            ( name, "" )
+
+
+nameAndMaxPerSection : Model -> List ( String, String )
+nameAndMaxPerSection model =
+    map (\name -> nameAndMax name model) model.activeSections
+
+
+nameAndMax : String -> Model -> ( String, String )
+nameAndMax name model =
+    case name of
+        "ed" ->
+            ( name, model.ed.max )
+
+        "nChord" ->
+            ( name, model.nChord.max )
+
+        _ ->
+            ( name, "" )
 
 
 edRangeToTableRows : String -> String -> List (Html Msg)

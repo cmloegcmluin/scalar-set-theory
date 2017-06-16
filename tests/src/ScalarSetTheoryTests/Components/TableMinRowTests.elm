@@ -21,14 +21,14 @@ tableMinRowTests =
                                 [ text "min" ]
                             , td
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                (minDropdown "ed")
+                                (minDropdown "ed" "3")
                             , td
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                (minDropdown "n-chord")
+                                (minDropdown "n-chord" "4")
                             ]
 
                     actual =
-                        tableMinRow [ "ed", "n-chord" ]
+                        tableMinRow [ ( "ed", "3" ), ( "n-chord", "4" ) ]
                 in
                 equal expected actual
         ]

@@ -3,34 +3,35 @@ module ScalarSetTheory.Components.TableMaxRow exposing (maxDropdown, tableMaxRow
 import Html exposing (Attribute, Html, select, td, text, tr)
 import Html.Events exposing (onInput)
 import List exposing (map)
-import ScalarSetTheory.Sections.EqualDivision exposing (edRangeFilterOptions)
+import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Styles.TableStyles exposing (tableBorder)
 import ScalarSetTheory.Update exposing (..)
+import Tuple exposing (first, second)
 
 
-tableMaxRow : List String -> Html Msg
-tableMaxRow sectionNames =
+tableMaxRow : List ( String, String ) -> Html Msg
+tableMaxRow nameAndMaxPerSection =
     tr []
         ([ td
             [ tableBorder ]
             [ text "max" ]
          ]
-            ++ map sectionNameToMaxDropdown sectionNames
+            ++ map sectionNameToMaxDropdown nameAndMaxPerSection
         )
 
 
-sectionNameToMaxDropdown : String -> Html Msg
-sectionNameToMaxDropdown sectionName =
+sectionNameToMaxDropdown : ( String, String ) -> Html Msg
+sectionNameToMaxDropdown nameAndMax =
     td
         [ tableBorder ]
-        (maxDropdown sectionName)
+        (maxDropdown (first nameAndMax) (second nameAndMax))
 
 
-maxDropdown : String -> List (Html Msg)
-maxDropdown sectionName =
+maxDropdown : String -> String -> List (Html Msg)
+maxDropdown sectionName selectedOption =
     [ select
         edMaxAttributes
-        edRangeFilterOptions
+        (dropdownOptions sectionName selectedOption)
     ]
 
 

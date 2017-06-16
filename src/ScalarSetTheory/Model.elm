@@ -10,19 +10,19 @@ type alias Model =
         { min : String
         , max : String
         }
-    , sections : List String
+    , activeSections : List String
     }
 
 
 model : Model
 model =
     { ed =
-        { min = "2"
-        , max = "2"
+        { min = "3"
+        , max = "3"
         }
     , nChord =
         { min = "1"
         , max = "100"
         }
-    , sections = [ "ed", "n-chord" ]
+    , activeSections = [ "ed", "nChord" ]
     }

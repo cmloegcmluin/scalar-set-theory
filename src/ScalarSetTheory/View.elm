@@ -24,7 +24,7 @@ view model =
             ([ tableHeaderRow model.activeSections ]
                 ++ [ tableMinRow (nameAndMinPerSection model) ]
                 ++ [ tableMaxRow (nameAndMaxPerSection model) ]
-                ++ edRangeToTableRows model.ed.min model.ed.max
+                ++ edRangeToTableRows model.ed.min model.ed.max model.nChord.min
             )
         ]
 
@@ -65,37 +65,37 @@ nameAndMax name model =
             ( name, "" )
 
 
-edRangeToTableRows : String -> String -> List (Html Msg)
-edRangeToTableRows edMin edMax =
-    edHeadRows (parseInt edMin) (parseInt edMax)
-        ++ concatMap edTailRows (range (parseInt edMin + 1) (parseInt edMax))
+edRangeToTableRows : String -> String -> String -> List (Html Msg)
+edRangeToTableRows edMin edMax nChordMin =
+    edHeadRows (parseInt edMin) (parseInt edMax) (parseInt nChordMin)
+        ++ concatMap (\ed -> edTailRows ed (parseInt nChordMin)) (range (parseInt edMin + 1) (parseInt edMax))
 
 
-edHeadRows : Int -> Int -> List (Html Msg)
-edHeadRows edMin edMax =
+edHeadRows : Int -> Int -> Int -> List (Html Msg)
+edHeadRows edMin edMax nChordMin =
     [ tr
         []
         ([ td
             [ rowspan (edHeadRowSpan edMin edMax), tableBorder ]
             [ text (concat [ "count (", toString (inclusiveCount edMin edMax), ")" ]) ]
          ]
-            ++ nChordHeadRowCells edMin
+            ++ nChordHeadRowCells edMin nChordMin
         )
     ]
         ++ map nChordTailRow (range 2 edMin)
 
 
-edTailRows : Int -> List (Html Msg)
-edTailRows ed =
-    [ nChordHeadRow ed ]
+edTailRows : Int -> Int -> List (Html Msg)
+edTailRows ed nChordMin =
+    [ nChordHeadRow ed nChordMin ]
         ++ map nChordTailRow (range 2 ed)
 
 
-nChordHeadRow : Int -> Html Msg
-nChordHeadRow ed =
+nChordHeadRow : Int -> Int -> Html Msg
+nChordHeadRow ed nChordMin =
     tr
         []
-        (nChordHeadRowCells ed)
+        (nChordHeadRowCells ed nChordMin)
 
 
 nChordTailRow : Int -> Html Msg
@@ -113,12 +113,12 @@ edHeadRowSpan min max =
     foldr (+) 0 (range min max)
 
 
-nChordHeadRowCells : Int -> List (Html Msg)
-nChordHeadRowCells ed =
+nChordHeadRowCells : Int -> Int -> List (Html Msg)
+nChordHeadRowCells ed nChordMin =
     [ td
         [ rowspan ed, tableBorder ]
         [ text (toString ed) ]
     , td
         [ tableBorder ]
-        [ text "1" ]
+        [ text (toString nChordMin) ]
     ]

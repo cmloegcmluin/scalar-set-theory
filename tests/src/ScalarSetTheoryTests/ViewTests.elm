@@ -30,7 +30,7 @@ viewTests =
                                     ([ tableHeaderRow [ "ed", "n-chord" ] ]
                                         ++ [ tableMinRow [ ( "ed", "2" ), ( "n-chord", "1" ) ] ]
                                         ++ [ tableMaxRow [ ( "ed", "3" ), ( "n-chord", "100" ) ] ]
-                                        ++ edRangeToTableRows "2" "3"
+                                        ++ edRangeToTableRows "2" "3" "1"
                                     )
                                 ]
 
@@ -48,10 +48,10 @@ viewTests =
                 \() ->
                     let
                         expected =
-                            edHeadRows 2 4 ++ edTailRows 3 ++ edTailRows 4
+                            edHeadRows 2 4 2 ++ edTailRows 3 2 ++ edTailRows 4 2
 
                         actual =
-                            edRangeToTableRows "2" "4"
+                            edRangeToTableRows "2" "4" "2"
                     in
                     equal expected actual
             ]
@@ -87,7 +87,7 @@ viewTests =
                             ]
 
                         actual =
-                            edHeadRows 3 5
+                            edHeadRows 3 5 1
                     in
                     equal expected actual
             ]
@@ -142,7 +142,7 @@ viewTests =
                             ]
 
                         actual =
-                            edTailRows 3
+                            edTailRows 3 1
                     in
                     equal expected actual
             ]
@@ -158,11 +158,11 @@ viewTests =
                                     [ text "8" ]
                                 , td
                                     [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                    [ text "1" ]
+                                    [ text "2" ]
                                 ]
 
                         actual =
-                            nChordHeadRow 8
+                            nChordHeadRow 8 2
                     in
                     equal expected actual
             ]

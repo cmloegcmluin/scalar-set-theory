@@ -30,16 +30,16 @@ sectionNameToMaxDropdown nameAndMax =
 maxDropdown : String -> String -> List (Html Msg)
 maxDropdown sectionName selectedOption =
     [ select
-        edMaxAttributes
+        (edMaxAttributes sectionName)
         (dropdownOptions sectionName selectedOption)
     ]
 
 
-edMaxAttributes : List (Attribute Msg)
-edMaxAttributes =
-    [ onInput edMaxOnInputHandler ]
+edMaxAttributes : String -> List (Attribute Msg)
+edMaxAttributes sectionName =
+    [ onInput (\newMax -> edMaxOnInputHandler newMax sectionName) ]
 
 
-edMaxOnInputHandler : String -> Msg
-edMaxOnInputHandler newMax =
-    UpdateSectionMax newMax "ed"
+edMaxOnInputHandler : String -> String -> Msg
+edMaxOnInputHandler newMax sectionName =
+    UpdateSectionMax newMax sectionName

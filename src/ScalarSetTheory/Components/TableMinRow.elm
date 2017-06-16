@@ -30,16 +30,16 @@ sectionNameToMinDropdown nameAndMin =
 minDropdown : String -> String -> List (Html Msg)
 minDropdown sectionName selectedOption =
     [ select
-        edMinAttributes
+        (edMinAttributes sectionName)
         (dropdownOptions sectionName selectedOption)
     ]
 
 
-edMinAttributes : List (Attribute Msg)
-edMinAttributes =
-    [ onInput edMinOnInputHandler ]
+edMinAttributes : String -> List (Attribute Msg)
+edMinAttributes sectionName =
+    [ onInput (\newMin -> edMinOnInputHandler newMin sectionName) ]
 
 
-edMinOnInputHandler : String -> Msg
-edMinOnInputHandler newMin =
-    UpdateSectionMin newMin "ed"
+edMinOnInputHandler : String -> String -> Msg
+edMinOnInputHandler newMin sectionName =
+    UpdateSectionMin newMin sectionName

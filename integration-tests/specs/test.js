@@ -54,6 +54,16 @@ describe('range of n-chords', function () {
 
 		assert.equal(browser.getValue(nChordMinSelect), '2');
 		assert.equal(browser.getValue(nChordMaxSelect), '100');
+
+		let edMinSelect = '//table/tr[2]/td[2]/select'
+		let edMaxSelect = '//table/tr[3]/td[2]/select'
+
+		assert.equal(browser.getValue(edMinSelect), '3');
+		assert.equal(browser.getValue(edMaxSelect), '3');
+
+		assert.equal(browser.getText('//table/tr[4]/td[2]'), '3')
+		assert.equal(browser.getText('//table/tr[4]/td[3]'), '2')
+		assert.equal(browser.getText('//table/tr[5]/td[2]'), '3')
 	})
 })
 

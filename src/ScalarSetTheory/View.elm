@@ -24,7 +24,7 @@ view model =
             ([ tableHeaderRow model.activeSections ]
                 ++ [ tableMinRow (nameAndMinPerSection model) ]
                 ++ [ tableMaxRow (nameAndMaxPerSection model) ]
-                ++ edRangeToTableRows model.ed.min model.ed.max model.nChord.min
+                ++ edRangeToTableRows model.ed.min model.ed.max model.nChord.min model.nChord.max
             )
         ]
 
@@ -65,14 +65,14 @@ nameAndMax name model =
             ( name, "" )
 
 
-edRangeToTableRows : String -> String -> String -> List (Html Msg)
-edRangeToTableRows edMin edMax nChordMin =
-    edHeadRows (parseInt edMin) (parseInt edMax) (parseInt nChordMin)
-        ++ concatMap (\ed -> edTailRows ed (parseInt nChordMin)) (range (parseInt edMin + 1) (parseInt edMax))
+edRangeToTableRows : String -> String -> String -> String -> List (Html Msg)
+edRangeToTableRows edMin edMax nChordMin nChordMax =
+    edHeadRows (parseInt edMin) (parseInt edMax) (parseInt nChordMin) (parseInt nChordMax)
+        ++ concatMap (\ed -> edTailRows ed (parseInt nChordMin) (parseInt nChordMax)) (range (parseInt edMin + 1) (parseInt edMax))
 
 
-edHeadRows : Int -> Int -> Int -> List (Html Msg)
-edHeadRows edMin edMax nChordMin =
+edHeadRows : Int -> Int -> Int -> Int -> List (Html Msg)
+edHeadRows edMin edMax nChordMin nChordMax =
     [ tr
         []
         ([ td
@@ -82,13 +82,21 @@ edHeadRows edMin edMax nChordMin =
             ++ nChordHeadRowCells edMin nChordMin
         )
     ]
-        ++ map nChordTailRow (range 2 edMin)
+        ++ map nChordTailRow (range 2 (min edMin nChordMax))
 
 
-edTailRows : Int -> Int -> List (Html Msg)
-edTailRows ed nChordMin =
+
+-- should not be 2, should be nChordMin + 1 ?
+
+
+edTailRows : Int -> Int -> Int -> List (Html Msg)
+edTailRows ed nChordMin nChordMax =
     [ nChordHeadRow ed nChordMin ]
-        ++ map nChordTailRow (range 2 ed)
+        ++ map nChordTailRow (range 2 (min ed nChordMax))
+
+
+
+-- should not be 2, should be nChordMin + 1 ?
 
 
 nChordHeadRow : Int -> Int -> Html Msg

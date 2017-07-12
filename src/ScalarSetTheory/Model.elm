@@ -21,7 +21,7 @@ model =
         , max = "3"
         }
     , nChord =
-        { min = "1"
+        { min = "2"
         , max = "100"
         }
     , activeSections = [ "ed", "nChord" ]

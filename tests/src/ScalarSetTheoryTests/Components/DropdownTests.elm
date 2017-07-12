@@ -21,7 +21,7 @@ dropdownTests =
                         dropdownOptions "ed" "8"
                 in
                 equal expected actual
-        , test "for n-chords, returns a range between 1 and 100" <|
+        , test "for nChords, returns a range between 1 and 100" <|
             \() ->
                 let
                     expected =

@@ -76,27 +76,19 @@ edHeadRows edMin edMax nChordMin nChordMax =
     [ tr
         []
         ([ td
-            [ rowspan (edHeadRowSpan edMin edMax), tableBorder ]
+            [ rowspan 9999, tableBorder ]
             [ text (concat [ "count (", toString (inclusiveCount edMin edMax), ")" ]) ]
          ]
             ++ nChordHeadRowCells edMin nChordMin
         )
     ]
-        ++ map nChordTailRow (range 2 (min edMin nChordMax))
-
-
-
--- should not be 2, should be nChordMin + 1 ?
+        ++ map nChordTailRow (range (nChordMin + 1) (min edMin nChordMax))
 
 
 edTailRows : Int -> Int -> Int -> List (Html Msg)
 edTailRows ed nChordMin nChordMax =
     [ nChordHeadRow ed nChordMin ]
-        ++ map nChordTailRow (range 2 (min ed nChordMax))
-
-
-
--- should not be 2, should be nChordMin + 1 ?
+        ++ map nChordTailRow (range (nChordMin + 1) (min ed nChordMax))
 
 
 nChordHeadRow : Int -> Int -> Html Msg
@@ -116,15 +108,10 @@ nChordTailRow nChord =
         ]
 
 
-edHeadRowSpan : Int -> Int -> Int
-edHeadRowSpan min max =
-    foldr (+) 0 (range min max)
-
-
 nChordHeadRowCells : Int -> Int -> List (Html Msg)
 nChordHeadRowCells ed nChordMin =
     [ td
-        [ rowspan ed, tableBorder ]
+        [ rowspan (ed + 1 - nChordMin), tableBorder ]
         [ text (toString ed) ]
     , td
         [ tableBorder ]

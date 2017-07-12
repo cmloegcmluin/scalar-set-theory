@@ -24,11 +24,11 @@ tableHeaderTests =
                                 [ text "ed" ]
                             , th
                                 [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                [ text "n-chord" ]
+                                [ text "nChord" ]
                             ]
 
                     actual =
-                        tableHeaderRow [ "ed", "n-chord" ]
+                        tableHeaderRow [ "ed", "nChord" ]
                 in
                 equal expected actual
         ]

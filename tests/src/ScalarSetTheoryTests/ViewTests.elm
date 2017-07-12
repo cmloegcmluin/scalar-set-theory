@@ -10,7 +10,7 @@ import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
 import ScalarSetTheory.Components.TableMinRow exposing (tableMinRow)
 import ScalarSetTheory.Styles.Styles exposing (styles)
 import ScalarSetTheory.Update exposing (Msg)
-import ScalarSetTheory.View exposing (edHeadRowSpan, edHeadRows, edRangeToTableRows, edTailRows, nChordHeadRow, nChordTailRow, view)
+import ScalarSetTheory.View exposing (edHeadRows, edRangeToTableRows, edTailRows, nChordHeadRow, nChordTailRow, view)
 import Test exposing (Test, describe, test)
 
 
@@ -28,9 +28,9 @@ viewTests =
         --                                [ h1 [] [ text "Scalar Set Theory" ]
         --                                , table
         --                                    [ styles [ borderCollapse collapse ] ]
-        --                                    ([ tableHeaderRow [ "ed", "n-chord" ] ]
-        --                                        ++ [ tableMinRow [ ( "ed", "2" ), ( "n-chord", "1" ) ] ]
-        --                                        ++ [ tableMaxRow [ ( "ed", "3" ), ( "n-chord", "100" ) ] ]
+        --                                    ([ tableHeaderRow [ "ed", "nChord" ] ]
+        --                                        ++ [ tableMinRow [ ( "ed", "2" ), ( "nChord", "1" ) ] ]
+        --                                        ++ [ tableMaxRow [ ( "ed", "3" ), ( "nChord", "100" ) ] ]
         --                                        ++ edRangeToTableRows "2" "3" "1" "100"
         --                                    )
         --                                ]
@@ -39,7 +39,7 @@ viewTests =
         --                            view
         --                                { ed = { min = "2", max = "3" }
         --                                , nChord = { min = "1", max = "100" }
-        --                                , activeSections = [ "ed", "n-chord" ]
+        --                                , activeSections = [ "ed", "nChord" ]
         --                                }
         --                    in
         --                    equal expected actual
@@ -57,14 +57,14 @@ viewTests =
                     equal expected actual
             ]
         , describe "edHeadRows"
-            [ test "returns a td for all eds vertically spanning all of them, plus the smallest ed vertically spanning all of its possible n-chords, plus a td for each of those n-chords" <|
+            [ test "returns a td for all eds vertically spanning all of them, plus the smallest ed vertically spanning all of its possible nChords, plus a td for each of those nChords" <|
                 \() ->
                     let
                         expected =
                             [ tr
                                 []
                                 [ td
-                                    [ rowspan 12, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ rowspan 9999, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                     [ text "count (3)" ]
                                 , td
                                     [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
@@ -91,59 +91,37 @@ viewTests =
                             edHeadRows 3 5 1 100
                     in
                     equal expected actual
-            , test "cuts off at the n-chord max if it is less than the edMin" <|
+            , test "cuts off at the nChord max if it is less than the edMin" <|
                 \() ->
                     let
                         expected =
                             [ tr
                                 []
                                 [ td
-                                    [ rowspan 12, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ rowspan 9999, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                     [ text "count (3)" ]
                                 , td
-                                    [ rowspan 3, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ rowspan 2, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                     [ text "3" ]
                                 , td
                                     [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                    [ text "1" ]
+                                    [ text "2" ]
                                 ]
                             , tr
                                 []
                                 [ td
                                     [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
-                                    [ text "2" ]
+                                    [ text "3" ]
                                 ]
                             ]
 
                         actual =
-                            edHeadRows 3 5 1 2
-                    in
-                    equal expected actual
-            ]
-        , describe "edHeadRowSpan"
-            [ test "returns the rowspan to cover all eds (each of which spans some number of nchords)" <|
-                \() ->
-                    let
-                        expected =
-                            14
-
-                        actual =
-                            edHeadRowSpan 2 5
-                    in
-                    equal expected actual
-            , test "(another example)" <|
-                \() ->
-                    let
-                        expected =
-                            7
-
-                        actual =
-                            edHeadRowSpan 3 4
+                            edHeadRows 3 5 2 3
                     in
                     equal expected actual
             ]
         , describe "edTailRows"
-            [ test "returns a td for an ed vertically spanning all of its possible n-chords, plus a td for each of its n-chords" <|
+            [ test "returns a td for an ed vertically spanning all of its possible nChords, plus a td for each of its nChords" <|
                 \() ->
                     let
                         expected =
@@ -174,7 +152,7 @@ viewTests =
                             edTailRows 3 1 100
                     in
                     equal expected actual
-            , test "cuts off at the n-chord max if it is less than the ed" <|
+            , test "cuts off at the nChord max if it is less than the ed" <|
                 \() ->
                     let
                         expected =
@@ -201,14 +179,14 @@ viewTests =
                     equal expected actual
             ]
         , describe "nChordHeadRow"
-            [ test "returns a single tr with one td for the parent ed and one td for the min of its n-chords" <|
+            [ test "returns a single tr with one td for the parent ed and one td for the min of its nChords" <|
                 \() ->
                     let
                         expected =
                             tr
                                 []
                                 [ td
-                                    [ rowspan 8, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
+                                    [ rowspan 7, styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
                                     [ text "8" ]
                                 , td
                                     [ styles [ border3 (px 1) solid (rgb 128 128 128) ] ]
@@ -221,7 +199,7 @@ viewTests =
                     equal expected actual
             ]
         , describe "nChordTailRow"
-            [ test "returns a single tr with a single td for the n-chord" <|
+            [ test "returns a single tr with a single td for the nChord" <|
                 \() ->
                     let
                         expected =

@@ -4,7 +4,7 @@ import Expect exposing (equal)
 import Html exposing (Html, option, text)
 import Html.Attributes exposing (selected, value)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Update exposing (Msg)
+import ScalarSetTheory.Msg exposing (Msg)
 import Test exposing (Test, describe, test)
 
 

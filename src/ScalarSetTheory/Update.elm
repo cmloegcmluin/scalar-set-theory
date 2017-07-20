@@ -1,11 +1,8 @@
-module ScalarSetTheory.Update exposing (..)
+module ScalarSetTheory.Update exposing (update)
 
 import ScalarSetTheory.Model exposing (Model)
-
-
-type Msg
-    = UpdateSectionMin String String
-    | UpdateSectionMax String String
+import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Actions.NewTableBody exposing (newTableBody)
 
 
 update : Msg -> Model -> Model
@@ -20,8 +17,14 @@ update msg model =
 
                         newEd =
                             { oldEd | min = newMin }
+
+                        newModel =
+                            { model | ed = newEd }
                     in
-                    { model | ed = newEd }
+                    { model
+                        | ed = newEd
+                        , tableBody = newTableBody newModel
+                    }
 
                 "nChord" ->
                     let
@@ -30,8 +33,14 @@ update msg model =
 
                         newNChord =
                             { oldNChord | min = newMin }
+
+                        newModel =
+                            { model | nChord = newNChord }
                     in
-                    { model | nChord = newNChord }
+                    { model
+                        | nChord = newNChord
+                        , tableBody = newTableBody newModel
+                    }
 
                 _ ->
                     model
@@ -45,8 +54,14 @@ update msg model =
 
                         newEd =
                             { oldEd | max = newMax }
+
+                        newModel =
+                            { model | ed = newEd }
                     in
-                    { model | ed = newEd }
+                    { model
+                        | ed = newEd
+                        , tableBody = newTableBody newModel
+                    }
 
                 "nChord" ->
                     let
@@ -55,8 +70,14 @@ update msg model =
 
                         newNChord =
                             { oldNChord | max = newMax }
+
+                        newModel =
+                            { model | nChord = newNChord }
                     in
-                    { model | nChord = newNChord }
+                    { model
+                        | nChord = newNChord
+                        , tableBody = newTableBody newModel
+                    }
 
                 _ ->
                     model

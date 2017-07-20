@@ -1,45 +1,68 @@
 module ScalarSetTheory.Components.TableMinRow exposing (minDropdown, tableMinRow)
 
-import Html exposing (Attribute, Html, select, td, text, tr)
+import Html exposing (Attribute, Html, select, text, div)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Styles.TableStyles exposing (tableBorder)
-import ScalarSetTheory.Update exposing (..)
+import ScalarSetTheory.Components.SstTable exposing (sstCell, htmlMsgListToTableRow)
+import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Msg exposing (..)
 import Tuple exposing (first, second)
 
 
-tableMinRow : List ( String, String ) -> Html Msg
-tableMinRow nameAndMinPerSection =
-    tr []
-        ([ td
-            [ tableBorder ]
-            [ text "min" ]
-         ]
-            ++ map sectionNameToMinDropdown nameAndMinPerSection
+tableMinRow : Model -> Html Msg
+tableMinRow model =
+    sstCell
+        (
+            htmlMsgListToTableRow
+                (
+                    [ div
+                        [ ]
+                        [ text "min" ]
+                    ]
+                    ++ map sectionNameToMinDropdown ( nameAndMinPerSection model )
+                )
         )
 
 
 sectionNameToMinDropdown : ( String, String ) -> Html Msg
 sectionNameToMinDropdown nameAndMin =
-    td
-        [ tableBorder ]
+    div
+        [ ]
         (minDropdown (first nameAndMin) (second nameAndMin))
 
 
 minDropdown : String -> String -> List (Html Msg)
 minDropdown sectionName selectedOption =
     [ select
-        (edMinAttributes sectionName)
+        (minAttributes sectionName)
         (dropdownOptions sectionName selectedOption)
     ]
 
 
-edMinAttributes : String -> List (Attribute Msg)
-edMinAttributes sectionName =
-    [ onInput (\newMin -> edMinOnInputHandler newMin sectionName) ]
+minAttributes : String -> List (Attribute Msg)
+minAttributes sectionName =
+    [ onInput (\newMin -> minOnInputHandler newMin sectionName) ]
 
 
-edMinOnInputHandler : String -> String -> Msg
-edMinOnInputHandler newMin sectionName =
+minOnInputHandler : String -> String -> Msg
+minOnInputHandler newMin sectionName =
     UpdateSectionMin newMin sectionName
+
+
+nameAndMinPerSection : Model -> List ( String, String )
+nameAndMinPerSection model =
+    map (\name -> nameAndMin name model) model.activeSections
+
+
+nameAndMin : String -> Model -> ( String, String )
+nameAndMin name model =
+    case name of
+        "ed" ->
+            ( name, model.ed.min )
+
+        "nChord" ->
+            ( name, model.nChord.min )
+
+        _ ->
+            ( name, "" )

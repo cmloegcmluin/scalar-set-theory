@@ -1,4 +1,5 @@
-let assert = require('assert')
+const assert = require('assert')
+const classSelector = require('./helpers/classSelector')
 
 beforeEach('visit main page', function () {
 	browser.url('/src/ScalarSetTheory/Main.elm')
@@ -270,10 +271,6 @@ describe('landing page', function () {
 // 		])
 // 	})
 // })
-
-const classSelector = function (className) {
-	return `//div[contains(concat(' ', @class, ' '), ' ${className} ')]`
-}
 
 // const selectOption = function (selectXPath, option) {
 // 	browser.click(selectXPath + "/option[contains(.,\"" + option + "\")]")

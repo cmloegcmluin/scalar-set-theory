@@ -17,14 +17,8 @@ update msg model =
 
                         newEd =
                             { oldEd | min = newMin }
-
-                        newModel =
-                            { model | ed = newEd }
                     in
-                    { model
-                        | ed = newEd
-                        , tableBody = newTableBody newModel
-                    }
+                    { model | ed = newEd }
 
                 "nChord" ->
                     let
@@ -33,14 +27,8 @@ update msg model =
 
                         newNChord =
                             { oldNChord | min = newMin }
-
-                        newModel =
-                            { model | nChord = newNChord }
                     in
-                    { model
-                        | nChord = newNChord
-                        , tableBody = newTableBody newModel
-                    }
+                    { model | nChord = newNChord }
 
                 _ ->
                     model
@@ -54,14 +42,8 @@ update msg model =
 
                         newEd =
                             { oldEd | max = newMax }
-
-                        newModel =
-                            { model | ed = newEd }
                     in
-                    { model
-                        | ed = newEd
-                        , tableBody = newTableBody newModel
-                    }
+                    { model | ed = newEd }
 
                 "nChord" ->
                     let
@@ -70,14 +52,8 @@ update msg model =
 
                         newNChord =
                             { oldNChord | max = newMax }
-
-                        newModel =
-                            { model | nChord = newNChord }
                     in
-                    { model
-                        | nChord = newNChord
-                        , tableBody = newTableBody newModel
-                    }
+                    { model | nChord = newNChord }
 
                 _ ->
                     model

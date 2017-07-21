@@ -2,6 +2,7 @@ module ScalarSetTheory.View exposing (..)
 
 import Html exposing (Html, div, h1, text)
 import Html.Attributes exposing (class)
+import ScalarSetTheory.Actions.NewTableBody exposing (newTableBody)
 import ScalarSetTheory.Components.SstTable exposing (sstCell)
 import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
 import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
@@ -23,6 +24,6 @@ view model =
             [ tableHeaderRow model.activeSections
             , tableMinRow model
             , tableMaxRow model
-            , sstCell model.tableBody
+            , sstCell (newTableBody model)
             ]
         ]

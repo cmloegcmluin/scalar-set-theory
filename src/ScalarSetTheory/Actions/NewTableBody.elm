@@ -20,13 +20,13 @@ countMessage : String -> Model -> String
 countMessage sectionName model =
     case sectionName of
         "ed" ->
-            "count(" ++ toString ((parseInt model.ed.max - parseInt model.ed.min) + 1) ++ ")"
+            "count (" ++ toString ((parseInt model.ed.max - parseInt model.ed.min) + 1) ++ ")"
 
         "nChord" ->
-            "count()"
+            "count ()"
 
         _ ->
-            "count()"
+            "count ()"
 
 
 getFirstSection : List String -> String

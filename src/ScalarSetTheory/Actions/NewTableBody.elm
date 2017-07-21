@@ -5,6 +5,7 @@ import List exposing (head, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNodeList)
+import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 newTableBody : Model -> TableNode
@@ -60,8 +61,3 @@ nChordToTableNode nChord model =
         { cellItself = text (toString nChord)
         , cellChildren = emptyTableNodeList
         }
-
-
-parseInt : String -> Int
-parseInt string =
-    String.toInt string |> Result.toMaybe |> Maybe.withDefault 0

@@ -17,4 +17,4 @@ integration:
 	elm-reactor -p 8001 & lsof -ti:4444 | xargs kill && cd integration-tests && npm test
 
 setup:
-	elm-package install -y && cd integration-tests && npm i
+	elm-package install -y && npm install -g elm-test && cd tests && elm-package install -y && cd ../integration-tests && npm i

@@ -3,7 +3,7 @@ module ScalarSetTheory.Components.SstTable exposing (htmlMsgListToTableRow, stri
 import Html exposing (Html, text, div)
 import List exposing (map, head, tail)
 import Maybe exposing (withDefault)
-import ScalarSetTheory.Styles.TableStyles exposing (sstTableCellBorder, sstCellAndChildren, sstCellItself, sstCellChildrenContainer)
+import ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellItself, sstCellChildrenContainer)
 import ScalarSetTheory.Types.TableNode exposing (TableNode, TableNode(TableNode))
 import ScalarSetTheory.Msg exposing (Msg)
 
@@ -69,7 +69,7 @@ sstCell (TableNode tableNode) =
     div
         [ sstCellAndChildren ]
         [ div
-            [ sstCellItself, sstTableCellBorder ]
+            [ sstCellItself ]
             [ tableNode.cellItself ]
         , div
             [ sstCellChildrenContainer ]

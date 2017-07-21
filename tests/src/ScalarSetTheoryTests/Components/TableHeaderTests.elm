@@ -6,7 +6,7 @@ import Html exposing (text, div)
 import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
 import ScalarSetTheory.Styles.Styles exposing (styles)
 import Test exposing (Test, describe, test)
-import ScalarSetTheory.Styles.TableStyles exposing (sstTableCellBorder, sstCellAndChildren, sstCellItself, sstCellChildrenContainer)
+import ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellItself, sstCellChildrenContainer)
 
 
 tableHeaderTests : Test
@@ -19,21 +19,21 @@ tableHeaderTests =
                         div
                             [ sstCellAndChildren ]
                             [ div
-                                [ sstCellItself, sstTableCellBorder ]
+                                [ sstCellItself ]
                                 [ text "section" ]
                             , div
                                 [ sstCellChildrenContainer ]
                                 [ div
                                     [ sstCellAndChildren ]
                                     [ div
-                                        [ sstCellItself, sstTableCellBorder ]
+                                        [ sstCellItself ]
                                         [ text "ed" ]
                                     , div
                                         [ sstCellChildrenContainer ]
                                         [ div
                                             [ sstCellAndChildren ]
                                             [ div
-                                                [ sstCellItself, sstTableCellBorder ]
+                                                [ sstCellItself ]
                                                 [ text "nChord" ]
                                             , div
                                                 [ sstCellChildrenContainer ]

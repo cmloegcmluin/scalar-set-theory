@@ -1,6 +1,7 @@
 module ScalarSetTheory.View exposing (..)
 
 import Html exposing (Html, div, h1, text)
+import Html.Attributes exposing (class)
 import ScalarSetTheory.Components.SstTable exposing (sstCell)
 import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
 import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
@@ -18,7 +19,7 @@ view model =
         [ appStyle ]
         [ h1 [] [ text "Scalar Set Theory" ]
         , div
-            [ tableStyle ]
+            [ tableStyle, class "sstTable" ]
             [ tableHeaderRow model.activeSections
             , tableMinRow model
             , tableMaxRow model

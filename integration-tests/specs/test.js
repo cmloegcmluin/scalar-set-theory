@@ -5,14 +5,30 @@ beforeEach('visit main page', function () {
 })
 
 describe('landing page', function () {
-	it('shows the title and a table', function () {
+	it('shows the title and a table with defaults', function () {
 		assert.equal(browser.getText('h1'), 'Scalar Set Theory')
 
-		// expectTable([
-		// 	[ 'section', 'ed', 'nChord' ],
-		// 	[ 'min    ' ],
-		// 	[ 'max    ' ],
-		// ])
+		let sstTableSelect = classSelector('sstTable')
+		let sstTableResult = browser.elements(sstTableSelect)
+		assert.equal(sstTableResult.value.length, 1)
+		let sstTable = sstTableResult.value[0]
+
+		assert.equal(sstTable.getText('//div[1]/div[1]'), 'section')
+		assert.equal(sstTable.getText('//div[1]/div[2]/div[1]/div[1]'), 'ed')
+		assert.equal(sstTable.getText('//div[1]/div[2]/div[1]/div[2]/div[1]/div[1]'), 'nChord')
+
+		assert.equal(sstTable.getText('//div[2]/div[1]'), 'min')
+		assert.equal(sstTable.getValue('//div[2]/div[2]/div[1]/div[1]/select'), '3')
+		assert.equal(sstTable.getValue('//div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/select'), '2')
+
+		assert.equal(sstTable.getText('//div[3]/div[1]'), 'max')
+		assert.equal(sstTable.getValue('//div[3]/div[2]/div[1]/div[1]/select'), '3')
+		assert.equal(sstTable.getValue('//div[3]/div[2]/div[1]/div[2]/div[1]/div[1]/select'), '100')
+
+		assert.equal(sstTable.getText('//div[4]/div[1]'), 'count(1)')
+		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[1]'), '3')
+		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[2]/div[1]/div[1]'), '2')
+		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[2]/div[2]/div[1]'), '3')
 	})
 })
 
@@ -254,6 +270,10 @@ describe('landing page', function () {
 // 		])
 // 	})
 // })
+
+const classSelector = function (className) {
+	return `//div[contains(concat(' ', @class, ' '), ' ${className} ')]`
+}
 
 // const selectOption = function (selectXPath, option) {
 // 	browser.click(selectXPath + "/option[contains(.,\"" + option + "\")]")

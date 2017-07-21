@@ -25,17 +25,14 @@ tableMinRow model =
 
 sectionNameToMinDropdown : ( String, String ) -> Html Msg
 sectionNameToMinDropdown nameAndMin =
-    div
-        []
-        (minDropdown (first nameAndMin) (second nameAndMin))
+    minDropdown (first nameAndMin) (second nameAndMin)
 
 
-minDropdown : String -> String -> List (Html Msg)
+minDropdown : String -> String -> Html Msg
 minDropdown sectionName selectedOption =
-    [ select
+    select
         (minAttributes sectionName)
         (dropdownOptions sectionName selectedOption)
-    ]
 
 
 minAttributes : String -> List (Attribute Msg)

@@ -25,17 +25,14 @@ tableMaxRow model =
 
 sectionNameToMaxDropdown : ( String, String ) -> Html Msg
 sectionNameToMaxDropdown nameAndMax =
-    div
-        []
-        (maxDropdown (first nameAndMax) (second nameAndMax))
+    maxDropdown (first nameAndMax) (second nameAndMax)
 
 
-maxDropdown : String -> String -> List (Html Msg)
+maxDropdown : String -> String -> Html Msg
 maxDropdown sectionName selectedOption =
-    [ select
+    select
         (maxAttributes sectionName)
         (dropdownOptions sectionName selectedOption)
-    ]
 
 
 maxAttributes : String -> List (Attribute Msg)

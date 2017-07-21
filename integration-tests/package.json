@@ -1,5 +1,5 @@
 {
-  "name": "standup-emcee-integration-test",
+  "name": "scalar-set-theory-integration-test",
   "version": "0.0.1",
   "description": "Integration tests for Scalar Set Theory",
   "main": "index.js",

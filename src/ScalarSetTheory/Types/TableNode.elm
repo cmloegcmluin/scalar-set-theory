@@ -1,19 +1,20 @@
-module ScalarSetTheory.Types.TableNode exposing (TableNode, TableNode(TableNode), emptyTableNodeList, emptyTableNode)
+module ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNode, emptyTableNodeList)
 
 import Html exposing (Html, text)
-import ScalarSetTheory.Msg exposing (Msg)
 import List exposing (map)
+import ScalarSetTheory.Msg exposing (Msg)
 
-type TableNode =
-    TableNode
+
+type TableNode
+    = TableNode
         { cellItself : Html Msg
-        , cellChildren : List (TableNode)
+        , cellChildren : List TableNode
         }
 
 
 emptyTableNodeList : List TableNode
 emptyTableNodeList =
-    map TableNode [ ]
+    map TableNode []
 
 
 emptyTableNode : TableNode

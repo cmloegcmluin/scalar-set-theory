@@ -1,13 +1,15 @@
-module ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellItself, sstCellChildrenContainer, tableStyle)
+module ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellChildrenContainer, sstCellItself, tableStyle)
 
-import Css exposing (px, rgb, solid, display, alignItems, justifyContent, width, borderRight3, borderBottom3, borderTop3, borderLeft3, margin, flexDirection, column, center, stretch, displayFlex, display, inlineBlock)
+import Css exposing (alignItems, borderBottom3, borderLeft3, borderRight3, borderTop3, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, margin, px, rem, rgb, solid, stretch, width)
 import ScalarSetTheory.Styles.Styles exposing (styles)
+
 
 sstCellAndChildren =
     styles
         [ displayFlex
         , alignItems stretch
         ]
+
 
 sstCellItself =
     styles
@@ -18,6 +20,7 @@ sstCellItself =
         , justifyContent center
         , width (px 80)
         ]
+
 
 sstCellChildrenContainer =
     styles

@@ -1,10 +1,11 @@
 module ScalarSetTheory.Actions.NewTableBody exposing (newTableBody)
 
-import ScalarSetTheory.Types.TableNode exposing (TableNode, TableNode(TableNode), emptyTableNodeList)
-import ScalarSetTheory.Model exposing (Model)
 import Html exposing (text)
 import List exposing (head, map, range)
 import Maybe exposing (withDefault)
+import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNodeList)
+
 
 newTableBody : Model -> TableNode
 newTableBody model =
@@ -18,9 +19,11 @@ countMessage : String -> Model -> String
 countMessage sectionName model =
     case sectionName of
         "ed" ->
-            "count(" ++ (toString (((parseInt model.ed.max) - (parseInt model.ed.min)) + 1 )) ++ ")"
+            "count(" ++ toString ((parseInt model.ed.max - parseInt model.ed.min) + 1) ++ ")"
+
         "nChord" ->
             "count()"
+
         _ ->
             "count()"
 
@@ -35,8 +38,10 @@ sectionNameToCellChildren sectionName model =
     case sectionName of
         "ed" ->
             map (\n -> edToTableNode n model) (range (parseInt model.ed.min) (parseInt model.ed.max))
+
         "nChord" ->
             emptyTableNodeList
+
         _ ->
             emptyTableNodeList
 

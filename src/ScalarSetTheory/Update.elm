@@ -1,8 +1,8 @@
 module ScalarSetTheory.Update exposing (update)
 
+import ScalarSetTheory.Actions.NewTableBody exposing (newTableBody)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Actions.NewTableBody exposing (newTableBody)
 
 
 update : Msg -> Model -> Model

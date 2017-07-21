@@ -1,10 +1,10 @@
 module ScalarSetTheory.Components.TableMaxRow exposing (maxDropdown, tableMaxRow)
 
-import Html exposing (Attribute, Html, select, text, div)
+import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Components.SstTable exposing (sstCell, htmlMsgListToTableRow)
+import ScalarSetTheory.Components.SstTable exposing (htmlMsgListToTableRow, sstCell)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import Tuple exposing (first, second)
@@ -13,22 +13,20 @@ import Tuple exposing (first, second)
 tableMaxRow : Model -> Html Msg
 tableMaxRow model =
     sstCell
-        (
-            htmlMsgListToTableRow
-                (
-                    [ div
-                        [ ]
-                        [ text "max" ]
-                    ]
-                    ++ map sectionNameToMaxDropdown (nameAndMaxPerSection model)
-                )
+        (htmlMsgListToTableRow
+            ([ div
+                []
+                [ text "max" ]
+             ]
+                ++ map sectionNameToMaxDropdown (nameAndMaxPerSection model)
+            )
         )
 
 
 sectionNameToMaxDropdown : ( String, String ) -> Html Msg
 sectionNameToMaxDropdown nameAndMax =
     div
-        [ ]
+        []
         (maxDropdown (first nameAndMax) (second nameAndMax))
 
 

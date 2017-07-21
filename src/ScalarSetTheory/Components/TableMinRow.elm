@@ -1,10 +1,10 @@
 module ScalarSetTheory.Components.TableMinRow exposing (minDropdown, tableMinRow)
 
-import Html exposing (Attribute, Html, select, text, div)
+import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Components.SstTable exposing (sstCell, htmlMsgListToTableRow)
+import ScalarSetTheory.Components.SstTable exposing (htmlMsgListToTableRow, sstCell)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import Tuple exposing (first, second)
@@ -13,22 +13,20 @@ import Tuple exposing (first, second)
 tableMinRow : Model -> Html Msg
 tableMinRow model =
     sstCell
-        (
-            htmlMsgListToTableRow
-                (
-                    [ div
-                        [ ]
-                        [ text "min" ]
-                    ]
-                    ++ map sectionNameToMinDropdown ( nameAndMinPerSection model )
-                )
+        (htmlMsgListToTableRow
+            ([ div
+                []
+                [ text "min" ]
+             ]
+                ++ map sectionNameToMinDropdown (nameAndMinPerSection model)
+            )
         )
 
 
 sectionNameToMinDropdown : ( String, String ) -> Html Msg
 sectionNameToMinDropdown nameAndMin =
     div
-        [ ]
+        []
         (minDropdown (first nameAndMin) (second nameAndMin))
 
 

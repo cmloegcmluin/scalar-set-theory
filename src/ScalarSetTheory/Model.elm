@@ -1,7 +1,8 @@
 module ScalarSetTheory.Model exposing (Model, model)
-import ScalarSetTheory.Types.TableNode exposing (TableNode, TableNode(TableNode), emptyTableNodeList)
+
+import Html exposing (Html, text)
 import List exposing (..)
-import Html exposing (text, Html)
+import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNodeList)
 
 
 type alias Model =
@@ -29,22 +30,23 @@ model =
         , max = "100"
         }
     , activeSections = [ "ed", "nChord" ]
-    , tableBody = TableNode
-        { cellItself = text "count(1)"
-        , cellChildren =
-            [ TableNode
-                { cellItself = text "3"
-                , cellChildren =
-                    [ TableNode
-                        { cellItself = text "2"
-                        , cellChildren = emptyTableNodeList
-                        }
-                    , TableNode
-                        { cellItself = text "3"
-                        , cellChildren = emptyTableNodeList
-                        }
-                    ]
-                }
-            ]
-        }
+    , tableBody =
+        TableNode
+            { cellItself = text "count(1)"
+            , cellChildren =
+                [ TableNode
+                    { cellItself = text "3"
+                    , cellChildren =
+                        [ TableNode
+                            { cellItself = text "2"
+                            , cellChildren = emptyTableNodeList
+                            }
+                        , TableNode
+                            { cellItself = text "3"
+                            , cellChildren = emptyTableNodeList
+                            }
+                        ]
+                    }
+                ]
+            }
     }

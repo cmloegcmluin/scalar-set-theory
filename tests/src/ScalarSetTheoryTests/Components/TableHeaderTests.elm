@@ -2,11 +2,11 @@ module ScalarSetTheoryTests.Components.TableHeaderTests exposing (tableHeaderTes
 
 import Css exposing (border3, px, rgb, solid)
 import Expect exposing (equal)
-import Html exposing (text, div)
+import Html exposing (div, text)
 import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
 import ScalarSetTheory.Styles.Styles exposing (styles)
+import ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellChildrenContainer, sstCellItself)
 import Test exposing (Test, describe, test)
-import ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellItself, sstCellChildrenContainer)
 
 
 tableHeaderTests : Test
@@ -37,7 +37,7 @@ tableHeaderTests =
                                                 [ text "nChord" ]
                                             , div
                                                 [ sstCellChildrenContainer ]
-                                                [ ]
+                                                []
                                             ]
                                         ]
                                     ]

@@ -47,3 +47,9 @@ What finally worked for me was deciding to use the local `elm-test` binary. I ha
 I still wasn't done though. `elm-test` now threw the error `Cannot find module 'node-elm-compiler'`. Which wasn't an Elm package. Nor did `npm i` globally work. Nor did `npm i` locally work, even! This was coming from a `package.json` in my installed Elm package! So I just had to `cd tests/elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/` and `npm i` there, then I could finally run `elm-test` and have things pass.
 
 I added stuff to the `make setup` script that theoretically should automate this on new workstations like this Windows 10 one, but I'm too afraid to test it right now.
+
+# DEPLOYMENT ODYSSEY
+
+This one wasn't so bad. But the `cf` CLI would lock me out of my PWS account because the interactive login prompt is broken and it will repeatedly try creds it thinks are failing. The solution was to use the flags to the login script, `-u` and `-p`, rather than trying to go interactive.
+
+I automated this, actually improving workflow, by automatically logging you in (in case the 24 timeout has passed) whenever you deploy. However, the one gotcha is that if your org or space on PWS have a space in them (mine do) then when you put those as environment variables they have to begin and end with escaped quotes; I couldn't include that in the bash script itself.

@@ -1,4 +1,4 @@
-module ScalarSetTheory.Sections exposing (..)
+module ScalarSetTheory.Sections.Sections exposing (..)
 
 
 type Section

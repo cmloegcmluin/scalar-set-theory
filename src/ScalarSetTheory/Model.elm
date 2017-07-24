@@ -1,8 +1,7 @@
 module ScalarSetTheory.Model exposing (Model, model)
 
 import Html exposing (Html, text)
-import List exposing (..)
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.Sections exposing (..)
 
 
 type alias Model =

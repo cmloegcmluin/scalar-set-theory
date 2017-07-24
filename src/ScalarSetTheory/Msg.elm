@@ -1,6 +1,6 @@
 module ScalarSetTheory.Msg exposing (..)
 
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.Sections exposing (..)
 
 
 type Msg

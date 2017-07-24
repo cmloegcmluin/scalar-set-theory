@@ -3,9 +3,9 @@ module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
-import ScalarSetTheory.GetSectionData exposing (getSectionDataBySection)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.GetSectionData exposing (getSectionDataBySection)
+import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
 

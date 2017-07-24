@@ -1,8 +1,8 @@
-module ScalarSetTheory.GetSectionData exposing (getSectionDataBySection)
+module ScalarSetTheory.Sections.GetSectionData exposing (getSectionDataBySection)
 
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.Sections exposing (..)
 
 
 getSectionDataBySection : Section -> Model -> SectionData

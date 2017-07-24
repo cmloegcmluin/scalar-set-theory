@@ -3,7 +3,7 @@ module ScalarSetTheory.Update exposing (update)
 import List exposing (map)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.Sections exposing (..)
 
 
 maybeUpdateSectionDataMin : SectionData -> Section -> Int -> SectionData

@@ -5,7 +5,7 @@ import Html exposing (Html, option, text)
 import Html.Attributes exposing (selected, value)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Sections exposing (..)
+import ScalarSetTheory.Sections.Sections exposing (..)
 import Test exposing (Test, describe, test)
 
 

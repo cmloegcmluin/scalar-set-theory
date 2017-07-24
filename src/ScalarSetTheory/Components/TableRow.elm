@@ -1,7 +1,7 @@
 module ScalarSetTheory.Components.TableRow exposing (tableRow)
 
 import Html exposing (Html, div)
-import List exposing (head, tail)
+import List exposing (head, length, tail)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
@@ -9,30 +9,35 @@ import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 
 tableRow : List (Html Msg) -> TableNode
 tableRow cells =
-    case tail cells of
-        Nothing ->
+    case length (cellsTail cells) of
+        0 ->
             defTableNode cells
 
-        Just cellsTail ->
-            case tail cellsTail of
-                Nothing ->
-                    defTableNode cells
-
-                Just _ ->
-                    TableNode
-                        { cellItself = getCellItself cells
-                        , cellChildren = [ tableRow cellsTail ]
-                        }
+        _ ->
+            TableNode
+                { cellItself = cellsHead cells
+                , cellChildren = [ tableRow (cellsTail cells) ]
+                }
 
 
-getCellItself : List (Html Msg) -> Html Msg
-getCellItself cells =
-    withDefault (div [] []) (head cells)
+cellsHead : List (Html Msg) -> Html Msg
+cellsHead cells =
+    withDefault emptyDiv (head cells)
+
+
+cellsTail : List (Html Msg) -> List (Html Msg)
+cellsTail cells =
+    withDefault [ emptyDiv ] (tail cells)
 
 
 defTableNode : List (Html Msg) -> TableNode
 defTableNode cells =
     TableNode
-        { cellItself = getCellItself cells
+        { cellItself = cellsHead cells
         , cellChildren = []
         }
+
+
+emptyDiv : Html Msg
+emptyDiv =
+    div [] []

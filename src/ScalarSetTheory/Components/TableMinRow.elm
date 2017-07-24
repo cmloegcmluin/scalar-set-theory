@@ -4,7 +4,7 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Components.TableRow exposing (htmlMsgListToTableRow)
+import ScalarSetTheory.Components.TableRow exposing (tableRow)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
@@ -13,11 +13,8 @@ import Tuple exposing (first, second)
 
 tableMinRow : Model -> TableNode
 tableMinRow model =
-    htmlMsgListToTableRow
-        ([ div
-            []
-            [ text "min" ]
-         ]
+    tableRow
+        ([ text "min" ]
             ++ map sectionNameToMinDropdown (nameAndMinPerSection model)
         )
 

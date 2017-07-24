@@ -1,4 +1,4 @@
-module ScalarSetTheory.Components.TableRow exposing (htmlMsgListToTableRow)
+module ScalarSetTheory.Components.TableRow exposing (tableRow)
 
 import Html exposing (Html, div)
 import List exposing (head, tail)
@@ -7,8 +7,8 @@ import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 
 
-htmlMsgListToTableRow : List (Html Msg) -> TableNode
-htmlMsgListToTableRow cells =
+tableRow : List (Html Msg) -> TableNode
+tableRow cells =
     case tail cells of
         Nothing ->
             defTableNode cells
@@ -21,7 +21,7 @@ htmlMsgListToTableRow cells =
                 Just _ ->
                     TableNode
                         { cellItself = getCellItself cells
-                        , cellChildren = [ htmlMsgListToTableRow cellsTail ]
+                        , cellChildren = [ tableRow cellsTail ]
                         }
 
 

@@ -5,6 +5,7 @@ import Html exposing (Html, option, text)
 import Html.Attributes exposing (selected, value)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Sections exposing (..)
 import Test exposing (Test, describe, test)
 
 
@@ -18,7 +19,7 @@ dropdownTests =
                         expectedEdOptions
 
                     actual =
-                        dropdownOptions "ed" "8"
+                        dropdownOptions Ed "8"
                 in
                 equal expected actual
         , test "for nChords, returns a range between 1 and 100" <|
@@ -28,7 +29,7 @@ dropdownTests =
                         expectedNChordOptions
 
                     actual =
-                        dropdownOptions "nChord" "4"
+                        dropdownOptions NChord "4"
                 in
                 equal expected actual
         ]

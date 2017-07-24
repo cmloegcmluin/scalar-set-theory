@@ -6,6 +6,7 @@ import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 import Tuple exposing (first, second)
@@ -15,45 +16,42 @@ tableMinRow : Model -> TableNode
 tableMinRow model =
     tableRow
         ([ text "min" ]
-            ++ map sectionNameToMinDropdown (nameAndMinPerSection model)
+            ++ map sectionToMinDropdown (sectionAndMinPerSection model)
         )
 
 
-sectionNameToMinDropdown : ( String, String ) -> Html Msg
-sectionNameToMinDropdown nameAndMin =
-    minDropdown (first nameAndMin) (second nameAndMin)
+sectionToMinDropdown : ( Section, String ) -> Html Msg
+sectionToMinDropdown sectionAndMin =
+    minDropdown (first sectionAndMin) (second sectionAndMin)
 
 
-minDropdown : String -> String -> Html Msg
-minDropdown sectionName selectedOption =
+minDropdown : Section -> String -> Html Msg
+minDropdown section selectedOption =
     select
-        (minAttributes sectionName)
-        (dropdownOptions sectionName selectedOption)
+        (minAttributes section)
+        (dropdownOptions section selectedOption)
 
 
-minAttributes : String -> List (Attribute Msg)
-minAttributes sectionName =
-    [ onInput (\newMin -> minOnInputHandler newMin sectionName) ]
+minAttributes : Section -> List (Attribute Msg)
+minAttributes section =
+    [ onInput (\newMin -> minOnInputHandler newMin section) ]
 
 
-minOnInputHandler : String -> String -> Msg
-minOnInputHandler newMin sectionName =
-    UpdateSectionMin newMin sectionName
+minOnInputHandler : String -> Section -> Msg
+minOnInputHandler newMin section =
+    UpdateSectionMin newMin section
 
 
-nameAndMinPerSection : Model -> List ( String, String )
-nameAndMinPerSection model =
-    map (\name -> nameAndMin name model) model.activeSections
+sectionAndMinPerSection : Model -> List ( Section, String )
+sectionAndMinPerSection model =
+    map (\section -> sectionAndMin section model) model.activeSections
 
 
-nameAndMin : String -> Model -> ( String, String )
-nameAndMin name model =
-    case name of
-        "ed" ->
-            ( name, model.ed.min )
+sectionAndMin : Section -> Model -> ( Section, String )
+sectionAndMin section model =
+    case section of
+        Ed ->
+            ( section, model.ed.min )
 
-        "nChord" ->
-            ( name, model.nChord.min )
-
-        _ ->
-            ( name, "" )
+        NChord ->
+            ( section, model.nChord.min )

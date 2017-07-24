@@ -4,11 +4,12 @@ import Html exposing (Attribute, Html, option, text)
 import Html.Attributes exposing (selected, value)
 import List exposing (map, range)
 import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Sections exposing (..)
 
 
-dropdownOptions : String -> String -> List (Html Msg)
-dropdownOptions sectionName selectedOption =
-    map (\optionIndex -> dropdownOption optionIndex selectedOption) (ranges sectionName)
+dropdownOptions : Section -> String -> List (Html Msg)
+dropdownOptions section selectedOption =
+    map (\optionIndex -> dropdownOption optionIndex selectedOption) (ranges section)
 
 
 dropdownOption : Int -> String -> Html Msg
@@ -25,14 +26,11 @@ isSelected optionIndex selectedOption =
     toString optionIndex == selectedOption
 
 
-ranges : String -> List Int
-ranges sectionName =
-    case sectionName of
-        "ed" ->
+ranges : Section -> List Int
+ranges section =
+    case section of
+        Ed ->
             range 3 100
 
-        "nChord" ->
+        NChord ->
             range 2 100
-
-        _ ->
-            range 0 0

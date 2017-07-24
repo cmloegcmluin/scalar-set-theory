@@ -3,6 +3,7 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 import Expect exposing (equal)
 import Html exposing (text)
 import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
@@ -17,15 +18,15 @@ updateTests =
                     expected =
                         { ed = { min = "5", max = "7" }
                         , nChord = { min = "4", max = "6" }
-                        , activeSections = [ "ed", "nChord" ]
+                        , activeSections = [ Ed, NChord ]
                         }
 
                     actual =
                         update
-                            (UpdateSectionMin "5" "ed")
+                            (UpdateSectionMin "5" Ed)
                             { ed = { min = "7", max = "7" }
                             , nChord = { min = "4", max = "6" }
-                            , activeSections = [ "ed", "nChord" ]
+                            , activeSections = [ Ed, NChord ]
                             }
                 in
                 equal expected actual
@@ -35,15 +36,15 @@ updateTests =
                     expected =
                         { ed = { min = "5", max = "7" }
                         , nChord = { min = "4", max = "8" }
-                        , activeSections = [ "ed", "nChord" ]
+                        , activeSections = [ Ed, NChord ]
                         }
 
                     actual =
                         update
-                            (UpdateSectionMax "8" "nChord")
+                            (UpdateSectionMax "8" NChord)
                             { ed = { min = "5", max = "7" }
                             , nChord = { min = "4", max = "6" }
-                            , activeSections = [ "ed", "nChord" ]
+                            , activeSections = [ Ed, NChord ]
                             }
                 in
                 equal expected actual

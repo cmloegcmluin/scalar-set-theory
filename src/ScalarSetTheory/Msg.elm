@@ -1,6 +1,8 @@
 module ScalarSetTheory.Msg exposing (..)
 
+import ScalarSetTheory.Sections exposing (..)
+
 
 type Msg
-    = UpdateSectionMin String String
-    | UpdateSectionMax String String
+    = UpdateSectionMin String Section
+    | UpdateSectionMax String Section

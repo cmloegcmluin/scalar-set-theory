@@ -4,6 +4,7 @@ import Html exposing (text)
 import List exposing (head, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Utilities exposing (parseInt)
 
@@ -12,38 +13,32 @@ tableBody : Model -> TableNode
 tableBody model =
     TableNode
         { cellItself = text (countMessage (getFirstSection model.activeSections) model)
-        , cellChildren = sectionNameToCellChildren (getFirstSection model.activeSections) model
+        , cellChildren = sectionToCellChildren (getFirstSection model.activeSections) model
         }
 
 
-countMessage : String -> Model -> String
-countMessage sectionName model =
-    case sectionName of
-        "ed" ->
+getFirstSection : List Section -> Section
+getFirstSection activeSections =
+    withDefault Ed (head activeSections)
+
+
+countMessage : Section -> Model -> String
+countMessage section model =
+    case section of
+        Ed ->
             "count (" ++ toString ((parseInt model.ed.max - parseInt model.ed.min) + 1) ++ ")"
 
-        "nChord" ->
-            "count ()"
-
-        _ ->
+        NChord ->
             "count ()"
 
 
-getFirstSection : List String -> String
-getFirstSection activeSections =
-    withDefault "" (head activeSections)
-
-
-sectionNameToCellChildren : String -> Model -> List TableNode
-sectionNameToCellChildren sectionName model =
-    case sectionName of
-        "ed" ->
+sectionToCellChildren : Section -> Model -> List TableNode
+sectionToCellChildren section model =
+    case section of
+        Ed ->
             map (\n -> edToTableNode n model) (range (parseInt model.ed.min) (parseInt model.ed.max))
 
-        "nChord" ->
-            []
-
-        _ ->
+        NChord ->
             []
 
 

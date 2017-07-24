@@ -2,6 +2,7 @@ module ScalarSetTheory.Model exposing (Model, model)
 
 import Html exposing (Html, text)
 import List exposing (..)
+import ScalarSetTheory.Sections exposing (..)
 
 
 type alias Model =
@@ -13,7 +14,7 @@ type alias Model =
         { min : String
         , max : String
         }
-    , activeSections : List String
+    , activeSections : List Section
     }
 
 
@@ -27,5 +28,5 @@ model =
         { min = "2"
         , max = "100"
         }
-    , activeSections = [ "ed", "nChord" ]
+    , activeSections = [ Ed, NChord ]
     }

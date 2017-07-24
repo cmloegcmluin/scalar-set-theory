@@ -2,6 +2,7 @@ module ScalarSetTheory.Update exposing (update)
 
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Sections exposing (..)
 
 
 update : Msg -> Model -> Model
@@ -9,7 +10,7 @@ update msg model =
     case msg of
         UpdateSectionMin newMin section ->
             case section of
-                "ed" ->
+                Ed ->
                     let
                         oldEd =
                             model.ed
@@ -19,7 +20,7 @@ update msg model =
                     in
                     { model | ed = newEd }
 
-                "nChord" ->
+                NChord ->
                     let
                         oldNChord =
                             model.nChord
@@ -29,12 +30,9 @@ update msg model =
                     in
                     { model | nChord = newNChord }
 
-                _ ->
-                    model
-
         UpdateSectionMax newMax section ->
             case section of
-                "ed" ->
+                Ed ->
                     let
                         oldEd =
                             model.ed
@@ -44,7 +42,7 @@ update msg model =
                     in
                     { model | ed = newEd }
 
-                "nChord" ->
+                NChord ->
                     let
                         oldNChord =
                             model.nChord
@@ -53,6 +51,3 @@ update msg model =
                             { oldNChord | max = newMax }
                     in
                     { model | nChord = newNChord }
-
-                _ ->
-                    model

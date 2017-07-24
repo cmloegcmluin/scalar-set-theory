@@ -6,6 +6,7 @@ import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 import Tuple exposing (first, second)
@@ -15,45 +16,42 @@ tableMaxRow : Model -> TableNode
 tableMaxRow model =
     tableRow
         ([ text "max" ]
-            ++ map sectionNameToMaxDropdown (nameAndMaxPerSection model)
+            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model)
         )
 
 
-sectionNameToMaxDropdown : ( String, String ) -> Html Msg
-sectionNameToMaxDropdown nameAndMax =
-    maxDropdown (first nameAndMax) (second nameAndMax)
+sectionToMaxDropdown : ( Section, String ) -> Html Msg
+sectionToMaxDropdown sectionAndMax =
+    maxDropdown (first sectionAndMax) (second sectionAndMax)
 
 
-maxDropdown : String -> String -> Html Msg
-maxDropdown sectionName selectedOption =
+maxDropdown : Section -> String -> Html Msg
+maxDropdown section selectedOption =
     select
-        (maxAttributes sectionName)
-        (dropdownOptions sectionName selectedOption)
+        (maxAttributes section)
+        (dropdownOptions section selectedOption)
 
 
-maxAttributes : String -> List (Attribute Msg)
-maxAttributes sectionName =
-    [ onInput (\newMax -> maxOnInputHandler newMax sectionName) ]
+maxAttributes : Section -> List (Attribute Msg)
+maxAttributes section =
+    [ onInput (\newMax -> maxOnInputHandler newMax section) ]
 
 
-maxOnInputHandler : String -> String -> Msg
-maxOnInputHandler newMax sectionName =
-    UpdateSectionMax newMax sectionName
+maxOnInputHandler : String -> Section -> Msg
+maxOnInputHandler newMax section =
+    UpdateSectionMax newMax section
 
 
-nameAndMaxPerSection : Model -> List ( String, String )
-nameAndMaxPerSection model =
-    map (\name -> nameAndMax name model) model.activeSections
+sectionAndMaxPerSection : Model -> List ( Section, String )
+sectionAndMaxPerSection model =
+    map (\section -> sectionAndMax section model) model.activeSections
 
 
-nameAndMax : String -> Model -> ( String, String )
-nameAndMax name model =
-    case name of
-        "ed" ->
-            ( name, model.ed.max )
+sectionAndMax : Section -> Model -> ( Section, String )
+sectionAndMax section model =
+    case section of
+        Ed ->
+            ( section, model.ed.max )
 
-        "nChord" ->
-            ( name, model.nChord.max )
-
-        _ ->
-            ( name, "" )
+        NChord ->
+            ( section, model.nChord.max )

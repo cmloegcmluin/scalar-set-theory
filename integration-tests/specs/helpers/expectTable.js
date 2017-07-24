@@ -2,14 +2,14 @@ const assert = require('assert')
 const classSelector = require('./classSelector')
 
 const expectTable = function (expectationsTable) {
-	const sstTable = browser.element(classSelector('sstTable'))
+	const explorationTable = browser.element(classSelector('explorationTable'))
 
 	expectationsTable.forEach(function (expectationsRow, expectationsRowIndex) {
 		expectationsRow.forEach(function (expectationsCell, expectationsColIndex) {
 			expectationsCell = expectationsCell.trim()
 			if (expectationsCell === '^^') return
 
-			const actualCell = sstTable.getText(
+			const actualCell = explorationTable.getText(
 				tableNodePathForExpectationsTableCoordinate(
 					expectationsRowIndex, expectationsColIndex, expectationsTable
 				)

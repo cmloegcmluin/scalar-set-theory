@@ -4,7 +4,7 @@ import Html exposing (Html, div, h1, text)
 import Html.Attributes exposing (class)
 import List exposing (map)
 import ScalarSetTheory.Components.TableBody exposing (tableBodyRow)
-import ScalarSetTheory.Components.TableCell exposing (sstCell)
+import ScalarSetTheory.Components.TableCell exposing (tableCell)
 import ScalarSetTheory.Components.TableHeader exposing (tableHeaderRow)
 import ScalarSetTheory.Components.TableMaxRow exposing (tableMaxRow)
 import ScalarSetTheory.Components.TableMinRow exposing (tableMinRow)
@@ -21,8 +21,8 @@ view model =
         [ appStyle ]
         [ h1 [] [ text "Scalar Set Theory" ]
         , div
-            [ tableStyle, class "sstTable" ]
-            (map sstCell
+            [ tableStyle, class "explorationTable" ]
+            (map tableCell
                 [ tableHeaderRow model
                 , tableMinRow model
                 , tableMaxRow model

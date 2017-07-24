@@ -1,20 +1,20 @@
-module ScalarSetTheory.Components.TableCell exposing (sstCell)
+module ScalarSetTheory.Components.TableCell exposing (tableCell)
 
 import Html exposing (Html, div)
 import List exposing (map)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Styles.TableStyles exposing (sstCellAndChildren, sstCellChildrenContainer, sstCellItself)
+import ScalarSetTheory.Styles.TableStyles exposing (tableCellAndChildren, tableCellChildrenContainer, tableCellItself)
 import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 
 
-sstCell : TableNode -> Html Msg
-sstCell (TableNode tableNode) =
+tableCell : TableNode -> Html Msg
+tableCell (TableNode tableNode) =
     div
-        [ sstCellAndChildren ]
+        [ tableCellAndChildren ]
         [ div
-            [ sstCellItself ]
+            [ tableCellItself ]
             [ tableNode.cellItself ]
         , div
-            [ sstCellChildrenContainer ]
-            (map sstCell tableNode.cellChildren)
+            [ tableCellChildrenContainer ]
+            (map tableCell tableNode.cellChildren)
         ]

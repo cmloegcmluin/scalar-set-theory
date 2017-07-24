@@ -16,27 +16,27 @@ describe('landing page', function () {
 	it('shows the title and a table with defaults', function () {
 		assert.equal(browser.getText('h1'), 'Scalar Set Theory')
 
-		let sstTableSelect = classSelector('sstTable')
-		let sstTableResult = browser.elements(sstTableSelect)
-		assert.equal(sstTableResult.value.length, 1)
-		let sstTable = sstTableResult.value[0]
+		let explorationTableSelect = classSelector('explorationTable')
+		let explorationTableResult = browser.elements(explorationTableSelect)
+		assert.equal(explorationTableResult.value.length, 1)
+		let explorationTable = explorationTableResult.value[0]
 
-		assert.equal(sstTable.getText('//div[1]/div[1]'), 'section')
-		assert.equal(sstTable.getText('//div[1]/div[2]/div[1]/div[1]'), 'ed')
-		assert.equal(sstTable.getText('//div[1]/div[2]/div[1]/div[2]/div[1]/div[1]'), 'nChord')
+		assert.equal(explorationTable.getText('//div[1]/div[1]'), 'section')
+		assert.equal(explorationTable.getText('//div[1]/div[2]/div[1]/div[1]'), 'ed')
+		assert.equal(explorationTable.getText('//div[1]/div[2]/div[1]/div[2]/div[1]/div[1]'), 'nChord')
 
-		assert.equal(sstTable.getText('//div[2]/div[1]'), 'min')
-		assert.equal(sstTable.getValue(edMinSelect), '3')
-		assert.equal(sstTable.getValue(nChordMinSelect), '2')
+		assert.equal(explorationTable.getText('//div[2]/div[1]'), 'min')
+		assert.equal(explorationTable.getValue(edMinSelect), '3')
+		assert.equal(explorationTable.getValue(nChordMinSelect), '2')
 
-		assert.equal(sstTable.getText('//div[3]/div[1]'), 'max')
-		assert.equal(sstTable.getValue(edMaxSelect), '3')
-		assert.equal(sstTable.getValue(nChordMaxSelect), '100')
+		assert.equal(explorationTable.getText('//div[3]/div[1]'), 'max')
+		assert.equal(explorationTable.getValue(edMaxSelect), '3')
+		assert.equal(explorationTable.getValue(nChordMaxSelect), '100')
 
-		assert.equal(sstTable.getText('//div[4]/div[1]'), 'count (1)')
-		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[1]'), '3')
-		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[2]/div[1]/div[1]'), '2')
-		assert.equal(sstTable.getText('//div[4]/div[2]/div[1]/div[2]/div[2]/div[1]'), '3')
+		assert.equal(explorationTable.getText('//div[4]/div[1]'), 'count (1)')
+		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[1]'), '3')
+		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[2]/div[1]/div[1]'), '2')
+		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[2]/div[2]/div[1]'), '3')
 	})
 })
 

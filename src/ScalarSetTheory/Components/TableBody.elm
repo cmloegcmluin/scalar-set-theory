@@ -1,4 +1,4 @@
-module ScalarSetTheory.Components.TableBody exposing (tableBody)
+module ScalarSetTheory.Components.TableBody exposing (tableBodyRow)
 
 import Html exposing (text)
 import List exposing (head, map, range)
@@ -8,8 +8,8 @@ import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTabl
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-tableBody : Model -> TableNode
-tableBody model =
+tableBodyRow : Model -> TableNode
+tableBodyRow model =
     TableNode
         { cellItself = text (countMessage (getFirstSection model.activeSections) model)
         , cellChildren = sectionNameToCellChildren (getFirstSection model.activeSections) model

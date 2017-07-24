@@ -1,6 +1,5 @@
 module ScalarSetTheory.Update exposing (update)
 
-import ScalarSetTheory.Components.TableBody exposing (tableBody)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 

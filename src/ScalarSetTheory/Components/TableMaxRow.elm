@@ -4,23 +4,21 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Components.TableCell exposing (sstCell)
 import ScalarSetTheory.Components.TableRow exposing (htmlMsgListToTableRow)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 import Tuple exposing (first, second)
 
 
-tableMaxRow : Model -> Html Msg
+tableMaxRow : Model -> TableNode
 tableMaxRow model =
-    sstCell
-        (htmlMsgListToTableRow
-            ([ div
-                []
-                [ text "max" ]
-             ]
-                ++ map sectionNameToMaxDropdown (nameAndMaxPerSection model)
-            )
+    htmlMsgListToTableRow
+        ([ div
+            []
+            [ text "max" ]
+         ]
+            ++ map sectionNameToMaxDropdown (nameAndMaxPerSection model)
         )
 
 

@@ -1,9 +1,13 @@
 module ScalarSetTheory.Utilities exposing (inclusiveCount, parseInt)
 
+import Maybe exposing (withDefault)
+import Result exposing (toMaybe)
+import String exposing (toInt)
+
 
 parseInt : String -> Int
 parseInt string =
-    String.toInt string |> Result.toMaybe |> Maybe.withDefault 0
+    toInt string |> toMaybe |> withDefault 0
 
 
 inclusiveCount : Int -> Int -> Int

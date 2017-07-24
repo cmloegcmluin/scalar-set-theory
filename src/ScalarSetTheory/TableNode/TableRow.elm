@@ -1,10 +1,10 @@
-module ScalarSetTheory.Components.TableRow exposing (tableRow)
+module ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 
 import Html exposing (Html, div)
 import List exposing (head, length, tail)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
 
 tableRow : List (Html Msg) -> TableNode

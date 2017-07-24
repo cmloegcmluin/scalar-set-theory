@@ -1,13 +1,13 @@
-module ScalarSetTheory.Components.TableMinRow exposing (minDropdown, tableMinRow)
+module ScalarSetTheory.TableNode.TableMinRow exposing (minDropdown, tableMinRow)
 
 import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Components.TableRow exposing (tableRow)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 import Tuple exposing (first, second)
 
 

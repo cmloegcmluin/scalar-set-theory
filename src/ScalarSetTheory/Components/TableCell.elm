@@ -4,7 +4,7 @@ import Html exposing (Html, div)
 import List exposing (map)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Styles.TableStyles exposing (tableCellAndChildren, tableCellChildrenContainer, tableCellItself)
-import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
 
 tableCell : TableNode -> Html Msg

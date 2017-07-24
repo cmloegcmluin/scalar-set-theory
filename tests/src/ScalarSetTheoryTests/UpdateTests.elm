@@ -3,7 +3,7 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 import Expect exposing (equal)
 import Html exposing (text)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNode, emptyTableNodeList)
+import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
 

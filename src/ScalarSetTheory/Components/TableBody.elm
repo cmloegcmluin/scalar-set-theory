@@ -4,7 +4,7 @@ import Html exposing (text)
 import List exposing (head, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode), emptyTableNodeList)
+import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
@@ -41,10 +41,10 @@ sectionNameToCellChildren sectionName model =
             map (\n -> edToTableNode n model) (range (parseInt model.ed.min) (parseInt model.ed.max))
 
         "nChord" ->
-            emptyTableNodeList
+            []
 
         _ ->
-            emptyTableNodeList
+            []
 
 
 edToTableNode : Int -> Model -> TableNode
@@ -59,5 +59,5 @@ nChordToTableNode : Int -> Model -> TableNode
 nChordToTableNode nChord model =
     TableNode
         { cellItself = text (toString nChord)
-        , cellChildren = emptyTableNodeList
+        , cellChildren = []
         }

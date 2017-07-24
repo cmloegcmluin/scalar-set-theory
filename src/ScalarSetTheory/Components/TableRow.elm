@@ -9,14 +9,24 @@ import ScalarSetTheory.Types.TableNode exposing (TableNode(TableNode))
 
 tableRow : List (Html Msg) -> TableNode
 tableRow cells =
-    case length (cellsTail cells) of
+    let
+        headCell =
+            cellsHead cells
+
+        tailCells =
+            cellsTail cells
+    in
+    case length tailCells of
         0 ->
-            defTableNode cells
+            TableNode
+                { cellItself = headCell
+                , cellChildren = []
+                }
 
         _ ->
             TableNode
-                { cellItself = cellsHead cells
-                , cellChildren = [ tableRow (cellsTail cells) ]
+                { cellItself = headCell
+                , cellChildren = [ tableRow tailCells ]
                 }
 
 
@@ -28,14 +38,6 @@ cellsHead cells =
 cellsTail : List (Html Msg) -> List (Html Msg)
 cellsTail cells =
     withDefault [ emptyDiv ] (tail cells)
-
-
-defTableNode : List (Html Msg) -> TableNode
-defTableNode cells =
-    TableNode
-        { cellItself = cellsHead cells
-        , cellChildren = []
-        }
 
 
 emptyDiv : Html Msg

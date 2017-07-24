@@ -1,19 +1,28 @@
 module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 
 import Html exposing (text)
-import List exposing (head, map, range)
+import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
-import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 tableBody : Model -> TableNode
 tableBody model =
+    let
+        firstSection =
+            getFirstSection model.activeSections
+
+        cellChildren =
+            sectionToCellChildren firstSection model
+
+        childCount =
+            length cellChildren
+    in
     TableNode
-        { cellItself = text (countMessage (getFirstSection model.activeSections) model)
-        , cellChildren = sectionToCellChildren (getFirstSection model.activeSections) model
+        { cellItself = text (toString childCount)
+        , cellChildren = cellChildren
         }
 
 
@@ -22,21 +31,11 @@ getFirstSection activeSections =
     withDefault Ed (head activeSections)
 
 
-countMessage : Section -> Model -> String
-countMessage section model =
-    case section of
-        Ed ->
-            "count (" ++ toString ((parseInt model.ed.max - parseInt model.ed.min) + 1) ++ ")"
-
-        NChord ->
-            "count ()"
-
-
 sectionToCellChildren : Section -> Model -> List TableNode
 sectionToCellChildren section model =
     case section of
         Ed ->
-            map (\n -> edToTableNode n model) (range (parseInt model.ed.min) (parseInt model.ed.max))
+            map (\n -> edToTableNode n model) (range model.ed.min model.ed.max)
 
         NChord ->
             []
@@ -46,7 +45,7 @@ edToTableNode : Int -> Model -> TableNode
 edToTableNode ed model =
     TableNode
         { cellItself = text (toString ed)
-        , cellChildren = map (\n -> nChordToTableNode n model) (range (parseInt model.nChord.min) (min ed (parseInt model.nChord.max)))
+        , cellChildren = map (\n -> nChordToTableNode n model) (range model.nChord.min (min ed model.nChord.max))
         }
 
 

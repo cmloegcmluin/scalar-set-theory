@@ -33,7 +33,7 @@ describe('landing page', function () {
 		assert.equal(explorationTable.getValue(edMaxSelect), '3')
 		assert.equal(explorationTable.getValue(nChordMaxSelect), '100')
 
-		assert.equal(explorationTable.getText('//div[4]/div[1]'), 'count (1)')
+		assert.equal(explorationTable.getText('//div[4]/div[1]'), '1')
 		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[1]'), '3')
 		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[2]/div[1]/div[1]'), '2')
 		assert.equal(explorationTable.getText('//div[4]/div[2]/div[1]/div[2]/div[2]/div[1]'), '3')
@@ -46,10 +46,10 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getValue(edMaxSelect), '3')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (1)', '3 ' ]
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '1      ', '3 ' ]
 		])
 
 		selectOption(edMaxSelect, '7')
@@ -57,24 +57,24 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getValue(edMaxSelect), '7')
 		
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '4 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '5 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '6 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '7 ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '4 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '5 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '6 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '7 ' ],
 		])
 		
 		selectOption(edMinSelect, '5')
@@ -82,19 +82,19 @@ describe('range of equal divisions', function () {
 		assert.equal(browser.getValue(edMaxSelect), '7')
 		
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (3)', '5 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '6 ' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '^^' ],
-			[ '^^       ', '7 ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '3      ', '5 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '6 ' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '^^' ],
+			[ '^^     ', '7 ' ],
 		])
 	})
 })
@@ -108,11 +108,11 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '100')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (1)', '3 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '1      ', '3 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
 		])
 
 		selectOption(edMaxSelect, '7')
@@ -124,29 +124,29 @@ describe('range of nChords', function () {
 
 		assert.equal(true, true)
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '4 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '5 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '6 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '^^', '6     ' ],
-			[ '^^       ', '7 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '^^', '6     ' ],
-			[ '^^       ', '^^', '7     ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '4 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '5 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '6 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '^^', '6     ' ],
+			[ '^^     ', '7 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '^^', '6     ' ],
+			[ '^^     ', '^^', '7     ' ],
 		])
 	})
 
@@ -159,17 +159,17 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '100')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ' ],
-			[ '^^       ', '4 ' ],
-			[ '^^       ', '5 ', '5     ' ],
-			[ '^^       ', '6 ', '5     ' ],
-			[ '^^       ', '^^', '6     ' ],
-			[ '^^       ', '7 ', '5     ' ],
-			[ '^^       ', '^^', '6     ' ],
-			[ '^^       ', '^^', '7     ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ' ],
+			[ '^^     ', '4 ' ],
+			[ '^^     ', '5 ', '5     ' ],
+			[ '^^     ', '6 ', '5     ' ],
+			[ '^^     ', '^^', '6     ' ],
+			[ '^^     ', '7 ', '5     ' ],
+			[ '^^     ', '^^', '6     ' ],
+			[ '^^     ', '^^', '7     ' ],
 		])
 	})
 
@@ -182,26 +182,26 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '5')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '4 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '5 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '6 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '7 ', '2     ' ],
-			[ '^^       ', '^^', '3     ' ],
-			[ '^^       ', '^^', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '4 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '5 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '6 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '7 ', '2     ' ],
+			[ '^^     ', '^^', '3     ' ],
+			[ '^^     ', '^^', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
 		])
 	})
 
@@ -215,17 +215,17 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '5')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ' ],
-			[ '^^       ', '4 ', '4     ' ],
-			[ '^^       ', '5 ', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '6 ', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
-			[ '^^       ', '7 ', '4     ' ],
-			[ '^^       ', '^^', '5     ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ' ],
+			[ '^^     ', '4 ', '4     ' ],
+			[ '^^     ', '5 ', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '6 ', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
+			[ '^^     ', '7 ', '4     ' ],
+			[ '^^     ', '^^', '5     ' ],
 		])
 	})
 
@@ -238,14 +238,14 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '2')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ' ],
-			[ '^^       ', '4 ' ],
-			[ '^^       ', '5 ' ],
-			[ '^^       ', '6 ' ],
-			[ '^^       ', '7 ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ' ],
+			[ '^^     ', '4 ' ],
+			[ '^^     ', '5 ' ],
+			[ '^^     ', '6 ' ],
+			[ '^^     ', '7 ' ],
 		])
 	})
 
@@ -258,14 +258,14 @@ describe('range of nChords', function () {
 		assert.equal(browser.getValue(nChordMaxSelect), '100')
 
 		expectTable([
-			[ 'section  ', 'ed', 'nChord' ],
-			[ 'min      ', ],
-			[ 'max      ', ],
-			[ 'count (5)', '3 ' ],
-			[ '^^       ', '4 ' ],
-			[ '^^       ', '5 ' ],
-			[ '^^       ', '6 ' ],
-			[ '^^       ', '7 ' ],
+			[ 'section', 'ed', 'nChord' ],
+			[ 'min    ', ],
+			[ 'max    ', ],
+			[ '5      ', '3 ' ],
+			[ '^^     ', '4 ' ],
+			[ '^^     ', '5 ' ],
+			[ '^^     ', '6 ' ],
+			[ '^^     ', '7 ' ],
 		])
 	})
 })

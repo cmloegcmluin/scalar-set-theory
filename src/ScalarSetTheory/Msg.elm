@@ -4,5 +4,5 @@ import ScalarSetTheory.Sections exposing (..)
 
 
 type Msg
-    = UpdateSectionMin String Section
-    | UpdateSectionMax String Section
+    = UpdateSectionMin Int Section
+    | UpdateSectionMax Int Section

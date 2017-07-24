@@ -16,16 +16,16 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { ed = { min = "5", max = "7" }
-                        , nChord = { min = "4", max = "6" }
+                        { ed = { min = 5, max = 7 }
+                        , nChord = { min = 4, max = 6 }
                         , activeSections = [ Ed, NChord ]
                         }
 
                     actual =
                         update
-                            (UpdateSectionMin "5" Ed)
-                            { ed = { min = "7", max = "7" }
-                            , nChord = { min = "4", max = "6" }
+                            (UpdateSectionMin 5 Ed)
+                            { ed = { min = 7, max = 7 }
+                            , nChord = { min = 4, max = 6 }
                             , activeSections = [ Ed, NChord ]
                             }
                 in
@@ -34,16 +34,16 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { ed = { min = "5", max = "7" }
-                        , nChord = { min = "4", max = "8" }
+                        { ed = { min = 5, max = 7 }
+                        , nChord = { min = 4, max = 8 }
                         , activeSections = [ Ed, NChord ]
                         }
 
                     actual =
                         update
-                            (UpdateSectionMax "8" NChord)
-                            { ed = { min = "5", max = "7" }
-                            , nChord = { min = "4", max = "6" }
+                            (UpdateSectionMax 8 NChord)
+                            { ed = { min = 5, max = 7 }
+                            , nChord = { min = 4, max = 6 }
                             , activeSections = [ Ed, NChord ]
                             }
                 in

@@ -7,12 +7,12 @@ import ScalarSetTheory.Sections exposing (..)
 
 type alias Model =
     { ed :
-        { min : String
-        , max : String
+        { min : Int
+        , max : Int
         }
     , nChord :
-        { min : String
-        , max : String
+        { min : Int
+        , max : Int
         }
     , activeSections : List Section
     }
@@ -21,12 +21,12 @@ type alias Model =
 model : Model
 model =
     { ed =
-        { min = "3"
-        , max = "3"
+        { min = 3
+        , max = 3
         }
     , nChord =
-        { min = "2"
-        , max = "100"
+        { min = 2
+        , max = 100
         }
     , activeSections = [ Ed, NChord ]
     }

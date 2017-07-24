@@ -9,6 +9,7 @@ import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
+import ScalarSetTheory.Utilities exposing (parseInt)
 import Tuple exposing (first, second)
 
 
@@ -20,16 +21,16 @@ tableMinRow model =
         )
 
 
-sectionToMinDropdown : ( Section, String ) -> Html Msg
+sectionToMinDropdown : ( Section, Int ) -> Html Msg
 sectionToMinDropdown sectionAndMin =
     minDropdown (first sectionAndMin) (second sectionAndMin)
 
 
-minDropdown : Section -> String -> Html Msg
+minDropdown : Section -> Int -> Html Msg
 minDropdown section selectedOption =
     select
         (minAttributes section)
-        (dropdownOptions section selectedOption)
+        (dropdownOptions section (toString selectedOption))
 
 
 minAttributes : Section -> List (Attribute Msg)
@@ -39,15 +40,15 @@ minAttributes section =
 
 minOnInputHandler : String -> Section -> Msg
 minOnInputHandler newMin section =
-    UpdateSectionMin newMin section
+    UpdateSectionMin (parseInt newMin) section
 
 
-sectionAndMinPerSection : Model -> List ( Section, String )
+sectionAndMinPerSection : Model -> List ( Section, Int )
 sectionAndMinPerSection model =
     map (\section -> sectionAndMin section model) model.activeSections
 
 
-sectionAndMin : Section -> Model -> ( Section, String )
+sectionAndMin : Section -> Model -> ( Section, Int )
 sectionAndMin section model =
     case section of
         Ed ->

@@ -9,6 +9,7 @@ import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
+import ScalarSetTheory.Utilities exposing (parseInt)
 import Tuple exposing (first, second)
 
 
@@ -20,16 +21,16 @@ tableMaxRow model =
         )
 
 
-sectionToMaxDropdown : ( Section, String ) -> Html Msg
+sectionToMaxDropdown : ( Section, Int ) -> Html Msg
 sectionToMaxDropdown sectionAndMax =
     maxDropdown (first sectionAndMax) (second sectionAndMax)
 
 
-maxDropdown : Section -> String -> Html Msg
+maxDropdown : Section -> Int -> Html Msg
 maxDropdown section selectedOption =
     select
         (maxAttributes section)
-        (dropdownOptions section selectedOption)
+        (dropdownOptions section (toString selectedOption))
 
 
 maxAttributes : Section -> List (Attribute Msg)
@@ -39,15 +40,15 @@ maxAttributes section =
 
 maxOnInputHandler : String -> Section -> Msg
 maxOnInputHandler newMax section =
-    UpdateSectionMax newMax section
+    UpdateSectionMax (parseInt newMax) section
 
 
-sectionAndMaxPerSection : Model -> List ( Section, String )
+sectionAndMaxPerSection : Model -> List ( Section, Int )
 sectionAndMaxPerSection model =
     map (\section -> sectionAndMax section model) model.activeSections
 
 
-sectionAndMax : Section -> Model -> ( Section, String )
+sectionAndMax : Section -> Model -> ( Section, Int )
 sectionAndMax section model =
     case section of
         Ed ->

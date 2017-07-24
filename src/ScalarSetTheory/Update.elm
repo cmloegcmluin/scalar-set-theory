@@ -1,53 +1,44 @@
 module ScalarSetTheory.Update exposing (update)
 
+import List exposing (map)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections exposing (..)
+
+
+maybeUpdateSectionDataMin : SectionData -> Section -> Int -> SectionData
+maybeUpdateSectionDataMin oldSectionData sectionToUpdate newMin =
+    case oldSectionData.section == sectionToUpdate of
+        True ->
+            { oldSectionData | min = newMin }
+
+        False ->
+            oldSectionData
+
+
+maybeUpdateSectionDataMax : SectionData -> Section -> Int -> SectionData
+maybeUpdateSectionDataMax oldSectionData sectionToUpdate newMax =
+    case oldSectionData.section == sectionToUpdate of
+        True ->
+            { oldSectionData | max = newMax }
+
+        False ->
+            oldSectionData
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         UpdateSectionMin newMin section ->
-            case section of
-                Ed ->
-                    let
-                        oldEd =
-                            model.ed
-
-                        newEd =
-                            { oldEd | min = newMin }
-                    in
-                    { model | ed = newEd }
-
-                NChord ->
-                    let
-                        oldNChord =
-                            model.nChord
-
-                        newNChord =
-                            { oldNChord | min = newMin }
-                    in
-                    { model | nChord = newNChord }
+            let
+                updatedSectionData =
+                    map (\oldSectionData -> maybeUpdateSectionDataMin oldSectionData section newMin) model.sectionData
+            in
+            { model | sectionData = updatedSectionData }
 
         UpdateSectionMax newMax section ->
-            case section of
-                Ed ->
-                    let
-                        oldEd =
-                            model.ed
-
-                        newEd =
-                            { oldEd | max = newMax }
-                    in
-                    { model | ed = newEd }
-
-                NChord ->
-                    let
-                        oldNChord =
-                            model.nChord
-
-                        newNChord =
-                            { oldNChord | max = newMax }
-                    in
-                    { model | nChord = newNChord }
+            let
+                updatedSectionData =
+                    map (\oldSectionData -> maybeUpdateSectionDataMax oldSectionData section newMax) model.sectionData
+            in
+            { model | sectionData = updatedSectionData }

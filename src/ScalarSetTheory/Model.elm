@@ -6,27 +6,13 @@ import ScalarSetTheory.Sections exposing (..)
 
 
 type alias Model =
-    { ed :
-        { min : Int
-        , max : Int
-        }
-    , nChord :
-        { min : Int
-        , max : Int
-        }
-    , activeSections : List Section
-    }
+    { sectionData : List SectionData }
 
 
 model : Model
 model =
-    { ed =
-        { min = 3
-        , max = 3
-        }
-    , nChord =
-        { min = 2
-        , max = 100
-        }
-    , activeSections = [ Ed, NChord ]
+    { sectionData =
+        [ SectionData Ed 3 3
+        , SectionData NChord 2 100
+        ]
     }

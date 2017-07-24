@@ -4,6 +4,7 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
+import ScalarSetTheory.GetSectionData exposing (getSectionDataBySection)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections exposing (..)
@@ -45,14 +46,13 @@ maxOnInputHandler newMax section =
 
 sectionAndMaxPerSection : Model -> List ( Section, Int )
 sectionAndMaxPerSection model =
-    map (\section -> sectionAndMax section model) model.activeSections
+    map (\sectionData -> sectionAndMax sectionData.section model) model.sectionData
 
 
 sectionAndMax : Section -> Model -> ( Section, Int )
 sectionAndMax section model =
-    case section of
-        Ed ->
-            ( section, model.ed.max )
-
-        NChord ->
-            ( section, model.nChord.max )
+    let
+        sectionData =
+            getSectionDataBySection section model
+    in
+    ( section, sectionData.max )

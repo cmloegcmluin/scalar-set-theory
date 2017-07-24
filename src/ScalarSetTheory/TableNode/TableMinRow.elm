@@ -4,6 +4,7 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
+import ScalarSetTheory.GetSectionData exposing (getSectionDataBySection)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections exposing (..)
@@ -45,14 +46,13 @@ minOnInputHandler newMin section =
 
 sectionAndMinPerSection : Model -> List ( Section, Int )
 sectionAndMinPerSection model =
-    map (\section -> sectionAndMin section model) model.activeSections
+    map (\sectionData -> sectionAndMin sectionData.section model) model.sectionData
 
 
 sectionAndMin : Section -> Model -> ( Section, Int )
 sectionAndMin section model =
-    case section of
-        Ed ->
-            ( section, model.ed.min )
-
-        NChord ->
-            ( section, model.nChord.min )
+    let
+        sectionData =
+            getSectionDataBySection section model
+    in
+    ( section, sectionData.min )

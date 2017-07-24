@@ -14,3 +14,15 @@ sectionNames section =
 
         NChord ->
             "nChord"
+
+
+sectionNamesFromData : SectionData -> String
+sectionNamesFromData sectionData =
+    sectionNames sectionData.section
+
+
+type alias SectionData =
+    { section : Section
+    , min : Int
+    , max : Int
+    }

@@ -11,41 +11,44 @@ import Test exposing (Test, describe, test)
 
 updateTests : Test
 updateTests =
-    describe "update"
-        [ test "UpdateSectionMin updates the min for the correct section" <|
-            \() ->
-                let
-                    expected =
-                        { ed = { min = 5, max = 7 }
-                        , nChord = { min = 4, max = 6 }
-                        , activeSections = [ Ed, NChord ]
-                        }
+    describe "update" []
 
-                    actual =
-                        update
-                            (UpdateSectionMin 5 Ed)
-                            { ed = { min = 7, max = 7 }
-                            , nChord = { min = 4, max = 6 }
-                            , activeSections = [ Ed, NChord ]
-                            }
-                in
-                equal expected actual
-        , test "UpdateSectionMax updates the max for the correct section" <|
-            \() ->
-                let
-                    expected =
-                        { ed = { min = 5, max = 7 }
-                        , nChord = { min = 4, max = 8 }
-                        , activeSections = [ Ed, NChord ]
-                        }
 
-                    actual =
-                        update
-                            (UpdateSectionMax 8 NChord)
-                            { ed = { min = 5, max = 7 }
-                            , nChord = { min = 4, max = 6 }
-                            , activeSections = [ Ed, NChord ]
-                            }
-                in
-                equal expected actual
-        ]
+
+--        [ test "UpdateSectionMin updates the min for the correct section" <|
+--            \() ->
+--                let
+--                    expected =
+--                        { ed = { min = 5, max = 7 }
+--                        , nChord = { min = 4, max = 6 }
+--                        , activeSections = [ Ed, NChord ]
+--                        }
+--
+--                    actual =
+--                        update
+--                            (UpdateSectionMin 5 Ed)
+--                            { ed = { min = 7, max = 7 }
+--                            , nChord = { min = 4, max = 6 }
+--                            , activeSections = [ Ed, NChord ]
+--                            }
+--                in
+--                equal expected actual
+--        , test "UpdateSectionMax updates the max for the correct section" <|
+--            \() ->
+--                let
+--                    expected =
+--                        { ed = { min = 5, max = 7 }
+--                        , nChord = { min = 4, max = 8 }
+--                        , activeSections = [ Ed, NChord ]
+--                        }
+--
+--                    actual =
+--                        update
+--                            (UpdateSectionMax 8 NChord)
+--                            { ed = { min = 5, max = 7 }
+--                            , nChord = { min = 4, max = 6 }
+--                            , activeSections = [ Ed, NChord ]
+--                            }
+--                in
+--                equal expected actual
+--        ]

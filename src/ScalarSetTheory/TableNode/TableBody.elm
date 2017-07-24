@@ -3,6 +3,7 @@ module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
+import ScalarSetTheory.GetSectionData exposing (getSectionDataBySection)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
@@ -12,7 +13,7 @@ tableBody : Model -> TableNode
 tableBody model =
     let
         firstSection =
-            getFirstSection model.activeSections
+            getFirstSection model.sectionData
 
         cellChildren =
             sectionToCellChildren firstSection model
@@ -26,16 +27,20 @@ tableBody model =
         }
 
 
-getFirstSection : List Section -> Section
-getFirstSection activeSections =
-    withDefault Ed (head activeSections)
+getFirstSection : List SectionData -> Section
+getFirstSection sectionData =
+    .section (withDefault (SectionData Ed 0 0) (head sectionData))
 
 
 sectionToCellChildren : Section -> Model -> List TableNode
 sectionToCellChildren section model =
+    let
+        edSectionData =
+            getSectionDataBySection Ed model
+    in
     case section of
         Ed ->
-            map (\n -> edToTableNode n model) (range model.ed.min model.ed.max)
+            map (\n -> edToTableNode n model) (range edSectionData.min edSectionData.max)
 
         NChord ->
             []
@@ -43,9 +48,13 @@ sectionToCellChildren section model =
 
 edToTableNode : Int -> Model -> TableNode
 edToTableNode ed model =
+    let
+        nChordSectionData =
+            getSectionDataBySection NChord model
+    in
     TableNode
         { cellItself = text (toString ed)
-        , cellChildren = map (\n -> nChordToTableNode n model) (range model.nChord.min (min ed model.nChord.max))
+        , cellChildren = map (\n -> nChordToTableNode n model) (range nChordSectionData.min (min ed nChordSectionData.max))
         }
 
 

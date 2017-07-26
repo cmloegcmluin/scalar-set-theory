@@ -3,12 +3,13 @@ module ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinSect
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections.Section exposing (..)
+import ScalarSetTheory.Sections.SectionChildrenValues exposing (SectionChildrenValues)
 import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
 import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, findSectionValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-equalDivisionsWithinSectionValuePath : SectionValuePath -> SectionSettings -> List String
+equalDivisionsWithinSectionValuePath : SectionChildrenValues
 equalDivisionsWithinSectionValuePath sectionValuePath sectionSettings =
     let
         edSetting =

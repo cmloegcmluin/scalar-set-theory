@@ -3,12 +3,13 @@ module ScalarSetTheory.Sections.NChord exposing (nChordsWithinSectionValuePath)
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections.Section exposing (..)
+import ScalarSetTheory.Sections.SectionChildrenValues exposing (SectionChildrenValues)
 import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
 import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, findSectionValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-nChordsWithinSectionValuePath : SectionValuePath -> SectionSettings -> List String
+nChordsWithinSectionValuePath : SectionChildrenValues
 nChordsWithinSectionValuePath sectionValuePath sectionSettings =
     let
         nChordSetting =

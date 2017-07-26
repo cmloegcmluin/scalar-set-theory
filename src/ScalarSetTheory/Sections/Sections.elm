@@ -4,8 +4,7 @@ import List exposing (range)
 import ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinSectionValuePath)
 import ScalarSetTheory.Sections.NChord exposing (nChordsWithinSectionValuePath)
 import ScalarSetTheory.Sections.Section exposing (..)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings)
-import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath)
+import ScalarSetTheory.Sections.SectionChildrenValues exposing (SectionChildrenValues)
 
 
 sectionNames : Section -> String
@@ -28,7 +27,7 @@ sectionRanges section =
             range 2 100
 
 
-sectionChildrenValues : Section -> SectionValuePath -> SectionSettings -> List String
+sectionChildrenValues : Section -> SectionChildrenValues
 sectionChildrenValues section =
     case section of
         EqualDivision ->

@@ -16,7 +16,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { sectionsAndTheirCurrentSettings =
+                        { sectionSettings =
                             [ { section = EqualDivision
                               , min = 5
                               , max = 7
@@ -31,7 +31,7 @@ updateTests =
                     actual =
                         update
                             (UpdateSectionMin 5 EqualDivision)
-                            { sectionsAndTheirCurrentSettings =
+                            { sectionSettings =
                                 [ { section = EqualDivision
                                   , min = 7
                                   , max = 7
@@ -48,7 +48,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { sectionsAndTheirCurrentSettings =
+                        { sectionSettings =
                             [ { section = EqualDivision
                               , min = 5
                               , max = 7
@@ -63,7 +63,7 @@ updateTests =
                     actual =
                         update
                             (UpdateSectionMax 8 NChord)
-                            { sectionsAndTheirCurrentSettings =
+                            { sectionSettings =
                                 [ { section = EqualDivision
                                   , min = 5
                                   , max = 7

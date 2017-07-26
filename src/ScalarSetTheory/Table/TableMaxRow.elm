@@ -7,7 +7,7 @@ import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
+import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -18,7 +18,7 @@ tableMaxRow : Model -> TableNode
 tableMaxRow model =
     tableRow
         ([ text "max" ]
-            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model.sectionsAndTheirCurrentSettings)
+            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model.sectionSettings)
         )
 
 
@@ -44,15 +44,15 @@ maxOnInputHandler newMax section =
     UpdateSectionMax (parseInt newMax) section
 
 
-sectionAndMaxPerSection : List SectionAndItsCurrentSettings -> List ( Section, Int )
-sectionAndMaxPerSection sectionsAndTheirCurrentSettings =
-    map (\sectionAndItsCurrentSettings -> sectionAndMax sectionAndItsCurrentSettings.section sectionsAndTheirCurrentSettings) sectionsAndTheirCurrentSettings
+sectionAndMaxPerSection : SectionSettings -> List ( Section, Int )
+sectionAndMaxPerSection sectionSettings =
+    map (\sectionSetting -> sectionAndMax sectionSetting.section sectionSettings) sectionSettings
 
 
-sectionAndMax : Section -> List SectionAndItsCurrentSettings -> ( Section, Int )
-sectionAndMax section sectionsAndTheirCurrentSettings =
+sectionAndMax : Section -> SectionSettings -> ( Section, Int )
+sectionAndMax section sectionSettings =
     let
-        sectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection section sectionsAndTheirCurrentSettings
+        sectionSetting =
+            getSectionSettingBySection section sectionSettings
     in
-    ( section, sectionAndItsCurrentSettings.max )
+    ( section, sectionSetting.max )

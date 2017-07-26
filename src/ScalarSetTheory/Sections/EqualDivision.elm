@@ -3,22 +3,22 @@ module ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinSect
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections.Section exposing (..)
-import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
+import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
 import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, findSectionValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-equalDivisionsWithinSectionValuePath : SectionValuePath -> List SectionAndItsCurrentSettings -> List String
-equalDivisionsWithinSectionValuePath sectionValuePath sectionsAndTheirCurrentSettings =
+equalDivisionsWithinSectionValuePath : SectionValuePath -> SectionSettings -> List String
+equalDivisionsWithinSectionValuePath sectionValuePath sectionSettings =
     let
-        edSectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection EqualDivision sectionsAndTheirCurrentSettings
+        edSetting =
+            getSectionSettingBySection EqualDivision sectionSettings
 
         edMin =
-            edSectionAndItsCurrentSettings.min
+            edSetting.min
 
         edMax =
-            edSectionAndItsCurrentSettings.max
+            edSetting.max
 
         nChordValue =
             case findSectionValueStepInPath NChord sectionValuePath of

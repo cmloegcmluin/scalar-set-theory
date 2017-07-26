@@ -7,7 +7,7 @@ import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
+import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -18,7 +18,7 @@ tableMinRow : Model -> TableNode
 tableMinRow model =
     tableRow
         ([ text "min" ]
-            ++ map sectionToMinDropdown (sectionAndMinPerSection model.sectionsAndTheirCurrentSettings)
+            ++ map sectionToMinDropdown (sectionAndMinPerSection model.sectionSettings)
         )
 
 
@@ -44,15 +44,15 @@ minOnInputHandler newMin section =
     UpdateSectionMin (parseInt newMin) section
 
 
-sectionAndMinPerSection : List SectionAndItsCurrentSettings -> List ( Section, Int )
-sectionAndMinPerSection sectionsAndTheirCurrentSettings =
-    map (\sectionAndItsCurrentSettings -> sectionAndMin sectionAndItsCurrentSettings.section sectionsAndTheirCurrentSettings) sectionsAndTheirCurrentSettings
+sectionAndMinPerSection : SectionSettings -> List ( Section, Int )
+sectionAndMinPerSection sectionSettings =
+    map (\sectionSetting -> sectionAndMin sectionSetting.section sectionSettings) sectionSettings
 
 
-sectionAndMin : Section -> List SectionAndItsCurrentSettings -> ( Section, Int )
-sectionAndMin section sectionsAndTheirCurrentSettings =
+sectionAndMin : Section -> SectionSettings -> ( Section, Int )
+sectionAndMin section sectionSettings =
     let
-        sectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection section sectionsAndTheirCurrentSettings
+        sectionSetting =
+            getSectionSettingBySection section sectionSettings
     in
-    ( section, sectionAndItsCurrentSettings.min )
+    ( section, sectionSetting.min )

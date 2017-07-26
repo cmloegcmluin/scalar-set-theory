@@ -6,7 +6,6 @@ import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.GetSectionAndItsCurrentSettingsBySection exposing (getSectionAndItsCurrentSettingsBySection)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
@@ -53,6 +52,6 @@ sectionAndMax : Section -> Model -> ( Section, Int )
 sectionAndMax section model =
     let
         sectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection section model
+            getSectionAndItsCurrentSettingsBySection section model.sectionsAndTheirCurrentSettings
     in
     ( section, sectionAndItsCurrentSettings.max )

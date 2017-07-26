@@ -2,8 +2,6 @@ module ScalarSetTheory.Sections.Ed exposing (edsWithinValueWithItsSectionFilters
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.GetSectionAndItsCurrentSettingsBySection exposing (getSectionAndItsCurrentSettingsBySection)
-import ScalarSetTheory.Sections.GetValueWithItsSectionFromValuesAndTheirSectionsByItsSection exposing (getValueWithItsSectionFromValuesAndTheirSectionsByItsSection)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
@@ -12,7 +10,7 @@ edsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> Model -> Lis
 edsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
     let
         edSectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection Ed model
+            getSectionAndItsCurrentSettingsBySection Ed model.sectionsAndTheirCurrentSettings
 
         edMin =
             edSectionAndItsCurrentSettings.min

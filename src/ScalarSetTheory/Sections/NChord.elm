@@ -2,8 +2,6 @@ module ScalarSetTheory.Sections.NChord exposing (nChordsWithinValueWithItsSectio
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.GetSectionAndItsCurrentSettingsBySection exposing (getSectionAndItsCurrentSettingsBySection)
-import ScalarSetTheory.Sections.GetValueWithItsSectionFromValuesAndTheirSectionsByItsSection exposing (getValueWithItsSectionFromValuesAndTheirSectionsByItsSection)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
@@ -12,7 +10,7 @@ nChordsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> Model ->
 nChordsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
     let
         nChordSectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection NChord model
+            getSectionAndItsCurrentSettingsBySection NChord model.sectionsAndTheirCurrentSettings
 
         nChordMin =
             nChordSectionAndItsCurrentSettings.min

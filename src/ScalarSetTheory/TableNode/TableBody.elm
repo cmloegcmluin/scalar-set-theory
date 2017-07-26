@@ -46,9 +46,6 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
     let
         maybeNextSectionAndItsCurrentSettings =
             getNextSectionAndItsCurrentSettings valueWithItsSection.section model.sectionsAndTheirCurrentSettings
-
-        deeperParentValueWithItsSectionFilters =
-            parentValueWithItsSectionFilters ++ [ valueWithItsSection ]
     in
     case maybeNextSectionAndItsCurrentSettings of
         Nothing ->
@@ -62,8 +59,14 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                 nextSection =
                     nextSectionAndItsCurrentSettings.section
 
+                nextSectionChildrenValuesGetter =
+                    sectionChildrenValues nextSection
+
+                deeperParentValueWithItsSectionFilters =
+                    parentValueWithItsSectionFilters ++ [ valueWithItsSection ]
+
                 cellChildrenValues =
-                    valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues nextSection deeperParentValueWithItsSectionFilters model.sectionsAndTheirCurrentSettings
+                    nextSectionChildrenValuesGetter deeperParentValueWithItsSectionFilters model.sectionsAndTheirCurrentSettings
 
                 cellChildValuesWithTheirSection =
                     map (\value -> ValueWithItsSection nextSection value) cellChildrenValues
@@ -75,12 +78,3 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                 { cellItself = text valueWithItsSection.value
                 , cellChildren = cellChildren
                 }
-
-
-valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues : Section -> ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> List String
-valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues section parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings =
-    let
-        sectionChildrenValuesThing =
-            sectionChildrenValues section
-    in
-    sectionChildrenValuesThing parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings

@@ -7,7 +7,7 @@ import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSettingBySection)
+import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSetting)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -53,6 +53,6 @@ sectionAndMin : Section -> SectionSettings -> ( Section, Int )
 sectionAndMin section sectionSettings =
     let
         sectionSetting =
-            getSectionSettingBySection section sectionSettings
+            getSectionSetting section sectionSettings
     in
     ( section, sectionSetting.min )

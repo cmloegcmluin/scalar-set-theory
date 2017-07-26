@@ -1,4 +1,4 @@
-module ScalarSetTheory.Sections.SectionSettings exposing (SectionSetting, SectionSettings, defaultSectionSettings, getFirstSectionSetting, getNextSectionSetting, getSectionSettingBySection)
+module ScalarSetTheory.Sections.SectionSettings exposing (SectionSetting, SectionSettings, defaultSectionSettings, getFirstSectionSetting, getNextSectionSetting, getSectionSetting)
 
 import List exposing (head)
 import Maybe exposing (withDefault)
@@ -17,8 +17,8 @@ type alias SectionSettings =
     List SectionSetting
 
 
-getSectionSettingBySection : Section -> SectionSettings -> SectionSetting
-getSectionSettingBySection section sectionSettings =
+getSectionSetting : Section -> SectionSettings -> SectionSetting
+getSectionSetting section sectionSettings =
     withDefault (SectionSetting EqualDivision 9999999 9999999) (find (\sectionSetting -> sectionSettingIsForSection sectionSetting section) sectionSettings)
 
 

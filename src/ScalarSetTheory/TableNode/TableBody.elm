@@ -4,9 +4,9 @@ import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinValueWithItsSectionFilters)
-import ScalarSetTheory.Sections.NChord exposing (nChordsWithinValueWithItsSectionFilters)
-import ScalarSetTheory.Sections.Sections exposing (..)
+import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings)
+import ScalarSetTheory.Sections.SectionChildrenValues exposing (valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues)
+import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSection, ValueWithItsSectionFilters)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
 
@@ -62,7 +62,7 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                     nextSectionAndItsCurrentSettings.section
 
                 cellChildrenValues =
-                    valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues nextSection deeperParentValueWithItsSectionFilters model
+                    valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues nextSection deeperParentValueWithItsSectionFilters model.sectionsAndTheirCurrentSettings
 
                 cellChildValuesWithTheirSection =
                     map (\value -> ValueWithItsSection nextSection value) cellChildrenValues
@@ -74,31 +74,3 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                 { cellItself = text valueWithItsSection.value
                 , cellChildren = cellChildren
                 }
-
-
-getFirstSectionAndItsCurrentSettings : List SectionAndItsCurrentSettings -> SectionAndItsCurrentSettings
-getFirstSectionAndItsCurrentSettings sectionsAndTheirCurrentSettings =
-    withDefault (SectionAndItsCurrentSettings EqualDivision 999999 999999) (head sectionsAndTheirCurrentSettings)
-
-
-valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues : Section -> ValueWithItsSectionFilters -> Model -> List String
-valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues section parentValueWithItsSectionFilters model =
-    case section of
-        EqualDivision ->
-            equalDivisionsWithinValueWithItsSectionFilters parentValueWithItsSectionFilters model
-
-        NChord ->
-            nChordsWithinValueWithItsSectionFilters parentValueWithItsSectionFilters model
-
-
-getNextSectionAndItsCurrentSettings : Section -> List SectionAndItsCurrentSettings -> Maybe SectionAndItsCurrentSettings
-getNextSectionAndItsCurrentSettings section sectionsAndTheirCurrentSettings =
-    case sectionsAndTheirCurrentSettings of
-        [] ->
-            Nothing
-
-        first :: rest ->
-            if section == first.section then
-                head rest
-            else
-                getNextSectionAndItsCurrentSettings section rest

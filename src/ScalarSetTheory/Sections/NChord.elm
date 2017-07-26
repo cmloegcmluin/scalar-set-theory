@@ -2,15 +2,17 @@ module ScalarSetTheory.Sections.NChord exposing (nChordsWithinValueWithItsSectio
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.Sections exposing (..)
+import ScalarSetTheory.Sections.Section exposing (..)
+import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
+import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSectionFilters, getValueWithItsSectionFromValuesAndTheirSectionsByItsSection)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-nChordsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> Model -> List String
-nChordsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
+nChordsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> List String
+nChordsWithinValueWithItsSectionFilters valueWithItsSectionFilters sectionsAndTheirCurrentSettings =
     let
         nChordSectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection NChord model.sectionsAndTheirCurrentSettings
+            getSectionAndItsCurrentSettingsBySection NChord sectionsAndTheirCurrentSettings
 
         nChordMin =
             nChordSectionAndItsCurrentSettings.min

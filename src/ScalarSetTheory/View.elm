@@ -8,11 +8,11 @@ import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Styles.AppStyles exposing (appStyle)
 import ScalarSetTheory.Styles.TableStyles exposing (tableStyle)
-import ScalarSetTheory.TableNode.TableBody exposing (tableBody)
-import ScalarSetTheory.TableNode.TableHeaderRow exposing (tableHeaderRow)
-import ScalarSetTheory.TableNode.TableMaxRow exposing (tableMaxRow)
-import ScalarSetTheory.TableNode.TableMinRow exposing (tableMinRow)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Table.TableBody exposing (tableBody)
+import ScalarSetTheory.Table.TableHeaderRow exposing (tableHeaderRow)
+import ScalarSetTheory.Table.TableMaxRow exposing (tableMaxRow)
+import ScalarSetTheory.Table.TableMinRow exposing (tableMinRow)
+import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
 view : Model -> Html Msg

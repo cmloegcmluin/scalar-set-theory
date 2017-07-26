@@ -1,12 +1,12 @@
-module ScalarSetTheory.TableNode.TableHeaderRow exposing (tableHeaderRow)
+module ScalarSetTheory.Table.TableHeaderRow exposing (tableHeaderRow)
 
 import Html exposing (Html, div, text)
 import List exposing (map)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Sections.Sections exposing (sectionNames)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
-import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
+import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Table.TableRow exposing (tableRow)
 
 
 tableHeaderRow : Model -> TableNode

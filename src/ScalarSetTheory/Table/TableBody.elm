@@ -1,4 +1,4 @@
-module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
+module ScalarSetTheory.Table.TableBody exposing (tableBody)
 
 import Html exposing (text)
 import List exposing (head, length, map, range)
@@ -8,7 +8,7 @@ import ScalarSetTheory.Sections.Section exposing (..)
 import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings)
 import ScalarSetTheory.Sections.Sections exposing (sectionChildrenValues)
 import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSection, ValueWithItsSectionFilters)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
 tableBody : Model -> TableNode

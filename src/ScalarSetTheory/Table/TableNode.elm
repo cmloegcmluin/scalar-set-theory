@@ -1,4 +1,4 @@
-module ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+module ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 import Html exposing (Html, text)
 import List exposing (map)

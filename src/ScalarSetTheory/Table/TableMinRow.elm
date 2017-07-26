@@ -1,4 +1,4 @@
-module ScalarSetTheory.TableNode.TableMinRow exposing (minDropdown, tableMinRow)
+module ScalarSetTheory.Table.TableMinRow exposing (minDropdown, tableMinRow)
 
 import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
@@ -8,8 +8,8 @@ import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Section exposing (Section)
 import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
-import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
+import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
 import Tuple exposing (first, second)
 

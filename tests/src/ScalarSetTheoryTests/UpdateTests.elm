@@ -4,7 +4,7 @@ import Expect exposing (equal)
 import Html exposing (text)
 import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Section exposing (..)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
 

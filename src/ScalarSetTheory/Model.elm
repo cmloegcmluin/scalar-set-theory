@@ -11,7 +11,7 @@ type alias Model =
 model : Model
 model =
     { sectionsAndTheirCurrentSettings =
-        [ SectionAndItsCurrentSettings Ed 3 3
+        [ SectionAndItsCurrentSettings EqualDivision 3 3
         , SectionAndItsCurrentSettings NChord 2 100
         ]
     }

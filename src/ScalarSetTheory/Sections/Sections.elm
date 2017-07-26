@@ -5,7 +5,7 @@ import ScalarSetTheory.Utilities exposing (find)
 
 
 type Section
-    = Ed
+    = EqualDivision
     | NChord
 
 
@@ -41,11 +41,11 @@ type alias ValueWithItsSectionChildren =
 sectionNames : Section -> String
 sectionNames section =
     case section of
-        Ed ->
-            "ed"
+        EqualDivision ->
+            "equal division"
 
         NChord ->
-            "nChord"
+            "n-chord"
 
 
 sectionNamesFromSectionsAndTheirCurrentSettings : SectionAndItsCurrentSettings -> String
@@ -65,7 +65,7 @@ valueWithItsSectionIsForSection valueWithItsSection section =
 
 getSectionAndItsCurrentSettingsBySection : Section -> List SectionAndItsCurrentSettings -> SectionAndItsCurrentSettings
 getSectionAndItsCurrentSettingsBySection section sectionsAndTheirCurrentSettings =
-    withDefault (SectionAndItsCurrentSettings Ed 9999999 9999999) (find (\sectionAndItsCurrentSettings -> sectionAndItsCurrentSettingsIsForSection sectionAndItsCurrentSettings section) sectionsAndTheirCurrentSettings)
+    withDefault (SectionAndItsCurrentSettings EqualDivision 9999999 9999999) (find (\sectionAndItsCurrentSettings -> sectionAndItsCurrentSettingsIsForSection sectionAndItsCurrentSettings section) sectionsAndTheirCurrentSettings)
 
 
 sectionAndItsCurrentSettingsIsForSection : SectionAndItsCurrentSettings -> Section -> Bool

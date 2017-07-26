@@ -19,7 +19,7 @@ nChordsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
             nChordSectionAndItsCurrentSettings.max
 
         edValue =
-            case getValueWithItsSectionFromValuesAndTheirSectionsByItsSection Ed valueWithItsSectionFilters of
+            case getValueWithItsSectionFromValuesAndTheirSectionsByItsSection EqualDivision valueWithItsSectionFilters of
                 Just edValueWithItsSection ->
                     parseInt edValueWithItsSection.value
 

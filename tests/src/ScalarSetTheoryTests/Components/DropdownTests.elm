@@ -19,7 +19,7 @@ dropdownTests =
                         expectedEdOptions
 
                     actual =
-                        dropdownOptions Ed "8"
+                        dropdownOptions EqualDivision "8"
                 in
                 equal expected actual
         , test "for nChords, returns a range between 1 and 100" <|

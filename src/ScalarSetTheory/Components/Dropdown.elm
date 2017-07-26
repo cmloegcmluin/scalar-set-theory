@@ -29,7 +29,7 @@ isSelected optionIndex selectedOption =
 ranges : Section -> List Int
 ranges section =
     case section of
-        Ed ->
+        EqualDivision ->
             range 3 100
 
         NChord ->

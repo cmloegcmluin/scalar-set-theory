@@ -17,7 +17,7 @@ updateTests =
                 let
                     expected =
                         { sectionsAndTheirCurrentSettings =
-                            [ { section = Ed
+                            [ { section = EqualDivision
                               , min = 5
                               , max = 7
                               }
@@ -30,9 +30,9 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateSectionMin 5 Ed)
+                            (UpdateSectionMin 5 EqualDivision)
                             { sectionsAndTheirCurrentSettings =
-                                [ { section = Ed
+                                [ { section = EqualDivision
                                   , min = 7
                                   , max = 7
                                   }
@@ -49,7 +49,7 @@ updateTests =
                 let
                     expected =
                         { sectionsAndTheirCurrentSettings =
-                            [ { section = Ed
+                            [ { section = EqualDivision
                               , min = 5
                               , max = 7
                               }
@@ -64,7 +64,7 @@ updateTests =
                         update
                             (UpdateSectionMax 8 NChord)
                             { sectionsAndTheirCurrentSettings =
-                                [ { section = Ed
+                                [ { section = EqualDivision
                                   , min = 5
                                   , max = 7
                                   }

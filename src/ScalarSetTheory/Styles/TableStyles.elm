@@ -18,7 +18,7 @@ tableCellItself =
         , displayFlex
         , alignItems center
         , justifyContent center
-        , width (px 80)
+        , width (px 100)
         ]
 
 

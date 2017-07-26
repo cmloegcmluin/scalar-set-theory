@@ -1,4 +1,4 @@
-module ScalarSetTheory.Sections.Ed exposing (edsWithinValueWithItsSectionFilters)
+module ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinValueWithItsSectionFilters)
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
@@ -6,11 +6,11 @@ import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-edsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> Model -> List String
-edsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
+equalDivisionsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> Model -> List String
+equalDivisionsWithinValueWithItsSectionFilters valueWithItsSectionFilters model =
     let
         edSectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection Ed model.sectionsAndTheirCurrentSettings
+            getSectionAndItsCurrentSettingsBySection EqualDivision model.sectionsAndTheirCurrentSettings
 
         edMin =
             edSectionAndItsCurrentSettings.min

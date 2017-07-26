@@ -4,7 +4,7 @@ import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.Ed exposing (edsWithinValueWithItsSectionFilters)
+import ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinValueWithItsSectionFilters)
 import ScalarSetTheory.Sections.NChord exposing (nChordsWithinValueWithItsSectionFilters)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
@@ -78,14 +78,14 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
 
 getFirstSectionAndItsCurrentSettings : List SectionAndItsCurrentSettings -> SectionAndItsCurrentSettings
 getFirstSectionAndItsCurrentSettings sectionsAndTheirCurrentSettings =
-    withDefault (SectionAndItsCurrentSettings Ed 999999 999999) (head sectionsAndTheirCurrentSettings)
+    withDefault (SectionAndItsCurrentSettings EqualDivision 999999 999999) (head sectionsAndTheirCurrentSettings)
 
 
 valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues : Section -> ValueWithItsSectionFilters -> Model -> List String
 valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues section parentValueWithItsSectionFilters model =
     case section of
-        Ed ->
-            edsWithinValueWithItsSectionFilters parentValueWithItsSectionFilters model
+        EqualDivision ->
+            equalDivisionsWithinValueWithItsSectionFilters parentValueWithItsSectionFilters model
 
         NChord ->
             nChordsWithinValueWithItsSectionFilters parentValueWithItsSectionFilters model

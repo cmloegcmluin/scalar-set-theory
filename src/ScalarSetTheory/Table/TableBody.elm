@@ -69,7 +69,7 @@ analysisValueStepToTableNode analysisValueStep analysisValuePath analysisSetting
                     analysisValuePath ++ [ analysisValueStep ]
 
                 cellChildrenValues =
-                    nextAnalysisChildrenValuesGetter deeperAnalysisValuePath analysisSettings
+                    nextAnalysisChildrenValuesGetter deeperAnalysisValuePath nextAnalysisSetting
 
                 cellChildValuesWithTheirAnalysis =
                     map (\value -> AnalysisValueStep nextAnalysis value) cellChildrenValues

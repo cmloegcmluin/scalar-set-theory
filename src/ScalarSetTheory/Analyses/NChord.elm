@@ -3,18 +3,14 @@ module ScalarSetTheory.Analyses.NChord exposing (nChordsWithinAnalysisValuePath)
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (..)
 import ScalarSetTheory.Analyses.AnalysisChildrenValues exposing (AnalysisChildrenValues)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, findAnalysisValueStepInPath)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 nChordsWithinAnalysisValuePath : AnalysisChildrenValues
-nChordsWithinAnalysisValuePath analysisValuePath analysisSettings =
+nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
     let
-        nChordSetting =
-            getAnalysisSetting NChord analysisSettings
-
         nChordMin =
             nChordSetting.min
 

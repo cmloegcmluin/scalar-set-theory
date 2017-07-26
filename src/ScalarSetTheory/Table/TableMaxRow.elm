@@ -4,7 +4,7 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
@@ -46,13 +46,9 @@ maxOnInputHandler newMax analysis =
 
 analysisAndMaxPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
 analysisAndMaxPerAnalysis analysisSettings =
-    map (\analysisSetting -> analysisAndMax analysisSetting.analysis analysisSettings) analysisSettings
+    map analysisAndMax analysisSettings
 
 
-analysisAndMax : Analysis -> AnalysisSettings -> ( Analysis, Int )
-analysisAndMax analysis analysisSettings =
-    let
-        analysisSetting =
-            getAnalysisSetting analysis analysisSettings
-    in
-    ( analysis, analysisSetting.max )
+analysisAndMax : AnalysisSetting -> ( Analysis, Int )
+analysisAndMax analysisSetting =
+    ( analysisSetting.analysis, analysisSetting.max )

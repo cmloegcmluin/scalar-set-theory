@@ -1,4 +1,4 @@
-module ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, defaultAnalysisSettings, getAnalysisSetting, getFirstAnalysisSetting, getNextAnalysisSetting)
+module ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, defaultAnalysisSettings, getFirstAnalysisSetting, getNextAnalysisSetting)
 
 import List exposing (head)
 import Maybe exposing (withDefault)
@@ -15,16 +15,6 @@ type alias AnalysisSetting =
 
 type alias AnalysisSettings =
     List AnalysisSetting
-
-
-getAnalysisSetting : Analysis -> AnalysisSettings -> AnalysisSetting
-getAnalysisSetting analysis analysisSettings =
-    withDefault (AnalysisSetting EqualDivision 9999999 9999999) (find (\analysisSetting -> analysisSettingIsForAnalysis analysisSetting analysis) analysisSettings)
-
-
-analysisSettingIsForAnalysis : AnalysisSetting -> Analysis -> Bool
-analysisSettingIsForAnalysis analysisSetting analysis =
-    analysisSetting.analysis == analysis
 
 
 getFirstAnalysisSetting : AnalysisSettings -> AnalysisSetting

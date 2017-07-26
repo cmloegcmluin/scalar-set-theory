@@ -3,23 +3,19 @@ module ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionsWithinAnal
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (..)
 import ScalarSetTheory.Analyses.AnalysisChildrenValues exposing (AnalysisChildrenValues)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, findAnalysisValueStepInPath)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 equalDivisionsWithinAnalysisValuePath : AnalysisChildrenValues
-equalDivisionsWithinAnalysisValuePath analysisValuePath analysisSettings =
+equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
     let
-        edSetting =
-            getAnalysisSetting EqualDivision analysisSettings
+        equalDivisionMin =
+            equalDivisionSetting.min
 
-        edMin =
-            edSetting.min
-
-        edMax =
-            edSetting.max
+        equalDivisionMax =
+            equalDivisionSetting.max
 
         nChordValue =
             case findAnalysisValueStepInPath NChord analysisValuePath of
@@ -29,4 +25,4 @@ equalDivisionsWithinAnalysisValuePath analysisValuePath analysisSettings =
                 Nothing ->
                     0
     in
-    map toString (range (max edMin nChordValue) edMax)
+    map toString (range (max equalDivisionMin nChordValue) equalDivisionMax)

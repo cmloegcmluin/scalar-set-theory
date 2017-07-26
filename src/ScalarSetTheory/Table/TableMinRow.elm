@@ -4,7 +4,7 @@ import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
@@ -46,13 +46,9 @@ minOnInputHandler newMin analysis =
 
 analysisAndMinPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
 analysisAndMinPerAnalysis analysisSettings =
-    map (\analysisSetting -> analysisAndMin analysisSetting.analysis analysisSettings) analysisSettings
+    map analysisAndMin analysisSettings
 
 
-analysisAndMin : Analysis -> AnalysisSettings -> ( Analysis, Int )
-analysisAndMin analysis analysisSettings =
-    let
-        analysisSetting =
-            getAnalysisSetting analysis analysisSettings
-    in
-    ( analysis, analysisSetting.min )
+analysisAndMin : AnalysisSetting -> ( Analysis, Int )
+analysisAndMin analysisSetting =
+    ( analysisSetting.analysis, analysisSetting.min )

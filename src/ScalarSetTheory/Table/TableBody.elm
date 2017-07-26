@@ -5,7 +5,7 @@ import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Analyses.Analyses exposing (analysisChildrenValues)
 import ScalarSetTheory.Analyses.Analysis exposing (..)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getFirstAnalysisSetting, getNextAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getNextAnalysisSetting)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
@@ -17,31 +17,40 @@ tableBody model =
         analysisSettings =
             model.analysisSettings
 
-        firstAnalysisSetting =
-            getFirstAnalysisSetting analysisSettings
-
-        firstAnalysis =
-            firstAnalysisSetting.analysis
-
-        analysisValuePath =
-            []
-
-        firstAnalysisRange =
-            range firstAnalysisSetting.min firstAnalysisSetting.max
-
-        valuesWithTheirAnalysisForFirstAnalysis =
-            map (\value -> AnalysisValueStep firstAnalysis (toString value)) firstAnalysisRange
-
-        cellChildren =
-            map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings) valuesWithTheirAnalysisForFirstAnalysis
-
-        childCount =
-            length cellChildren
+        maybeFirstAnalysisSetting =
+            head analysisSettings
     in
-    TableNode
-        { cellItself = text (toString childCount)
-        , cellChildren = cellChildren
-        }
+    case maybeFirstAnalysisSetting of
+        Nothing ->
+            TableNode
+                { cellItself = text "0"
+                , cellChildren = []
+                }
+
+        Just firstAnalysisSetting ->
+            let
+                firstAnalysis =
+                    firstAnalysisSetting.analysis
+
+                analysisValuePath =
+                    []
+
+                firstAnalysisRange =
+                    range firstAnalysisSetting.min firstAnalysisSetting.max
+
+                valuesWithTheirAnalysisForFirstAnalysis =
+                    map (\value -> AnalysisValueStep firstAnalysis (toString value)) firstAnalysisRange
+
+                cellChildren =
+                    map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings) valuesWithTheirAnalysisForFirstAnalysis
+
+                childCount =
+                    length cellChildren
+            in
+            TableNode
+                { cellItself = text (toString childCount)
+                , cellChildren = cellChildren
+                }
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode

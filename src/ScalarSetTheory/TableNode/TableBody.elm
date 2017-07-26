@@ -4,8 +4,9 @@ import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings)
-import ScalarSetTheory.Sections.SectionChildrenValues exposing (valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues)
+import ScalarSetTheory.Sections.Section exposing (..)
+import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings)
+import ScalarSetTheory.Sections.Sections exposing (sectionChildrenValues)
 import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSection, ValueWithItsSectionFilters)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
@@ -74,3 +75,12 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                 { cellItself = text valueWithItsSection.value
                 , cellChildren = cellChildren
                 }
+
+
+valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues : Section -> ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> List String
+valueWithItsSectionAndItsParentValueWithItsSectionFiltersToChildrenValues section parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings =
+    let
+        sectionChildrenValuesThing =
+            sectionChildrenValues section
+    in
+    sectionChildrenValuesThing parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings

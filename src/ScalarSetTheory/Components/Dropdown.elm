@@ -4,7 +4,8 @@ import Html exposing (Attribute, Html, option, text)
 import Html.Attributes exposing (selected, value)
 import List exposing (map, range)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Sections.Section exposing (Section, sectionRanges)
+import ScalarSetTheory.Sections.Section exposing (Section)
+import ScalarSetTheory.Sections.Sections exposing (sectionRanges)
 
 
 dropdownOptions : Section -> String -> List (Html Msg)

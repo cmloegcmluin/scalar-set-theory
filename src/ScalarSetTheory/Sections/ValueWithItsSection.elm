@@ -1,6 +1,6 @@
 module ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSection, ValueWithItsSectionFilters, getValueWithItsSectionFromValuesAndTheirSectionsByItsSection)
 
-import ScalarSetTheory.Sections.Section exposing (..)
+import ScalarSetTheory.Sections.Section exposing (Section)
 import ScalarSetTheory.Utilities exposing (find)
 
 

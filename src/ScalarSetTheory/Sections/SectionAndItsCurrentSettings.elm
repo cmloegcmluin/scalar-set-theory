@@ -1,4 +1,4 @@
-module ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, defaultSectionsAndTheirCurrentSettings, getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection, sectionNamesFromSectionsAndTheirCurrentSettings)
+module ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, defaultSectionsAndTheirCurrentSettings, getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
 
 import List exposing (head)
 import Maybe exposing (withDefault)
@@ -11,11 +11,6 @@ type alias SectionAndItsCurrentSettings =
     , min : Int
     , max : Int
     }
-
-
-sectionNamesFromSectionsAndTheirCurrentSettings : SectionAndItsCurrentSettings -> String
-sectionNamesFromSectionsAndTheirCurrentSettings sectionAndItsCurrentSettings =
-    sectionNames sectionAndItsCurrentSettings.section
 
 
 getSectionAndItsCurrentSettingsBySection : Section -> List SectionAndItsCurrentSettings -> SectionAndItsCurrentSettings

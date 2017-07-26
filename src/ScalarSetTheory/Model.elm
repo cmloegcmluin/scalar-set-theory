@@ -1,15 +1,15 @@
 module ScalarSetTheory.Model exposing (Model, model)
 
 import Html exposing (Html, text)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, defaultSectionSettings)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, defaultAnalysisSettings)
 
 
 type alias Model =
-    { sectionSettings : SectionSettings }
+    { analysisSettings : AnalysisSettings }
 
 
 model : Model
 model =
-    { sectionSettings =
-        defaultSectionSettings
+    { analysisSettings =
+        defaultAnalysisSettings
     }

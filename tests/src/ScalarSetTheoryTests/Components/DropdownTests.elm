@@ -3,9 +3,9 @@ module ScalarSetTheoryTests.Components.DropdownTests exposing (dropdownTests)
 import Expect exposing (equal)
 import Html exposing (Html, option, text)
 import Html.Attributes exposing (selected, value)
+import ScalarSetTheory.Analyses.Analysis exposing (..)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Sections.Section exposing (..)
 import Test exposing (Test, describe, test)
 
 

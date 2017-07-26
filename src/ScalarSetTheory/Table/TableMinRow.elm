@@ -3,11 +3,11 @@ module ScalarSetTheory.Table.TableMinRow exposing (minDropdown, tableMinRow)
 import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSetting)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -18,41 +18,41 @@ tableMinRow : Model -> TableNode
 tableMinRow model =
     tableRow
         ([ text "min" ]
-            ++ map sectionToMinDropdown (sectionAndMinPerSection model.sectionSettings)
+            ++ map analysisToMinDropdown (analysisAndMinPerAnalysis model.analysisSettings)
         )
 
 
-sectionToMinDropdown : ( Section, Int ) -> Html Msg
-sectionToMinDropdown sectionAndMin =
-    minDropdown (first sectionAndMin) (second sectionAndMin)
+analysisToMinDropdown : ( Analysis, Int ) -> Html Msg
+analysisToMinDropdown analysisAndMin =
+    minDropdown (first analysisAndMin) (second analysisAndMin)
 
 
-minDropdown : Section -> Int -> Html Msg
-minDropdown section selectedOption =
+minDropdown : Analysis -> Int -> Html Msg
+minDropdown analysis selectedOption =
     select
-        (minAttributes section)
-        (dropdownOptions section (toString selectedOption))
+        (minAttributes analysis)
+        (dropdownOptions analysis (toString selectedOption))
 
 
-minAttributes : Section -> List (Attribute Msg)
-minAttributes section =
-    [ onInput (\newMin -> minOnInputHandler newMin section) ]
+minAttributes : Analysis -> List (Attribute Msg)
+minAttributes analysis =
+    [ onInput (\newMin -> minOnInputHandler newMin analysis) ]
 
 
-minOnInputHandler : String -> Section -> Msg
-minOnInputHandler newMin section =
-    UpdateSectionMin (parseInt newMin) section
+minOnInputHandler : String -> Analysis -> Msg
+minOnInputHandler newMin analysis =
+    UpdateAnalysisMin (parseInt newMin) analysis
 
 
-sectionAndMinPerSection : SectionSettings -> List ( Section, Int )
-sectionAndMinPerSection sectionSettings =
-    map (\sectionSetting -> sectionAndMin sectionSetting.section sectionSettings) sectionSettings
+analysisAndMinPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
+analysisAndMinPerAnalysis analysisSettings =
+    map (\analysisSetting -> analysisAndMin analysisSetting.analysis analysisSettings) analysisSettings
 
 
-sectionAndMin : Section -> SectionSettings -> ( Section, Int )
-sectionAndMin section sectionSettings =
+analysisAndMin : Analysis -> AnalysisSettings -> ( Analysis, Int )
+analysisAndMin analysis analysisSettings =
     let
-        sectionSetting =
-            getSectionSetting section sectionSettings
+        analysisSetting =
+            getAnalysisSetting analysis analysisSettings
     in
-    ( section, sectionSetting.min )
+    ( analysis, analysisSetting.min )

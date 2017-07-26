@@ -3,11 +3,11 @@ module ScalarSetTheory.Table.TableMaxRow exposing (maxDropdown, tableMaxRow)
 import Html exposing (Attribute, Html, div, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getAnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getSectionSetting)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -18,41 +18,41 @@ tableMaxRow : Model -> TableNode
 tableMaxRow model =
     tableRow
         ([ text "max" ]
-            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model.sectionSettings)
+            ++ map analysisToMaxDropdown (analysisAndMaxPerAnalysis model.analysisSettings)
         )
 
 
-sectionToMaxDropdown : ( Section, Int ) -> Html Msg
-sectionToMaxDropdown sectionAndMax =
-    maxDropdown (first sectionAndMax) (second sectionAndMax)
+analysisToMaxDropdown : ( Analysis, Int ) -> Html Msg
+analysisToMaxDropdown analysisAndMax =
+    maxDropdown (first analysisAndMax) (second analysisAndMax)
 
 
-maxDropdown : Section -> Int -> Html Msg
-maxDropdown section selectedOption =
+maxDropdown : Analysis -> Int -> Html Msg
+maxDropdown analysis selectedOption =
     select
-        (maxAttributes section)
-        (dropdownOptions section (toString selectedOption))
+        (maxAttributes analysis)
+        (dropdownOptions analysis (toString selectedOption))
 
 
-maxAttributes : Section -> List (Attribute Msg)
-maxAttributes section =
-    [ onInput (\newMax -> maxOnInputHandler newMax section) ]
+maxAttributes : Analysis -> List (Attribute Msg)
+maxAttributes analysis =
+    [ onInput (\newMax -> maxOnInputHandler newMax analysis) ]
 
 
-maxOnInputHandler : String -> Section -> Msg
-maxOnInputHandler newMax section =
-    UpdateSectionMax (parseInt newMax) section
+maxOnInputHandler : String -> Analysis -> Msg
+maxOnInputHandler newMax analysis =
+    UpdateAnalysisMax (parseInt newMax) analysis
 
 
-sectionAndMaxPerSection : SectionSettings -> List ( Section, Int )
-sectionAndMaxPerSection sectionSettings =
-    map (\sectionSetting -> sectionAndMax sectionSetting.section sectionSettings) sectionSettings
+analysisAndMaxPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
+analysisAndMaxPerAnalysis analysisSettings =
+    map (\analysisSetting -> analysisAndMax analysisSetting.analysis analysisSettings) analysisSettings
 
 
-sectionAndMax : Section -> SectionSettings -> ( Section, Int )
-sectionAndMax section sectionSettings =
+analysisAndMax : Analysis -> AnalysisSettings -> ( Analysis, Int )
+analysisAndMax analysis analysisSettings =
     let
-        sectionSetting =
-            getSectionSetting section sectionSettings
+        analysisSetting =
+            getAnalysisSetting analysis analysisSettings
     in
-    ( section, sectionSetting.max )
+    ( analysis, analysisSetting.max )

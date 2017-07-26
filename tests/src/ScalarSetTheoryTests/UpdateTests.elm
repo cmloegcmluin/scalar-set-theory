@@ -2,8 +2,8 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
+import ScalarSetTheory.Analyses.Analysis exposing (..)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.Section exposing (..)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
@@ -12,16 +12,16 @@ import Test exposing (Test, describe, test)
 updateTests : Test
 updateTests =
     describe "update"
-        [ test "UpdateSectionMin updates the min for the correct section" <|
+        [ test "UpdateAnalysisMin updates the min for the correct analysis" <|
             \() ->
                 let
                     expected =
-                        { sectionSettings =
-                            [ { section = EqualDivision
+                        { analysisSettings =
+                            [ { analysis = EqualDivision
                               , min = 5
                               , max = 7
                               }
-                            , { section = NChord
+                            , { analysis = NChord
                               , min = 4
                               , max = 6
                               }
@@ -30,13 +30,13 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateSectionMin 5 EqualDivision)
-                            { sectionSettings =
-                                [ { section = EqualDivision
+                            (UpdateAnalysisMin 5 EqualDivision)
+                            { analysisSettings =
+                                [ { analysis = EqualDivision
                                   , min = 7
                                   , max = 7
                                   }
-                                , { section = NChord
+                                , { analysis = NChord
                                   , min = 4
                                   , max = 6
                                   }
@@ -44,16 +44,16 @@ updateTests =
                             }
                 in
                 equal expected actual
-        , test "UpdateSectionMax updates the max for the correct section" <|
+        , test "UpdateAnalysisMax updates the max for the correct analysis" <|
             \() ->
                 let
                     expected =
-                        { sectionSettings =
-                            [ { section = EqualDivision
+                        { analysisSettings =
+                            [ { analysis = EqualDivision
                               , min = 5
                               , max = 7
                               }
-                            , { section = NChord
+                            , { analysis = NChord
                               , min = 4
                               , max = 8
                               }
@@ -62,13 +62,13 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateSectionMax 8 NChord)
-                            { sectionSettings =
-                                [ { section = EqualDivision
+                            (UpdateAnalysisMax 8 NChord)
+                            { analysisSettings =
+                                [ { analysis = EqualDivision
                                   , min = 5
                                   , max = 7
                                   }
-                                , { section = NChord
+                                , { analysis = NChord
                                   , min = 4
                                   , max = 6
                                   }

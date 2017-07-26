@@ -1,8 +1,8 @@
 module ScalarSetTheory.Msg exposing (..)
 
-import ScalarSetTheory.Sections.Section exposing (Section)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 
 
 type Msg
-    = UpdateSectionMin Int Section
-    | UpdateSectionMax Int Section
+    = UpdateAnalysisMin Int Analysis
+    | UpdateAnalysisMax Int Analysis

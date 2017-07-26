@@ -3,37 +3,37 @@ module ScalarSetTheory.Table.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (head, length, map, range)
 import Maybe exposing (withDefault)
+import ScalarSetTheory.Analyses.Analyses exposing (analysisChildrenValues)
+import ScalarSetTheory.Analyses.Analysis exposing (..)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getFirstAnalysisSetting, getNextAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Sections.Section exposing (..)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSettings, getFirstSectionSetting, getNextSectionSetting)
-import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, SectionValueStep)
-import ScalarSetTheory.Sections.Sections exposing (sectionChildrenValues)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
 tableBody : Model -> TableNode
 tableBody model =
     let
-        sectionSettings =
-            model.sectionSettings
+        analysisSettings =
+            model.analysisSettings
 
-        firstSectionSetting =
-            getFirstSectionSetting sectionSettings
+        firstAnalysisSetting =
+            getFirstAnalysisSetting analysisSettings
 
-        firstSection =
-            firstSectionSetting.section
+        firstAnalysis =
+            firstAnalysisSetting.analysis
 
-        sectionValuePath =
+        analysisValuePath =
             []
 
-        firstSectionRange =
-            range firstSectionSetting.min firstSectionSetting.max
+        firstAnalysisRange =
+            range firstAnalysisSetting.min firstAnalysisSetting.max
 
-        valuesWithTheirSectionForFirstSection =
-            map (\value -> SectionValueStep firstSection (toString value)) firstSectionRange
+        valuesWithTheirAnalysisForFirstAnalysis =
+            map (\value -> AnalysisValueStep firstAnalysis (toString value)) firstAnalysisRange
 
         cellChildren =
-            map (\cellChildSectionValueStep -> sectionValueStepToTableNode cellChildSectionValueStep sectionValuePath sectionSettings) valuesWithTheirSectionForFirstSection
+            map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings) valuesWithTheirAnalysisForFirstAnalysis
 
         childCount =
             length cellChildren
@@ -44,40 +44,40 @@ tableBody model =
         }
 
 
-sectionValueStepToTableNode : SectionValueStep -> SectionValuePath -> SectionSettings -> TableNode
-sectionValueStepToTableNode sectionValueStep sectionValuePath sectionSettings =
+analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode
+analysisValueStepToTableNode analysisValueStep analysisValuePath analysisSettings =
     let
-        maybeNextSectionSetting =
-            getNextSectionSetting sectionValueStep.section sectionSettings
+        maybeNextAnalysisSetting =
+            getNextAnalysisSetting analysisValueStep.analysis analysisSettings
     in
-    case maybeNextSectionSetting of
+    case maybeNextAnalysisSetting of
         Nothing ->
             TableNode
-                { cellItself = text sectionValueStep.value
+                { cellItself = text analysisValueStep.value
                 , cellChildren = []
                 }
 
-        Just nextSectionSetting ->
+        Just nextAnalysisSetting ->
             let
-                nextSection =
-                    nextSectionSetting.section
+                nextAnalysis =
+                    nextAnalysisSetting.analysis
 
-                nextSectionChildrenValuesGetter =
-                    sectionChildrenValues nextSection
+                nextAnalysisChildrenValuesGetter =
+                    analysisChildrenValues nextAnalysis
 
-                deeperSectionValuePath =
-                    sectionValuePath ++ [ sectionValueStep ]
+                deeperAnalysisValuePath =
+                    analysisValuePath ++ [ analysisValueStep ]
 
                 cellChildrenValues =
-                    nextSectionChildrenValuesGetter deeperSectionValuePath sectionSettings
+                    nextAnalysisChildrenValuesGetter deeperAnalysisValuePath analysisSettings
 
-                cellChildValuesWithTheirSection =
-                    map (\value -> SectionValueStep nextSection value) cellChildrenValues
+                cellChildValuesWithTheirAnalysis =
+                    map (\value -> AnalysisValueStep nextAnalysis value) cellChildrenValues
 
                 cellChildren =
-                    map (\cellChildSectionValueStep -> sectionValueStepToTableNode cellChildSectionValueStep deeperSectionValuePath sectionSettings) cellChildValuesWithTheirSection
+                    map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep deeperAnalysisValuePath analysisSettings) cellChildValuesWithTheirAnalysis
             in
             TableNode
-                { cellItself = text sectionValueStep.value
+                { cellItself = text analysisValueStep.value
                 , cellChildren = cellChildren
                 }

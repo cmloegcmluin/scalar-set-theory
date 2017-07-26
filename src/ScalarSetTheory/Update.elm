@@ -1,45 +1,45 @@
 module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.Section exposing (Section)
-import ScalarSetTheory.Sections.SectionSettings exposing (SectionSetting, SectionSettings)
 
 
-maybeUpdateSectionSettingMin : SectionSetting -> Section -> Int -> SectionSetting
-maybeUpdateSectionSettingMin oldSectionSetting sectionToUpdate newMin =
-    case oldSectionSetting.section == sectionToUpdate of
+maybeUpdateAnalysisSettingMin : AnalysisSetting -> Analysis -> Int -> AnalysisSetting
+maybeUpdateAnalysisSettingMin oldAnalysisSetting analysisToUpdate newMin =
+    case oldAnalysisSetting.analysis == analysisToUpdate of
         True ->
-            { oldSectionSetting | min = newMin }
+            { oldAnalysisSetting | min = newMin }
 
         False ->
-            oldSectionSetting
+            oldAnalysisSetting
 
 
-maybeUpdateSectionSettingMax : SectionSetting -> Section -> Int -> SectionSetting
-maybeUpdateSectionSettingMax oldSectionSetting sectionToUpdate newMax =
-    case oldSectionSetting.section == sectionToUpdate of
+maybeUpdateAnalysisSettingMax : AnalysisSetting -> Analysis -> Int -> AnalysisSetting
+maybeUpdateAnalysisSettingMax oldAnalysisSetting analysisToUpdate newMax =
+    case oldAnalysisSetting.analysis == analysisToUpdate of
         True ->
-            { oldSectionSetting | max = newMax }
+            { oldAnalysisSetting | max = newMax }
 
         False ->
-            oldSectionSetting
+            oldAnalysisSetting
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateSectionMin newMin section ->
+        UpdateAnalysisMin newMin analysis ->
             let
-                updatedSectionSetting =
-                    map (\oldSectionSetting -> maybeUpdateSectionSettingMin oldSectionSetting section newMin) model.sectionSettings
+                updatedAnalysisSetting =
+                    map (\oldAnalysisSetting -> maybeUpdateAnalysisSettingMin oldAnalysisSetting analysis newMin) model.analysisSettings
             in
-            { model | sectionSettings = updatedSectionSetting }
+            { model | analysisSettings = updatedAnalysisSetting }
 
-        UpdateSectionMax newMax section ->
+        UpdateAnalysisMax newMax analysis ->
             let
-                updatedSectionSetting =
-                    map (\oldSectionSetting -> maybeUpdateSectionSettingMax oldSectionSetting section newMax) model.sectionSettings
+                updatedAnalysisSetting =
+                    map (\oldAnalysisSetting -> maybeUpdateAnalysisSettingMax oldAnalysisSetting analysis newMax) model.analysisSettings
             in
-            { model | sectionSettings = updatedSectionSetting }
+            { model | analysisSettings = updatedAnalysisSetting }

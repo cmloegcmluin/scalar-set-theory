@@ -12,7 +12,6 @@ import ScalarSetTheory.Table.TableBody exposing (tableBody)
 import ScalarSetTheory.Table.TableHeaderRow exposing (tableHeaderRow)
 import ScalarSetTheory.Table.TableMaxRow exposing (tableMaxRow)
 import ScalarSetTheory.Table.TableMinRow exposing (tableMinRow)
-import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
 view : Model -> Html Msg

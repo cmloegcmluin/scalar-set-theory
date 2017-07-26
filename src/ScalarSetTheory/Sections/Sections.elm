@@ -1,11 +1,11 @@
 module ScalarSetTheory.Sections.Sections exposing (sectionChildrenValues, sectionNames, sectionRanges)
 
 import List exposing (range)
-import ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinValueWithItsSectionFilters)
-import ScalarSetTheory.Sections.NChord exposing (nChordsWithinValueWithItsSectionFilters)
+import ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinSectionValuePath)
+import ScalarSetTheory.Sections.NChord exposing (nChordsWithinSectionValuePath)
 import ScalarSetTheory.Sections.Section exposing (..)
 import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings)
-import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSectionFilters)
+import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath)
 
 
 sectionNames : Section -> String
@@ -28,11 +28,11 @@ sectionRanges section =
             range 2 100
 
 
-sectionChildrenValues : Section -> ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> List String
+sectionChildrenValues : Section -> SectionValuePath -> List SectionAndItsCurrentSettings -> List String
 sectionChildrenValues section =
     case section of
         EqualDivision ->
-            equalDivisionsWithinValueWithItsSectionFilters
+            equalDivisionsWithinSectionValuePath
 
         NChord ->
-            nChordsWithinValueWithItsSectionFilters
+            nChordsWithinSectionValuePath

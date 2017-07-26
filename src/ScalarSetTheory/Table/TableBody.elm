@@ -6,8 +6,8 @@ import Maybe exposing (withDefault)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections.Section exposing (..)
 import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getFirstSectionAndItsCurrentSettings, getNextSectionAndItsCurrentSettings)
+import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, SectionValueStep)
 import ScalarSetTheory.Sections.Sections exposing (sectionChildrenValues)
-import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSection, ValueWithItsSectionFilters)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
@@ -23,17 +23,17 @@ tableBody model =
         firstSection =
             firstSectionAndItsCurrentSettings.section
 
-        parentValueWithItsSectionFilters =
+        sectionValuePath =
             []
 
         firstSectionRange =
             range firstSectionAndItsCurrentSettings.min firstSectionAndItsCurrentSettings.max
 
         valuesWithTheirSectionForFirstSection =
-            map (\value -> ValueWithItsSection firstSection (toString value)) firstSectionRange
+            map (\value -> SectionValueStep firstSection (toString value)) firstSectionRange
 
         cellChildren =
-            map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings) valuesWithTheirSectionForFirstSection
+            map (\cellChildSectionValueStep -> sectionValueStepToTableNode cellChildSectionValueStep sectionValuePath sectionsAndTheirCurrentSettings) valuesWithTheirSectionForFirstSection
 
         childCount =
             length cellChildren
@@ -44,16 +44,16 @@ tableBody model =
         }
 
 
-valueWithItsSectionToCell : ValueWithItsSection -> ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> TableNode
-valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings =
+sectionValueStepToTableNode : SectionValueStep -> SectionValuePath -> List SectionAndItsCurrentSettings -> TableNode
+sectionValueStepToTableNode sectionValueStep sectionValuePath sectionsAndTheirCurrentSettings =
     let
         maybeNextSectionAndItsCurrentSettings =
-            getNextSectionAndItsCurrentSettings valueWithItsSection.section sectionsAndTheirCurrentSettings
+            getNextSectionAndItsCurrentSettings sectionValueStep.section sectionsAndTheirCurrentSettings
     in
     case maybeNextSectionAndItsCurrentSettings of
         Nothing ->
             TableNode
-                { cellItself = text valueWithItsSection.value
+                { cellItself = text sectionValueStep.value
                 , cellChildren = []
                 }
 
@@ -65,19 +65,19 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters s
                 nextSectionChildrenValuesGetter =
                     sectionChildrenValues nextSection
 
-                deeperParentValueWithItsSectionFilters =
-                    parentValueWithItsSectionFilters ++ [ valueWithItsSection ]
+                deeperSectionValuePath =
+                    sectionValuePath ++ [ sectionValueStep ]
 
                 cellChildrenValues =
-                    nextSectionChildrenValuesGetter deeperParentValueWithItsSectionFilters sectionsAndTheirCurrentSettings
+                    nextSectionChildrenValuesGetter deeperSectionValuePath sectionsAndTheirCurrentSettings
 
                 cellChildValuesWithTheirSection =
-                    map (\value -> ValueWithItsSection nextSection value) cellChildrenValues
+                    map (\value -> SectionValueStep nextSection value) cellChildrenValues
 
                 cellChildren =
-                    map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection deeperParentValueWithItsSectionFilters sectionsAndTheirCurrentSettings) cellChildValuesWithTheirSection
+                    map (\cellChildSectionValueStep -> sectionValueStepToTableNode cellChildSectionValueStep deeperSectionValuePath sectionsAndTheirCurrentSettings) cellChildValuesWithTheirSection
             in
             TableNode
-                { cellItself = text valueWithItsSection.value
+                { cellItself = text sectionValueStep.value
                 , cellChildren = cellChildren
                 }

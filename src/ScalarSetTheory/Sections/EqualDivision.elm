@@ -1,15 +1,15 @@
-module ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinValueWithItsSectionFilters)
+module ScalarSetTheory.Sections.EqualDivision exposing (equalDivisionsWithinSectionValuePath)
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Sections.Section exposing (..)
 import ScalarSetTheory.Sections.SectionAndItsCurrentSettings exposing (SectionAndItsCurrentSettings, getSectionAndItsCurrentSettingsBySection)
-import ScalarSetTheory.Sections.ValueWithItsSection exposing (ValueWithItsSectionFilters, getValueWithItsSectionFromValuesAndTheirSectionsByItsSection)
+import ScalarSetTheory.Sections.SectionValueStep exposing (SectionValuePath, findSectionValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-equalDivisionsWithinValueWithItsSectionFilters : ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> List String
-equalDivisionsWithinValueWithItsSectionFilters valueWithItsSectionFilters sectionsAndTheirCurrentSettings =
+equalDivisionsWithinSectionValuePath : SectionValuePath -> List SectionAndItsCurrentSettings -> List String
+equalDivisionsWithinSectionValuePath sectionValuePath sectionsAndTheirCurrentSettings =
     let
         edSectionAndItsCurrentSettings =
             getSectionAndItsCurrentSettingsBySection EqualDivision sectionsAndTheirCurrentSettings
@@ -21,9 +21,9 @@ equalDivisionsWithinValueWithItsSectionFilters valueWithItsSectionFilters sectio
             edSectionAndItsCurrentSettings.max
 
         nChordValue =
-            case getValueWithItsSectionFromValuesAndTheirSectionsByItsSection NChord valueWithItsSectionFilters of
-                Just nChordValueWithItsSection ->
-                    parseInt nChordValueWithItsSection.value
+            case findSectionValueStepInPath NChord sectionValuePath of
+                Just nChordSectionValueStep ->
+                    parseInt nChordSectionValueStep.value
 
                 Nothing ->
                     0

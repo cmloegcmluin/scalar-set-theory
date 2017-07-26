@@ -17,7 +17,7 @@ tableMinRow : Model -> TableNode
 tableMinRow model =
     tableRow
         ([ text "min" ]
-            ++ map sectionToMinDropdown (sectionAndMinPerSection model)
+            ++ map sectionToMinDropdown (sectionAndMinPerSection model.sectionsAndTheirCurrentSettings)
         )
 
 
@@ -43,15 +43,15 @@ minOnInputHandler newMin section =
     UpdateSectionMin (parseInt newMin) section
 
 
-sectionAndMinPerSection : Model -> List ( Section, Int )
-sectionAndMinPerSection model =
-    map (\sectionAndItsCurrentSettings -> sectionAndMin sectionAndItsCurrentSettings.section model) model.sectionsAndTheirCurrentSettings
+sectionAndMinPerSection : List SectionAndItsCurrentSettings -> List ( Section, Int )
+sectionAndMinPerSection sectionsAndTheirCurrentSettings =
+    map (\sectionAndItsCurrentSettings -> sectionAndMin sectionAndItsCurrentSettings.section sectionsAndTheirCurrentSettings) sectionsAndTheirCurrentSettings
 
 
-sectionAndMin : Section -> Model -> ( Section, Int )
-sectionAndMin section model =
+sectionAndMin : Section -> List SectionAndItsCurrentSettings -> ( Section, Int )
+sectionAndMin section sectionsAndTheirCurrentSettings =
     let
         sectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection section model.sectionsAndTheirCurrentSettings
+            getSectionAndItsCurrentSettingsBySection section sectionsAndTheirCurrentSettings
     in
     ( section, sectionAndItsCurrentSettings.min )

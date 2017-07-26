@@ -17,7 +17,7 @@ tableMaxRow : Model -> TableNode
 tableMaxRow model =
     tableRow
         ([ text "max" ]
-            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model)
+            ++ map sectionToMaxDropdown (sectionAndMaxPerSection model.sectionsAndTheirCurrentSettings)
         )
 
 
@@ -43,15 +43,15 @@ maxOnInputHandler newMax section =
     UpdateSectionMax (parseInt newMax) section
 
 
-sectionAndMaxPerSection : Model -> List ( Section, Int )
-sectionAndMaxPerSection model =
-    map (\sectionAndItsCurrentSettings -> sectionAndMax sectionAndItsCurrentSettings.section model) model.sectionsAndTheirCurrentSettings
+sectionAndMaxPerSection : List SectionAndItsCurrentSettings -> List ( Section, Int )
+sectionAndMaxPerSection sectionsAndTheirCurrentSettings =
+    map (\sectionAndItsCurrentSettings -> sectionAndMax sectionAndItsCurrentSettings.section sectionsAndTheirCurrentSettings) sectionsAndTheirCurrentSettings
 
 
-sectionAndMax : Section -> Model -> ( Section, Int )
-sectionAndMax section model =
+sectionAndMax : Section -> List SectionAndItsCurrentSettings -> ( Section, Int )
+sectionAndMax section sectionsAndTheirCurrentSettings =
     let
         sectionAndItsCurrentSettings =
-            getSectionAndItsCurrentSettingsBySection section model.sectionsAndTheirCurrentSettings
+            getSectionAndItsCurrentSettingsBySection section sectionsAndTheirCurrentSettings
     in
     ( section, sectionAndItsCurrentSettings.max )

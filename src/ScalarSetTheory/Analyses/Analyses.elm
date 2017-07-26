@@ -1,4 +1,4 @@
-module ScalarSetTheory.Analyses.Analyses exposing (analysisChildrenValues, analysisNames, analysisRanges)
+module ScalarSetTheory.Analyses.Analyses exposing (analysisChildrenValues, analysisName, analysisRange)
 
 import List exposing (range)
 import ScalarSetTheory.Analyses.Analysis exposing (..)
@@ -7,8 +7,8 @@ import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionsWithinAnal
 import ScalarSetTheory.Analyses.NChord exposing (nChordsWithinAnalysisValuePath)
 
 
-analysisNames : Analysis -> String
-analysisNames analysis =
+analysisName : Analysis -> String
+analysisName analysis =
     case analysis of
         EqualDivision ->
             "equal division"
@@ -17,8 +17,8 @@ analysisNames analysis =
             "n-chord"
 
 
-analysisRanges : Analysis -> List Int
-analysisRanges analysis =
+analysisRange : Analysis -> List Int
+analysisRange analysis =
     case analysis of
         EqualDivision ->
             range 3 100

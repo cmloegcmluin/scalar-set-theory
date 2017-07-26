@@ -6,7 +6,7 @@ import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.GetSectionData exposing (getSectionDataBySection)
+import ScalarSetTheory.Sections.GetSectionAndItsCurrentSettingsBySection exposing (getSectionAndItsCurrentSettingsBySection)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
@@ -46,13 +46,13 @@ maxOnInputHandler newMax section =
 
 sectionAndMaxPerSection : Model -> List ( Section, Int )
 sectionAndMaxPerSection model =
-    map (\sectionData -> sectionAndMax sectionData.section model) model.sectionData
+    map (\sectionAndItsCurrentSettings -> sectionAndMax sectionAndItsCurrentSettings.section model) model.sectionsAndTheirCurrentSettings
 
 
 sectionAndMax : Section -> Model -> ( Section, Int )
 sectionAndMax section model =
     let
-        sectionData =
-            getSectionDataBySection section model
+        sectionAndItsCurrentSettings =
+            getSectionAndItsCurrentSettingsBySection section model
     in
-    ( section, sectionData.max )
+    ( section, sectionAndItsCurrentSettings.max )

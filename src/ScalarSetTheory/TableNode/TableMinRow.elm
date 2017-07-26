@@ -6,7 +6,7 @@ import List exposing (map)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Sections.GetSectionData exposing (getSectionDataBySection)
+import ScalarSetTheory.Sections.GetSectionAndItsCurrentSettingsBySection exposing (getSectionAndItsCurrentSettingsBySection)
 import ScalarSetTheory.Sections.Sections exposing (..)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
@@ -46,13 +46,13 @@ minOnInputHandler newMin section =
 
 sectionAndMinPerSection : Model -> List ( Section, Int )
 sectionAndMinPerSection model =
-    map (\sectionData -> sectionAndMin sectionData.section model) model.sectionData
+    map (\sectionAndItsCurrentSettings -> sectionAndMin sectionAndItsCurrentSettings.section model) model.sectionsAndTheirCurrentSettings
 
 
 sectionAndMin : Section -> Model -> ( Section, Int )
 sectionAndMin section model =
     let
-        sectionData =
-            getSectionDataBySection section model
+        sectionAndItsCurrentSettings =
+            getSectionAndItsCurrentSettingsBySection section model
     in
-    ( section, sectionData.min )
+    ( section, sectionAndItsCurrentSettings.min )

@@ -1,4 +1,4 @@
-module ScalarSetTheory.Utilities exposing (inclusiveCount, parseInt)
+module ScalarSetTheory.Utilities exposing (find, inclusiveCount, parseInt)
 
 import Maybe exposing (withDefault)
 import Result exposing (toMaybe)
@@ -13,3 +13,16 @@ parseInt string =
 inclusiveCount : Int -> Int -> Int
 inclusiveCount min max =
     1 + max - min
+
+
+find : (a -> Bool) -> List a -> Maybe a
+find predicate list =
+    case list of
+        [] ->
+            Nothing
+
+        first :: rest ->
+            if predicate first then
+                Just first
+            else
+                find predicate rest

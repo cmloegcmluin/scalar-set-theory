@@ -11,4 +11,4 @@ import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 
 tableHeaderRow : Model -> TableNode
 tableHeaderRow model =
-    tableRow (map text ([ "section" ] ++ map sectionNamesFromData model.sectionData))
+    tableRow (map text ([ "section" ] ++ map sectionNamesFromSectionsAndTheirCurrentSettings model.sectionsAndTheirCurrentSettings))

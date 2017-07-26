@@ -5,13 +5,13 @@ import ScalarSetTheory.Sections.Sections exposing (..)
 
 
 type alias Model =
-    { sectionData : List SectionData }
+    { sectionsAndTheirCurrentSettings : List SectionAndItsCurrentSettings }
 
 
 model : Model
 model =
-    { sectionData =
-        [ SectionData Ed 3 3
-        , SectionData NChord 2 100
+    { sectionsAndTheirCurrentSettings =
+        [ SectionAndItsCurrentSettings Ed 3 3
+        , SectionAndItsCurrentSettings NChord 2 100
         ]
     }

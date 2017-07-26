@@ -16,13 +16,35 @@ sectionNames section =
             "nChord"
 
 
-sectionNamesFromData : SectionData -> String
-sectionNamesFromData sectionData =
-    sectionNames sectionData.section
+sectionNamesFromSectionsAndTheirCurrentSettings : SectionAndItsCurrentSettings -> String
+sectionNamesFromSectionsAndTheirCurrentSettings sectionAndItsCurrentSettings =
+    sectionNames sectionAndItsCurrentSettings.section
 
 
-type alias SectionData =
+type alias SectionAndItsCurrentSettings =
     { section : Section
     , min : Int
     , max : Int
     }
+
+
+type alias ValueWithItsSection =
+    { section : Section
+    , value : String
+    }
+
+
+
+-- the section is different in each one of these
+
+
+type alias ValueWithItsSectionFilters =
+    List ValueWithItsSection
+
+
+
+-- the section is the same in all of these
+
+
+type alias ValueWithItsSectionChildren =
+    List ValueWithItsSection

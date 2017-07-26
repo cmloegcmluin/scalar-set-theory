@@ -16,7 +16,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { sectionData =
+                        { sectionsAndTheirCurrentSettings =
                             [ { section = Ed
                               , min = 5
                               , max = 7
@@ -31,7 +31,7 @@ updateTests =
                     actual =
                         update
                             (UpdateSectionMin 5 Ed)
-                            { sectionData =
+                            { sectionsAndTheirCurrentSettings =
                                 [ { section = Ed
                                   , min = 7
                                   , max = 7
@@ -48,7 +48,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { sectionData =
+                        { sectionsAndTheirCurrentSettings =
                             [ { section = Ed
                               , min = 5
                               , max = 7
@@ -63,7 +63,7 @@ updateTests =
                     actual =
                         update
                             (UpdateSectionMax 8 NChord)
-                            { sectionData =
+                            { sectionsAndTheirCurrentSettings =
                                 [ { section = Ed
                                   , min = 5
                                   , max = 7

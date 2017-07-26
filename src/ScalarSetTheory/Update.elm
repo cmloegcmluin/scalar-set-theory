@@ -6,24 +6,24 @@ import ScalarSetTheory.Msg exposing (..)
 import ScalarSetTheory.Sections.Sections exposing (..)
 
 
-maybeUpdateSectionDataMin : SectionData -> Section -> Int -> SectionData
-maybeUpdateSectionDataMin oldSectionData sectionToUpdate newMin =
-    case oldSectionData.section == sectionToUpdate of
+maybeUpdateSectionAndItsCurrentSettingsMin : SectionAndItsCurrentSettings -> Section -> Int -> SectionAndItsCurrentSettings
+maybeUpdateSectionAndItsCurrentSettingsMin oldSectionAndItsCurrentSettings sectionToUpdate newMin =
+    case oldSectionAndItsCurrentSettings.section == sectionToUpdate of
         True ->
-            { oldSectionData | min = newMin }
+            { oldSectionAndItsCurrentSettings | min = newMin }
 
         False ->
-            oldSectionData
+            oldSectionAndItsCurrentSettings
 
 
-maybeUpdateSectionDataMax : SectionData -> Section -> Int -> SectionData
-maybeUpdateSectionDataMax oldSectionData sectionToUpdate newMax =
-    case oldSectionData.section == sectionToUpdate of
+maybeUpdateSectionAndItsCurrentSettingsMax : SectionAndItsCurrentSettings -> Section -> Int -> SectionAndItsCurrentSettings
+maybeUpdateSectionAndItsCurrentSettingsMax oldSectionAndItsCurrentSettings sectionToUpdate newMax =
+    case oldSectionAndItsCurrentSettings.section == sectionToUpdate of
         True ->
-            { oldSectionData | max = newMax }
+            { oldSectionAndItsCurrentSettings | max = newMax }
 
         False ->
-            oldSectionData
+            oldSectionAndItsCurrentSettings
 
 
 update : Msg -> Model -> Model
@@ -31,14 +31,14 @@ update msg model =
     case msg of
         UpdateSectionMin newMin section ->
             let
-                updatedSectionData =
-                    map (\oldSectionData -> maybeUpdateSectionDataMin oldSectionData section newMin) model.sectionData
+                updatedSectionAndItsCurrentSettings =
+                    map (\oldSectionAndItsCurrentSettings -> maybeUpdateSectionAndItsCurrentSettingsMin oldSectionAndItsCurrentSettings section newMin) model.sectionsAndTheirCurrentSettings
             in
-            { model | sectionData = updatedSectionData }
+            { model | sectionsAndTheirCurrentSettings = updatedSectionAndItsCurrentSettings }
 
         UpdateSectionMax newMax section ->
             let
-                updatedSectionData =
-                    map (\oldSectionData -> maybeUpdateSectionDataMax oldSectionData section newMax) model.sectionData
+                updatedSectionAndItsCurrentSettings =
+                    map (\oldSectionAndItsCurrentSettings -> maybeUpdateSectionAndItsCurrentSettingsMax oldSectionAndItsCurrentSettings section newMax) model.sectionsAndTheirCurrentSettings
             in
-            { model | sectionData = updatedSectionData }
+            { model | sectionsAndTheirCurrentSettings = updatedSectionAndItsCurrentSettings }

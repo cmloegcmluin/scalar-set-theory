@@ -14,8 +14,11 @@ import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 tableBody : Model -> TableNode
 tableBody model =
     let
+        sectionsAndTheirCurrentSettings =
+            model.sectionsAndTheirCurrentSettings
+
         firstSectionAndItsCurrentSettings =
-            getFirstSectionAndItsCurrentSettings model.sectionsAndTheirCurrentSettings
+            getFirstSectionAndItsCurrentSettings sectionsAndTheirCurrentSettings
 
         firstSection =
             firstSectionAndItsCurrentSettings.section
@@ -30,7 +33,7 @@ tableBody model =
             map (\value -> ValueWithItsSection firstSection (toString value)) firstSectionRange
 
         cellChildren =
-            map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection parentValueWithItsSectionFilters model) valuesWithTheirSectionForFirstSection
+            map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings) valuesWithTheirSectionForFirstSection
 
         childCount =
             length cellChildren
@@ -41,11 +44,11 @@ tableBody model =
         }
 
 
-valueWithItsSectionToCell : ValueWithItsSection -> ValueWithItsSectionFilters -> Model -> TableNode
-valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters model =
+valueWithItsSectionToCell : ValueWithItsSection -> ValueWithItsSectionFilters -> List SectionAndItsCurrentSettings -> TableNode
+valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters sectionsAndTheirCurrentSettings =
     let
         maybeNextSectionAndItsCurrentSettings =
-            getNextSectionAndItsCurrentSettings valueWithItsSection.section model.sectionsAndTheirCurrentSettings
+            getNextSectionAndItsCurrentSettings valueWithItsSection.section sectionsAndTheirCurrentSettings
     in
     case maybeNextSectionAndItsCurrentSettings of
         Nothing ->
@@ -66,13 +69,13 @@ valueWithItsSectionToCell valueWithItsSection parentValueWithItsSectionFilters m
                     parentValueWithItsSectionFilters ++ [ valueWithItsSection ]
 
                 cellChildrenValues =
-                    nextSectionChildrenValuesGetter deeperParentValueWithItsSectionFilters model.sectionsAndTheirCurrentSettings
+                    nextSectionChildrenValuesGetter deeperParentValueWithItsSectionFilters sectionsAndTheirCurrentSettings
 
                 cellChildValuesWithTheirSection =
                     map (\value -> ValueWithItsSection nextSection value) cellChildrenValues
 
                 cellChildren =
-                    map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection deeperParentValueWithItsSectionFilters model) cellChildValuesWithTheirSection
+                    map (\cellChildValueWithItsSection -> valueWithItsSectionToCell cellChildValueWithItsSection deeperParentValueWithItsSectionFilters sectionsAndTheirCurrentSettings) cellChildValuesWithTheirSection
             in
             TableNode
                 { cellItself = text valueWithItsSection.value

@@ -14,15 +14,6 @@ type alias SettingValues =
     List SettingValue
 
 
-updateSettingValues : SettingValues -> Setting -> Int -> SettingValues
-updateSettingValues settingValues setting newValue =
-    let
-        updateTargetSettingValue =
-            \oldSettingValue -> maybeUpdateSettingValue oldSettingValue setting newValue
-    in
-    map updateTargetSettingValue settingValues
-
-
 maybeUpdateSettingValue : SettingValue -> Setting -> Int -> SettingValue
 maybeUpdateSettingValue oldSettingValue settingToUpdate newValue =
     case oldSettingValue.setting == settingToUpdate of
@@ -31,3 +22,12 @@ maybeUpdateSettingValue oldSettingValue settingToUpdate newValue =
 
         False ->
             oldSettingValue
+
+
+updateSettingValues : SettingValues -> Setting -> Int -> SettingValues
+updateSettingValues settingValues setting newValue =
+    let
+        updateTargetSettingValue =
+            \oldSettingValue -> maybeUpdateSettingValue oldSettingValue setting newValue
+    in
+    map updateTargetSettingValue settingValues

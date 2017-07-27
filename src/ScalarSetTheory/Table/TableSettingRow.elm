@@ -52,6 +52,6 @@ settingDropdown setting analysisSettingValues =
             [ onInput handler ]
 
         options =
-            dropdownOptions analysis (toString selectedOption)
+            dropdownOptions analysisSettingValues setting (toString selectedOption)
     in
     select attributes options

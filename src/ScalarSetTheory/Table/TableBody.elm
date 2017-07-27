@@ -4,7 +4,7 @@ import Html exposing (text)
 import List exposing (head, length, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, getNextAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
@@ -12,27 +12,20 @@ import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 tableBody : Model -> TableNode
 tableBody model =
-    let
-        allAnalysisSettings =
-            model.analysisSettings
-
-        maybeAnalysisSetting =
-            head allAnalysisSettings
-    in
-    case maybeAnalysisSetting of
-        Nothing ->
+    case model.analysisSettings of
+        [] ->
             TableNode
                 { cellItself = text "0"
                 , cellChildren = []
                 }
 
-        Just thisAnalysisSetting ->
+        firstAnalysisSetting :: remainingAnalysisSettings ->
             let
                 analysisValuePath =
                     []
 
                 cellChildren =
-                    getCellChildren thisAnalysisSetting allAnalysisSettings analysisValuePath
+                    getCellChildren firstAnalysisSetting remainingAnalysisSettings analysisValuePath
             in
             TableNode
                 { cellItself = cellChildren |> length |> toString |> text
@@ -41,25 +34,21 @@ tableBody model =
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode
-analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath allAnalysisSettings =
-    let
-        maybeAnalysisSetting =
-            getNextAnalysisSetting analysisValueStep.analysis allAnalysisSettings
-    in
-    case maybeAnalysisSetting of
-        Nothing ->
+analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath remainingAnalysisSettings =
+    case remainingAnalysisSettings of
+        [] ->
             TableNode
                 { cellItself = text analysisValueStep.value
                 , cellChildren = []
                 }
 
-        Just thisAnalysisSetting ->
+        thisAnalysisSetting :: remainingAnalysisSettings ->
             let
                 analysisValuePath =
                     previousAnalysisValuePath ++ [ analysisValueStep ]
 
                 cellChildren =
-                    getCellChildren thisAnalysisSetting allAnalysisSettings analysisValuePath
+                    getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath
             in
             TableNode
                 { cellItself = text analysisValueStep.value
@@ -68,7 +57,7 @@ analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath allAnal
 
 
 getCellChildren : AnalysisSetting -> AnalysisSettings -> AnalysisValuePath -> List TableNode
-getCellChildren thisAnalysisSetting allAnalysisSettings analysisValuePath =
+getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath =
     let
         cellChildrenValues =
             getCellChildrenValues thisAnalysisSetting analysisValuePath
@@ -80,7 +69,7 @@ getCellChildren thisAnalysisSetting allAnalysisSettings analysisValuePath =
             map convertValuesToAnalysisValueSteps cellChildrenValues
 
         convertAnalysisValueStepsToTableNodesWhichMayRecurse =
-            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath allAnalysisSettings
+            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath remainingAnalysisSettings
     in
     map convertAnalysisValueStepsToTableNodesWhichMayRecurse cellChildAnalysisValueSteps
 

@@ -3,7 +3,6 @@ module ScalarSetTheory.Table.TableMaxRow exposing (maxDropdown, tableMaxRow)
 import Html exposing (Html, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
@@ -20,7 +19,7 @@ tableMaxRow model =
             map maxDropdown model.analysisSettings
 
         maxDropdownsPlusMaxHeading =
-            [ text "max" ] ++ maxDropdowns
+            text "max" :: maxDropdowns
     in
     tableRow maxDropdownsPlusMaxHeading
 

@@ -1,9 +1,12 @@
 module ScalarSetTheory.Styles.TableStyles exposing (tableCellAndChildren, tableCellChildrenContainer, tableCellItself, tableStyle)
 
-import Css exposing (alignItems, borderBottom3, borderLeft3, borderRight3, borderTop3, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, margin, px, rem, rgb, solid, stretch, width)
+import Css exposing (alignItems, borderBottom3, borderLeft3, borderRight3, borderTop3, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, px, rgb, solid, stretch, width)
+import Html exposing (Attribute)
+import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Styles.Styles exposing (styles)
 
 
+tableCellAndChildren : Attribute Msg
 tableCellAndChildren =
     styles
         [ displayFlex
@@ -11,6 +14,7 @@ tableCellAndChildren =
         ]
 
 
+tableCellItself : Attribute Msg
 tableCellItself =
     styles
         [ borderRight3 (px 1) solid (rgb 128 128 128)
@@ -22,6 +26,7 @@ tableCellItself =
         ]
 
 
+tableCellChildrenContainer : Attribute Msg
 tableCellChildrenContainer =
     styles
         [ displayFlex
@@ -29,6 +34,7 @@ tableCellChildrenContainer =
         ]
 
 
+tableStyle : Attribute Msg
 tableStyle =
     styles
         [ borderTop3 (px 1) solid (rgb 128 128 128)

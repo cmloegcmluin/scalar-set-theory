@@ -1,6 +1,5 @@
 module ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 
-import List exposing (range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
 import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionsWithinAnalysisValuePath)

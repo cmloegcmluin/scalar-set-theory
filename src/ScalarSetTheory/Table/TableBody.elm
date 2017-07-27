@@ -1,8 +1,7 @@
 module ScalarSetTheory.Table.TableBody exposing (tableBody)
 
 import Html exposing (text)
-import List exposing (head, length, map, range)
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import List exposing (length, map, range)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
@@ -34,8 +33,8 @@ tableBody model =
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode
-analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath remainingAnalysisSettings =
-    case remainingAnalysisSettings of
+analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingAnalysisSettings =
+    case previousRemainingAnalysisSettings of
         [] ->
             TableNode
                 { cellItself = text analysisValueStep.value

@@ -1,7 +1,6 @@
 module ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
-import Html exposing (Html, text)
-import List exposing (map)
+import Html exposing (Html)
 import ScalarSetTheory.Msg exposing (Msg)
 
 

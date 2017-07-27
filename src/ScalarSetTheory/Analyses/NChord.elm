@@ -1,6 +1,6 @@
 module ScalarSetTheory.Analyses.NChord exposing (nChordsWithinAnalysisValuePath)
 
-import List exposing (foldr, map, range)
+import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision))
 import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)

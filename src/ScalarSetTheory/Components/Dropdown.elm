@@ -1,6 +1,6 @@
 module ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 
-import Html exposing (Attribute, Html, option, text)
+import Html exposing (Html, option, text)
 import Html.Attributes exposing (selected, value)
 import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)

@@ -2,7 +2,7 @@ module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax, UpdateAnalysisMin))
 

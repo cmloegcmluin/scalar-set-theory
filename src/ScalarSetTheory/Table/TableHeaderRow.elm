@@ -1,10 +1,9 @@
 module ScalarSetTheory.Table.TableHeaderRow exposing (tableHeaderRow)
 
-import Html exposing (Html, div, text)
+import Html exposing (text)
 import List exposing (map)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 
@@ -22,7 +21,7 @@ tableHeaderRow model =
             map .name analysisPropertiesInOrder
 
         analysisNamesPlusAnalysisHeading =
-            [ "analysis" ] ++ analysisNames
+            "analysis" :: analysisNames
 
         analysisNamesPlusAnalysisHeadingAsHtml =
             map text analysisNamesPlusAnalysisHeading

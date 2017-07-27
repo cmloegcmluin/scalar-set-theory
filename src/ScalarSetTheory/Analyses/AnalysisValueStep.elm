@@ -17,10 +17,7 @@ type alias AnalysisValuePath =
 findAnalysisValueStepInPath : Analysis -> AnalysisValuePath -> Maybe AnalysisValueStep
 findAnalysisValueStepInPath analysis analysisValuePath =
     let
-        analysisValueStepIsForAnalysis =
-            \analysisValueStep analysis -> analysisValueStep.analysis == analysis
-
         stepIsForAnalysis =
-            \analysisValueStep -> analysisValueStepIsForAnalysis analysisValueStep analysis
+            \analysisValueStep -> analysisValueStep.analysis == analysis
     in
     find stepIsForAnalysis analysisValuePath

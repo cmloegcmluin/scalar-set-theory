@@ -3,7 +3,6 @@ module ScalarSetTheory.Table.TableMinRow exposing (minDropdown, tableMinRow)
 import Html exposing (Html, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
@@ -20,7 +19,7 @@ tableMinRow model =
             map minDropdown model.analysisSettings
 
         minDropdownsPlusMinHeading =
-            [ text "min" ] ++ minDropdowns
+            text "min" :: minDropdowns
     in
     tableRow minDropdownsPlusMinHeading
 

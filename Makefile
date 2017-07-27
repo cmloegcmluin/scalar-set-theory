@@ -16,5 +16,8 @@ unit:
 integration:
 	elm-reactor -p 8001 & lsof -ti:4444 | xargs kill && cd integration-tests && npm test
 
+analyse:
+	elm-analyse
+	
 setup:
-	elm-package install -y && cd integration-tests && npm i && cd ../tests && elm-package install -y && cd elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/ && npm i && export PATH=$PATH:~\workspace\scalar-set-theory\tests\elm-stuff\packages\rtfeldman\node-test-runner\3.0.0\bin && npm config set msvs_version 2017
+	elm-package install -y && cd integration-tests && npm i && cd ../tests && elm-package install -y && cd elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/ && npm i && export PATH=$PATH:~\workspace\scalar-set-theory\tests\elm-stuff\packages\rtfeldman\node-test-runner\3.0.0\bin && npm config set msvs_version 2017 && npm i -g elm-analyse

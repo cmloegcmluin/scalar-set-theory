@@ -2,12 +2,12 @@ module ScalarSetTheory.Analyses.NChord exposing (nChordsWithinAnalysisValuePath)
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision))
-import ScalarSetTheory.Analyses.AnalysisChildrenValues exposing (AnalysisChildrenValues)
+import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-nChordsWithinAnalysisValuePath : AnalysisChildrenValues
+nChordsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
 nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
     let
         nChordMin =

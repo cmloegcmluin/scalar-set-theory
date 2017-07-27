@@ -2,12 +2,12 @@ module ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionsWithinAnal
 
 import List exposing (foldr, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(NChord))
-import ScalarSetTheory.Analyses.AnalysisChildrenValues exposing (AnalysisChildrenValues)
+import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-equalDivisionsWithinAnalysisValuePath : AnalysisChildrenValues
+equalDivisionsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
 equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
     let
         equalDivisionMin =

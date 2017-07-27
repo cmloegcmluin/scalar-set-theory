@@ -1,16 +1,16 @@
-module ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValues)
+module ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValuesGetter)
 
 import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(NChord))
-import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
+import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
 import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-equalDivisionChildValues : AnalysisValuePathChildValues
-equalDivisionChildValues analysisValuePath equalDivisionSettingValues =
+equalDivisionChildValuesGetter : AnalysisValuePathChildValuesGetter
+equalDivisionChildValuesGetter analysisValuePath equalDivisionSettingValues =
     let
         equalDivisionMin =
             getValueOfSetting equalDivisionSettingValues Min

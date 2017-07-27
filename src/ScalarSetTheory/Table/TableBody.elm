@@ -5,7 +5,8 @@ import List exposing (length, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
-import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValuePathChildValues, AnalysisValueStep)
+import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
+import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
@@ -103,11 +104,11 @@ getAnalysisValuePathChildValues analysisValuePath thisAnalysisSettingValues =
                 analysisProperties =
                     getAnalysisProperties thisAnalysisSettingValues.analysis
 
-                analysisValuePathChildValues =
-                    analysisProperties.analysisValuePathChildValues
+                analysisValuePathChildValuesGetter =
+                    analysisProperties.analysisValuePathChildValuesGetter
 
                 childValues =
-                    analysisValuePathChildValues analysisValuePath thisAnalysisSettingValues
+                    analysisValuePathChildValuesGetter analysisValuePath thisAnalysisSettingValues
 
                 analysis =
                     thisAnalysisSettingValues.analysis

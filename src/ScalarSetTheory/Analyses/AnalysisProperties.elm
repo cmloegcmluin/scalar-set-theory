@@ -1,9 +1,9 @@
 module ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
-import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
-import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValues)
-import ScalarSetTheory.Analyses.NChord exposing (nChordChildValues)
+import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValuesGetter)
+import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValuesGetter)
+import ScalarSetTheory.Analyses.NChord exposing (nChordChildValuesGetter)
 
 
 type alias AnalysisProperties =
@@ -12,7 +12,7 @@ type alias AnalysisProperties =
     , ultimateMax : Int
     , initialMin : Int
     , initialMax : Int
-    , analysisValuePathChildValues : AnalysisValuePathChildValues
+    , analysisValuePathChildValuesGetter : AnalysisValuePathChildValuesGetter
     }
 
 
@@ -33,7 +33,7 @@ equalDivisionProperties =
     , ultimateMax = 100
     , initialMin = 3
     , initialMax = 3
-    , analysisValuePathChildValues = equalDivisionChildValues
+    , analysisValuePathChildValuesGetter = equalDivisionChildValuesGetter
     }
 
 
@@ -44,5 +44,5 @@ nChordProperties =
     , ultimateMax = 100
     , initialMin = 2
     , initialMax = 100
-    , analysisValuePathChildValues = nChordChildValues
+    , analysisValuePathChildValuesGetter = nChordChildValuesGetter
     }

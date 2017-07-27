@@ -1,13 +1,13 @@
 module ScalarSetTheoryTests.Analyses.EqualDivisionTests exposing (equalDivisionTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValues)
+import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValuesGetter)
 import Test exposing (Test, describe, test)
 
 
 equalDivisionTests : Test
 equalDivisionTests =
-    describe "equal division child values"
+    describe "equal division child values getter"
         [ test "" <|
             \() ->
                 let

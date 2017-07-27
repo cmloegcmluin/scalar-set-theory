@@ -2,9 +2,8 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Analyses.Analysis exposing (..)
-import ScalarSetTheory.Msg exposing (..)
-import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax, UpdateAnalysisMin))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
 

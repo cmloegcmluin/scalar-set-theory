@@ -1,11 +1,11 @@
-module Tests exposing (..)
+module Tests exposing (all)
 
 import Expect
 import ScalarSetTheory.Main exposing (main)
 import ScalarSetTheoryTests.Components.DropdownTests exposing (dropdownTests)
 import ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 import ScalarSetTheoryTests.UtilitiesTests exposing (utilitiesTests)
-import Test exposing (..)
+import Test exposing (Test, describe)
 
 
 all : Test

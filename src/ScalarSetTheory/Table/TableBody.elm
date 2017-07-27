@@ -2,7 +2,7 @@ module ScalarSetTheory.Table.TableBody exposing (tableBody)
 
 import Html exposing (text)
 import List exposing (head, length, map, range)
-import ScalarSetTheory.Analyses.Analysis exposing (..)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getNextAnalysisSetting)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)

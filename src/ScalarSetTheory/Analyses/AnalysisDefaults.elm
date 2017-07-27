@@ -1,6 +1,6 @@
 module ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettings)
 
-import ScalarSetTheory.Analyses.Analysis exposing (..)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 

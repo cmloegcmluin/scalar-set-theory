@@ -4,7 +4,7 @@ import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (..)
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax, UpdateAnalysisMin))
 
 
 maybeUpdateAnalysisSettingMin : AnalysisSetting -> Analysis -> Int -> AnalysisSetting

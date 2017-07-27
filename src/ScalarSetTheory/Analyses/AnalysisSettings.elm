@@ -1,8 +1,7 @@
-module ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, defaultAnalysisSettings, getNextAnalysisSetting)
+module ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, getNextAnalysisSetting)
 
 import List exposing (head)
-import Maybe exposing (withDefault)
-import ScalarSetTheory.Analyses.Analysis exposing (..)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Utilities exposing (find)
 
 
@@ -28,10 +27,3 @@ getNextAnalysisSetting analysis analysisSettings =
                 head rest
             else
                 getNextAnalysisSetting analysis rest
-
-
-defaultAnalysisSettings : AnalysisSettings
-defaultAnalysisSettings =
-    [ AnalysisSetting EqualDivision 3 3
-    , AnalysisSetting NChord 2 100
-    ]

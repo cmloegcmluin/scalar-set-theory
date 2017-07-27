@@ -50,10 +50,10 @@ tableBody model =
                     map convertAnalysisValueStepsToTableNodes analysisValueStepsForFirstAnalysis
 
                 childCount =
-                    length cellChildren
+                    cellChildren |> length |> toString |> text
             in
             TableNode
-                { cellItself = text (toString childCount)
+                { cellItself = childCount
                 , cellChildren = cellChildren
                 }
 

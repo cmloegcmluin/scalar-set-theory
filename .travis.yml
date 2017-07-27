@@ -1,0 +1,3 @@
+language: elm
+script:
+    - make test

@@ -17,7 +17,9 @@ tableCellAndChildren =
 tableCellItself : Attribute Msg
 tableCellItself =
     styles
-        [ borderRight3 (px 1) solid (rgb 128 128 128)
+        [ borderTop3 (px 1) solid (rgb 128 128 128)
+        , borderLeft3 (px 1) solid (rgb 128 128 128)
+        , borderRight3 (px 1) solid (rgb 128 128 128)
         , borderBottom3 (px 1) solid (rgb 128 128 128)
         , displayFlex
         , alignItems center
@@ -37,7 +39,5 @@ tableCellChildrenContainer =
 tableStyle : Attribute Msg
 tableStyle =
     styles
-        [ borderTop3 (px 1) solid (rgb 128 128 128)
-        , borderLeft3 (px 1) solid (rgb 128 128 128)
-        , display inlineBlock
+        [ display inlineBlock
         ]

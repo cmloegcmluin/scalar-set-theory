@@ -1,14 +1,10 @@
-module ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+module ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Settings.SettingValue exposing (SettingValues)
 
 
-type alias AnalysisSetting =
+type alias AnalysisSettingValues =
     { analysis : Analysis
     , settingValues : SettingValues
     }
-
-
-type alias AnalysisSettings =
-    List AnalysisSetting

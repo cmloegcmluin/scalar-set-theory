@@ -1,14 +1,14 @@
-module ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettings)
+module ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettingValues)
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Settings.SettingValue exposing (SettingValue)
 
 
-defaultAnalysisSettings : AnalysisSettings
-defaultAnalysisSettings =
+defaultAnalysisSettingValues : List AnalysisSettingValues
+defaultAnalysisSettingValues =
     let
         equalDivisionProperties =
             getAnalysisProperties EqualDivision
@@ -26,6 +26,6 @@ defaultAnalysisSettings =
             , SettingValue Max nChordProperties.initialMax
             ]
     in
-    [ AnalysisSetting EqualDivision equalDivisionSettingValues
-    , AnalysisSetting NChord nChordSettingValues
+    [ AnalysisSettingValues EqualDivision equalDivisionSettingValues
+    , AnalysisSettingValues NChord nChordSettingValues
     ]

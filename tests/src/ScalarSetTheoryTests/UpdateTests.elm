@@ -3,7 +3,7 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 import Expect exposing (equal)
 import Html exposing (text)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Settings.SettingValue exposing (SettingValue)
 import ScalarSetTheory.Update exposing (update)
@@ -17,7 +17,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { analysisSettings =
+                        { activeAnalysisSettingValues =
                             [ { analysis = EqualDivision
                               , settingValues =
                                     [ SettingValue Min 5
@@ -35,8 +35,8 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSetting Min 5 EqualDivision)
-                            { analysisSettings =
+                            (UpdateAnalysisSettingValue Min 5 EqualDivision)
+                            { activeAnalysisSettingValues =
                                 [ { analysis = EqualDivision
                                   , settingValues =
                                         [ SettingValue Min 7
@@ -57,7 +57,7 @@ updateTests =
             \() ->
                 let
                     expected =
-                        { analysisSettings =
+                        { activeAnalysisSettingValues =
                             [ { analysis = EqualDivision
                               , settingValues =
                                     [ SettingValue Min 5
@@ -75,8 +75,8 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSetting Max 8 NChord)
-                            { analysisSettings =
+                            (UpdateAnalysisSettingValue Max 8 NChord)
+                            { activeAnalysisSettingValues =
                                 [ { analysis = EqualDivision
                                   , settingValues =
                                         [ SettingValue Min 5

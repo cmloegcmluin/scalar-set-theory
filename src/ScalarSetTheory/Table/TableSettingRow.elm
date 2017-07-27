@@ -3,10 +3,10 @@ module ScalarSetTheory.Table.TableSettingRow exposing (settingDropdown, tableSet
 import Html exposing (Html, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
 import ScalarSetTheory.Settings.Setting exposing (Setting)
 import ScalarSetTheory.Settings.SettingProperties exposing (getSettingProperties)
 import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
@@ -25,10 +25,10 @@ tableSettingRow setting model =
             settingProperties.name
 
         settingDropdownUsingSettingField =
-            \analysisSetting -> settingDropdown setting analysisSetting
+            \activeAnalysisSettingValues -> settingDropdown setting activeAnalysisSettingValues
 
         settingDropdowns =
-            map settingDropdownUsingSettingField model.analysisSettings
+            map settingDropdownUsingSettingField model.activeAnalysisSettingValues
 
         settingDropdownsPlusSettingHeading =
             text settingName :: settingDropdowns
@@ -36,7 +36,7 @@ tableSettingRow setting model =
     tableRow settingDropdownsPlusSettingHeading
 
 
-settingDropdown : Setting -> AnalysisSetting -> Html Msg
+settingDropdown : Setting -> AnalysisSettingValues -> Html Msg
 settingDropdown setting analysisSetting =
     let
         maybeSelectedOption =
@@ -54,7 +54,7 @@ settingDropdown setting analysisSetting =
             analysisSetting.analysis
 
         handler =
-            \newSetting -> UpdateAnalysisSetting setting (parseInt newSetting) analysis
+            \newSetting -> UpdateAnalysisSettingValue setting (parseInt newSetting) analysis
 
         attributes =
             [ onInput handler ]

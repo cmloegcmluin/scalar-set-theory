@@ -12,7 +12,7 @@ tableHeaderRow : Model -> TableNode
 tableHeaderRow model =
     let
         analysesInOrder =
-            map .analysis model.analysisSettings
+            map .analysis model.activeAnalysisSettingValues
 
         analysisPropertiesInOrder =
             map getAnalysisProperties analysesInOrder

@@ -1,14 +1,14 @@
 module ScalarSetTheory.Model exposing (Model, model)
 
-import ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettings)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettingValues)
+import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 
 
 type alias Model =
-    { analysisSettings : AnalysisSettings }
+    { activeAnalysisSettingValues : List AnalysisSettingValues }
 
 
 model : Model
 model =
-    { analysisSettings = defaultAnalysisSettings
+    { activeAnalysisSettingValues = defaultAnalysisSettingValues
     }

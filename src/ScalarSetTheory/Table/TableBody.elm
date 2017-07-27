@@ -3,7 +3,7 @@ module ScalarSetTheory.Table.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (length, map, range)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
@@ -13,7 +13,7 @@ import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 tableBody : Model -> TableNode
 tableBody model =
-    case model.analysisSettings of
+    case model.activeAnalysisSettingValues of
         [] ->
             TableNode
                 { cellItself = text "0"
@@ -34,7 +34,7 @@ tableBody model =
                 }
 
 
-analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode
+analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> List AnalysisSettingValues -> TableNode
 analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingAnalysisSettings =
     case previousRemainingAnalysisSettings of
         [] ->
@@ -57,7 +57,7 @@ analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previou
                 }
 
 
-getCellChildren : AnalysisSetting -> AnalysisSettings -> AnalysisValuePath -> List TableNode
+getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode
 getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath =
     let
         cellChildrenValues =
@@ -75,7 +75,7 @@ getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath 
     map convertAnalysisValueStepsToTableNodesWhichMayRecurse cellChildAnalysisValueSteps
 
 
-getCellChildrenValues : AnalysisSetting -> AnalysisValuePath -> List String
+getCellChildrenValues : AnalysisSettingValues -> AnalysisValuePath -> List String
 getCellChildrenValues thisAnalysisSetting analysisValuePath =
     case length analysisValuePath of
         0 ->

@@ -2,14 +2,14 @@ module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
 import ScalarSetTheory.Settings.Setting exposing (Setting)
 import ScalarSetTheory.Settings.SettingValue exposing (updateSettingValues)
 
 
-maybeUpdateAnalysisSettingField : AnalysisSetting -> Analysis -> Setting -> Int -> AnalysisSetting
+maybeUpdateAnalysisSettingField : AnalysisSettingValues -> Analysis -> Setting -> Int -> AnalysisSettingValues
 maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting =
     case oldAnalysisSetting.analysis == analysisToUpdate of
         True ->
@@ -22,12 +22,12 @@ maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpd
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateAnalysisSetting settingToUpdate newSetting analysisToUpdate ->
+        UpdateAnalysisSettingValue settingToUpdate newSetting analysisToUpdate ->
             let
-                updateTargetAnalysis =
-                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting
+                updateTargetAnalysisSettingValues =
+                    \oldAnalysisSettingValues -> maybeUpdateAnalysisSettingField oldAnalysisSettingValues analysisToUpdate settingToUpdate newSetting
 
-                updatedAnalysisSettings =
-                    map updateTargetAnalysis model.analysisSettings
+                updatedAnalysisSettingValues =
+                    map updateTargetAnalysisSettingValues model.activeAnalysisSettingValues
             in
-            { model | analysisSettings = updatedAnalysisSettings }
+            { model | activeAnalysisSettingValues = updatedAnalysisSettingValues }

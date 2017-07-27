@@ -13,7 +13,7 @@ nChordsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
 nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
     let
         maybeNChordMinSettingValue =
-            getSettingValue nChordSetting.settings Min
+            getSettingValue nChordSetting.settingValues Min
 
         nChordMin =
             case maybeNChordMinSettingValue of
@@ -24,7 +24,7 @@ nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
                     nChordMinSettingValue.value
 
         maybeNChordMaxSettingValue =
-            getSettingValue nChordSetting.settings Max
+            getSettingValue nChordSetting.settingValues Max
 
         nChordMax =
             case maybeNChordMaxSettingValue of

@@ -13,7 +13,7 @@ maybeUpdateAnalysisSettingField : AnalysisSetting -> Analysis -> Setting -> Int 
 maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting =
     case oldAnalysisSetting.analysis == analysisToUpdate of
         True ->
-            { oldAnalysisSetting | settings = updateSettingValues oldAnalysisSetting.settings settingToUpdate newSetting }
+            { oldAnalysisSetting | settingValues = updateSettingValues oldAnalysisSetting.settingValues settingToUpdate newSetting }
 
         False ->
             oldAnalysisSetting

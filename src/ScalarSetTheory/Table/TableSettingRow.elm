@@ -40,7 +40,7 @@ settingDropdown : Setting -> AnalysisSetting -> Html Msg
 settingDropdown setting analysisSetting =
     let
         maybeSelectedOption =
-            getSettingValue analysisSetting.settings setting
+            getSettingValue analysisSetting.settingValues setting
 
         selectedOption =
             case maybeSelectedOption of

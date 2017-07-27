@@ -6,7 +6,7 @@ import ScalarSetTheory.Settings.SettingValue exposing (SettingValues)
 
 type alias AnalysisSetting =
     { analysis : Analysis
-    , settings : SettingValues
+    , settingValues : SettingValues
     }
 
 

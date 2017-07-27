@@ -81,7 +81,7 @@ getCellChildrenValues thisAnalysisSetting analysisValuePath =
         0 ->
             let
                 maybeThisAnalysisSettingMinSettingValue =
-                    getSettingValue thisAnalysisSetting.settings Min
+                    getSettingValue thisAnalysisSetting.settingValues Min
 
                 thisAnalysisSettingMin =
                     case maybeThisAnalysisSettingMinSettingValue of
@@ -92,7 +92,7 @@ getCellChildrenValues thisAnalysisSetting analysisValuePath =
                             thisAnalysisSettingMinSettingValue.value
 
                 maybeThisAnalysisSettingMaxSettingValue =
-                    getSettingValue thisAnalysisSetting.settings Max
+                    getSettingValue thisAnalysisSetting.settingValues Max
 
                 thisAnalysisSettingMax =
                     case maybeThisAnalysisSettingMaxSettingValue of

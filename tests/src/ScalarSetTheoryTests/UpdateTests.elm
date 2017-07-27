@@ -19,13 +19,13 @@ updateTests =
                     expected =
                         { analysisSettings =
                             [ { analysis = EqualDivision
-                              , settings =
+                              , settingValues =
                                     [ SettingValue Min 5
                                     , SettingValue Max 7
                                     ]
                               }
                             , { analysis = NChord
-                              , settings =
+                              , settingValues =
                                     [ SettingValue Min 4
                                     , SettingValue Max 6
                                     ]
@@ -38,13 +38,13 @@ updateTests =
                             (UpdateAnalysisSetting Min 5 EqualDivision)
                             { analysisSettings =
                                 [ { analysis = EqualDivision
-                                  , settings =
+                                  , settingValues =
                                         [ SettingValue Min 7
                                         , SettingValue Max 7
                                         ]
                                   }
                                 , { analysis = NChord
-                                  , settings =
+                                  , settingValues =
                                         [ SettingValue Min 4
                                         , SettingValue Max 6
                                         ]
@@ -59,13 +59,13 @@ updateTests =
                     expected =
                         { analysisSettings =
                             [ { analysis = EqualDivision
-                              , settings =
+                              , settingValues =
                                     [ SettingValue Min 5
                                     , SettingValue Max 7
                                     ]
                               }
                             , { analysis = NChord
-                              , settings =
+                              , settingValues =
                                     [ SettingValue Min 4
                                     , SettingValue Max 8
                                     ]
@@ -78,13 +78,13 @@ updateTests =
                             (UpdateAnalysisSetting Max 8 NChord)
                             { analysisSettings =
                                 [ { analysis = EqualDivision
-                                  , settings =
+                                  , settingValues =
                                         [ SettingValue Min 5
                                         , SettingValue Max 7
                                         ]
                                   }
                                 , { analysis = NChord
-                                  , settings =
+                                  , settingValues =
                                         [ SettingValue Min 4
                                         , SettingValue Max 6
                                         ]

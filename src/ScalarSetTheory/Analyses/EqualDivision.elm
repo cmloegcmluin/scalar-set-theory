@@ -12,22 +12,22 @@ import ScalarSetTheory.Utilities exposing (parseInt)
 equalDivisionsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
 equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
     let
-        maybeEqualDivisionMin =
-            getSettingValue equalDivisionSetting.settings Min
+        maybeEqualDivisionMinSettingValue =
+            getSettingValue equalDivisionSetting.settingValues Min
 
         equalDivisionMin =
-            case maybeEqualDivisionMin of
+            case maybeEqualDivisionMinSettingValue of
                 Nothing ->
                     0
 
                 Just equalDivisionMinSettingValue ->
                     equalDivisionMinSettingValue.value
 
-        maybeEqualDivisionMax =
-            getSettingValue equalDivisionSetting.settings Max
+        maybeEqualDivisionMaxSettingValue =
+            getSettingValue equalDivisionSetting.settingValues Max
 
         equalDivisionMax =
-            case maybeEqualDivisionMax of
+            case maybeEqualDivisionMaxSettingValue of
                 Nothing ->
                     0
 

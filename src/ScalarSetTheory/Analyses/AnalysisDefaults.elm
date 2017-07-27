@@ -1,4 +1,4 @@
-module ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultAnalysisSettingValues)
+module ScalarSetTheory.Analyses.AnalysisDefaults exposing (defaultActiveAnalysisSettingValues)
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
@@ -7,8 +7,8 @@ import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Settings.SettingValue exposing (SettingValue)
 
 
-defaultAnalysisSettingValues : List AnalysisSettingValues
-defaultAnalysisSettingValues =
+defaultActiveAnalysisSettingValues : List AnalysisSettingValues
+defaultActiveAnalysisSettingValues =
     let
         equalDivisionProperties =
             getAnalysisProperties EqualDivision

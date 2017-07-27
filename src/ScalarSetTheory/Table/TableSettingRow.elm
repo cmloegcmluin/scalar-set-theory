@@ -46,7 +46,7 @@ settingDropdown setting analysisSettingValues =
             analysisSettingValues.analysis
 
         handler =
-            \newSetting -> UpdateAnalysisSettingValue setting (parseInt newSetting) analysis
+            \newValue -> UpdateAnalysisSettingValue analysis setting (parseInt newValue)
 
         attributes =
             [ onInput handler ]

@@ -20,13 +20,13 @@ tableBody model =
                 , cellChildren = []
                 }
 
-        firstAnalysisSetting :: remainingAnalysisSettings ->
+        firstActiveAnalysisSetting :: remainingActiveAnalysisSettings ->
             let
                 analysisValuePath =
                     []
 
                 cellChildren =
-                    getCellChildren firstAnalysisSetting remainingAnalysisSettings analysisValuePath
+                    getCellChildren firstActiveAnalysisSetting remainingActiveAnalysisSettings analysisValuePath
             in
             TableNode
                 { cellItself = cellChildren |> length |> toString |> text
@@ -35,8 +35,8 @@ tableBody model =
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> List AnalysisSettingValues -> TableNode
-analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingAnalysisSettingValues =
-    case previousRemainingAnalysisSettingValues of
+analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingActiveAnalysisSettingValues =
+    case previousRemainingActiveAnalysisSettingValues of
         [] ->
             TableNode
                 { cellItself = text analysisValueStep.value
@@ -58,7 +58,7 @@ analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previou
 
 
 getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode
-getCellChildren thisAnalysisSettingValues remainingAnalysisSettings analysisValuePath =
+getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettings analysisValuePath =
     let
         cellChildrenValues =
             getCellChildrenValues thisAnalysisSettingValues analysisValuePath
@@ -70,7 +70,7 @@ getCellChildren thisAnalysisSettingValues remainingAnalysisSettings analysisValu
             map convertValuesToAnalysisValueSteps cellChildrenValues
 
         convertAnalysisValueStepsToTableNodesWhichMayRecurse =
-            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath remainingAnalysisSettings
+            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath remainingActiveAnalysisSettings
     in
     map convertAnalysisValueStepsToTableNodesWhichMayRecurse cellChildAnalysisValueSteps
 

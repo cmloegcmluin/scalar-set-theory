@@ -5,4 +5,4 @@ import ScalarSetTheory.Settings.Setting exposing (Setting)
 
 
 type Msg
-    = UpdateAnalysisSettingValue Setting Int Analysis
+    = UpdateAnalysisSettingValue Analysis Setting Int

@@ -35,7 +35,7 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSettingValue Min 5 EqualDivision)
+                            (UpdateAnalysisSettingValue EqualDivision Min 5)
                             { activeAnalysisSettingValues =
                                 [ { analysis = EqualDivision
                                   , settingValues =
@@ -75,7 +75,7 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSettingValue Max 8 NChord)
+                            (UpdateAnalysisSettingValue NChord Max 8)
                             { activeAnalysisSettingValues =
                                 [ { analysis = EqualDivision
                                   , settingValues =

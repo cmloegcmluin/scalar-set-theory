@@ -9,25 +9,25 @@ import ScalarSetTheory.Settings.Setting exposing (Setting)
 import ScalarSetTheory.Settings.SettingValue exposing (updateSettingValues)
 
 
-maybeUpdateAnalysisSettingField : AnalysisSettingValues -> Analysis -> Setting -> Int -> AnalysisSettingValues
-maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting =
-    case oldAnalysisSetting.analysis == analysisToUpdate of
+maybeUpdateAnalysisSettingValue : AnalysisSettingValues -> Analysis -> Setting -> Int -> AnalysisSettingValues
+maybeUpdateAnalysisSettingValue oldAnalysisSettingValues analysisToUpdate settingToUpdate newValue =
+    case oldAnalysisSettingValues.analysis == analysisToUpdate of
         True ->
-            { oldAnalysisSetting | settingValues = updateSettingValues oldAnalysisSetting.settingValues settingToUpdate newSetting }
+            { oldAnalysisSettingValues | settingValues = updateSettingValues oldAnalysisSettingValues.settingValues settingToUpdate newValue }
 
         False ->
-            oldAnalysisSetting
+            oldAnalysisSettingValues
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateAnalysisSettingValue settingToUpdate newSetting analysisToUpdate ->
+        UpdateAnalysisSettingValue analysisToUpdate settingToUpdate newValue ->
             let
                 updateTargetAnalysisSettingValues =
-                    \oldAnalysisSettingValues -> maybeUpdateAnalysisSettingField oldAnalysisSettingValues analysisToUpdate settingToUpdate newSetting
+                    \memberOfOldActiveAnalysisSettingValues -> maybeUpdateAnalysisSettingValue memberOfOldActiveAnalysisSettingValues analysisToUpdate settingToUpdate newValue
 
-                updatedAnalysisSettingValues =
+                updatedActiveAnalysisSettingValues =
                     map updateTargetAnalysisSettingValues model.activeAnalysisSettingValues
             in
-            { model | activeAnalysisSettingValues = updatedAnalysisSettingValues }
+            { model | activeAnalysisSettingValues = updatedActiveAnalysisSettingValues }

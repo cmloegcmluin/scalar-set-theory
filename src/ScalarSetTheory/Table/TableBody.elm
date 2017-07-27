@@ -4,7 +4,7 @@ import Html exposing (text)
 import List exposing (head, length, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSettings, getNextAnalysisSetting)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings, getNextAnalysisSetting)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
@@ -34,32 +34,20 @@ tableBody model =
                 analysisValuePath =
                     []
 
-                firstAnalysisRange =
-                    range firstAnalysisSetting.min firstAnalysisSetting.max
-
-                convertValuesToAnalysisValueSteps =
-                    \value -> AnalysisValueStep firstAnalysis (toString value)
-
-                analysisValueStepsForFirstAnalysis =
-                    map convertValuesToAnalysisValueSteps firstAnalysisRange
-
-                convertAnalysisValueStepsToTableNodes =
-                    \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings
+                cellChildrenValues =
+                    getCellChildrenValues firstAnalysisSetting analysisValuePath
 
                 cellChildren =
-                    map convertAnalysisValueStepsToTableNodes analysisValueStepsForFirstAnalysis
-
-                childCount =
-                    cellChildren |> length |> toString |> text
+                    getCellChildren cellChildrenValues firstAnalysis analysisSettings analysisValuePath
             in
             TableNode
-                { cellItself = childCount
+                { cellItself = cellChildren |> length |> toString |> text
                 , cellChildren = cellChildren
                 }
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> AnalysisSettings -> TableNode
-analysisValueStepToTableNode analysisValueStep analysisValuePath analysisSettings =
+analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath analysisSettings =
     let
         maybeNextAnalysisSetting =
             getNextAnalysisSetting analysisValueStep.analysis analysisSettings
@@ -76,31 +64,52 @@ analysisValueStepToTableNode analysisValueStep analysisValuePath analysisSetting
                 nextAnalysis =
                     nextAnalysisSetting.analysis
 
-                nextAnalysisProperties =
-                    getAnalysisProperties nextAnalysis
-
-                nextAnalysisChildrenValuesGetter =
-                    nextAnalysisProperties.childrenValues
-
-                deeperAnalysisValuePath =
-                    analysisValuePath ++ [ analysisValueStep ]
+                analysisValuePath =
+                    previousAnalysisValuePath ++ [ analysisValueStep ]
 
                 cellChildrenValues =
-                    nextAnalysisChildrenValuesGetter deeperAnalysisValuePath nextAnalysisSetting
-
-                convertValuesToAnalysisValueSteps =
-                    \value -> AnalysisValueStep nextAnalysis value
-
-                cellChildAnalysisValueSteps =
-                    map convertValuesToAnalysisValueSteps cellChildrenValues
-
-                convertAnalysisValueStepsToTableNodes =
-                    \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep deeperAnalysisValuePath analysisSettings
+                    getCellChildrenValues nextAnalysisSetting analysisValuePath
 
                 cellChildren =
-                    map convertAnalysisValueStepsToTableNodes cellChildAnalysisValueSteps
+                    getCellChildren cellChildrenValues nextAnalysis analysisSettings analysisValuePath
             in
             TableNode
                 { cellItself = text analysisValueStep.value
                 , cellChildren = cellChildren
                 }
+
+
+getCellChildren : List String -> Analysis -> AnalysisSettings -> AnalysisValuePath -> List TableNode
+getCellChildren cellChildrenValues analysis analysisSettings analysisValuePath =
+    let
+        convertValuesToAnalysisValueSteps =
+            \value -> AnalysisValueStep analysis value
+
+        cellChildAnalysisValueSteps =
+            map convertValuesToAnalysisValueSteps cellChildrenValues
+
+        convertAnalysisValueStepsToTableNodes =
+            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings
+    in
+    map convertAnalysisValueStepsToTableNodes cellChildAnalysisValueSteps
+
+
+getCellChildrenValues : AnalysisSetting -> AnalysisValuePath -> List String
+getCellChildrenValues analysisSetting analysisValuePath =
+    case length analysisValuePath of
+        0 ->
+            let
+                firstAnalysisRange =
+                    range analysisSetting.min analysisSetting.max
+            in
+            map toString firstAnalysisRange
+
+        _ ->
+            let
+                analysisProperties =
+                    getAnalysisProperties analysisSetting.analysis
+
+                analysisChildrenValuesGetter =
+                    analysisProperties.childrenValues
+            in
+            analysisChildrenValuesGetter analysisValuePath analysisSetting

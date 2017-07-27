@@ -16,7 +16,7 @@ unit:
 integration:
 	elm-reactor -p 8001 & lsof -ti:4444 | xargs kill && cd integration-tests && npm test
 
-analyse:
+analyze:
 	elm-analyse
 
 setup:

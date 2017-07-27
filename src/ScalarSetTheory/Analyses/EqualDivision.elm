@@ -4,17 +4,35 @@ import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(NChord))
 import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
+import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 equalDivisionsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
 equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
     let
+        maybeEqualDivisionMin =
+            getSettingValue equalDivisionSetting.settings Min
+
         equalDivisionMin =
-            equalDivisionSetting.min
+            case maybeEqualDivisionMin of
+                Nothing ->
+                    0
+
+                Just equalDivisionMinSettingValue ->
+                    equalDivisionMinSettingValue.value
+
+        maybeEqualDivisionMax =
+            getSettingValue equalDivisionSetting.settings Max
 
         equalDivisionMax =
-            equalDivisionSetting.max
+            case maybeEqualDivisionMax of
+                Nothing ->
+                    0
+
+                Just equalDivisionMaxSettingValue ->
+                    equalDivisionMaxSettingValue.value
 
         -- and eventually other section values and their effects on the values for equal divisions here
         nChordValue =

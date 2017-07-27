@@ -4,24 +4,16 @@ import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax, UpdateAnalysisMin))
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
+import ScalarSetTheory.Settings.Setting exposing (Setting)
+import ScalarSetTheory.Settings.SettingValue exposing (updateSettingValues)
 
 
-maybeUpdateAnalysisSettingMin : AnalysisSetting -> Analysis -> Int -> AnalysisSetting
-maybeUpdateAnalysisSettingMin oldAnalysisSetting analysisToUpdate newMin =
+maybeUpdateAnalysisSettingField : AnalysisSetting -> Analysis -> Setting -> Int -> AnalysisSetting
+maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting =
     case oldAnalysisSetting.analysis == analysisToUpdate of
         True ->
-            { oldAnalysisSetting | min = newMin }
-
-        False ->
-            oldAnalysisSetting
-
-
-maybeUpdateAnalysisSettingMax : AnalysisSetting -> Analysis -> Int -> AnalysisSetting
-maybeUpdateAnalysisSettingMax oldAnalysisSetting analysisToUpdate newMax =
-    case oldAnalysisSetting.analysis == analysisToUpdate of
-        True ->
-            { oldAnalysisSetting | max = newMax }
+            { oldAnalysisSetting | settings = updateSettingValues oldAnalysisSetting.settings settingToUpdate newSetting }
 
         False ->
             oldAnalysisSetting
@@ -30,20 +22,10 @@ maybeUpdateAnalysisSettingMax oldAnalysisSetting analysisToUpdate newMax =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateAnalysisMin newMin analysis ->
+        UpdateAnalysisSetting settingToUpdate newSetting analysisToUpdate ->
             let
                 updateTargetAnalysis =
-                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingMin oldAnalysisSetting analysis newMin
-
-                updatedAnalysisSettings =
-                    map updateTargetAnalysis model.analysisSettings
-            in
-            { model | analysisSettings = updatedAnalysisSettings }
-
-        UpdateAnalysisMax newMax analysis ->
-            let
-                updateTargetAnalysis =
-                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingMax oldAnalysisSetting analysis newMax
+                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingField oldAnalysisSetting analysisToUpdate settingToUpdate newSetting
 
                 updatedAnalysisSettings =
                     map updateTargetAnalysis model.analysisSettings

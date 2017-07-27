@@ -1,8 +1,8 @@
-module ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax, UpdateAnalysisMin))
+module ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import ScalarSetTheory.Settings.Setting exposing (Setting)
 
 
 type Msg
-    = UpdateAnalysisMin Int Analysis
-    | UpdateAnalysisMax Int Analysis
+    = UpdateAnalysisSetting Setting Int Analysis

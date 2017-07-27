@@ -6,9 +6,10 @@ import List exposing (map)
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSetting))
 import ScalarSetTheory.Settings.Setting exposing (Setting)
-import ScalarSetTheory.Settings.SettingProperties exposing (SettingProperties, getSettingProperties)
+import ScalarSetTheory.Settings.SettingProperties exposing (getSettingProperties)
+import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -23,11 +24,11 @@ tableSettingRow setting model =
         settingName =
             settingProperties.name
 
-        settingDropdownUsingSettingProperties =
-            \analysisSetting -> settingDropdown settingProperties analysisSetting
+        settingDropdownUsingSettingField =
+            \analysisSetting -> settingDropdown setting analysisSetting
 
         settingDropdowns =
-            map settingDropdownUsingSettingProperties model.analysisSettings
+            map settingDropdownUsingSettingField model.analysisSettings
 
         settingDropdownsPlusSettingHeading =
             text settingName :: settingDropdowns
@@ -35,23 +36,25 @@ tableSettingRow setting model =
     tableRow settingDropdownsPlusSettingHeading
 
 
-settingDropdown : SettingProperties -> AnalysisSetting -> Html Msg
-settingDropdown settingProperties analysisSetting =
+settingDropdown : Setting -> AnalysisSetting -> Html Msg
+settingDropdown setting analysisSetting =
     let
-        settingUpdater =
-            settingProperties.updater
-
-        settingField =
-            settingProperties.field
+        maybeSelectedOption =
+            getSettingValue analysisSetting.settings setting
 
         selectedOption =
-            toString (settingField analysisSetting)
+            case maybeSelectedOption of
+                Nothing ->
+                    "0"
+
+                Just selectedOptionAsInt ->
+                    toString selectedOptionAsInt.value
 
         analysis =
             analysisSetting.analysis
 
         handler =
-            \newSetting -> settingUpdater (parseInt newSetting) analysis
+            \newSetting -> UpdateAnalysisSetting setting (parseInt newSetting) analysis
 
         attributes =
             [ onInput handler ]

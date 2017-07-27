@@ -6,6 +6,8 @@ import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperti
 import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
@@ -78,8 +80,30 @@ getCellChildrenValues thisAnalysisSetting analysisValuePath =
     case length analysisValuePath of
         0 ->
             let
+                maybeThisAnalysisSettingMinSettingValue =
+                    getSettingValue thisAnalysisSetting.settings Min
+
+                thisAnalysisSettingMin =
+                    case maybeThisAnalysisSettingMinSettingValue of
+                        Nothing ->
+                            0
+
+                        Just thisAnalysisSettingMinSettingValue ->
+                            thisAnalysisSettingMinSettingValue.value
+
+                maybeThisAnalysisSettingMaxSettingValue =
+                    getSettingValue thisAnalysisSetting.settings Max
+
+                thisAnalysisSettingMax =
+                    case maybeThisAnalysisSettingMaxSettingValue of
+                        Nothing ->
+                            99999
+
+                        Just thisAnalysisSettingMaxSettingValue ->
+                            thisAnalysisSettingMaxSettingValue.value
+
                 firstAnalysisRange =
-                    range thisAnalysisSetting.min thisAnalysisSetting.max
+                    range thisAnalysisSettingMin thisAnalysisSettingMax
             in
             map toString firstAnalysisRange
 

@@ -16,19 +16,26 @@ dropdownOptions analysis selectedOption =
 
         rangeForAnalysis =
             range analysisProperties.ultimateMin analysisProperties.ultimateMax
+
+        indexToOption =
+            \index -> dropdownOption index selectedOption
     in
-    map (\optionIndex -> dropdownOption optionIndex selectedOption) rangeForAnalysis
+    map indexToOption rangeForAnalysis
 
 
 dropdownOption : Int -> String -> Html Msg
-dropdownOption index selectedOption =
+dropdownOption indexAsInt selectedOption =
+    let
+        index =
+            toString indexAsInt
+    in
     option
-        [ value (toString index)
+        [ value index
         , selected (isSelected index selectedOption)
         ]
-        [ text (toString index) ]
+        [ text index ]
 
 
-isSelected : Int -> String -> Bool
-isSelected optionIndex selectedOption =
-    toString optionIndex == selectedOption
+isSelected : String -> String -> Bool
+isSelected index selectedOption =
+    index == selectedOption

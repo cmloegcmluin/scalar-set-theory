@@ -34,15 +34,13 @@ maxDropdown analysisSetting =
         analysis =
             analysisSetting.analysis
 
+        handler =
+            \newMax -> UpdateAnalysisMax (parseInt newMax) analysis
+
         attributes =
-            [ onInput (\newMax -> maxOnInputHandler newMax analysis) ]
+            [ onInput handler ]
 
         options =
             dropdownOptions analysis selectedOption
     in
     select attributes options
-
-
-maxOnInputHandler : String -> Analysis -> Msg
-maxOnInputHandler newMax analysis =
-    UpdateAnalysisMax (parseInt newMax) analysis

@@ -16,7 +16,11 @@ type alias AnalysisValuePath =
 
 findAnalysisValueStepInPath : Analysis -> AnalysisValuePath -> Maybe AnalysisValueStep
 findAnalysisValueStepInPath analysis analysisValuePath =
-    find (\analysisValueStep -> analysisValueStepIsForAnalysis analysisValueStep analysis) analysisValuePath
+    let
+        stepIsForAnalysis =
+            \analysisValueStep -> analysisValueStepIsForAnalysis analysisValueStep analysis
+    in
+    find stepIsForAnalysis analysisValuePath
 
 
 analysisValueStepIsForAnalysis : AnalysisValueStep -> Analysis -> Bool

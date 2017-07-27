@@ -11,6 +11,5 @@ type alias Model =
 
 model : Model
 model =
-    { analysisSettings =
-        defaultAnalysisSettings
+    { analysisSettings = defaultAnalysisSettings
     }

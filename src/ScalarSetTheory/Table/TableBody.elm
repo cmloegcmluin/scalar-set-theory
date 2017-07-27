@@ -37,11 +37,17 @@ tableBody model =
                 firstAnalysisRange =
                     range firstAnalysisSetting.min firstAnalysisSetting.max
 
-                valuesWithTheirAnalysisForFirstAnalysis =
-                    map (\value -> AnalysisValueStep firstAnalysis (toString value)) firstAnalysisRange
+                convertValuesToAnalysisValueSteps =
+                    \value -> AnalysisValueStep firstAnalysis (toString value)
+
+                analysisValueStepsForFirstAnalysis =
+                    map convertValuesToAnalysisValueSteps firstAnalysisRange
+
+                convertAnalysisValueStepsToTableNodes =
+                    \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings
 
                 cellChildren =
-                    map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath analysisSettings) valuesWithTheirAnalysisForFirstAnalysis
+                    map convertAnalysisValueStepsToTableNodes analysisValueStepsForFirstAnalysis
 
                 childCount =
                     length cellChildren
@@ -82,11 +88,17 @@ analysisValueStepToTableNode analysisValueStep analysisValuePath analysisSetting
                 cellChildrenValues =
                     nextAnalysisChildrenValuesGetter deeperAnalysisValuePath nextAnalysisSetting
 
-                cellChildValuesWithTheirAnalysis =
-                    map (\value -> AnalysisValueStep nextAnalysis value) cellChildrenValues
+                convertValuesToAnalysisValueSteps =
+                    \value -> AnalysisValueStep nextAnalysis value
+
+                cellChildAnalysisValueSteps =
+                    map convertValuesToAnalysisValueSteps cellChildrenValues
+
+                convertAnalysisValueStepsToTableNodes =
+                    \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep deeperAnalysisValuePath analysisSettings
 
                 cellChildren =
-                    map (\cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep deeperAnalysisValuePath analysisSettings) cellChildValuesWithTheirAnalysis
+                    map convertAnalysisValueStepsToTableNodes cellChildAnalysisValueSteps
             in
             TableNode
                 { cellItself = text analysisValueStep.value

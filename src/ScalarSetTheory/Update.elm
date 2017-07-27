@@ -32,14 +32,20 @@ update msg model =
     case msg of
         UpdateAnalysisMin newMin analysis ->
             let
-                updatedAnalysisSetting =
-                    map (\oldAnalysisSetting -> maybeUpdateAnalysisSettingMin oldAnalysisSetting analysis newMin) model.analysisSettings
+                updateTargetAnalysis =
+                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingMin oldAnalysisSetting analysis newMin
+
+                updatedAnalysisSettings =
+                    map updateTargetAnalysis model.analysisSettings
             in
-            { model | analysisSettings = updatedAnalysisSetting }
+            { model | analysisSettings = updatedAnalysisSettings }
 
         UpdateAnalysisMax newMax analysis ->
             let
-                updatedAnalysisSetting =
-                    map (\oldAnalysisSetting -> maybeUpdateAnalysisSettingMax oldAnalysisSetting analysis newMax) model.analysisSettings
+                updateTargetAnalysis =
+                    \oldAnalysisSetting -> maybeUpdateAnalysisSettingMax oldAnalysisSetting analysis newMax
+
+                updatedAnalysisSettings =
+                    map updateTargetAnalysis model.analysisSettings
             in
-            { model | analysisSettings = updatedAnalysisSetting }
+            { model | analysisSettings = updatedAnalysisSettings }

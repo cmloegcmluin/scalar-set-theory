@@ -16,6 +16,7 @@ nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
         nChordMax =
             nChordSetting.max
 
+        -- and eventually other section values and their effects on the values for nChords here
         edValue =
             case findAnalysisValueStepInPath EqualDivision analysisValuePath of
                 Just edAnalysisValueStep ->
@@ -23,5 +24,14 @@ nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
 
                 Nothing ->
                     99999
+
+        childValuesMin =
+            nChordMin
+
+        childValuesMax =
+            min edValue nChordMax
+
+        childValues =
+            range childValuesMin childValuesMax
     in
-    map toString (range nChordMin (min edValue nChordMax))
+    map toString childValues

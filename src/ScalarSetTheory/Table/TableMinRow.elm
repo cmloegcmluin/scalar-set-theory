@@ -34,15 +34,13 @@ minDropdown analysisSetting =
         analysis =
             analysisSetting.analysis
 
+        handler =
+            \newMin -> UpdateAnalysisMin (parseInt newMin) analysis
+
         attributes =
-            [ onInput (\newMin -> minOnInputHandler newMin analysis) ]
+            [ onInput handler ]
 
         options =
             dropdownOptions analysis selectedOption
     in
     select attributes options
-
-
-minOnInputHandler : String -> Analysis -> Msg
-minOnInputHandler newMin analysis =
-    UpdateAnalysisMin (parseInt newMin) analysis

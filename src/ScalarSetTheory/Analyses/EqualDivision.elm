@@ -16,6 +16,7 @@ equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
         equalDivisionMax =
             equalDivisionSetting.max
 
+        -- and eventually other section values and their effects on the values for equal divisions here
         nChordValue =
             case findAnalysisValueStepInPath NChord analysisValuePath of
                 Just nChordAnalysisValueStep ->
@@ -23,5 +24,14 @@ equalDivisionsWithinAnalysisValuePath analysisValuePath equalDivisionSetting =
 
                 Nothing ->
                     0
+
+        childValuesMin =
+            max equalDivisionMin nChordValue
+
+        childValuesMax =
+            equalDivisionMax
+
+        childValues =
+            range childValuesMin childValuesMax
     in
-    map toString (range (max equalDivisionMin nChordValue) equalDivisionMax)
+    map toString childValues

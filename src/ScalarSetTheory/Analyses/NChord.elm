@@ -1,16 +1,16 @@
-module ScalarSetTheory.Analyses.NChord exposing (nChordsWithinAnalysisValuePath)
+module ScalarSetTheory.Analyses.NChord exposing (nChordChildValues)
 
 import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision))
-import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
+import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
 import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
-nChordsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
-nChordsWithinAnalysisValuePath analysisValuePath nChordSettingValues =
+nChordChildValues : AnalysisValuePathChildValues
+nChordChildValues analysisValuePath nChordSettingValues =
     let
         nChordMin =
             getValueOfSetting nChordSettingValues Min

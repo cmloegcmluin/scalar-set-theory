@@ -1,4 +1,4 @@
-module ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep, findAnalysisValueStepInPath)
+module ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValuePathChildValues, AnalysisValueStep, findAnalysisValueStepInPath)
 
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Utilities exposing (find)
@@ -7,6 +7,12 @@ import ScalarSetTheory.Utilities exposing (find)
 type alias AnalysisValueStep =
     { analysis : Analysis
     , value : String
+    }
+
+
+type alias AnalysisValuePathChildValues =
+    { analysis : Analysis
+    , values : List String
     }
 
 

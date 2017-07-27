@@ -1,8 +1,8 @@
-module ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
+module ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
 
 import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath)
 
 
-type alias AnalysisChildrenValuesGetter =
+type alias AnalysisValuePathChildValues =
     AnalysisValuePath -> AnalysisSettingValues -> List String

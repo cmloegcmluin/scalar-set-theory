@@ -2,9 +2,10 @@ module ScalarSetTheory.Table.TableBody exposing (tableBody)
 
 import Html exposing (text)
 import List exposing (length, map, range)
+import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
-import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
+import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValuePathChildValues, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
@@ -20,13 +21,13 @@ tableBody model =
                 , cellChildren = []
                 }
 
-        firstActiveAnalysisSetting :: remainingActiveAnalysisSettings ->
+        firstActiveAnalysisSettingValues :: remainingActiveAnalysisSettingValues ->
             let
                 analysisValuePath =
                     []
 
                 cellChildren =
-                    getCellChildren firstActiveAnalysisSetting remainingActiveAnalysisSettings analysisValuePath
+                    getCellChildren firstActiveAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
             in
             TableNode
                 { cellItself = cellChildren |> length |> toString |> text
@@ -34,22 +35,25 @@ tableBody model =
                 }
 
 
-analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> List AnalysisSettingValues -> TableNode
-analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingActiveAnalysisSettingValues =
+analysisValuePathChildValueToTableNode : AnalysisValuePath -> Analysis -> String -> List AnalysisSettingValues -> TableNode
+analysisValuePathChildValueToTableNode previousAnalysisValuePath analysis childValue previousRemainingActiveAnalysisSettingValues =
     case previousRemainingActiveAnalysisSettingValues of
         [] ->
             TableNode
-                { cellItself = text analysisValueStep.value
+                { cellItself = text childValue
                 , cellChildren = []
                 }
 
-        thisAnalysisSetting :: remainingAnalysisSettings ->
+        thisAnalysisSettingValues :: remainingActiveAnalysisSettingValues ->
             let
+                analysisValueStep =
+                    AnalysisValueStep analysis childValue
+
                 analysisValuePath =
                     previousAnalysisValuePath ++ [ analysisValueStep ]
 
                 cellChildren =
-                    getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath
+                    getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
             in
             TableNode
                 { cellItself = text analysisValueStep.value
@@ -58,25 +62,22 @@ analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previou
 
 
 getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode
-getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettings analysisValuePath =
+getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath =
     let
-        cellChildrenValues =
-            getCellChildrenValues thisAnalysisSettingValues analysisValuePath
+        analysisValuePathChildValues =
+            getAnalysisValuePathChildValues analysisValuePath thisAnalysisSettingValues
 
-        convertValuesToAnalysisValueSteps =
-            \value -> AnalysisValueStep thisAnalysisSettingValues.analysis value
+        analysis =
+            analysisValuePathChildValues.analysis
 
-        cellChildAnalysisValueSteps =
-            map convertValuesToAnalysisValueSteps cellChildrenValues
-
-        convertAnalysisValueStepsToTableNodesWhichMayRecurse =
-            \cellChildAnalysisValueStep -> analysisValueStepToTableNode cellChildAnalysisValueStep analysisValuePath remainingActiveAnalysisSettings
+        convertAnalysisValuePathChildValuesToTableNodesWhichMayRecurse =
+            \analysisValuePathChildValue -> analysisValuePathChildValueToTableNode analysisValuePath analysis analysisValuePathChildValue remainingActiveAnalysisSettingValues
     in
-    map convertAnalysisValueStepsToTableNodesWhichMayRecurse cellChildAnalysisValueSteps
+    map convertAnalysisValuePathChildValuesToTableNodesWhichMayRecurse analysisValuePathChildValues.values
 
 
-getCellChildrenValues : AnalysisSettingValues -> AnalysisValuePath -> List String
-getCellChildrenValues thisAnalysisSettingValues analysisValuePath =
+getAnalysisValuePathChildValues : AnalysisValuePath -> AnalysisSettingValues -> AnalysisValuePathChildValues
+getAnalysisValuePathChildValues analysisValuePath thisAnalysisSettingValues =
     case length analysisValuePath of
         0 ->
             let
@@ -88,15 +89,27 @@ getCellChildrenValues thisAnalysisSettingValues analysisValuePath =
 
                 firstAnalysisRange =
                     range thisAnalysisSettingValuesMin thisAnalysisSettingValuesMax
+
+                childValues =
+                    map toString firstAnalysisRange
+
+                analysis =
+                    thisAnalysisSettingValues.analysis
             in
-            map toString firstAnalysisRange
+            AnalysisValuePathChildValues analysis childValues
 
         _ ->
             let
                 analysisProperties =
                     getAnalysisProperties thisAnalysisSettingValues.analysis
 
-                analysisChildrenValuesGetter =
-                    analysisProperties.childrenValuesGetter
+                analysisValuePathChildValues =
+                    analysisProperties.analysisValuePathChildValues
+
+                childValues =
+                    analysisValuePathChildValues analysisValuePath thisAnalysisSettingValues
+
+                analysis =
+                    thisAnalysisSettingValues.analysis
             in
-            analysisChildrenValuesGetter analysisValuePath thisAnalysisSettingValues
+            AnalysisValuePathChildValues analysis childValues

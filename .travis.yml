@@ -1,4 +1,3 @@
-language: elm
 before_script:
     - make setup
 script:

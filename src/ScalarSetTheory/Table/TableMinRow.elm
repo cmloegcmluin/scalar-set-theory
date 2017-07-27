@@ -1,54 +1,48 @@
 module ScalarSetTheory.Table.TableMinRow exposing (minDropdown, tableMinRow)
 
-import Html exposing (Attribute, Html, div, select, text)
+import Html exposing (Html, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMin))
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
-import Tuple exposing (first, second)
 
 
 tableMinRow : Model -> TableNode
 tableMinRow model =
-    tableRow
-        ([ text "min" ]
-            ++ map analysisToMinDropdown (analysisAndMinPerAnalysis model.analysisSettings)
-        )
+    let
+        minDropdowns =
+            map minDropdown model.analysisSettings
+
+        minDropdownsPlusMinHeading =
+            [ text "min" ] ++ minDropdowns
+    in
+    tableRow minDropdownsPlusMinHeading
 
 
-analysisToMinDropdown : ( Analysis, Int ) -> Html Msg
-analysisToMinDropdown analysisAndMin =
-    minDropdown (first analysisAndMin) (second analysisAndMin)
+minDropdown : AnalysisSetting -> Html Msg
+minDropdown analysisSetting =
+    let
+        selectedOption =
+            toString analysisSetting.min
 
+        analysis =
+            analysisSetting.analysis
 
-minDropdown : Analysis -> Int -> Html Msg
-minDropdown analysis selectedOption =
-    select
-        (minAttributes analysis)
-        (dropdownOptions analysis (toString selectedOption))
+        attributes =
+            [ onInput (\newMin -> minOnInputHandler newMin analysis) ]
 
-
-minAttributes : Analysis -> List (Attribute Msg)
-minAttributes analysis =
-    [ onInput (\newMin -> minOnInputHandler newMin analysis) ]
+        options =
+            dropdownOptions analysis selectedOption
+    in
+    select attributes options
 
 
 minOnInputHandler : String -> Analysis -> Msg
 minOnInputHandler newMin analysis =
     UpdateAnalysisMin (parseInt newMin) analysis
-
-
-analysisAndMinPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
-analysisAndMinPerAnalysis analysisSettings =
-    map analysisAndMin analysisSettings
-
-
-analysisAndMin : AnalysisSetting -> ( Analysis, Int )
-analysisAndMin analysisSetting =
-    ( analysisSetting.analysis, analysisSetting.min )

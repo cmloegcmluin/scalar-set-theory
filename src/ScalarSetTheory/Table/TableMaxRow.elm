@@ -1,54 +1,48 @@
 module ScalarSetTheory.Table.TableMaxRow exposing (maxDropdown, tableMaxRow)
 
-import Html exposing (Attribute, Html, div, select, text)
+import Html exposing (Html, select, text)
 import Html.Events exposing (onInput)
 import List exposing (map)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting, AnalysisSettings)
+import ScalarSetTheory.Analyses.AnalysisSettings exposing (AnalysisSetting)
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisMax))
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
-import Tuple exposing (first, second)
 
 
 tableMaxRow : Model -> TableNode
 tableMaxRow model =
-    tableRow
-        ([ text "max" ]
-            ++ map analysisToMaxDropdown (analysisAndMaxPerAnalysis model.analysisSettings)
-        )
+    let
+        maxDropdowns =
+            map maxDropdown model.analysisSettings
+
+        maxDropdownsPlusMaxHeading =
+            [ text "max" ] ++ maxDropdowns
+    in
+    tableRow maxDropdownsPlusMaxHeading
 
 
-analysisToMaxDropdown : ( Analysis, Int ) -> Html Msg
-analysisToMaxDropdown analysisAndMax =
-    maxDropdown (first analysisAndMax) (second analysisAndMax)
+maxDropdown : AnalysisSetting -> Html Msg
+maxDropdown analysisSetting =
+    let
+        selectedOption =
+            toString analysisSetting.max
 
+        analysis =
+            analysisSetting.analysis
 
-maxDropdown : Analysis -> Int -> Html Msg
-maxDropdown analysis selectedOption =
-    select
-        (maxAttributes analysis)
-        (dropdownOptions analysis (toString selectedOption))
+        attributes =
+            [ onInput (\newMax -> maxOnInputHandler newMax analysis) ]
 
-
-maxAttributes : Analysis -> List (Attribute Msg)
-maxAttributes analysis =
-    [ onInput (\newMax -> maxOnInputHandler newMax analysis) ]
+        options =
+            dropdownOptions analysis selectedOption
+    in
+    select attributes options
 
 
 maxOnInputHandler : String -> Analysis -> Msg
 maxOnInputHandler newMax analysis =
     UpdateAnalysisMax (parseInt newMax) analysis
-
-
-analysisAndMaxPerAnalysis : AnalysisSettings -> List ( Analysis, Int )
-analysisAndMaxPerAnalysis analysisSettings =
-    map analysisAndMax analysisSettings
-
-
-analysisAndMax : AnalysisSetting -> ( Analysis, Int )
-analysisAndMax analysisSetting =
-    ( analysisSetting.analysis, analysisSetting.max )

@@ -1,8 +1,7 @@
-module ScalarSetTheory.Settings.SettingValue exposing (SettingValue, SettingValues, getSettingValue, updateSettingValues)
+module ScalarSetTheory.Settings.SettingValue exposing (SettingValue, SettingValues, updateSettingValues)
 
 import List exposing (map)
 import ScalarSetTheory.Settings.Setting exposing (Setting)
-import ScalarSetTheory.Utilities exposing (find)
 
 
 type alias SettingValue =
@@ -13,15 +12,6 @@ type alias SettingValue =
 
 type alias SettingValues =
     List SettingValue
-
-
-getSettingValue : SettingValues -> Setting -> Maybe SettingValue
-getSettingValue settingValues setting =
-    let
-        settingValueIsForSetting =
-            \settingValue -> settingValue.setting == setting
-    in
-    find settingValueIsForSetting settingValues
 
 
 updateSettingValues : SettingValues -> Setting -> Int -> SettingValues

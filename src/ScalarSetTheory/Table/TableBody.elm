@@ -6,8 +6,8 @@ import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperti
 import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, AnalysisValueStep)
 import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
-import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
@@ -35,8 +35,8 @@ tableBody model =
 
 
 analysisValueStepToTableNode : AnalysisValueStep -> AnalysisValuePath -> List AnalysisSettingValues -> TableNode
-analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingAnalysisSettings =
-    case previousRemainingAnalysisSettings of
+analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previousRemainingAnalysisSettingValues =
+    case previousRemainingAnalysisSettingValues of
         [] ->
             TableNode
                 { cellItself = text analysisValueStep.value
@@ -58,13 +58,13 @@ analysisValueStepToTableNode analysisValueStep previousAnalysisValuePath previou
 
 
 getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode
-getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath =
+getCellChildren thisAnalysisSettingValues remainingAnalysisSettings analysisValuePath =
     let
         cellChildrenValues =
-            getCellChildrenValues thisAnalysisSetting analysisValuePath
+            getCellChildrenValues thisAnalysisSettingValues analysisValuePath
 
         convertValuesToAnalysisValueSteps =
-            \value -> AnalysisValueStep thisAnalysisSetting.analysis value
+            \value -> AnalysisValueStep thisAnalysisSettingValues.analysis value
 
         cellChildAnalysisValueSteps =
             map convertValuesToAnalysisValueSteps cellChildrenValues
@@ -76,43 +76,27 @@ getCellChildren thisAnalysisSetting remainingAnalysisSettings analysisValuePath 
 
 
 getCellChildrenValues : AnalysisSettingValues -> AnalysisValuePath -> List String
-getCellChildrenValues thisAnalysisSetting analysisValuePath =
+getCellChildrenValues thisAnalysisSettingValues analysisValuePath =
     case length analysisValuePath of
         0 ->
             let
-                maybeThisAnalysisSettingMinSettingValue =
-                    getSettingValue thisAnalysisSetting.settingValues Min
+                thisAnalysisSettingValuesMin =
+                    getValueOfSetting thisAnalysisSettingValues Min
 
-                thisAnalysisSettingMin =
-                    case maybeThisAnalysisSettingMinSettingValue of
-                        Nothing ->
-                            0
-
-                        Just thisAnalysisSettingMinSettingValue ->
-                            thisAnalysisSettingMinSettingValue.value
-
-                maybeThisAnalysisSettingMaxSettingValue =
-                    getSettingValue thisAnalysisSetting.settingValues Max
-
-                thisAnalysisSettingMax =
-                    case maybeThisAnalysisSettingMaxSettingValue of
-                        Nothing ->
-                            99999
-
-                        Just thisAnalysisSettingMaxSettingValue ->
-                            thisAnalysisSettingMaxSettingValue.value
+                thisAnalysisSettingValuesMax =
+                    getValueOfSetting thisAnalysisSettingValues Max
 
                 firstAnalysisRange =
-                    range thisAnalysisSettingMin thisAnalysisSettingMax
+                    range thisAnalysisSettingValuesMin thisAnalysisSettingValuesMax
             in
             map toString firstAnalysisRange
 
         _ ->
             let
                 analysisProperties =
-                    getAnalysisProperties thisAnalysisSetting.analysis
+                    getAnalysisProperties thisAnalysisSettingValues.analysis
 
                 analysisChildrenValuesGetter =
                     analysisProperties.childrenValuesGetter
             in
-            analysisChildrenValuesGetter analysisValuePath thisAnalysisSetting
+            analysisChildrenValuesGetter analysisValuePath thisAnalysisSettingValues

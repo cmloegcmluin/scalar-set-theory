@@ -7,9 +7,9 @@ import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingV
 import ScalarSetTheory.Components.Dropdown exposing (dropdownOptions)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
+import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting)
 import ScalarSetTheory.Settings.SettingProperties exposing (getSettingProperties)
-import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Table.TableRow exposing (tableRow)
 import ScalarSetTheory.Utilities exposing (parseInt)
@@ -37,21 +37,13 @@ tableSettingRow setting model =
 
 
 settingDropdown : Setting -> AnalysisSettingValues -> Html Msg
-settingDropdown setting analysisSetting =
+settingDropdown setting analysisSettingValues =
     let
-        maybeSelectedOption =
-            getSettingValue analysisSetting.settingValues setting
-
         selectedOption =
-            case maybeSelectedOption of
-                Nothing ->
-                    "0"
-
-                Just selectedOptionAsInt ->
-                    toString selectedOptionAsInt.value
+            getValueOfSetting analysisSettingValues setting
 
         analysis =
-            analysisSetting.analysis
+            analysisSettingValues.analysis
 
         handler =
             \newSetting -> UpdateAnalysisSettingValue setting (parseInt newSetting) analysis
@@ -60,6 +52,6 @@ settingDropdown setting analysisSetting =
             [ onInput handler ]
 
         options =
-            dropdownOptions analysis selectedOption
+            dropdownOptions analysis (toString selectedOption)
     in
     select attributes options

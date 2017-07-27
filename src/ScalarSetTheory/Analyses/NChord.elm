@@ -4,35 +4,19 @@ import List exposing (map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision))
 import ScalarSetTheory.Analyses.AnalysisChildrenValuesGetter exposing (AnalysisChildrenValuesGetter)
 import ScalarSetTheory.Analyses.AnalysisValueStep exposing (findAnalysisValueStepInPath)
+import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
-import ScalarSetTheory.Settings.SettingValue exposing (getSettingValue)
 import ScalarSetTheory.Utilities exposing (parseInt)
 
 
 nChordsWithinAnalysisValuePath : AnalysisChildrenValuesGetter
-nChordsWithinAnalysisValuePath analysisValuePath nChordSetting =
+nChordsWithinAnalysisValuePath analysisValuePath nChordSettingValues =
     let
-        maybeNChordMinSettingValue =
-            getSettingValue nChordSetting.settingValues Min
-
         nChordMin =
-            case maybeNChordMinSettingValue of
-                Nothing ->
-                    0
-
-                Just nChordMinSettingValue ->
-                    nChordMinSettingValue.value
-
-        maybeNChordMaxSettingValue =
-            getSettingValue nChordSetting.settingValues Max
+            getValueOfSetting nChordSettingValues Min
 
         nChordMax =
-            case maybeNChordMaxSettingValue of
-                Nothing ->
-                    99999
-
-                Just nChordMaxSettingValue ->
-                    nChordMaxSettingValue.value
+            getValueOfSetting nChordSettingValues Max
 
         -- and eventually other section values and their effects on the values for nChords here
         edValue =

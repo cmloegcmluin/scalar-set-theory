@@ -19,7 +19,7 @@ tableBody model =
     case model.activeAnalysisSettingValues of
         [] ->
             TableNode
-                { cellItself = text "0"
+                { cellItself = Nothing
                 , cellChildren = []
                 }
 
@@ -39,7 +39,7 @@ analysisValuePathChildValueToTableNode previousAnalysisValuePath analysis childV
     case previousRemainingActiveAnalysisSettingValues of
         [] ->
             TableNode
-                { cellItself = text childValue
+                { cellItself = Just (text childValue)
                 , cellChildren = []
                 }
 

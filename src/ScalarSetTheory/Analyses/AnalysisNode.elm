@@ -8,10 +8,10 @@ import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 analysisNode : String -> List TableNode -> TableNode
 analysisNode cellValue cellChildren =
     TableNode
-        { cellItself = text cellValue
+        { cellItself = Just (text cellValue)
         , cellChildren =
             [ TableNode
-                { cellItself = cellChildren |> length |> toString |> text
+                { cellItself = Just (cellChildren |> length |> toString |> text)
                 , cellChildren = cellChildren
                 }
             ]

@@ -7,6 +7,7 @@ import ScalarSetTheoryTests.Analyses.AnalysisValueStepTests exposing (analysisVa
 import ScalarSetTheoryTests.Analyses.EqualDivisionTests exposing (equalDivisionTests)
 import ScalarSetTheoryTests.Analyses.NChordTests exposing (nChordTests)
 import ScalarSetTheoryTests.Components.DropdownTests exposing (dropdownTests)
+import ScalarSetTheoryTests.Components.TableCellTests exposing (tableCellTests)
 import ScalarSetTheoryTests.Settings.GetSettingValueTests exposing (getSettingValueTests)
 import ScalarSetTheoryTests.Settings.SettingValueTests exposing (settingValueTests)
 import ScalarSetTheoryTests.UpdateTests exposing (updateTests)
@@ -26,4 +27,5 @@ all =
         , equalDivisionTests
         , nChordTests
         , analysisNodeTests
+        , tableCellTests
         ]

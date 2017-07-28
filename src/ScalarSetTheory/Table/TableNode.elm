@@ -6,6 +6,6 @@ import ScalarSetTheory.Msg exposing (Msg)
 
 type TableNode
     = TableNode
-        { cellItself : Html Msg
+        { cellItself : Maybe (Html Msg)
         , cellChildren : List TableNode
         }

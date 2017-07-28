@@ -1,6 +1,7 @@
 module ScalarSetTheoryTests.Analyses.AnalysisNodeTests exposing (analysisNodeTests)
 
 import Expect exposing (equal)
+import Html exposing (text)
 import ScalarSetTheory.Analyses.AnalysisNode exposing (analysisNode)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import Test exposing (Test, describe, test)
@@ -14,21 +15,21 @@ analysisNodeTests =
                 let
                     expected =
                         TableNode
-                            { cellItself = "555"
+                            { cellItself = Just (text "555")
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = "3"
+                                    { cellItself = Just (text "3")
                                     , cellChildren =
                                         [ TableNode
-                                            { cellItself = "333"
+                                            { cellItself = Just (text "333")
                                             , cellChildren = []
                                             }
                                         , TableNode
-                                            { cellItself = "444"
+                                            { cellItself = Just (text "444")
                                             , cellChildren = []
                                             }
                                         , TableNode
-                                            { cellItself = "555"
+                                            { cellItself = Just (text "555")
                                             , cellChildren = []
                                             }
                                         ]
@@ -38,15 +39,15 @@ analysisNodeTests =
 
                     cellChildren =
                         [ TableNode
-                            { cellItself = "333"
+                            { cellItself = Just (text "333")
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = "444"
+                            { cellItself = Just (text "444")
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = "555"
+                            { cellItself = Just (text "555")
                             , cellChildren = []
                             }
                         ]

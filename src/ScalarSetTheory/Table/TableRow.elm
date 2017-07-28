@@ -1,6 +1,6 @@
 module ScalarSetTheory.Table.TableRow exposing (tableRow)
 
-import Html exposing (Html, div, text)
+import Html exposing (Html, div)
 import List exposing (head, length, tail)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Msg exposing (Msg)
@@ -19,16 +19,16 @@ tableRow cells =
     case length tailCells of
         0 ->
             TableNode
-                { cellItself = headCell
+                { cellItself = Just headCell
                 , cellChildren = []
                 }
 
         _ ->
             TableNode
-                { cellItself = headCell
+                { cellItself = Just headCell
                 , cellChildren =
                     [ TableNode
-                        { cellItself = text ""
+                        { cellItself = Nothing
                         , cellChildren = [ tableRow tailCells ]
                         }
                     ]

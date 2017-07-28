@@ -7,7 +7,7 @@ script:
 cache:
   directories:
     - tests/elm-stuff/build-artifacts
-before_script:
-  - export CHROME_BIN=google-chrome-stable
 addons:
   chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &

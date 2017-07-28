@@ -1,7 +1,8 @@
 module ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)
 
 import List exposing (map, range)
-import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision))
+import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildrenGetter exposing (LensValuePathChildrenGetter)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (findLensValueStepInPath)
 import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
@@ -35,5 +36,8 @@ nChordChildrenGetter lensValuePath nChordSettingValues =
 
         children =
             range childrenMin childrenMax
+
+        childrenAsStrings =
+            map toString children
     in
-    map toString children
+    LensValuePathChildren NChord childrenAsStrings

@@ -14,30 +14,30 @@ getLensValuePathChildren lensValuePath thisLensSettingValues =
     let
         lens =
             thisLensSettingValues.lens
-
-        children =
-            case length lensValuePath of
-                0 ->
-                    let
-                        thisLensSettingValuesMin =
-                            getValueOfSetting thisLensSettingValues Min
-
-                        thisLensSettingValuesMax =
-                            getValueOfSetting thisLensSettingValues Max
-
-                        firstLensRange =
-                            range thisLensSettingValuesMin thisLensSettingValuesMax
-                    in
-                    map toString firstLensRange
-
-                _ ->
-                    let
-                        lensProperties =
-                            getLensProperties lens
-
-                        lensValuePathChildrenGetter =
-                            lensProperties.lensValuePathChildrenGetter
-                    in
-                    lensValuePathChildrenGetter lensValuePath thisLensSettingValues
     in
-    LensValuePathChildren lens children
+    case length lensValuePath of
+        0 ->
+            let
+                thisLensSettingValuesMin =
+                    getValueOfSetting thisLensSettingValues Min
+
+                thisLensSettingValuesMax =
+                    getValueOfSetting thisLensSettingValues Max
+
+                firstLensRange =
+                    range thisLensSettingValuesMin thisLensSettingValuesMax
+
+                children =
+                    map toString firstLensRange
+            in
+            LensValuePathChildren lens children
+
+        _ ->
+            let
+                lensProperties =
+                    getLensProperties lens
+
+                lensValuePathChildrenGetter =
+                    lensProperties.lensValuePathChildrenGetter
+            in
+            lensValuePathChildrenGetter lensValuePath thisLensSettingValues

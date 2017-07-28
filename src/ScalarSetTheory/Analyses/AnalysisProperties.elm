@@ -1,5 +1,6 @@
 module ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 
+import Css exposing (Color, rgb)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
 import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValuesGetter)
 import ScalarSetTheory.Analyses.EqualDivision exposing (equalDivisionChildValuesGetter)
@@ -12,6 +13,7 @@ type alias AnalysisProperties =
     , ultimateMax : Int
     , initialMin : Int
     , initialMax : Int
+    , color : Color
     , analysisValuePathChildValuesGetter : AnalysisValuePathChildValuesGetter
     }
 
@@ -33,6 +35,7 @@ equalDivisionProperties =
     , ultimateMax = 100
     , initialMin = 3
     , initialMax = 3
+    , color = rgb 201 218 248
     , analysisValuePathChildValuesGetter = equalDivisionChildValuesGetter
     }
 
@@ -44,5 +47,6 @@ nChordProperties =
     , ultimateMax = 100
     , initialMin = 2
     , initialMax = 100
+    , color = rgb 208 224 227
     , analysisValuePathChildValuesGetter = nChordChildValuesGetter
     }

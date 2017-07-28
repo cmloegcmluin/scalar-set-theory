@@ -4,6 +4,8 @@ import Html exposing (Html, div)
 import List exposing (head, length, tail)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Styles.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
@@ -15,24 +17,26 @@ tableRow cells =
 
         tailCells =
             cellsTail cells
-    in
-    case length tailCells of
-        0 ->
-            TableNode
-                { cellItself = Just headCell
-                , cellChildren = []
-                }
 
-        _ ->
-            TableNode
-                { cellItself = Just headCell
-                , cellChildren =
+        cellItself =
+            Just (TableCell headCell defaultGrey)
+
+        cellChildren =
+            case length tailCells of
+                0 ->
+                    []
+
+                _ ->
                     [ TableNode
                         { cellItself = Nothing
                         , cellChildren = [ tableRow tailCells ]
                         }
                     ]
-                }
+    in
+    TableNode
+        { cellItself = cellItself
+        , cellChildren = cellChildren
+        }
 
 
 cellsHead : List (Html Msg) -> Html Msg

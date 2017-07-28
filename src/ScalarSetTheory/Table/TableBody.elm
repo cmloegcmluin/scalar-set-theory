@@ -11,6 +11,8 @@ import ScalarSetTheory.Analyses.AnalysisValueStep exposing (AnalysisValuePath, A
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Settings.GetSettingValue exposing (getValueOfSetting)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Styles.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
@@ -30,16 +32,26 @@ tableBody model =
 
                 cellChildren =
                     getCellChildren firstActiveAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
+
+                rootTableCell =
+                    TableCell (text "root") defaultGrey
             in
-            analysisNode "root" cellChildren
+            analysisNode rootTableCell cellChildren
 
 
 analysisValuePathChildValueToTableNode : AnalysisValuePath -> Analysis -> String -> List AnalysisSettingValues -> TableNode
 analysisValuePathChildValueToTableNode previousAnalysisValuePath analysis childValue previousRemainingActiveAnalysisSettingValues =
+    let
+        analysisProperties =
+            getAnalysisProperties analysis
+
+        analysisColor =
+            analysisProperties.color
+    in
     case previousRemainingActiveAnalysisSettingValues of
         [] ->
             TableNode
-                { cellItself = Just (text childValue)
+                { cellItself = Just (TableCell (text childValue) analysisColor)
                 , cellChildren = []
                 }
 
@@ -53,8 +65,11 @@ analysisValuePathChildValueToTableNode previousAnalysisValuePath analysis childV
 
                 cellChildren =
                     getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
+
+                tableCell =
+                    TableCell (text analysisValueStep.value) analysisColor
             in
-            analysisNode analysisValueStep.value cellChildren
+            analysisNode tableCell cellChildren
 
 
 getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode

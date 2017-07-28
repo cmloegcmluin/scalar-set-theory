@@ -1,16 +1,17 @@
-module ScalarSetTheoryTests.Components.TableCellTests exposing (tableCellTests)
+module ScalarSetTheoryTests.Components.TableNodeToHtmlTests exposing (tableNodeToHtmlTests)
 
-import Css exposing (alignItems, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, outline3, px, rgb, solid, stretch, width)
+import Css exposing (alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, outline3, px, rgb, solid, stretch, width)
 import Expect exposing (equal)
 import Html exposing (div, text)
-import ScalarSetTheory.Components.TableCell exposing (tableCell)
+import ScalarSetTheory.Components.TableNodeToHtml exposing (tableNodeToHtml)
 import ScalarSetTheory.Styles.Styles exposing (styles)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import Test exposing (Test, describe, test)
 
 
-tableCellTests : Test
-tableCellTests =
+tableNodeToHtmlTests : Test
+tableNodeToHtmlTests =
     describe "table cell tests"
         [ test "when the cell itself is nothing, put an empty space in the table" <|
             \() ->
@@ -33,7 +34,7 @@ tableCellTests =
                             }
 
                     actual =
-                        tableCell tableNode
+                        tableNodeToHtml tableNode
                 in
                 equal expected actual
         , test "when the cell itself is something, put a table cell in the table" <|
@@ -51,6 +52,7 @@ tableCellTests =
                                     , outline3 (px 1) solid (rgb 128 128 128)
                                     , alignItems center
                                     , justifyContent center
+                                    , backgroundColor (rgb 180 180 180)
                                     ]
                                 ]
                                 [ text "bob" ]
@@ -61,12 +63,12 @@ tableCellTests =
 
                     tableNode =
                         TableNode
-                            { cellItself = Just (text "bob")
+                            { cellItself = Just (TableCell (text "bob") (rgb 180 180 180))
                             , cellChildren = []
                             }
 
                     actual =
-                        tableCell tableNode
+                        tableNodeToHtml tableNode
                 in
                 equal expected actual
         ]

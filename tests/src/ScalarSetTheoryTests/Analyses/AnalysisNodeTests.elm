@@ -3,6 +3,8 @@ module ScalarSetTheoryTests.Analyses.AnalysisNodeTests exposing (analysisNodeTes
 import Expect exposing (equal)
 import Html exposing (text)
 import ScalarSetTheory.Analyses.AnalysisNode exposing (analysisNode)
+import ScalarSetTheory.Styles.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 import Test exposing (Test, describe, test)
 
@@ -15,21 +17,21 @@ analysisNodeTests =
                 let
                     expected =
                         TableNode
-                            { cellItself = Just (text "555")
+                            { cellItself = Just (TableCell (text "555") defaultGrey)
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = Just (text "3")
+                                    { cellItself = Just (TableCell (text "3") defaultGrey)
                                     , cellChildren =
                                         [ TableNode
-                                            { cellItself = Just (text "333")
+                                            { cellItself = Just (TableCell (text "333") defaultGrey)
                                             , cellChildren = []
                                             }
                                         , TableNode
-                                            { cellItself = Just (text "444")
+                                            { cellItself = Just (TableCell (text "444") defaultGrey)
                                             , cellChildren = []
                                             }
                                         , TableNode
-                                            { cellItself = Just (text "555")
+                                            { cellItself = Just (TableCell (text "555") defaultGrey)
                                             , cellChildren = []
                                             }
                                         ]
@@ -39,21 +41,21 @@ analysisNodeTests =
 
                     cellChildren =
                         [ TableNode
-                            { cellItself = Just (text "333")
+                            { cellItself = Just (TableCell (text "333") defaultGrey)
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = Just (text "444")
+                            { cellItself = Just (TableCell (text "444") defaultGrey)
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = Just (text "555")
+                            { cellItself = Just (TableCell (text "555") defaultGrey)
                             , cellChildren = []
                             }
                         ]
 
                     actual =
-                        analysisNode "555" cellChildren
+                        analysisNode (TableCell (text "555") defaultGrey) cellChildren
                 in
                 equal expected actual
         ]

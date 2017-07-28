@@ -3,7 +3,7 @@ module ScalarSetTheory.View exposing (view)
 import Html exposing (Html, div, h1, text)
 import Html.Attributes exposing (class)
 import List exposing (map)
-import ScalarSetTheory.Components.TableCell exposing (tableCell)
+import ScalarSetTheory.Components.TableNodeToHtml exposing (tableNodeToHtml)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
@@ -25,7 +25,7 @@ view model =
             ]
 
         tableHtml =
-            map tableCell table
+            map tableNodeToHtml table
     in
     div
         [ appStyle ]

@@ -1,11 +1,10 @@
 module ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
-import Html exposing (Html)
-import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 
 
 type TableNode
     = TableNode
-        { cellItself : Maybe (Html Msg)
+        { cellItself : Maybe TableCell
         , cellChildren : List TableNode
         }

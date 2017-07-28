@@ -1,17 +1,27 @@
 module ScalarSetTheory.Analyses.AnalysisNode exposing (analysisNode)
 
+import Css exposing (rgb)
 import Html exposing (text)
 import List exposing (length)
+import ScalarSetTheory.Styles.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Table.TableCell exposing (TableCell)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
-analysisNode : String -> List TableNode -> TableNode
-analysisNode cellValue cellChildren =
+analysisNode : TableCell -> List TableNode -> TableNode
+analysisNode tableCell cellChildren =
+    let
+        childrenCount =
+            cellChildren |> length |> toString |> text
+
+        childrenCountCell =
+            Just (TableCell childrenCount defaultGrey)
+    in
     TableNode
-        { cellItself = Just (text cellValue)
+        { cellItself = Just tableCell
         , cellChildren =
             [ TableNode
-                { cellItself = Just (cellChildren |> length |> toString |> text)
+                { cellItself = childrenCountCell
                 , cellChildren = cellChildren
                 }
             ]

@@ -1,14 +1,16 @@
-module ScalarSetTheory.Components.TableCell exposing (tableCell)
+module ScalarSetTheory.Components.TableNodeToHtml exposing (tableNodeToHtml)
 
+import Css exposing (backgroundColor)
 import Html exposing (Html, div)
 import List exposing (map)
 import ScalarSetTheory.Msg exposing (Msg)
+import ScalarSetTheory.Styles.Styles exposing (styles)
 import ScalarSetTheory.Styles.TableStyles exposing (blankTableCellStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle)
 import ScalarSetTheory.Table.TableNode exposing (TableNode(TableNode))
 
 
-tableCell : TableNode -> Html Msg
-tableCell (TableNode tableNode) =
+tableNodeToHtml : TableNode -> Html Msg
+tableNodeToHtml (TableNode tableNode) =
     let
         cellItselfHtml =
             case tableNode.cellItself of
@@ -19,11 +21,11 @@ tableCell (TableNode tableNode) =
 
                 Just cellItself ->
                     div
-                        [ tableCellItselfStyle ]
-                        [ cellItself ]
+                        [ tableCellItselfStyle, styles [ backgroundColor cellItself.color ] ]
+                        [ cellItself.content ]
 
         cellChildren =
-            map tableCell tableNode.cellChildren
+            map tableNodeToHtml tableNode.cellChildren
 
         cellChildrenHtml =
             div

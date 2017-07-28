@@ -2,6 +2,7 @@ module Tests exposing (all)
 
 import Expect
 import ScalarSetTheory.Main exposing (main)
+import ScalarSetTheoryTests.Analyses.AnalysisNodeTests exposing (analysisNodeTests)
 import ScalarSetTheoryTests.Analyses.AnalysisValueStepTests exposing (analysisValueStepTests)
 import ScalarSetTheoryTests.Analyses.EqualDivisionTests exposing (equalDivisionTests)
 import ScalarSetTheoryTests.Analyses.NChordTests exposing (nChordTests)
@@ -24,4 +25,5 @@ all =
         , settingValueTests
         , equalDivisionTests
         , nChordTests
+        , analysisNodeTests
         ]

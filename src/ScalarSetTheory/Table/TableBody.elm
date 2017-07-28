@@ -3,6 +3,7 @@ module ScalarSetTheory.Table.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (length, map, range)
 import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
+import ScalarSetTheory.Analyses.AnalysisNode exposing (analysisNode)
 import ScalarSetTheory.Analyses.AnalysisProperties exposing (getAnalysisProperties)
 import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
 import ScalarSetTheory.Analyses.AnalysisValuePathChildValues exposing (AnalysisValuePathChildValues)
@@ -30,10 +31,7 @@ tableBody model =
                 cellChildren =
                     getCellChildren firstActiveAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
             in
-            TableNode
-                { cellItself = cellChildren |> length |> toString |> text
-                , cellChildren = cellChildren
-                }
+            analysisNode "root" cellChildren
 
 
 analysisValuePathChildValueToTableNode : AnalysisValuePath -> Analysis -> String -> List AnalysisSettingValues -> TableNode
@@ -56,10 +54,7 @@ analysisValuePathChildValueToTableNode previousAnalysisValuePath analysis childV
                 cellChildren =
                     getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettingValues analysisValuePath
             in
-            TableNode
-                { cellItself = text analysisValueStep.value
-                , cellChildren = cellChildren
-                }
+            analysisNode analysisValueStep.value cellChildren
 
 
 getCellChildren : AnalysisSettingValues -> List AnalysisSettingValues -> AnalysisValuePath -> List TableNode
@@ -79,38 +74,33 @@ getCellChildren thisAnalysisSettingValues remainingActiveAnalysisSettingValues a
 
 getAnalysisValuePathChildValues : AnalysisValuePath -> AnalysisSettingValues -> AnalysisValuePathChildValues
 getAnalysisValuePathChildValues analysisValuePath thisAnalysisSettingValues =
-    case length analysisValuePath of
-        0 ->
-            let
-                thisAnalysisSettingValuesMin =
-                    getValueOfSetting thisAnalysisSettingValues Min
+    let
+        analysis =
+            thisAnalysisSettingValues.analysis
 
-                thisAnalysisSettingValuesMax =
-                    getValueOfSetting thisAnalysisSettingValues Max
+        childValues =
+            case length analysisValuePath of
+                0 ->
+                    let
+                        thisAnalysisSettingValuesMin =
+                            getValueOfSetting thisAnalysisSettingValues Min
 
-                firstAnalysisRange =
-                    range thisAnalysisSettingValuesMin thisAnalysisSettingValuesMax
+                        thisAnalysisSettingValuesMax =
+                            getValueOfSetting thisAnalysisSettingValues Max
 
-                childValues =
+                        firstAnalysisRange =
+                            range thisAnalysisSettingValuesMin thisAnalysisSettingValuesMax
+                    in
                     map toString firstAnalysisRange
 
-                analysis =
-                    thisAnalysisSettingValues.analysis
-            in
-            AnalysisValuePathChildValues analysis childValues
+                _ ->
+                    let
+                        analysisProperties =
+                            getAnalysisProperties analysis
 
-        _ ->
-            let
-                analysisProperties =
-                    getAnalysisProperties thisAnalysisSettingValues.analysis
-
-                analysisValuePathChildValuesGetter =
-                    analysisProperties.analysisValuePathChildValuesGetter
-
-                childValues =
+                        analysisValuePathChildValuesGetter =
+                            analysisProperties.analysisValuePathChildValuesGetter
+                    in
                     analysisValuePathChildValuesGetter analysisValuePath thisAnalysisSettingValues
-
-                analysis =
-                    thisAnalysisSettingValues.analysis
-            in
-            AnalysisValuePathChildValues analysis childValues
+    in
+    AnalysisValuePathChildValues analysis childValues

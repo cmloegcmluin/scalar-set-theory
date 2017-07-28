@@ -1,33 +1,33 @@
 module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Analyses.AnalysisSettingValues exposing (AnalysisSettingValues)
+import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
-import ScalarSetTheory.Settings.Setting exposing (Setting)
-import ScalarSetTheory.Settings.SettingValue exposing (updateSettingValues)
+import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
+import ScalarSetTheory.Setting.Setting exposing (Setting)
+import ScalarSetTheory.SettingValue.SettingValue exposing (updateSettingValues)
 
 
-maybeUpdateAnalysisSettingValue : AnalysisSettingValues -> Analysis -> Setting -> Int -> AnalysisSettingValues
-maybeUpdateAnalysisSettingValue oldAnalysisSettingValues analysisToUpdate settingToUpdate newValue =
-    case oldAnalysisSettingValues.analysis == analysisToUpdate of
+maybeUpdateLensSettingValue : LensSettingValues -> Lens -> Setting -> Int -> LensSettingValues
+maybeUpdateLensSettingValue oldLensSettingValues lensToUpdate settingToUpdate newValue =
+    case oldLensSettingValues.lens == lensToUpdate of
         True ->
-            { oldAnalysisSettingValues | settingValues = updateSettingValues oldAnalysisSettingValues.settingValues settingToUpdate newValue }
+            { oldLensSettingValues | settingValues = updateSettingValues oldLensSettingValues.settingValues settingToUpdate newValue }
 
         False ->
-            oldAnalysisSettingValues
+            oldLensSettingValues
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        UpdateAnalysisSettingValue analysisToUpdate settingToUpdate newValue ->
+        UpdateLensSettingValue lensToUpdate settingToUpdate newValue ->
             let
-                updateTargetAnalysisSettingValues =
-                    \memberOfOldActiveAnalysisSettingValues -> maybeUpdateAnalysisSettingValue memberOfOldActiveAnalysisSettingValues analysisToUpdate settingToUpdate newValue
+                updateTargetLensSettingValues =
+                    \memberOfOldActiveLensSettingValues -> maybeUpdateLensSettingValue memberOfOldActiveLensSettingValues lensToUpdate settingToUpdate newValue
 
-                updatedActiveAnalysisSettingValues =
-                    map updateTargetAnalysisSettingValues model.activeAnalysisSettingValues
+                updatedActiveLensSettingValues =
+                    map updateTargetLensSettingValues model.activeLensSettingValues
             in
-            { model | activeAnalysisSettingValues = updatedActiveAnalysisSettingValues }
+            { model | activeLensSettingValues = updatedActiveLensSettingValues }

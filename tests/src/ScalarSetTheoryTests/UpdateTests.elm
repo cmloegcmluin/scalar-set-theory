@@ -2,10 +2,10 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis(EqualDivision, NChord))
-import ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
-import ScalarSetTheory.Settings.Setting exposing (Setting(Max, Min))
-import ScalarSetTheory.Settings.SettingValue exposing (SettingValue)
+import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
+import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
 
@@ -13,18 +13,18 @@ import Test exposing (Test, describe, test)
 updateTests : Test
 updateTests =
     describe "update"
-        [ test "UpdateAnalysisSetting can update the min for an analysis" <|
+        [ test "UpdateLensSetting can update the min for a lens" <|
             \() ->
                 let
                     expected =
-                        { activeAnalysisSettingValues =
-                            [ { analysis = EqualDivision
+                        { activeLensSettingValues =
+                            [ { lens = EqualDivision
                               , settingValues =
                                     [ SettingValue Min 5
                                     , SettingValue Max 7
                                     ]
                               }
-                            , { analysis = NChord
+                            , { lens = NChord
                               , settingValues =
                                     [ SettingValue Min 4
                                     , SettingValue Max 6
@@ -35,15 +35,15 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSettingValue EqualDivision Min 5)
-                            { activeAnalysisSettingValues =
-                                [ { analysis = EqualDivision
+                            (UpdateLensSettingValue EqualDivision Min 5)
+                            { activeLensSettingValues =
+                                [ { lens = EqualDivision
                                   , settingValues =
                                         [ SettingValue Min 7
                                         , SettingValue Max 7
                                         ]
                                   }
-                                , { analysis = NChord
+                                , { lens = NChord
                                   , settingValues =
                                         [ SettingValue Min 4
                                         , SettingValue Max 6
@@ -53,18 +53,18 @@ updateTests =
                             }
                 in
                 equal expected actual
-        , test "UpdateAnalysisSetting can update the max for an analysis" <|
+        , test "UpdateLensSetting can update the max for a lens" <|
             \() ->
                 let
                     expected =
-                        { activeAnalysisSettingValues =
-                            [ { analysis = EqualDivision
+                        { activeLensSettingValues =
+                            [ { lens = EqualDivision
                               , settingValues =
                                     [ SettingValue Min 5
                                     , SettingValue Max 7
                                     ]
                               }
-                            , { analysis = NChord
+                            , { lens = NChord
                               , settingValues =
                                     [ SettingValue Min 4
                                     , SettingValue Max 8
@@ -75,15 +75,15 @@ updateTests =
 
                     actual =
                         update
-                            (UpdateAnalysisSettingValue NChord Max 8)
-                            { activeAnalysisSettingValues =
-                                [ { analysis = EqualDivision
+                            (UpdateLensSettingValue NChord Max 8)
+                            { activeLensSettingValues =
+                                [ { lens = EqualDivision
                                   , settingValues =
                                         [ SettingValue Min 5
                                         , SettingValue Max 7
                                         ]
                                   }
-                                , { analysis = NChord
+                                , { lens = NChord
                                   , settingValues =
                                         [ SettingValue Min 4
                                         , SettingValue Max 6

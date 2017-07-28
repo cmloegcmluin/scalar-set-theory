@@ -1,8 +1,8 @@
-module ScalarSetTheory.Msg exposing (Msg(UpdateAnalysisSettingValue))
+module ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
 
-import ScalarSetTheory.Analyses.Analysis exposing (Analysis)
-import ScalarSetTheory.Settings.Setting exposing (Setting)
+import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.Setting.Setting exposing (Setting)
 
 
 type Msg
-    = UpdateAnalysisSettingValue Analysis Setting Int
+    = UpdateLensSettingValue Lens Setting Int

@@ -2,16 +2,16 @@ module Tests exposing (all)
 
 import Expect
 import ScalarSetTheory.Main exposing (main)
-import ScalarSetTheoryTests.Analyses.AnalysisNodeTests exposing (analysisNodeTests)
-import ScalarSetTheoryTests.Analyses.AnalysisValueStepTests exposing (analysisValueStepTests)
-import ScalarSetTheoryTests.Analyses.EqualDivisionTests exposing (equalDivisionTests)
-import ScalarSetTheoryTests.Analyses.NChordTests exposing (nChordTests)
-import ScalarSetTheoryTests.Components.DropdownTests exposing (dropdownTests)
-import ScalarSetTheoryTests.Components.TableNodeToHtmlTests exposing (tableNodeToHtmlTests)
-import ScalarSetTheoryTests.Settings.GetSettingValueTests exposing (getSettingValueTests)
-import ScalarSetTheoryTests.Settings.SettingValueTests exposing (settingValueTests)
+import ScalarSetTheoryTests.Html.DropdownTests exposing (dropdownTests)
+import ScalarSetTheoryTests.Html.TableNodeToHtmlTests exposing (tableNodeToHtmlTests)
+import ScalarSetTheoryTests.LensValuePathChildValues.EqualDivisionTests exposing (equalDivisionTests)
+import ScalarSetTheoryTests.LensValuePathChildValues.NChordTests exposing (nChordTests)
+import ScalarSetTheoryTests.LensValueStep.LensValueStepTests exposing (lensValueStepTests)
+import ScalarSetTheoryTests.SettingValue.SettingValueTests exposing (settingValueTests)
+import ScalarSetTheoryTests.TableNode.LensNodeTests exposing (lensNodeTests)
 import ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 import ScalarSetTheoryTests.UtilitiesTests exposing (utilitiesTests)
+import ScalarSetTheoryTests.Value.GetValueOfSettingTests exposing (getValueOfSettingTests)
 import Test exposing (Test, describe)
 
 
@@ -21,11 +21,11 @@ all =
         [ updateTests
         , utilitiesTests
         , dropdownTests
-        , analysisValueStepTests
-        , getSettingValueTests
+        , lensValueStepTests
+        , getValueOfSettingTests
         , settingValueTests
         , equalDivisionTests
         , nChordTests
-        , analysisNodeTests
+        , lensNodeTests
         , tableNodeToHtmlTests
         ]

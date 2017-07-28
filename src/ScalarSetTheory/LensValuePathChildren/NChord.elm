@@ -1,16 +1,16 @@
-module ScalarSetTheory.LensValuePathChildValues.NChord exposing (nChordChildValuesGetter)
+module ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)
 
 import List exposing (map, range)
 import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision))
-import ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValuesGetter)
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildrenGetter)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (findLensValueStepInPath)
 import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Utilities exposing (parseInt)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
 
-nChordChildValuesGetter : LensValuePathChildValuesGetter
-nChordChildValuesGetter lensValuePath nChordSettingValues =
+nChordChildrenGetter : LensValuePathChildrenGetter
+nChordChildrenGetter lensValuePath nChordSettingValues =
     let
         nChordMin =
             getValueOfSetting nChordSettingValues Min
@@ -27,13 +27,13 @@ nChordChildValuesGetter lensValuePath nChordSettingValues =
                 Nothing ->
                     99999
 
-        childValuesMin =
+        childrenMin =
             nChordMin
 
-        childValuesMax =
+        childrenMax =
             min edValue nChordMax
 
-        childValues =
-            range childValuesMin childValuesMax
+        children =
+            range childrenMin childrenMax
     in
-    map toString childValues
+    map toString children

@@ -1,13 +1,13 @@
-module ScalarSetTheoryTests.LensValuePathChildValues.EqualDivisionTests exposing (equalDivisionTests)
+module ScalarSetTheoryTests.LensValuePathChildren.NChordTests exposing (nChordTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.LensValuePathChildValues.EqualDivision exposing (equalDivisionChildValuesGetter)
+import ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)
 import Test exposing (Test, describe, test)
 
 
-equalDivisionTests : Test
-equalDivisionTests =
-    describe "equal division child values getter"
+nChordTests : Test
+nChordTests =
+    describe "n-chord child values getter"
         [ test "" <|
             \() ->
                 let

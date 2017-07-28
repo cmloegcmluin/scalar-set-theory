@@ -2,9 +2,9 @@ module ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties
 
 import Css exposing (Color, rgb)
 import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.LensValuePathChildValues.EqualDivision exposing (equalDivisionChildValuesGetter)
-import ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValuesGetter)
-import ScalarSetTheory.LensValuePathChildValues.NChord exposing (nChordChildValuesGetter)
+import ScalarSetTheory.LensValuePathChildren.EqualDivision exposing (equalDivisionChildrenGetter)
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildrenGetter)
+import ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)
 
 
 type alias LensProperties =
@@ -14,7 +14,7 @@ type alias LensProperties =
     , initialMin : Int
     , initialMax : Int
     , color : Color
-    , lensValuePathChildValuesGetter : LensValuePathChildValuesGetter
+    , lensValuePathChildrenGetter : LensValuePathChildrenGetter
     }
 
 
@@ -36,7 +36,7 @@ equalDivisionProperties =
     , initialMin = 3
     , initialMax = 3
     , color = rgb 201 218 248
-    , lensValuePathChildValuesGetter = equalDivisionChildValuesGetter
+    , lensValuePathChildrenGetter = equalDivisionChildrenGetter
     }
 
 
@@ -48,5 +48,5 @@ nChordProperties =
     , initialMin = 2
     , initialMax = 100
     , color = rgb 208 224 227
-    , lensValuePathChildValuesGetter = nChordChildValuesGetter
+    , lensValuePathChildrenGetter = nChordChildrenGetter
     }

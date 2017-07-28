@@ -6,8 +6,8 @@ import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
 import ScalarSetTheory.Lens.Lens exposing (Lens)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
-import ScalarSetTheory.LensValuePathChildValues.GetLensValuePathChildValues exposing (getLensValuePathChildValues)
-import ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValues)
+import ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath, LensValueStep)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
@@ -76,13 +76,13 @@ lensValuePathChildValueToTableNode previousLensValuePath lens childValue previou
 getCellChildren : LensSettingValues -> List LensSettingValues -> LensValuePath -> List TableNode
 getCellChildren thisLensSettingValues remainingActiveLensSettingValues lensValuePath =
     let
-        lensValuePathChildValues =
-            getLensValuePathChildValues lensValuePath thisLensSettingValues
+        lensValuePathChildren =
+            getLensValuePathChildren lensValuePath thisLensSettingValues
 
         lens =
-            lensValuePathChildValues.lens
+            lensValuePathChildren.lens
 
-        convertLensValuePathChildValuesToTableNodesWhichMayRecurse =
+        lensValuePathChildValuesToTableNodes =
             \lensValuePathChildValue -> lensValuePathChildValueToTableNode lensValuePath lens lensValuePathChildValue remainingActiveLensSettingValues
     in
-    map convertLensValuePathChildValuesToTableNodesWhichMayRecurse lensValuePathChildValues.values
+    map lensValuePathChildValuesToTableNodes lensValuePathChildren.values

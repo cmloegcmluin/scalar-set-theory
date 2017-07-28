@@ -1,15 +1,15 @@
-module ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValues, LensValuePathChildValuesGetter)
+module ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren, LensValuePathChildrenGetter)
 
 import ScalarSetTheory.Lens.Lens exposing (Lens)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath)
 
 
-type alias LensValuePathChildValues =
+type alias LensValuePathChildren =
     { lens : Lens
     , values : List String
     }
 
 
-type alias LensValuePathChildValuesGetter =
+type alias LensValuePathChildrenGetter =
     LensValuePath -> LensSettingValues -> List String

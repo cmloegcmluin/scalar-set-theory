@@ -1,16 +1,16 @@
-module ScalarSetTheory.LensValuePathChildValues.EqualDivision exposing (equalDivisionChildValuesGetter)
+module ScalarSetTheory.LensValuePathChildren.EqualDivision exposing (equalDivisionChildrenGetter)
 
 import List exposing (map, range)
 import ScalarSetTheory.Lens.Lens exposing (Lens(NChord))
-import ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValuesGetter)
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildrenGetter)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (findLensValueStepInPath)
 import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Utilities exposing (parseInt)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
 
-equalDivisionChildValuesGetter : LensValuePathChildValuesGetter
-equalDivisionChildValuesGetter lensValuePath equalDivisionSettingValues =
+equalDivisionChildrenGetter : LensValuePathChildrenGetter
+equalDivisionChildrenGetter lensValuePath equalDivisionSettingValues =
     let
         equalDivisionMin =
             getValueOfSetting equalDivisionSettingValues Min
@@ -27,13 +27,13 @@ equalDivisionChildValuesGetter lensValuePath equalDivisionSettingValues =
                 Nothing ->
                     0
 
-        childValuesMin =
+        childrenMin =
             max equalDivisionMin nChordValue
 
-        childValuesMax =
+        childrenMax =
             equalDivisionMax
 
-        childValues =
-            range childValuesMin childValuesMax
+        children =
+            range childrenMin childrenMax
     in
-    map toString childValues
+    map toString children

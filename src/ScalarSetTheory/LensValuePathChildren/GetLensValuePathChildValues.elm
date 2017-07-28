@@ -1,21 +1,21 @@
-module ScalarSetTheory.LensValuePathChildValues.GetLensValuePathChildValues exposing (getLensValuePathChildValues)
+module ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
 
 import List exposing (length, map, range)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
-import ScalarSetTheory.LensValuePathChildValues.LensValuePathChildValues exposing (LensValuePathChildValues)
+import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath)
 import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
 
-getLensValuePathChildValues : LensValuePath -> LensSettingValues -> LensValuePathChildValues
-getLensValuePathChildValues lensValuePath thisLensSettingValues =
+getLensValuePathChildren : LensValuePath -> LensSettingValues -> LensValuePathChildren
+getLensValuePathChildren lensValuePath thisLensSettingValues =
     let
         lens =
             thisLensSettingValues.lens
 
-        childValues =
+        children =
             case length lensValuePath of
                 0 ->
                     let
@@ -35,9 +35,9 @@ getLensValuePathChildValues lensValuePath thisLensSettingValues =
                         lensProperties =
                             getLensProperties lens
 
-                        lensValuePathChildValuesGetter =
-                            lensProperties.lensValuePathChildValuesGetter
+                        lensValuePathChildrenGetter =
+                            lensProperties.lensValuePathChildrenGetter
                     in
-                    lensValuePathChildValuesGetter lensValuePath thisLensSettingValues
+                    lensValuePathChildrenGetter lensValuePath thisLensSettingValues
     in
-    LensValuePathChildValues lens childValues
+    LensValuePathChildren lens children

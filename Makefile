@@ -20,7 +20,7 @@ analyze:
 	elm-analyse
 
 ci:
-	npm install -g elm && elm-package install -y && cd integration-tests && npm i && cd ../tests && elm-package install -y && cd elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/ && npm i && export PATH=$PATH:~\workspace\scalar-set-theory\tests\elm-stuff\packages\rtfeldman\node-test-runner\3.0.0\bin && npm config set msvs_version 2017
+	npm install -g elm && elm-package install -y && cd integration-tests && which npm && npm i && cd ../tests && elm-package install -y && cd elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/ && which npm && npm i && export PATH=$PATH:~\workspace\scalar-set-theory\tests\elm-stuff\packages\rtfeldman\node-test-runner\3.0.0\bin && npm config set msvs_version 2017
 
 setup:
 	npm install -g elm && elm-package install -y && cd integration-tests && npm i && cd ../tests && elm-package install -y && cd elm-stuff/packages/rtfeldman/node-test-runner/3.0.0/ && npm i && export PATH=$PATH:~\workspace\scalar-set-theory\tests\elm-stuff\packages\rtfeldman\node-test-runner\3.0.0\bin && npm config set msvs_version 2017 && npm i -g elm-analyse

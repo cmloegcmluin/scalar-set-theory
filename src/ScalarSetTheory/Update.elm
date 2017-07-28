@@ -25,7 +25,7 @@ update msg model =
         UpdateLensSettingValue lensToUpdate settingToUpdate newValue ->
             let
                 updateTargetLensSettingValues =
-                    \memberOfOldActiveLensSettingValues -> maybeUpdateLensSettingValue memberOfOldActiveLensSettingValues lensToUpdate settingToUpdate newValue
+                    \activeLensSettingValues -> maybeUpdateLensSettingValue activeLensSettingValues lensToUpdate settingToUpdate newValue
 
                 updatedActiveLensSettingValues =
                     map updateTargetLensSettingValues model.activeLensSettingValues

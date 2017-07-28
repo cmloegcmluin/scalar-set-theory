@@ -1,6 +1,5 @@
 module ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 
-import Css exposing (rgb)
 import Html exposing (text)
 import List exposing (length)
 import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)

@@ -1,20 +1,17 @@
 module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 
 import Html exposing (text)
-import List exposing (length, map, range)
+import List exposing (map)
 import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
 import ScalarSetTheory.Lens.Lens exposing (Lens)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
-import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath, LensValueStep)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
-import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
 
 tableBody : Model -> TableNode

@@ -6,6 +6,8 @@ The main problem was that I was unable to successfully run the `npm i` command i
 
 What finally worked for me was re-installing Microsoft Visual Studio from scratch, with everything and the kitchen sink included, in particular several Windows SDKs. Then I needed to run this magic incantation: `npm config set msvs_version 2017`. 
 
+For what it's worth, downgrading to node 6 fixed this issue for my coworker on a Mac.
+
 I also had to comment out some lines of `wdio.config.js` related to the loopback host. I was overriding its working defaults for some reason. Hopefully that doesn't screw up it working on Mac OS.
 
 Also, because the `make integration` script was not written to be cross-platform (`lsof` is Unix only) you will need to open three separate shells: 

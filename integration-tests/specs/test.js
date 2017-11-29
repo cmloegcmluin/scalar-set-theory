@@ -10,6 +10,7 @@ const nChordMaxSelect = '//div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[
 
 beforeEach('visit main page', function () {
 	browser.url('/src/ScalarSetTheory/Main.elm')
+	browser.waitForExist('h1')
 })
 
 describe('landing page', function () {

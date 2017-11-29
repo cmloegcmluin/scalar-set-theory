@@ -1,7 +1,7 @@
 exports.config = {
 	browserName: 'chrome',
 	chromeOptions: {
-		args: [ '--headless', '--disable-gpu', '--window-size=1280,800', '--no-sandbox' ]
+		args: [ '--headless', '--disable-gpu', '--window-size=1280,800' ]
 	},
 
     // =====================

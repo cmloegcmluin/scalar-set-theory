@@ -10,4 +10,5 @@ cache:
 addons:
   chrome: stable
 before_install:
+  - export CHROME_BIN=google-chrome-stable
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &

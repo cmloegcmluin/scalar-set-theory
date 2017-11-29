@@ -1,10 +1,5 @@
 exports.config = {
-	browserName: 'chrome',
-	chromeOptions: {
-		args: [ '--headless', '--disable-gpu', '--window-size=1280,800' ]
-	},
-
-    // =====================
+	// =====================
     // Server Configurations
     // =====================
     // Host address of the running Selenium server. This information is usually obsolete as
@@ -62,7 +57,10 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 5,
         //
-        browserName: 'chrome'
+        browserName: 'chrome',
+        chromeOptions: {
+            args: [ '--headless', '--disable-gpu', '--window-size=1280,800' ]
+        }
     }],
     //
     // ===================

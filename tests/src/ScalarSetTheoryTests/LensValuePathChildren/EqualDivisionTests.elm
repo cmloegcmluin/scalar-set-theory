@@ -30,14 +30,4 @@ equalDivisionTests =
                         equalDivisionChildrenGetter lensValuePath equalDivisionSettingValues
                 in
                 equal expected actual
-        , test "" <|
-            \() ->
-                let
-                    expected =
-                        ""
-
-                    actual =
-                        ""
-                in
-                equal expected actual
         ]

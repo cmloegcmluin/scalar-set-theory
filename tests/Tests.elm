@@ -5,7 +5,6 @@ import ScalarSetTheory.Main exposing (main)
 import ScalarSetTheoryTests.Html.DropdownTests exposing (dropdownTests)
 import ScalarSetTheoryTests.Html.TableNodeToHtmlTests exposing (tableNodeToHtmlTests)
 import ScalarSetTheoryTests.LensValuePathChildren.EqualDivisionTests exposing (equalDivisionTests)
-import ScalarSetTheoryTests.LensValuePathChildren.NChordTests exposing (nChordTests)
 import ScalarSetTheoryTests.LensValueStep.LensValueStepTests exposing (lensValueStepTests)
 import ScalarSetTheoryTests.SettingValue.SettingValueTests exposing (settingValueTests)
 import ScalarSetTheoryTests.TableNode.LensNodeTests exposing (lensNodeTests)
@@ -25,7 +24,6 @@ all =
         , getValueOfSettingTests
         , settingValueTests
         , equalDivisionTests
-        , nChordTests
         , lensNodeTests
         , tableNodeToHtmlTests
         ]

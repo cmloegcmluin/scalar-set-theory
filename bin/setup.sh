@@ -3,6 +3,7 @@
 npm i -g elm elm-test elm-analyse
 
 elm-test init
+rm tests/Example.elm
 
 elm-package install -y
 

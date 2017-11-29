@@ -5,6 +5,7 @@ npm i elm elm-test
 export PATH=${PATH}:/home/travis/build/cmloegcmluin/scalar-set-theory/node_modules/.bin
 
 elm-test init
+rm /home/travis/build/cmloegcmluin/scalar-set-theory/tests/Example.elm
 
 elm-package install -y
 

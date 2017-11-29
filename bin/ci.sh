@@ -8,12 +8,9 @@ elm-test init
 
 elm-package install -y
 
-cd tests
-elm-package install -y
-
 elm-test
 
-cd ../integration-tests
+cd integration-tests
 npm i
 elm-reactor -p 8001 &
 npm test

@@ -4,8 +4,5 @@ node_js:
 dist: trusty
 script:
     - make ci
-cache:
-  directories:
-    - tests/elm-stuff/build-artifacts
 addons:
   chrome: stable

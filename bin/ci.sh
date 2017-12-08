@@ -11,7 +11,7 @@ elm-package install -y
 
 elm-test
 
+elm-reactor -p 8001 &
 cd integration-tests
 npm i
-elm-reactor -p 8001 &
 npm test

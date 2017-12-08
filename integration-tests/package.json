@@ -4,7 +4,7 @@
   "description": "Integration tests for Scalar Set Theory",
   "main": "index.js",
   "scripts": {
-    "test": "selenium-standalone start & wdio wdio.config.js",
+    "test": "wdio wdio.config.js",
     "postinstall": "selenium-standalone install"
   },
   "author": "",

@@ -1,7 +1,7 @@
 module ScalarSetTheoryTests.LensValueStep.LensValueStepTests exposing (lensValueStepTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValueStep, findLensValueStepInPath)
 import Test exposing (Test, describe, test)
 

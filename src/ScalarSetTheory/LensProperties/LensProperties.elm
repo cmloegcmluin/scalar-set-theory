@@ -1,7 +1,7 @@
 module ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 
 import Css exposing (Color, rgb)
-import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import ScalarSetTheory.LensValuePathChildren.EqualDivision exposing (equalDivisionChildrenGetter)
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildrenGetter exposing (LensValuePathChildrenGetter)
 import ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)

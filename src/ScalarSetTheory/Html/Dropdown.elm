@@ -7,7 +7,7 @@ import List exposing (map, range)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Utilities exposing (parseInt)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 

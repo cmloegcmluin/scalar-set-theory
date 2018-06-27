@@ -1,6 +1,6 @@
 module ScalarSetTheory.SettingProperties.SettingProperties exposing (SettingProperties, getSettingProperties)
 
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 
 
 type alias SettingProperties =

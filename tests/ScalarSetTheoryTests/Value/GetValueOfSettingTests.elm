@@ -1,9 +1,9 @@
 module ScalarSetTheoryTests.Value.GetValueOfSettingTests exposing (getValueOfSettingTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision))
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision))
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 import Test exposing (Test, describe, test)

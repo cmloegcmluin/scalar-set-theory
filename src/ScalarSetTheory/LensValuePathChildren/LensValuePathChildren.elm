@@ -1,6 +1,6 @@
 module ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 
-import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.Types.Lens exposing (Lens)
 
 
 type alias LensValuePathChildren =

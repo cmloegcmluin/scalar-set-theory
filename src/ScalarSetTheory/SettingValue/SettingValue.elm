@@ -1,7 +1,7 @@
 module ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue, SettingValues, updateSettingValues)
 
 import List exposing (map)
-import ScalarSetTheory.Setting.Setting exposing (Setting)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
 type alias SettingValue =

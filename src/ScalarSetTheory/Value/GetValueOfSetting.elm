@@ -1,7 +1,7 @@
 module ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
-import ScalarSetTheory.Setting.Setting exposing (Setting)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 import ScalarSetTheory.Utilities exposing (find)
 
 

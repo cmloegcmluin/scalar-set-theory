@@ -1,7 +1,7 @@
 module ScalarSetTheoryTests.SettingValue.SettingValueTests exposing (settingValueTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue, updateSettingValues)
 import Test exposing (Test, describe, test)
 

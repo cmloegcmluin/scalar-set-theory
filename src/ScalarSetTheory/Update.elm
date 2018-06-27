@@ -1,11 +1,11 @@
 module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
-import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
-import ScalarSetTheory.Setting.Setting exposing (Setting)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 import ScalarSetTheory.SettingValue.SettingValue exposing (updateSettingValues)
 
 

@@ -1,6 +1,6 @@
 module ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath, LensValueStep, findLensValueStepInPath)
 
-import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.Utilities exposing (find)
 
 

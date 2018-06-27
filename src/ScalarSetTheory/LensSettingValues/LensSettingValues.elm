@@ -1,6 +1,6 @@
 module ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 
-import ScalarSetTheory.Lens.Lens exposing (Lens)
+import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValues)
 
 

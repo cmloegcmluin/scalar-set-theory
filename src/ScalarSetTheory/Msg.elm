@@ -1,7 +1,7 @@
 module ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
 
-import ScalarSetTheory.Lens.Lens exposing (Lens)
-import ScalarSetTheory.Setting.Setting exposing (Setting)
+import ScalarSetTheory.Types.Lens exposing (Lens)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
 type Msg

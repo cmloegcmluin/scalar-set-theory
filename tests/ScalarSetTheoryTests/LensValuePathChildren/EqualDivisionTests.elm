@@ -1,12 +1,12 @@
 module ScalarSetTheoryTests.LensValuePathChildren.EqualDivisionTests exposing (equalDivisionTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Lens.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.LensValuePathChildren.EqualDivision exposing (equalDivisionChildrenGetter)
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValueStep)
-import ScalarSetTheory.Setting.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
 import Test exposing (Test, describe, test)
 

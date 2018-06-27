@@ -1,22 +1,20 @@
 module ScalarSetTheory.Update exposing (update)
 
 import List exposing (map)
-import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
-import ScalarSetTheory.Types.Setting exposing (Setting)
 import ScalarSetTheory.SettingValue.SettingValue exposing (updateSettingValues)
+import ScalarSetTheory.Types.Lens exposing (Lens)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
 maybeUpdateLensSettingValue : LensSettingValues -> Lens -> Setting -> Int -> LensSettingValues
 maybeUpdateLensSettingValue oldLensSettingValues lensToUpdate settingToUpdate newValue =
-    case oldLensSettingValues.lens == lensToUpdate of
-        True ->
-            { oldLensSettingValues | settingValues = updateSettingValues oldLensSettingValues.settingValues settingToUpdate newValue }
-
-        False ->
-            oldLensSettingValues
+    if oldLensSettingValues.lens == lensToUpdate then
+        { oldLensSettingValues | settingValues = updateSettingValues oldLensSettingValues.settingValues settingToUpdate newValue }
+    else
+        oldLensSettingValues
 
 
 update : Msg -> Model -> Model

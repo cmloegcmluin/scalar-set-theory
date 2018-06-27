@@ -8,10 +8,10 @@ import ScalarSetTheory.Css.TableStyles exposing (tableStyle)
 import ScalarSetTheory.Html.TableNodeToHtml exposing (tableNodeToHtml)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 import ScalarSetTheory.TableNode.TableHeaderRow exposing (tableHeaderRow)
 import ScalarSetTheory.TableNode.TableSettingRow exposing (tableSettingRow)
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 
 
 view : Model -> Html Msg

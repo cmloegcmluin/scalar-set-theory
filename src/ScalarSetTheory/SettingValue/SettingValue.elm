@@ -16,12 +16,10 @@ type alias SettingValues =
 
 maybeUpdateSettingValue : SettingValue -> Setting -> Int -> SettingValue
 maybeUpdateSettingValue oldSettingValue settingToUpdate newValue =
-    case oldSettingValue.setting == settingToUpdate of
-        True ->
-            { oldSettingValue | value = newValue }
-
-        False ->
-            oldSettingValue
+    if oldSettingValue.setting == settingToUpdate then
+        { oldSettingValue | value = newValue }
+    else
+        oldSettingValue
 
 
 updateSettingValues : SettingValues -> Setting -> Int -> SettingValues

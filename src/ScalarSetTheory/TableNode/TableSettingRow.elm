@@ -4,10 +4,10 @@ import Html exposing (text)
 import List exposing (map)
 import ScalarSetTheory.Html.Dropdown exposing (settingDropdown)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Types.Setting exposing (Setting)
 import ScalarSetTheory.SettingProperties.SettingProperties exposing (getSettingProperties)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
+import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
 tableSettingRow : Setting -> Model -> TableNode

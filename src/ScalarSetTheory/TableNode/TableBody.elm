@@ -3,7 +3,6 @@ module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 import Html exposing (text)
 import List exposing (map)
 import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
-import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
@@ -12,6 +11,7 @@ import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.Types.Lens exposing (Lens)
 
 
 tableBody : Model -> TableNode

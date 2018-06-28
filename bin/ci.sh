@@ -6,7 +6,7 @@ elm-reactor -p 8001 &
 
 cd integration-tests
 
-apt-get install g++ build-essential
+apt-get install -y g++ build-essential
 
 npm i
 

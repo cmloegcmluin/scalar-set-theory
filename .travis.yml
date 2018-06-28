@@ -23,7 +23,6 @@ before_install:
       make && make install;
       cd ..;
     fi
-    google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost:8081 &
 
 install: # install specific versions of elm & elm-test
   - npm install -g elm@$ELM_VERSION elm-test@$ELM_TEST

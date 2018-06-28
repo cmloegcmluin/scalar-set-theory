@@ -1,5 +1,5 @@
 language: node_js # elm is installed from npm (see install below)
-node_js: node     # use "latest" version of Node.js
+node_js: "10.1.0"
 dist: trusty
 jdk:
   - oraclejdk8

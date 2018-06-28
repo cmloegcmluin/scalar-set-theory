@@ -6,4 +6,4 @@ cd integration-tests
 
 npm i
 
-npm run ci
+npm test

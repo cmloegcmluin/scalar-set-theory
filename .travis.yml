@@ -1,5 +1,5 @@
 language: node_js # elm is installed from npm (see install below)
-node_js: "10.1.0"
+node_js: "4"
 sudo: required
 dist: trusty
 jdk:

@@ -2,6 +2,7 @@
 
 set -e -x
 
+elm-test init
 elm-test
 
 elm-reactor -p 8001 &

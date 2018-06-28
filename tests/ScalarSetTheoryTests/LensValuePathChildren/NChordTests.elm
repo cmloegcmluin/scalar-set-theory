@@ -14,7 +14,23 @@ import Test exposing (Test, describe, test)
 nChordTests : Test
 nChordTests =
     describe "n-chord child values getter"
-        [ test "gives the n-chords which support the value for equal division and other lenses that it is within" <|
+        [ test "when at the top of the lens value path, filters all but any n-chord allowed by its setting values" <|
+            \() ->
+                let
+                    expected =
+                        LensValuePathChildren NChord [ "2", "3", "4", "5", "6", "7", "8", "9" ]
+
+                    lensValuePath =
+                        []
+
+                    nChordSettingValues =
+                        LensSettingValues NChord [ SettingValue Min 2, SettingValue Max 9 ]
+
+                    actual =
+                        nChordChildrenGetter lensValuePath nChordSettingValues
+                in
+                equal expected actual
+        , test "when underneath an equal division value in the lens value path, filters all but n-chords less than that equal division value (also still filters by n-chord's setting values as always)" <|
             \() ->
                 let
                     expected =

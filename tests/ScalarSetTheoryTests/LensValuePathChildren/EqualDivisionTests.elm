@@ -14,7 +14,23 @@ import Test exposing (Test, describe, test)
 equalDivisionTests : Test
 equalDivisionTests =
     describe "equal division child values getter"
-        [ test "gives the equal divisions which support the value for n-chord and other lenses that it is within" <|
+        [ test "when at the top of the lens value path, filters all but any equal division allowed by its setting values" <|
+            \() ->
+                let
+                    expected =
+                        LensValuePathChildren EqualDivision [ "2", "3", "4", "5", "6", "7", "8", "9" ]
+
+                    lensValuePath =
+                        []
+
+                    equalDivisionSettingValues =
+                        LensSettingValues EqualDivision [ SettingValue Min 2, SettingValue Max 9 ]
+
+                    actual =
+                        equalDivisionChildrenGetter lensValuePath equalDivisionSettingValues
+                in
+                equal expected actual
+        , test "when underneath an n-chord value in the lens value path, filters all but equal divisions greater than that n-chord value (also still filters by equal division's setting values as always)" <|
             \() ->
                 let
                     expected =

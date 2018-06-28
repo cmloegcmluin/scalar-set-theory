@@ -17,6 +17,9 @@ elm-reactor -p 8001 &
 
 cd integration-tests
 
+echo "node version???"
+node -v
+nodejs -v
 npm i
 
 npm test

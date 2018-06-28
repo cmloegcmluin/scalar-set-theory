@@ -59,7 +59,7 @@ exports.config = {
         //
         browserName: 'chrome',
         chromeOptions: {
-            args: [ '--headless', '--disable-gpu', '--window-size=1280,800', '--disable-dev-shm-usage' ]
+            args: [ '--headless', '--disable-gpu', '--window-size=1280,800', '--no-sandbox' ]
         }
     }],
     //

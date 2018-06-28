@@ -1,3 +1,5 @@
+'use strict'
+
 const selectOption = function (selectXPath, option) {
 	browser.click(selectXPath + "/option[contains(.,\"" + option + "\")]")
 	browser.execute(function (selectXPath) {

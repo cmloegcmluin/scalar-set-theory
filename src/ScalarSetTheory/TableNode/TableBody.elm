@@ -11,6 +11,7 @@ import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TerminalNode exposing (terminalNode)
 import ScalarSetTheory.Types.Lens exposing (Lens)
 
 
@@ -48,10 +49,7 @@ lensValuePathChildValueToTableNode previousLensValuePath lens childValue previou
     in
     case previousRemainingActiveLensSettingValues of
         [] ->
-            TableNode
-                { cellItself = Just (TableCell (text childValue) lensColor)
-                , cellChildren = []
-                }
+            terminalNode childValue lensColor
 
         thisLensSettingValues :: remainingActiveLensSettingValues ->
             let

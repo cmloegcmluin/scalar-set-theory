@@ -8,7 +8,7 @@ sudo apt-get update \
     make \
     g++ \
     build-essential \
-  && npm i -g node-gyp
+#  && npm i -g node-gyp
   echo "finished installing crap"
 
 which build-essential
@@ -24,7 +24,7 @@ cd integration-tests
 echo "node version???"
 node -v
 nodejs -v
-npm i fibers
+#npm i fibers
 npm i
 
 npm test

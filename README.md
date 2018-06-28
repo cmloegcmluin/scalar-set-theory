@@ -28,6 +28,8 @@ cd integration-tests
 
 And try to avoid zombie selenium servers because it is harder to kill things by port they run on and it isn't being done automatically.
 
+Actually now I had to `npm i -g -p windows-build-tools` in elevated Command Prompt and `npm i -g node-gyp` and `npm config set msvs_version 2015` (not 2017). Not sure how much of these were necessary.
+
 # UNIT TEST ODYSSEY
 
 Then we had a whole separate odyssey just to get the unit tests to work. 

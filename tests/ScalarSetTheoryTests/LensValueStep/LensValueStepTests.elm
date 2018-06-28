@@ -1,15 +1,15 @@
 module ScalarSetTheoryTests.LensValueStep.LensValueStepTests exposing (lensValueStepTests)
 
 import Expect exposing (equal)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValueStep, findLensValueStepInPath)
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import Test exposing (Test, describe, test)
 
 
 lensValueStepTests : Test
 lensValueStepTests =
     describe "lens value step tests"
-        [ test "when the anlysis value path contains a step with the sought lens, returns that step" <|
+        [ test "when the value path contains a step with the sought lens, returns that step" <|
             \() ->
                 let
                     expected =
@@ -24,7 +24,7 @@ lensValueStepTests =
                         findLensValueStepInPath EqualDivision lensValuePath
                 in
                 equal expected actual
-        , test "find lens value path does not contain a step with the sought lens, returns nothing" <|
+        , test "when the value path does not contain a step with the sought lens, returns nothing" <|
             \() ->
                 let
                     expected =

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e -x
+
 elm-test
 
 elm-reactor -p 8001 &

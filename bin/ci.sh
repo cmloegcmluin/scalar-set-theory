@@ -20,6 +20,7 @@ cd integration-tests
 echo "node version???"
 node -v
 nodejs -v
+npm i fibers
 npm i
 
 npm test

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cmloegcmluin/scalar-set-theory.svg?branch=master)](https://travis-ci.org/cmloegcmluin/scalar-set-theory)
+
 # INTEGRATION TEST ODYSSEY
 
 `make integration` does not yet work on Windows.

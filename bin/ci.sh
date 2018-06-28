@@ -11,6 +11,10 @@ sudo apt-get update \
   && npm i -g node-gyp
   echo "finished installing crap"
 
+which build-essential
+which g++
+which gcc
+
 elm-package install -y
 
 elm-reactor -p 8001 &

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir node_modules
-npm i elm
+sudo apt-get install g++ build-essential
 
 elm-package install -y
 

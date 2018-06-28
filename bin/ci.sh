@@ -6,8 +6,8 @@ elm-reactor -p 8001 &
 
 cd integration-tests
 
-sudo apt-get install g++ build-essential
-npm i -g node-gyp
+apt-get install g++ build-essential
+
 npm i
 
 npm test

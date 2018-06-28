@@ -23,6 +23,7 @@ before_install:
       make && make install;
       cd ..;
     fi
+    google-chrome-stable --headless --disable-gpu --window-size=1280,800 --no-sandbox &
 
 install: # install specific versions of elm & elm-test
   - npm install -g elm@$ELM_VERSION elm-test@$ELM_TEST

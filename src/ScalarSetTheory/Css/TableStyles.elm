@@ -1,6 +1,6 @@
-module ScalarSetTheory.Css.TableStyles exposing (blankTableCellStyle, borderGrey, defaultGrey, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
+module ScalarSetTheory.Css.TableStyles exposing (blankTableCellStyle, borderGrey, defaultGrey, dropdownStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
 
-import Css exposing (Color, alignItems, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, outline3, px, rgb, solid, stretch, width)
+import Css exposing (Color, alignItems, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
 import Html exposing (Attribute)
 import ScalarSetTheory.Css.Styles exposing (styles)
 import ScalarSetTheory.Msg exposing (Msg)
@@ -23,7 +23,8 @@ tableCellItselfStyle =
         , displayFlex
         , alignItems center
         , justifyContent center
-        , width (px 100)
+        , width (px 50)
+        , whiteSpace noWrap
         ]
 
 
@@ -33,7 +34,7 @@ blankTableCellStyle =
         [ marginTop (px 1)
         , marginLeft (px 1)
         , displayFlex
-        , width (px 100)
+        , width (px 50)
         ]
 
 
@@ -49,6 +50,13 @@ tableStyle : Attribute Msg
 tableStyle =
     styles
         [ display inlineBlock
+        ]
+
+
+dropdownStyle : Attribute Msg
+dropdownStyle =
+    styles
+        [ width (px 50)
         ]
 
 

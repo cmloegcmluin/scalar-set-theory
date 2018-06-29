@@ -1,6 +1,6 @@
 module ScalarSetTheoryTests.Html.TableNodeToHtmlTests exposing (tableNodeToHtmlTests)
 
-import Css exposing (alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, outline3, px, rgb, solid, stretch, width)
+import Css exposing (alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
 import Expect exposing (equal)
 import Html exposing (div, text)
 import ScalarSetTheory.Css.Styles exposing (styles)
@@ -12,7 +12,7 @@ import Test exposing (Test, describe, test)
 
 tableNodeToHtmlTests : Test
 tableNodeToHtmlTests =
-    describe "table cell tests"
+    describe "table node to html tests"
         [ test "when the cell itself is nothing, put an empty space in the table" <|
             \() ->
                 let
@@ -20,7 +20,7 @@ tableNodeToHtmlTests =
                         div
                             [ styles [ displayFlex, alignItems stretch ] ]
                             [ div
-                                [ styles [ marginTop (px 1), marginLeft (px 1), displayFlex, width (px 100) ] ]
+                                [ styles [ marginTop (px 1), marginLeft (px 1), displayFlex, width (px 50) ] ]
                                 []
                             , div
                                 [ styles [ displayFlex, flexDirection column ] ]
@@ -48,9 +48,10 @@ tableNodeToHtmlTests =
                                     [ marginTop (px 1)
                                     , marginLeft (px 1)
                                     , displayFlex
-                                    , width (px 100)
+                                    , width (px 50)
                                     , outline3 (px 1) solid (rgb 128 128 128)
                                     , alignItems center
+                                    , whiteSpace noWrap
                                     , justifyContent center
                                     , backgroundColor (rgb 180 180 180)
                                     ]

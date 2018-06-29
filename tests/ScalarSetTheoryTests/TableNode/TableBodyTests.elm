@@ -39,11 +39,16 @@ tableBodyTests =
                             { cellItself = Just (TableCell (text "root") defaultGrey)
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = Just (TableCell (text "1") defaultGrey)
+                                    { cellItself = Just (TableCell (text "^") defaultGrey)
                                     , cellChildren =
                                         [ TableNode
-                                            { cellItself = Just (TableCell (text "0") (getLensProperties NChord).color)
-                                            , cellChildren = []
+                                            { cellItself = Just (TableCell (text "1") defaultGrey)
+                                            , cellChildren =
+                                                [ TableNode
+                                                    { cellItself = Just (TableCell (text "0") (getLensProperties NChord).color)
+                                                    , cellChildren = []
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }

@@ -9,17 +9,23 @@ const expectTable = function (expectationsTable) {
 	expectationsTable.forEach(function (expectationsRow, expectationsRowIndex) {
 		expectationsRow.forEach(function (expectationsCell, expectationsColIndex) {
 			expectationsCell = expectationsCell.trim()
-			if (expectationsCell === '^^') return
+			if (expectationsCell === '--') return
 
-			const actualCell = phoropter.getText(
-				tableNodePathForExpectationsTableCoordinate(
-					expectationsRowIndex, expectationsColIndex, expectationsTable
+			let actualCell
+			try {
+				actualCell = phoropter.getText(
+					tableNodePathForExpectationsTableCoordinate(
+						expectationsRowIndex, expectationsColIndex, expectationsTable,
+					),
 				)
-			)
+			}
+			catch (e) {
+
+			}
 			assert.equal(
 				actualCell,
 				expectationsCell,
-				`Failure at row ${expectationsRowIndex + 1}, col ${expectationsColIndex + 1} of expectations table: expected ${actualCell} to be ${expectationsCell}`
+				`Failure at row ${expectationsRowIndex + 1}, col ${expectationsColIndex + 1} of expectations table: expected ${actualCell} to be ${expectationsCell}`,
 			)
 		})
 	})
@@ -28,13 +34,13 @@ const expectTable = function (expectationsTable) {
 const INDEX_OF_CELL_ITSELF = 1
 const INDEX_OF_CELL_CHILDREN = 2
 
-const tableNodePathForExpectationsTableCoordinate = function(expectationsRow, expectationsCol, expectationsTable) {
+const tableNodePathForExpectationsTableCoordinate = function (expectationsRow, expectationsCol, expectationsTable) {
 	let currentlySearchingTableNodeRow = 0
 	let currentlySearchingTableNodeCol = 0
 
 	let lastGoodRow = 0
 
-	let path = "/"
+	let path = '/'
 
 	let tableNodeChildrenIndex
 	let currentContents
@@ -42,8 +48,8 @@ const tableNodePathForExpectationsTableCoordinate = function(expectationsRow, ex
 	while (currentlySearchingTableNodeCol <= expectationsCol) {
 		tableNodeChildrenIndex = 0
 		while (currentlySearchingTableNodeRow <= expectationsRow) {
-			currentContents = expectationsTable[currentlySearchingTableNodeRow][currentlySearchingTableNodeCol].trim()
-			if (currentContents !== '^^') {
+			currentContents = expectationsTable[ currentlySearchingTableNodeRow ][ currentlySearchingTableNodeCol ].trim()
+			if (currentContents !== '--') {
 				lastGoodRow = currentlySearchingTableNodeRow
 				tableNodeChildrenIndex++
 			}

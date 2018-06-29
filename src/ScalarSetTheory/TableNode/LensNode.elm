@@ -15,13 +15,21 @@ lensNode tableCell cellChildren =
 
         childrenCountCell =
             Just (TableCell childrenCount defaultGrey)
+
+        collapseToggleCell =
+            Just (TableCell (text "^") defaultGrey)
     in
     TableNode
         { cellItself = Just tableCell
         , cellChildren =
             [ TableNode
-                { cellItself = childrenCountCell
-                , cellChildren = cellChildren
+                { cellItself = collapseToggleCell
+                , cellChildren =
+                    [ TableNode
+                        { cellItself = childrenCountCell
+                        , cellChildren = cellChildren
+                        }
+                    ]
                 }
             ]
         }

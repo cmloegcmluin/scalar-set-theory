@@ -12,7 +12,7 @@ import Test exposing (Test, describe, test)
 lensNodeTests : Test
 lensNodeTests =
     describe "lens node tests"
-        [ test "includes the children count" <|
+        [ test "includes the children count and a collapse toggle" <|
             \() ->
                 let
                     expected =
@@ -20,19 +20,24 @@ lensNodeTests =
                             { cellItself = Just (TableCell (text "555") defaultGrey)
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = Just (TableCell (text "3") defaultGrey)
+                                    { cellItself = Just (TableCell (text "^") defaultGrey)
                                     , cellChildren =
                                         [ TableNode
-                                            { cellItself = Just (TableCell (text "333") defaultGrey)
-                                            , cellChildren = []
-                                            }
-                                        , TableNode
-                                            { cellItself = Just (TableCell (text "444") defaultGrey)
-                                            , cellChildren = []
-                                            }
-                                        , TableNode
-                                            { cellItself = Just (TableCell (text "555") defaultGrey)
-                                            , cellChildren = []
+                                            { cellItself = Just (TableCell (text "3") defaultGrey)
+                                            , cellChildren =
+                                                [ TableNode
+                                                    { cellItself = Just (TableCell (text "333") defaultGrey)
+                                                    , cellChildren = []
+                                                    }
+                                                , TableNode
+                                                    { cellItself = Just (TableCell (text "444") defaultGrey)
+                                                    , cellChildren = []
+                                                    }
+                                                , TableNode
+                                                    { cellItself = Just (TableCell (text "555") defaultGrey)
+                                                    , cellChildren = []
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }

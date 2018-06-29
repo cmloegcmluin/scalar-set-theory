@@ -13,11 +13,7 @@ const expectTable = function (expectationsTable) {
 
 			let actualCell
 			try {
-				actualCell = phoropter.getText(
-					tableNodePathForExpectationsTableCoordinate(
-						expectationsRowIndex, expectationsColIndex, expectationsTable,
-					),
-				)
+				actualCell = phoropter.getText(tableNodePathForExpectationsTableCoordinate(expectationsRowIndex, expectationsColIndex, expectationsTable))
 			}
 			catch (e) {
 

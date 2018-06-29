@@ -2,7 +2,7 @@ module ScalarSetTheoryTests.TableNode.LensNodeTests exposing (lensNodeTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
+import ScalarSetTheory.Css.TableStyles exposing (collapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
@@ -20,7 +20,7 @@ lensNodeTests =
                             { cellItself = Just (TableCell (text "555") defaultGreyBackground)
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = Just (TableCell (text "^") defaultGreyBackground)
+                                    { cellItself = Just (TableCell (text "^") collapseToggleCellStyle)
                                     , cellChildren =
                                         [ TableNode
                                             { cellItself = Just (TableCell (text "3") defaultGreyBackground)

@@ -1,4 +1,4 @@
-module ScalarSetTheory.Css.TableStyles exposing (background, blankTableCellStyle, borderGrey, defaultGrey, defaultGreyBackground, dropdownStyle, noStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
+module ScalarSetTheory.Css.TableStyles exposing (background, blankCollapseToggleCellStyle, blankTableCellStyle, borderGrey, collapseToggleCellStyle, defaultGrey, defaultGreyBackground, dropdownStyle, noStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
 
 import Css exposing (Color, alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
 import Html exposing (Attribute)
@@ -35,6 +35,25 @@ blankTableCellStyle =
         , marginLeft (px 1)
         , displayFlex
         , width (px 50)
+        ]
+
+
+blankCollapseToggleCellStyle : Attribute Msg
+blankCollapseToggleCellStyle =
+    styles
+        [ marginTop (px 1)
+        , marginLeft (px 1)
+        , displayFlex
+        , width (px 20)
+        , outline3 (px 0) solid borderGrey
+        ]
+
+
+collapseToggleCellStyle : Attribute Msg
+collapseToggleCellStyle =
+    styles
+        [ backgroundColor defaultGrey
+        , width (px 20)
         ]
 
 

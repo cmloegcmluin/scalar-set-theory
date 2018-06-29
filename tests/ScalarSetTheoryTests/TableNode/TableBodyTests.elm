@@ -2,7 +2,7 @@ module ScalarSetTheoryTests.TableNode.TableBodyTests exposing (tableBodyTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Css.TableStyles exposing (background, defaultGreyBackground)
+import ScalarSetTheory.Css.TableStyles exposing (background, collapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
@@ -38,7 +38,7 @@ tableBodyTests =
                     expected =
                         tableRow
                             [ Just (TableCell (text "root") defaultGreyBackground)
-                            , Just (TableCell (text "^") defaultGreyBackground)
+                            , Just (TableCell (text "^") collapseToggleCellStyle)
                             , Just (TableCell (text "1") defaultGreyBackground)
                             , Just (TableCell (text "0") (background (getLensProperties NChord).color))
                             ]

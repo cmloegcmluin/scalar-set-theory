@@ -5,7 +5,7 @@ import Expect exposing (equal)
 import Html exposing (option, select, text)
 import Html.Events exposing (onInput)
 import ScalarSetTheory.Css.Styles exposing (styles)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
+import ScalarSetTheory.Css.TableStyles exposing (blankCollapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
@@ -25,10 +25,10 @@ tableHeaderTests =
                     expected =
                         tableRow
                             [ Just (TableCell (text "lens") defaultGreyBackground)
-                            , Nothing
+                            , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
                             , Just (TableCell (text "n-chord") defaultGreyBackground)
-                            , Nothing
+                            , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
                             , Just (TableCell (text "equal division") defaultGreyBackground)
                             ]
@@ -53,10 +53,10 @@ tableHeaderTests =
                     expected =
                         tableRow
                             [ Just (TableCell (text "min") defaultGreyBackground)
-                            , Nothing
+                            , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
                             , Just (TableCell (select [] []) defaultGreyBackground)
-                            , Nothing
+                            , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
                             , Just (TableCell (select [] []) defaultGreyBackground)
                             ]

@@ -2,7 +2,7 @@ module ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 
 import Html exposing (text)
 import List exposing (length)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
+import ScalarSetTheory.Css.TableStyles exposing (collapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 
@@ -17,7 +17,7 @@ lensNode tableCell cellChildren =
             Just (TableCell childrenCount defaultGreyBackground)
 
         collapseToggleCell =
-            Just (TableCell (text "^") defaultGreyBackground)
+            Just (TableCell (text "^") collapseToggleCellStyle)
     in
     TableNode
         { cellItself = Just tableCell

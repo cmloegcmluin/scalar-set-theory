@@ -3,7 +3,7 @@ module ScalarSetTheory.TableNode.TableHeader exposing (tableLensHeaderRow, table
 import Html exposing (Html, div, text)
 import List exposing (head, length, map, tail)
 import Maybe exposing (withDefault)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
+import ScalarSetTheory.Css.TableStyles exposing (blankCollapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.Html.Dropdown exposing (settingDropdown)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.Model exposing (Model)
@@ -78,7 +78,8 @@ tableHeaderRow cells =
 
                 _ ->
                     [ TableNode
-                        { cellItself = Nothing
+                        { cellItself =
+                            Just (TableCell (text "") blankCollapseToggleCellStyle)
                         , cellChildren =
                             [ TableNode
                                 { cellItself = Nothing

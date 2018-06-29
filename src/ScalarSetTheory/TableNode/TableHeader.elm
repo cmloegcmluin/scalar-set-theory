@@ -1,9 +1,9 @@
-module ScalarSetTheory.TableNode.TableHeader exposing (tableHeaderRow, tableSettingRow)
+module ScalarSetTheory.TableNode.TableHeader exposing (tableLensHeaderRow, tableLensSettingRow)
 
 import Html exposing (Html, div, text)
 import List exposing (head, length, map, tail)
 import Maybe exposing (withDefault)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
 import ScalarSetTheory.Html.Dropdown exposing (settingDropdown)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.Model exposing (Model)
@@ -14,8 +14,8 @@ import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
 import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
-tableHeaderRow : Model -> TableNode
-tableHeaderRow model =
+tableLensHeaderRow : Model -> TableNode
+tableLensHeaderRow model =
     let
         activeLensSettingValues =
             map .lens model.activeLensSettingValues
@@ -32,11 +32,11 @@ tableHeaderRow model =
         lensNamesPlusLensHeadingAsHtml =
             map text activeLensNamesPlusLensHeading
     in
-    tableRow lensNamesPlusLensHeadingAsHtml
+    tableHeaderRow lensNamesPlusLensHeadingAsHtml
 
 
-tableSettingRow : Setting -> Model -> TableNode
-tableSettingRow setting model =
+tableLensSettingRow : Setting -> Model -> TableNode
+tableLensSettingRow setting model =
     let
         settingProperties =
             getSettingProperties setting
@@ -53,11 +53,11 @@ tableSettingRow setting model =
         settingDropdownsPlusSettingHeading =
             text settingName :: settingDropdowns
     in
-    tableRow settingDropdownsPlusSettingHeading
+    tableHeaderRow settingDropdownsPlusSettingHeading
 
 
-tableRow : List (Html Msg) -> TableNode
-tableRow cells =
+tableHeaderRow : List (Html Msg) -> TableNode
+tableHeaderRow cells =
     let
         emptyDiv =
             div [] []
@@ -69,7 +69,7 @@ tableRow cells =
             withDefault [ emptyDiv ] (tail cells)
 
         cellItself =
-            Just (TableCell headCell defaultGrey)
+            Just (TableCell headCell defaultGreyBackground)
 
         cellChildren =
             case length tailCells of
@@ -78,11 +78,11 @@ tableRow cells =
 
                 _ ->
                     [ TableNode
-                        { cellItself = Nothing --spacer for children count
+                        { cellItself = Nothing
                         , cellChildren =
                             [ TableNode
-                                { cellItself = Nothing --spacer for collapse toggle
-                                , cellChildren = [ tableRow tailCells ]
+                                { cellItself = Nothing
+                                , cellChildren = [ tableHeaderRow tailCells ]
                                 }
                             ]
                         }

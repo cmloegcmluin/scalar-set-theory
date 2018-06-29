@@ -1,139 +1,156 @@
 module ScalarSetTheoryTests.Html.DropdownTests exposing (dropdownTests)
 
 import Expect exposing (equal)
-import Html exposing (Html, option, text)
+import Html exposing (Html, option, select, text)
 import Html.Attributes exposing (selected, value)
-import ScalarSetTheory.Html.Dropdown exposing (dropdownOptions)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Html.Dropdown exposing (dropdownOptions, settingDropdown)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Msg exposing (Msg)
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import Test exposing (Test, describe, test)
 
 
 dropdownTests : Test
 dropdownTests =
-    describe "dropdownOptions"
-        [ test "for equal divisions, when the lens settings are at their ultimate maxes and mins, and the dropdown is for the min, it returns the full ultimate range (between 3 and 100), with the specified option selected" <|
-            \() ->
-                let
-                    expected =
-                        fullEqualDivisionRange
+    describe "dropdowns"
+        [ describe "dropdown options"
+            [ test "for equal divisions, when the lens settings are at their ultimate maxes and mins, and the dropdown is for the min, it returns the full ultimate range (between 3 and 100), with the specified option selected" <|
+                \() ->
+                    let
+                        expected =
+                            fullEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 3
-                            , SettingValue Max 100
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 3
+                                , SettingValue Max 100
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Min "8"
-                in
-                equal expected actual
-        , test "for equal divisions, when the lens settings are at their ultimate maxes and mins, and the dropdown is for the max, it also returns the full ultimate range, with the specified option selected as always" <|
-            \() ->
-                let
-                    expected =
-                        fullEqualDivisionRange
+                        actual =
+                            dropdownOptions lensSettingValues Min "8"
+                    in
+                    equal expected actual
+            , test "for equal divisions, when the lens settings are at their ultimate maxes and mins, and the dropdown is for the max, it also returns the full ultimate range, with the specified option selected as always" <|
+                \() ->
+                    let
+                        expected =
+                            fullEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 3
-                            , SettingValue Max 100
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 3
+                                , SettingValue Max 100
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Max "8"
-                in
-                equal expected actual
-        , test "for equal divisions, when the lens setting min is above the ultimate min, and the lens setting max is at the ultimate max, and the dropdown is for the min, still returns the full ultimate range, specified option selected" <|
-            \() ->
-                let
-                    expected =
-                        fullEqualDivisionRange
+                        actual =
+                            dropdownOptions lensSettingValues Max "8"
+                    in
+                    equal expected actual
+            , test "for equal divisions, when the lens setting min is above the ultimate min, and the lens setting max is at the ultimate max, and the dropdown is for the min, still returns the full ultimate range, specified option selected" <|
+                \() ->
+                    let
+                        expected =
+                            fullEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 7
-                            , SettingValue Max 100
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 7
+                                , SettingValue Max 100
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Min "8"
-                in
-                equal expected actual
-        , test "for equal divisions, when the lens setting min is above the ultimate min, and the lens setting max is at the ultimate max, and the dropdown is for the max, returns only the range between the selected min and the ultimate max, specified option selected" <|
-            \() ->
-                let
-                    expected =
-                        selectedMinToUltimateMaxEqualDivisionRange
+                        actual =
+                            dropdownOptions lensSettingValues Min "8"
+                    in
+                    equal expected actual
+            , test "for equal divisions, when the lens setting min is above the ultimate min, and the lens setting max is at the ultimate max, and the dropdown is for the max, returns only the range between the selected min and the ultimate max, specified option selected" <|
+                \() ->
+                    let
+                        expected =
+                            selectedMinToUltimateMaxEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 7
-                            , SettingValue Max 100
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 7
+                                , SettingValue Max 100
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Max "8"
-                in
-                equal expected actual
-        , test "for equal divisions, when the lens setting max is below the ultimate max, and the lens setting min is at the ultimate min, and the dropdown is for the min, returns only the range between the ultimate min and the selected max, specified option selected" <|
-            \() ->
-                let
-                    expected =
-                        ultimateMinToSelectedMaxEqualDivisionRange
+                        actual =
+                            dropdownOptions lensSettingValues Max "8"
+                    in
+                    equal expected actual
+            , test "for equal divisions, when the lens setting max is below the ultimate max, and the lens setting min is at the ultimate min, and the dropdown is for the min, returns only the range between the ultimate min and the selected max, specified option selected" <|
+                \() ->
+                    let
+                        expected =
+                            ultimateMinToSelectedMaxEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 3
-                            , SettingValue Max 12
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 3
+                                , SettingValue Max 12
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Min "8"
-                in
-                equal expected actual
-        , test "for equal divisions, when the lens setting max is below the ultimate max, and the lens setting min is at the ultimate min, and the dropdown is for the max, returns the full ultimate range, specified option selected" <|
-            \() ->
-                let
-                    expected =
-                        fullEqualDivisionRange
+                        actual =
+                            dropdownOptions lensSettingValues Min "8"
+                    in
+                    equal expected actual
+            , test "for equal divisions, when the lens setting max is below the ultimate max, and the lens setting min is at the ultimate min, and the dropdown is for the max, returns the full ultimate range, specified option selected" <|
+                \() ->
+                    let
+                        expected =
+                            fullEqualDivisionRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            EqualDivision
-                            [ SettingValue Min 3
-                            , SettingValue Max 12
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                EqualDivision
+                                [ SettingValue Min 3
+                                , SettingValue Max 12
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Max "8"
-                in
-                equal expected actual
-        , test "for nChords, returns a range between 2 and 100 instead of 3 to 100" <|
-            \() ->
-                let
-                    expected =
-                        fullNChordRange
+                        actual =
+                            dropdownOptions lensSettingValues Max "8"
+                    in
+                    equal expected actual
+            , test "for nChords, returns a range between 2 and 100 instead of 3 to 100" <|
+                \() ->
+                    let
+                        expected =
+                            fullNChordRange
 
-                    lensSettingValues =
-                        LensSettingValues
-                            NChord
-                            [ SettingValue Min 2
-                            , SettingValue Max 100
-                            ]
+                        lensSettingValues =
+                            LensSettingValues
+                                NChord
+                                [ SettingValue Min 2
+                                , SettingValue Max 100
+                                ]
 
-                    actual =
-                        dropdownOptions lensSettingValues Max "4"
-                in
-                equal expected actual
+                        actual =
+                            dropdownOptions lensSettingValues Max "4"
+                    in
+                    equal expected actual
+            ]
+        , describe "setting dropdowns"
+            [ test "when there are no setting values, do not style or attach a handler (primarily for testability, sorry)" <|
+                \() ->
+                    let
+                        expected =
+                            select [] []
+
+                        lensSettingValues =
+                            LensSettingValues NChord []
+
+                        actual =
+                            settingDropdown Min lensSettingValues
+                    in
+                    equal expected actual
+            ]
         ]
 
 

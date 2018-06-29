@@ -2,10 +2,10 @@ module ScalarSetTheoryTests.UpdateTests exposing (updateTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
 import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
+import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
+import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
 import ScalarSetTheory.Update exposing (update)
 import Test exposing (Test, describe, test)
 

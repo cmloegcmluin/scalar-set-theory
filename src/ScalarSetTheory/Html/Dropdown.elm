@@ -1,10 +1,9 @@
 module ScalarSetTheory.Html.Dropdown exposing (dropdownOptions, settingDropdown)
 
-import Css exposing (px, width)
 import Html exposing (Html, option, select, text)
 import Html.Attributes exposing (selected, value)
 import Html.Events exposing (onInput)
-import List exposing (map, range)
+import List exposing (length, map, range)
 import ScalarSetTheory.Css.TableStyles exposing (dropdownStyle)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
@@ -27,9 +26,14 @@ settingDropdown setting lensSettingValues =
             \newValue -> UpdateLensSettingValue lens setting (parseInt newValue)
 
         attributes =
-            [ onInput handler
-            , dropdownStyle
-            ]
+            case length lensSettingValues.settingValues of
+                0 ->
+                    []
+
+                _ ->
+                    [ onInput handler
+                    , dropdownStyle
+                    ]
 
         options =
             dropdownOptions lensSettingValues setting (toString selectedOption)

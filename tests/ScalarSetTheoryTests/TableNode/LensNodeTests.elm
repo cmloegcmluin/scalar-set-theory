@@ -2,7 +2,7 @@ module ScalarSetTheoryTests.TableNode.LensNodeTests exposing (lensNodeTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Css.TableStyles exposing (defaultGreyBackground)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
@@ -17,24 +17,24 @@ lensNodeTests =
                 let
                     expected =
                         TableNode
-                            { cellItself = Just (TableCell (text "555") defaultGrey)
+                            { cellItself = Just (TableCell (text "555") defaultGreyBackground)
                             , cellChildren =
                                 [ TableNode
-                                    { cellItself = Just (TableCell (text "^") defaultGrey)
+                                    { cellItself = Just (TableCell (text "^") defaultGreyBackground)
                                     , cellChildren =
                                         [ TableNode
-                                            { cellItself = Just (TableCell (text "3") defaultGrey)
+                                            { cellItself = Just (TableCell (text "3") defaultGreyBackground)
                                             , cellChildren =
                                                 [ TableNode
-                                                    { cellItself = Just (TableCell (text "333") defaultGrey)
+                                                    { cellItself = Just (TableCell (text "333") defaultGreyBackground)
                                                     , cellChildren = []
                                                     }
                                                 , TableNode
-                                                    { cellItself = Just (TableCell (text "444") defaultGrey)
+                                                    { cellItself = Just (TableCell (text "444") defaultGreyBackground)
                                                     , cellChildren = []
                                                     }
                                                 , TableNode
-                                                    { cellItself = Just (TableCell (text "555") defaultGrey)
+                                                    { cellItself = Just (TableCell (text "555") defaultGreyBackground)
                                                     , cellChildren = []
                                                     }
                                                 ]
@@ -46,21 +46,21 @@ lensNodeTests =
 
                     cellChildren =
                         [ TableNode
-                            { cellItself = Just (TableCell (text "333") defaultGrey)
+                            { cellItself = Just (TableCell (text "333") defaultGreyBackground)
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = Just (TableCell (text "444") defaultGrey)
+                            { cellItself = Just (TableCell (text "444") defaultGreyBackground)
                             , cellChildren = []
                             }
                         , TableNode
-                            { cellItself = Just (TableCell (text "555") defaultGrey)
+                            { cellItself = Just (TableCell (text "555") defaultGreyBackground)
                             , cellChildren = []
                             }
                         ]
 
                     actual =
-                        lensNode (TableCell (text "555") defaultGrey) cellChildren
+                        lensNode (TableCell (text "555") defaultGreyBackground) cellChildren
                 in
                 equal expected actual
         ]

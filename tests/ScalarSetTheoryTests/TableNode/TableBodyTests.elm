@@ -2,12 +2,13 @@ module ScalarSetTheoryTests.TableNode.TableBodyTests exposing (tableBodyTests)
 
 import Expect exposing (equal)
 import Html exposing (text)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Css.TableStyles exposing (background, defaultGreyBackground)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 import ScalarSetTheory.Types.Lens exposing (Lens(NChord))
 import Test exposing (Test, describe, test)
 
@@ -35,25 +36,12 @@ tableBodyTests =
             \() ->
                 let
                     expected =
-                        TableNode
-                            { cellItself = Just (TableCell (text "root") defaultGrey)
-                            , cellChildren =
-                                [ TableNode
-                                    { cellItself = Just (TableCell (text "^") defaultGrey)
-                                    , cellChildren =
-                                        [ TableNode
-                                            { cellItself = Just (TableCell (text "1") defaultGrey)
-                                            , cellChildren =
-                                                [ TableNode
-                                                    { cellItself = Just (TableCell (text "0") (getLensProperties NChord).color)
-                                                    , cellChildren = []
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                        tableRow
+                            [ Just (TableCell (text "root") defaultGreyBackground)
+                            , Just (TableCell (text "^") defaultGreyBackground)
+                            , Just (TableCell (text "1") defaultGreyBackground)
+                            , Just (TableCell (text "0") (background (getLensProperties NChord).color))
+                            ]
 
                     model =
                         Model

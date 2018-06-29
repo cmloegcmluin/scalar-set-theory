@@ -2,7 +2,7 @@ module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 
 import Html exposing (text)
 import List exposing (map)
-import ScalarSetTheory.Css.TableStyles exposing (defaultGrey)
+import ScalarSetTheory.Css.TableStyles exposing (background, defaultGreyBackground)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
@@ -33,7 +33,7 @@ tableBody model =
                     getCellChildren firstActiveLensSettingValues remainingActiveLensSettingValues lensValuePath
 
                 rootTableCell =
-                    TableCell (text "root") defaultGrey
+                    TableCell (text "root") defaultGreyBackground
             in
             lensNode rootTableCell cellChildren
 
@@ -63,7 +63,7 @@ lensValuePathChildValueToTableNode previousLensValuePath lens childValue previou
                     getCellChildren thisLensSettingValues remainingActiveLensSettingValues lensValuePath
 
                 tableCell =
-                    TableCell (text lensValueStep.value) lensColor
+                    TableCell (text lensValueStep.value) (background lensColor)
             in
             lensNode tableCell cellChildren
 

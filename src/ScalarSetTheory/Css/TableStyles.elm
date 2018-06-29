@@ -1,6 +1,6 @@
-module ScalarSetTheory.Css.TableStyles exposing (blankTableCellStyle, borderGrey, defaultGrey, dropdownStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
+module ScalarSetTheory.Css.TableStyles exposing (background, blankTableCellStyle, borderGrey, defaultGrey, defaultGreyBackground, dropdownStyle, noStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
 
-import Css exposing (Color, alignItems, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
+import Css exposing (Color, alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
 import Html exposing (Attribute)
 import ScalarSetTheory.Css.Styles exposing (styles)
 import ScalarSetTheory.Msg exposing (Msg)
@@ -68,3 +68,22 @@ defaultGrey =
 borderGrey : Color
 borderGrey =
     rgb 128 128 128
+
+
+defaultGreyBackground : Attribute Msg
+defaultGreyBackground =
+    styles
+        [ backgroundColor defaultGrey
+        ]
+
+
+background : Color -> Attribute Msg
+background color =
+    styles
+        [ backgroundColor color
+        ]
+
+
+noStyle : Attribute Msg
+noStyle =
+    styles []

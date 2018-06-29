@@ -13,7 +13,13 @@ const expectTable = function (expectationsTable) {
 
 			let actualCell
 			try {
-				actualCell = phoropter.getText(tableNodePathForExpectationsTableCoordinate(expectationsRowIndex, expectationsColIndex, expectationsTable))
+				actualCell = phoropter.getText(
+					tableNodePathForExpectationsTableCoordinate(
+						expectationsRowIndex,
+						expectationsColIndex,
+						expectationsTable
+					)
+				)
 			}
 			catch (e) {
 
@@ -21,7 +27,7 @@ const expectTable = function (expectationsTable) {
 			assert.equal(
 				actualCell,
 				expectationsCell,
-				`Failure at row ${expectationsRowIndex + 1}, col ${expectationsColIndex + 1} of expectations table: expected ${actualCell} to be ${expectationsCell}`,
+				`Failure at row ${expectationsRowIndex + 1}, col ${expectationsColIndex + 1} of expectations table: expected ${actualCell} to be ${expectationsCell}`
 			)
 		})
 	})

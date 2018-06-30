@@ -26,7 +26,7 @@ tableBodyTests =
                             }
 
                     model =
-                        Model []
+                        Model [] []
 
                     actual =
                         tableBody model
@@ -49,6 +49,7 @@ tableBodyTests =
                               , settingValues = []
                               }
                             ]
+                            []
 
                     actual =
                         tableBody model

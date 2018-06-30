@@ -42,6 +42,7 @@ tableHeaderTests =
                               , settingValues = []
                               }
                             ]
+                            []
 
                     actual =
                         tableLensHeaderRow model
@@ -70,6 +71,7 @@ tableHeaderTests =
                               , settingValues = []
                               }
                             ]
+                            []
 
                     actual =
                         tableLensSettingRow Min model

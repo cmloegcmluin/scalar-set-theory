@@ -1,12 +1,13 @@
 module ScalarSetTheory.Update exposing (update)
 
-import List exposing (map)
+import List exposing (filterMap, map)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
+import ScalarSetTheory.Msg exposing (Msg(ToggleCollapsedLensValuePath, UpdateLensSettingValue))
 import ScalarSetTheory.SettingValue.SettingValue exposing (updateSettingValues)
 import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.Types.Setting exposing (Setting)
+import ScalarSetTheory.Utilities exposing (find)
 
 
 maybeUpdateLensSettingValue : LensSettingValues -> Lens -> Setting -> Int -> LensSettingValues
@@ -29,3 +30,25 @@ update msg model =
                     map updateTargetLensSettingValues model.activeLensSettingValues
             in
             { model | activeLensSettingValues = updatedActiveLensSettingValues }
+
+        ToggleCollapsedLensValuePath lensValuePath ->
+            let
+                lensValuePathIsAlreadyCollapsed =
+                    \collapsedLensValuePath -> collapsedLensValuePath == lensValuePath
+
+                isNotIt =
+                    \collapsedLensValuePath ->
+                        if collapsedLensValuePath == lensValuePath then
+                            Nothing
+                        else
+                            Just collapsedLensValuePath
+
+                updatedCollapsedLensValuePaths =
+                    case find lensValuePathIsAlreadyCollapsed model.collapsedLensValuePaths of
+                        Nothing ->
+                            lensValuePath :: model.collapsedLensValuePaths
+
+                        _ ->
+                            filterMap isNotIt model.collapsedLensValuePaths
+            in
+            { model | collapsedLensValuePaths = updatedCollapsedLensValuePaths }

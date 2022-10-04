@@ -1,0 +1,21 @@
+name: tests
+run-name: testing
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+        
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: make build
+      - run: npm i -g elm-test
+      - run: elm-test init
+      - run: rm tests/Example.elm
+      - run: elm-test
+      - run: cd integration-tests
+      - run: npm i
+      - run: npm test

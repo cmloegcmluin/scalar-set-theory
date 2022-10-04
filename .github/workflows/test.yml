@@ -20,4 +20,5 @@ jobs:
       - run: rm tests/Example.elm
       - run: elm-test
       - run: cd integration-tests && npm i
+      - run: elm reactor --port 8001 &
       - run: cd integration-tests && npm t

@@ -19,6 +19,5 @@ jobs:
       - run: elm-test init
       - run: rm tests/Example.elm
       - run: elm-test
-      - run: cd integration-tests
-      - run: npm i
-      - run: npm test
+      - run: cd integration-tests && npm i
+      - run: cd integration-tests && npm t

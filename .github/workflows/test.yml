@@ -6,12 +6,15 @@ jobs:
     runs-on: ubuntu-latest
         
     steps:
+      - uses: jorelali/setup-elm@v3
+        with:
+          elm-version: 0.19.1
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - run: make build
+      - run: elm make src/ScalarSetTheory/Main.elm --output dist/index.html
       - run: npm i -g elm-test
       - run: elm-test init
       - run: rm tests/Example.elm

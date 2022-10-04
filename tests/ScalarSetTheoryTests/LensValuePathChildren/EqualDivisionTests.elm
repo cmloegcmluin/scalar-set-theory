@@ -6,8 +6,8 @@ import ScalarSetTheory.LensValuePathChildren.EqualDivision exposing (equalDivisi
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValueStep)
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Lens exposing (Lens(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 import Test exposing (Test, describe, test)
 
 

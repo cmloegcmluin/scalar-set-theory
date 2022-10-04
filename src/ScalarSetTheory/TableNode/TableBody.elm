@@ -1,6 +1,6 @@
 module ScalarSetTheory.TableNode.TableBody exposing (tableBody)
 
-import Html exposing (text)
+import Html.Styled exposing (Html, text)
 import List exposing (map)
 import ScalarSetTheory.Css.TableStyles exposing (background, defaultGreyBackground)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
@@ -8,11 +8,17 @@ import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSetting
 import ScalarSetTheory.LensValuePathChildren.GetLensValuePathChildren exposing (getLensValuePathChildren)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath, LensValueStep)
 import ScalarSetTheory.Model exposing (Model)
+import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 import ScalarSetTheory.TableNode.TerminalNode exposing (terminalNode)
 import ScalarSetTheory.Types.Lens exposing (Lens)
+
+
+rootText : Html Msg
+rootText =
+    text "root"
 
 
 tableBody : Model -> TableNode
@@ -33,7 +39,7 @@ tableBody model =
                     getCellChildren firstActiveLensSettingValues remainingActiveLensSettingValues lensValuePath
 
                 rootTableCell =
-                    TableCell (text "root") defaultGreyBackground
+                    TableCell rootText defaultGreyBackground
             in
             lensNode rootTableCell cellChildren
 

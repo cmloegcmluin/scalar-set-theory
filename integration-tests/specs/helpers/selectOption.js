@@ -1,8 +1,8 @@
 'use strict'
 
-const selectOption = function (selectXPath, option) {
-	browser.click(selectXPath + "/option[contains(.,\"" + option + "\")]")
-	browser.execute(function (selectXPath) {
+const selectOption = async (selectXPath, option) => {
+	await $(selectXPath).selectByVisibleText(option)
+	browser.execute(selectXPath => {
 		const select = document.evaluate(
 			selectXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null
 		).singleNodeValue

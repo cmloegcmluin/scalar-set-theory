@@ -1,6 +1,6 @@
 module ScalarSetTheory.TableNode.TableHeader exposing (tableLensHeaderRow, tableLensSettingRow)
 
-import Html exposing (Html, div, text)
+import Html.Styled exposing (Html, div, text)
 import List exposing (head, length, map, tail)
 import Maybe exposing (withDefault)
 import ScalarSetTheory.Css.TableStyles exposing (blankCollapseToggleCellStyle, defaultGreyBackground)
@@ -10,7 +10,7 @@ import ScalarSetTheory.Model exposing (Model)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.SettingProperties.SettingProperties exposing (getSettingProperties)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 import ScalarSetTheory.Types.Setting exposing (Setting)
 
 
@@ -56,6 +56,11 @@ tableLensSettingRow setting model =
     tableHeaderRow settingDropdownsPlusSettingHeading
 
 
+emptyText : Html Msg
+emptyText =
+    text ""
+
+
 tableHeaderRow : List (Html Msg) -> TableNode
 tableHeaderRow cells =
     let
@@ -63,13 +68,13 @@ tableHeaderRow cells =
             div [] []
 
         headCell =
-            withDefault emptyDiv (head cells)
+            withDefault emptyDiv <| head cells
 
         tailCells =
-            withDefault [ emptyDiv ] (tail cells)
+            withDefault [ emptyDiv ] <| tail cells
 
         cellItself =
-            Just (TableCell headCell defaultGreyBackground)
+            Just <| TableCell headCell defaultGreyBackground
 
         cellChildren =
             case length tailCells of
@@ -79,7 +84,7 @@ tableHeaderRow cells =
                 _ ->
                     [ TableNode
                         { cellItself =
-                            Just (TableCell (text "") blankCollapseToggleCellStyle)
+                            Just <| TableCell emptyText blankCollapseToggleCellStyle
                         , cellChildren =
                             [ TableNode
                                 { cellItself = Nothing

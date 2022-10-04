@@ -1,4 +1,4 @@
-module ScalarSetTheory.Msg exposing (Msg(ToggleCollapsedLensValuePath, UpdateLensSettingValue))
+module ScalarSetTheory.Msg exposing (Msg(..))
 
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (LensValuePath)
 import ScalarSetTheory.Types.Lens exposing (Lens)

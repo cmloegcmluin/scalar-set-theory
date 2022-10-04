@@ -1,10 +1,10 @@
 module ScalarSetTheoryTests.TableNode.TableRowTests exposing (tableRowTests)
 
 import Expect exposing (equal)
-import Html exposing (text)
+import Html.Styled exposing (text)
 import ScalarSetTheory.Css.TableStyles exposing (noStyle)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
 import Test exposing (Test, describe, test)
 

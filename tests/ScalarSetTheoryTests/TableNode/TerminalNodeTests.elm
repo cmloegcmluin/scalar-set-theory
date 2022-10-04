@@ -1,10 +1,10 @@
 module ScalarSetTheoryTests.TableNode.TerminalNodeTests exposing (terminalNodeTests)
 
 import Expect exposing (equal)
-import Html exposing (text)
+import Html.Styled exposing (text)
 import ScalarSetTheory.Css.TableStyles exposing (defaultGrey, defaultGreyBackground)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 import ScalarSetTheory.TableNode.TerminalNode exposing (terminalNode)
 import Test exposing (Test, describe, test)
 

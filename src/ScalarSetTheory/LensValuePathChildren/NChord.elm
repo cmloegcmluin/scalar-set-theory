@@ -1,11 +1,12 @@
 module ScalarSetTheory.LensValuePathChildren.NChord exposing (nChordChildrenGetter)
 
+import Debug exposing (toString)
 import List exposing (map, range)
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildren exposing (LensValuePathChildren)
 import ScalarSetTheory.LensValuePathChildren.LensValuePathChildrenGetter exposing (LensValuePathChildrenGetter)
 import ScalarSetTheory.LensValueStep.LensValueStep exposing (findLensValueStepInPath)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Lens exposing (Lens(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 import ScalarSetTheory.Utilities exposing (parseInt)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 

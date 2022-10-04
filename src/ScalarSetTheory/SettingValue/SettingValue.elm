@@ -18,6 +18,7 @@ maybeUpdateSettingValue : SettingValue -> Setting -> Int -> SettingValue
 maybeUpdateSettingValue oldSettingValue settingToUpdate newValue =
     if oldSettingValue.setting == settingToUpdate then
         { oldSettingValue | value = newValue }
+
     else
         oldSettingValue
 

@@ -1,4 +1,4 @@
-module ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+module ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 

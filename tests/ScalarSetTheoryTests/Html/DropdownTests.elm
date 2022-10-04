@@ -1,14 +1,15 @@
 module ScalarSetTheoryTests.Html.DropdownTests exposing (dropdownTests)
 
 import Expect exposing (equal)
-import Html exposing (Html, option, select, text)
-import Html.Attributes exposing (selected, value)
+import Html.Styled exposing (Html, option, select, styled, text)
+import Html.Styled.Attributes exposing (selected, value)
+import ScalarSetTheory.Css.TableStyles exposing (dropdownStyle)
 import ScalarSetTheory.Html.Dropdown exposing (dropdownOptions, settingDropdown)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Msg exposing (Msg)
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Lens exposing (Lens(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 import Test exposing (Test, describe, test)
 
 
@@ -141,7 +142,7 @@ dropdownTests =
                 \() ->
                     let
                         expected =
-                            select [] []
+                            styled select dropdownStyle [] []
 
                         lensSettingValues =
                             LensSettingValues NChord []

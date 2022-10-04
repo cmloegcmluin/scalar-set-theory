@@ -1,82 +1,71 @@
 module ScalarSetTheory.Css.TableStyles exposing (background, blankCollapseToggleCellStyle, blankTableCellStyle, borderGrey, collapseToggleCellStyle, defaultGrey, defaultGreyBackground, dropdownStyle, noStyle, tableCellAndChildrenStyle, tableCellChildrenContainerStyle, tableCellItselfStyle, tableStyle)
 
-import Css exposing (Color, alignItems, backgroundColor, center, column, display, displayFlex, flexDirection, inlineBlock, justifyContent, marginLeft, marginTop, noWrap, outline3, px, rgb, solid, stretch, whiteSpace, width)
-import Html exposing (Attribute)
-import ScalarSetTheory.Css.Styles exposing (styles)
-import ScalarSetTheory.Msg exposing (Msg)
+import Css exposing (..)
 
 
-tableCellAndChildrenStyle : Attribute Msg
+tableCellAndChildrenStyle : List Style
 tableCellAndChildrenStyle =
-    styles
-        [ displayFlex
-        , alignItems stretch
-        ]
+    [ displayFlex
+    , alignItems stretch
+    ]
 
 
-tableCellItselfStyle : Attribute Msg
+tableCellItselfStyle : List Style
 tableCellItselfStyle =
-    styles
-        [ outline3 (px 1) solid borderGrey
-        , marginTop (px 1)
-        , marginLeft (px 1)
-        , displayFlex
-        , alignItems center
-        , justifyContent center
-        , width (px 50)
-        , whiteSpace noWrap
-        ]
+    [ outline3 (px 1) solid borderGrey
+    , marginTop <| px 1
+    , marginLeft <| px 1
+    , displayFlex
+    , alignItems center
+    , justifyContent center
+    , width <| px 50
+    , whiteSpace noWrap
+    ]
 
 
-blankTableCellStyle : Attribute Msg
+blankTableCellStyle : List Style
 blankTableCellStyle =
-    styles
-        [ marginTop (px 1)
-        , marginLeft (px 1)
-        , displayFlex
-        , width (px 50)
-        ]
+    [ marginTop <| px 1
+    , marginLeft <| px 1
+    , displayFlex
+    , width <| px 50
+    ]
 
 
-blankCollapseToggleCellStyle : Attribute Msg
+blankCollapseToggleCellStyle : List Style
 blankCollapseToggleCellStyle =
-    styles
-        [ marginTop (px 1)
-        , marginLeft (px 1)
-        , displayFlex
-        , width (px 20)
-        , outline3 (px 0) solid borderGrey
-        ]
+    [ marginTop <| px 1
+    , marginLeft <| px 1
+    , displayFlex
+    , width <| px 20
+    , outline3 (px 0) solid borderGrey
+    ]
 
 
-collapseToggleCellStyle : Attribute Msg
+collapseToggleCellStyle : List Style
 collapseToggleCellStyle =
-    styles
-        [ backgroundColor defaultGrey
-        , width (px 20)
-        ]
+    [ backgroundColor defaultGrey
+    , width <| px 20
+    ]
 
 
-tableCellChildrenContainerStyle : Attribute Msg
+tableCellChildrenContainerStyle : List Style
 tableCellChildrenContainerStyle =
-    styles
-        [ displayFlex
-        , flexDirection column
-        ]
+    [ displayFlex
+    , flexDirection column
+    ]
 
 
-tableStyle : Attribute Msg
+tableStyle : List Style
 tableStyle =
-    styles
-        [ display inlineBlock
-        ]
+    [ display inlineBlock
+    ]
 
 
-dropdownStyle : Attribute Msg
+dropdownStyle : List Style
 dropdownStyle =
-    styles
-        [ width (px 50)
-        ]
+    [ width <| px 50
+    ]
 
 
 defaultGrey : Color
@@ -89,20 +78,18 @@ borderGrey =
     rgb 128 128 128
 
 
-defaultGreyBackground : Attribute Msg
+defaultGreyBackground : List Style
 defaultGreyBackground =
-    styles
-        [ backgroundColor defaultGrey
-        ]
+    [ backgroundColor defaultGrey
+    ]
 
 
-background : Color -> Attribute Msg
+background : Color -> List Style
 background color =
-    styles
-        [ backgroundColor color
-        ]
+    [ backgroundColor color
+    ]
 
 
-noStyle : Attribute Msg
+noStyle : List Style
 noStyle =
-    styles []
+    []

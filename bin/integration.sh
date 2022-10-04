@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-elm-reactor -p 8001 &
-
-lsof -ti:4444 | xargs kill
-lsof -ti:8001 | xargs kill
+elm reactor --port 8001 &
 
 cd integration-tests
 npm test

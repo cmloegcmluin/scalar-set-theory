@@ -1,18 +1,14 @@
 module ScalarSetTheoryTests.TableNode.TableHeaderTests exposing (tableHeaderTests)
 
-import Css exposing (px, width)
 import Expect exposing (equal)
-import Html exposing (option, select, text)
-import Html.Events exposing (onInput)
-import ScalarSetTheory.Css.Styles exposing (styles)
-import ScalarSetTheory.Css.TableStyles exposing (blankCollapseToggleCellStyle, defaultGreyBackground)
+import Html.Styled exposing (select, styled, text)
+import ScalarSetTheory.Css.TableStyles exposing (blankCollapseToggleCellStyle, defaultGreyBackground, dropdownStyle)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.TableHeader exposing (tableLensHeaderRow, tableLensSettingRow)
 import ScalarSetTheory.TableNode.TableRow exposing (tableRow)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.Types.Setting exposing (Setting(Min))
+import ScalarSetTheory.Types.Lens exposing (Lens(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 import Test exposing (Test, describe, test)
 
 
@@ -56,10 +52,10 @@ tableHeaderTests =
                             [ Just (TableCell (text "min") defaultGreyBackground)
                             , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
-                            , Just (TableCell (select [] []) defaultGreyBackground)
+                            , Just (TableCell (styled select dropdownStyle [] []) defaultGreyBackground)
                             , Just (TableCell (text "") blankCollapseToggleCellStyle)
                             , Nothing
-                            , Just (TableCell (select [] []) defaultGreyBackground)
+                            , Just (TableCell (styled select dropdownStyle [] []) defaultGreyBackground)
                             ]
 
                     model =

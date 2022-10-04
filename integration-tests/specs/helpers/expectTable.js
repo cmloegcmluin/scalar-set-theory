@@ -1,19 +1,18 @@
 'use strict'
 
 const assert = require('assert')
-const classSelector = require('./classSelector')
 
-const expectTable = function (expectationsTable) {
-	const phoropter = browser.element(classSelector('phoropter'))
+const expectTable = async expectationsTable => {
+	const phoropter = $('.phoropter')
 
-	expectationsTable.forEach(function (expectationsRow, expectationsRowIndex) {
-		expectationsRow.forEach(function (expectationsCell, expectationsColIndex) {
+	expectationsTable.forEach((expectationsRow, expectationsRowIndex) => {
+		expectationsRow.forEach(async (expectationsCell, expectationsColIndex) => {
 			expectationsCell = expectationsCell.trim()
 			if (expectationsCell === '--') return
 
 			let actualCell
 			try {
-				actualCell = phoropter.getText(
+				actualCell = await phoropter.getText(
 					tableNodePathForExpectationsTableCoordinate(
 						expectationsRowIndex,
 						expectationsColIndex,
@@ -36,7 +35,7 @@ const expectTable = function (expectationsTable) {
 const INDEX_OF_CELL_ITSELF = 1
 const INDEX_OF_CELL_CHILDREN = 2
 
-const tableNodePathForExpectationsTableCoordinate = function (expectationsRow, expectationsCol, expectationsTable) {
+const tableNodePathForExpectationsTableCoordinate = (expectationsRow, expectationsCol, expectationsTable) => {
 	let currentlySearchingTableNodeRow = 0
 	let currentlySearchingTableNodeCol = 0
 

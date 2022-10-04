@@ -3,7 +3,7 @@ module ScalarSetTheory.Update exposing (update)
 import List exposing (filterMap, map)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.Model exposing (Model)
-import ScalarSetTheory.Msg exposing (Msg(ToggleCollapsedLensValuePath, UpdateLensSettingValue))
+import ScalarSetTheory.Msg exposing (Msg(..))
 import ScalarSetTheory.SettingValue.SettingValue exposing (updateSettingValues)
 import ScalarSetTheory.Types.Lens exposing (Lens)
 import ScalarSetTheory.Types.Setting exposing (Setting)
@@ -14,6 +14,7 @@ maybeUpdateLensSettingValue : LensSettingValues -> Lens -> Setting -> Int -> Len
 maybeUpdateLensSettingValue oldLensSettingValues lensToUpdate settingToUpdate newValue =
     if oldLensSettingValues.lens == lensToUpdate then
         { oldLensSettingValues | settingValues = updateSettingValues oldLensSettingValues.settingValues settingToUpdate newValue }
+
     else
         oldLensSettingValues
 
@@ -40,6 +41,7 @@ update msg model =
                     \collapsedLensValuePath ->
                         if collapsedLensValuePath == lensValuePath then
                             Nothing
+
                         else
                             Just collapsedLensValuePath
 

@@ -1,11 +1,11 @@
 module ScalarSetTheoryTests.TableNode.LensNodeTests exposing (lensNodeTests)
 
 import Expect exposing (equal)
-import Html exposing (text)
+import Html.Styled exposing (text)
 import ScalarSetTheory.Css.TableStyles exposing (collapseToggleCellStyle, defaultGreyBackground)
 import ScalarSetTheory.TableCell.TableCell exposing (TableCell)
 import ScalarSetTheory.TableNode.LensNode exposing (lensNode)
-import ScalarSetTheory.TableNode.TableNode exposing (TableNode(TableNode))
+import ScalarSetTheory.TableNode.TableNode exposing (TableNode(..))
 import Test exposing (Test, describe, test)
 
 

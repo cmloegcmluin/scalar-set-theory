@@ -3,8 +3,8 @@ module ScalarSetTheory.LensSettingValues.DefaultActiveLensSettingValues exposing
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
 import ScalarSetTheory.SettingValue.SettingValue exposing (SettingValue)
-import ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Types.Lens exposing (Lens(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 
 
 defaultActiveLensSettingValues : List LensSettingValues

@@ -1,14 +1,15 @@
 module ScalarSetTheory.Html.Dropdown exposing (dropdownOptions, settingDropdown)
 
-import Html exposing (Html, option, select, text)
-import Html.Attributes exposing (selected, value)
-import Html.Events exposing (onInput)
+import Debug exposing (toString)
+import Html.Styled exposing (Html, option, select, styled, text)
+import Html.Styled.Attributes exposing (selected, value)
+import Html.Styled.Events exposing (onInput)
 import List exposing (length, map, range)
 import ScalarSetTheory.Css.TableStyles exposing (dropdownStyle)
 import ScalarSetTheory.LensProperties.LensProperties exposing (getLensProperties)
 import ScalarSetTheory.LensSettingValues.LensSettingValues exposing (LensSettingValues)
-import ScalarSetTheory.Msg exposing (Msg(UpdateLensSettingValue))
-import ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+import ScalarSetTheory.Msg exposing (Msg(..))
+import ScalarSetTheory.Types.Setting exposing (Setting(..))
 import ScalarSetTheory.Utilities exposing (parseInt)
 import ScalarSetTheory.Value.GetValueOfSetting exposing (getValueOfSetting)
 
@@ -23,7 +24,7 @@ settingDropdown setting lensSettingValues =
             lensSettingValues.lens
 
         handler =
-            \newValue -> UpdateLensSettingValue lens setting (parseInt newValue)
+            \newValue -> UpdateLensSettingValue lens setting <| parseInt newValue
 
         attributes =
             case length lensSettingValues.settingValues of
@@ -31,14 +32,15 @@ settingDropdown setting lensSettingValues =
                     []
 
                 _ ->
-                    [ onInput handler
-                    , dropdownStyle
-                    ]
+                    [ onInput handler ]
 
         options =
             dropdownOptions lensSettingValues setting (toString selectedOption)
     in
-    select attributes options
+    styled select
+        dropdownStyle
+        attributes
+        options
 
 
 dropdownOptions : LensSettingValues -> Setting -> String -> List (Html Msg)
@@ -89,7 +91,7 @@ dropdownOption indexAsInt selectedOption =
     in
     option
         [ value index
-        , selected (isSelected index selectedOption)
+        , selected <| isSelected index selectedOption
         ]
         [ text index ]
 

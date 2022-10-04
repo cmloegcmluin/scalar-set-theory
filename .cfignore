@@ -1,8 +1,0 @@
-/elm-stuff
-/integration-tests
-/src
-/tests
-/.idea
-.gitignore
-elm-package.json
-Makefile

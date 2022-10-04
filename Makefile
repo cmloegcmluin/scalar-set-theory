@@ -1,8 +1,8 @@
 start:
-	elm-reactor
+	elm reactor
 
 build:
-	elm-make src/ScalarSetTheory/Main.elm --output dist/index.html
+	elm make src/ScalarSetTheory/Main.elm --output dist/index.html
 
 deploy:
 	./bin/deploy.sh
@@ -16,11 +16,8 @@ unit:
 integration:
 	./bin/integration.sh
 
-analyze:
-	elm-analyse
-
-ci:
-	./bin/ci.sh
+lint:
+	elm-format src/ && elm-format tests/
 
 setup:
 	./bin/setup.sh

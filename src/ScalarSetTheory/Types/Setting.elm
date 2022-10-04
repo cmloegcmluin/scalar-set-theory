@@ -1,4 +1,4 @@
-module ScalarSetTheory.Types.Setting exposing (Setting(Max, Min))
+module ScalarSetTheory.Types.Setting exposing (Setting(..))
 
 
 type Setting

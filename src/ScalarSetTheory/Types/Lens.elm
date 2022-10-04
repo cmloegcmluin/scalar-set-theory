@@ -1,4 +1,4 @@
-module ScalarSetTheory.Types.Lens exposing (Lens(EqualDivision, NChord))
+module ScalarSetTheory.Types.Lens exposing (Lens(..))
 
 
 type Lens

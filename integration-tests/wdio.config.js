@@ -10,7 +10,7 @@ exports.config = {
         "goog:chromeOptions": {args: ["headless", "disable-gpu", "window-size=1280,800", "no-sandbox"]},
         excludeDriverLogs: ['server'],
     }],
-    logLevel: "silent",
+    logLevel: "error",
     coloredLogs: true,
     bail: 0,
     screenshotPath: "./errorShots/",

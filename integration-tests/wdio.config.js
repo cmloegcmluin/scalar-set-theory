@@ -1,5 +1,5 @@
 exports.config = {
-    host: "localhost",
+    host: "0.0.0.0",
     port: 4444,
     path: "/wd/hub",
     specs: ["./specs/**/*.js"],

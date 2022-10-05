@@ -14,14 +14,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+      - uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: beta
       - run: elm make src/ScalarSetTheory/Main.elm --output dist/index.html
       - run: npm i -g elm-test
       - run: elm-test init
       - run: rm tests/Example.elm
       - run: elm-test
-      - run: |
-            wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_current_amd64.deb"
-            sudo dpkg -i "google-chrome-stable_current_amd64.deb"
       - run: cd integration-tests && npm i
       - run: elm reactor --port 8001 &
       - run: cd integration-tests && npm t

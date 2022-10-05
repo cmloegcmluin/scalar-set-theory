@@ -19,6 +19,9 @@ jobs:
       - run: elm-test init
       - run: rm tests/Example.elm
       - run: elm-test
+      - run: |
+            wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_current_amd64.deb"
+            sudo dpkg -i "google-chrome-stable_current_amd64.deb"
       - run: cd integration-tests && npm i
       - run: elm reactor --port 8001 &
       - run: cd integration-tests && npm t

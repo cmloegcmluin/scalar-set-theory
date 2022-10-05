@@ -16,7 +16,7 @@ jobs:
           node-version: 16.x
       - uses: browser-actions/setup-chrome@latest
         with:
-          chrome-version: beta
+          chrome-version: stable
       - run: elm make src/ScalarSetTheory/Main.elm --output dist/index.html
       - run: npm i -g elm-test
       - run: elm-test init
